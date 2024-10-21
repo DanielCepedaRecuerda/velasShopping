@@ -11,17 +11,20 @@ header {
     color: #fff;
     padding: 20px;
     text-align: center;
-}
-.divBotonAcceso{
     display: flex;
-    right: 0;
-    margin-right: 2vw;
-    position: absolute;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+}
+.divBotonAcceso {
+    margin: 1em;
+    display: flex;
+    justify-content: center; /* Centra el botón */
 }
 .botonAcceso{
     position:relative;
     right: 0;
 }
+
 
 nav ul {
     list-style-type: none;
@@ -67,6 +70,11 @@ nav ul li a {
     border-radius: 5px;
     display: block; /* Asegura que la imagen sea un bloque */
     margin: 0 auto; /* Centra la imagen */
+   
+}
+.product a{
+    text-decoration: none;
+    color: inherit
 }
 
 .price {
@@ -81,16 +89,19 @@ footer {
     padding: 20px;
     background-color: #444;
     color: #fff;
+    
 }
 .footer-content {
-    text-align: center;
-    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: center; /* Centra los elementos */
+    text-align: center; /* Centra el texto */
 }
 
 .footer-content p {
-    margin: 5px 0;
+    word-wrap: break-word; /* Permite que las palabras largas se dividan */
+    margin: 5px 0; /* Espaciado entre párrafos */
 }
-
 footer a{
     color: white;
     font-weight: bold;
@@ -98,6 +109,16 @@ footer a{
 footer a:hover{
     color: #e67e22; /* Acento de color brillante */
 }
+.footer-content nav ul {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los enlaces se envuelvan */
+    justify-content: center; /* Centra los enlaces */
+}
+
+.footer-content nav ul li {
+    margin: 5px; /* Espaciado entre los enlaces */
+}
+
 .social-links a {
     display: inline-block; /* Hace que el enlace se comporte como un bloque */
     width: 40px; /* Ancho del ícono */
@@ -129,15 +150,7 @@ footer a:hover{
     opacity: 0.8; /* Efecto de hover */
 }
 
-.footer-content nav ul {
-    list-style: none;
-    padding: 0;
-}
 
-.footer-content nav ul li {
-    display: inline;
-    margin: 0 10px;
-}
 
 .form {
     display: flex;
@@ -167,6 +180,7 @@ label {
 
 input[type="text"],
 input[type="email"],
+input[type="password"],
 textarea {
     width: 100%; /* Ocupa todo el ancho disponible */
     padding: 10px; /* Espaciado interno */
@@ -180,6 +194,7 @@ textarea {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
+input[type="password"]:focus,
 textarea:focus {
     border-color: #e67e22; /* Cambia el color del borde al enfocarse */
     outline: none; /* Elimina el contorno por defecto */
@@ -205,10 +220,30 @@ button:hover {
     background-color: #d35400; /* Color de fondo al pasar el mouse */
 }
 
+.aForm{
+    margin-top: 1em;
+    color: #e67e22;
+}
+
 
 
 /* Media Queries para hacer el diseño responsive */
 @media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Asegura que el header esté en columna */
+    }
+
+    .divBotonAcceso {
+        margin-top: 10px; /* Añade espacio entre el botón y los enlaces */
+    }
+
+    nav ul {
+        flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+    }
+
+    nav li {
+        margin: 5px 0; /* Espaciado vertical entre los enlaces */
+    }
     .product {
         flex: 1 1 calc(45% - 20px); /* Dos columnas en pantallas medianas */
     }
@@ -223,12 +258,26 @@ button:hover {
 }
 
 @media (max-width: 480px) {
+    header {
+        flex-direction: column; /* Asegura que el header esté en columna */
+    }
+
+    .divBotonAcceso {
+        margin-top: 10px; /* Añade espacio entre el botón y los enlaces */
+    }
+
+    nav ul {
+        flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+    }
+
     .product {
         flex: 1 1 100%; /* Una columna en pantallas pequeñas */
     }
 
     nav ul li {
         display: block; /* En una lista vertical en pantallas pequeñas */
+        margin: 5px 0; /* Espaciado vertical entre los enlaces */
+
         margin: 10px 0;
     }
     .form {
@@ -237,6 +286,7 @@ button:hover {
 
     input[type="text"],
     input[type="email"],
+    input[type="password"],
     textarea {
         font-size: 14px; /* Tamaño de fuente más pequeño */
     }

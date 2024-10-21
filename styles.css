@@ -52,7 +52,7 @@ nav ul li a {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 15px;
+    padding: 20px;
     margin: 10px;
     flex: 1 1 calc(30% - 40px);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -66,7 +66,8 @@ nav ul li a {
 
 .product img {
     max-width: 100%;
-    height: 80%;
+    height: 200px;
+    max-height: 200px;
     border-radius: 5px;
     display: block; /* Asegura que la imagen sea un bloque */
     margin: 0 auto; /* Centra la imagen */

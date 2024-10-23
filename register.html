@@ -1,61 +1,72 @@
-<form class="form" id="registrationForm">
-    <div>
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" required>
-    </div>
-    <div>
-        <label for="apellido1">Apellido 1:</label>
-        <input type="text" id="apellido1" required>
-    </div>
-    <div>
-        <label for="apellidos2">Apellido 2:</label>
-        <input type="text" id="apellidos2">
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" required>
-    </div>
-    <div>
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" required>
-    </div>
-    <div>
-        <label for="telefono">Teléfono:</label>
-        <input type="text" id="telefono" required>
-    </div>
-    
-    <button type="submit">Registrarse</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form class="form" id="registrationForm">
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" required>
+        </div>
+        <div>
+            <label for="apellido1">Apellido 1:</label>
+            <input type="text" id="apellido1" required>
+        </div>
+        <div>
+            <label for="apellidos2">Apellido 2:</label>
+            <input type="text" id="apellidos2">
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+        </div>
+        <div>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" required>
+        </div>
+        <div>
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" required>
+        </div>
+        
+        <button type="submit">Registrarse</button>
+    </form>
 
+</body>
 <script>
-document.getElementById('registrationForm').addEventListener('submit', async (event) => {
-    event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
-
-    const nombre = document.getElementById('nombre').value;
-    const apellido1 = document.getElementById('apellido1').value;
-    const apellidos2 = document.getElementById('apellidos2').value;
-    const email = document.getElementById('email').value;
-    const contraseña = document.getElementById('password').value; // Considera hacer un hash de esta contraseña
-    const telefono = document.getElementById('telefono').value;
-
-    try {
-        const response = await fetch('https://velas-shopping.vercel.app/api/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ nombre, apellido1, apellidos2, email, contraseña, telefono }),
-        });
-
-        if (response.ok) {
-            alert('Cliente registrado con éxito');
-            // Aquí puedes redirigir al usuario o limpiar el formulario
-        } else {
-            alert('Error al registrar el cliente');
+    document.getElementById('registrationForm').addEventListener('submit', async (event) => {
+        event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
+    
+        const nombre = document.getElementById('nombre').value;
+        const apellido1 = document.getElementById('apellido1').value;
+        const apellidos2 = document.getElementById('apellidos2').value;
+        const email = document.getElementById('email').value;
+        const contraseña = document.getElementById('password').value; // Considera hacer un hash de esta contraseña
+        const telefono = document.getElementById('telefono').value;
+    
+        try {
+            const response = await fetch('https://velas-shopping.vercel.app/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ nombre, apellido1, apellidos2, email, contraseña, telefono }),
+            });
+    
+            if (response.ok) {
+                alert('Cliente registrado con éxito');
+                // Aquí puedes redirigir al usuario o limpiar el formulario
+            } else {
+                alert('Error al registrar el cliente');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Hubo un problema con el registro');
         }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Hubo un problema con el registro');
-    }
-});
-</script>
+    });
+    </script>
+</html>

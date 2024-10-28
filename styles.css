@@ -2,12 +2,12 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: #fff8e1; /* Tono cálido */
     color: #333;
 }
 
 header {
-    background-color: #444;
+    background-color: #333;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -23,6 +23,10 @@ header {
 .botonAcceso{
     position:relative;
     right: 0;
+    background-color: #e67e22; /* Color brillante */
+}
+.botonAcceso:hover {
+    background-color: #d35400; /* Color al pasar el mouse */
 }
 
 
@@ -37,7 +41,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: #e67e22; /* Acento de color vibrante */
     text-decoration: none;
 }
 
@@ -50,12 +54,12 @@ nav ul li a {
 
 .product {
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid #e67e22; /* Borde vibrante */
     border-radius: 5px;
     padding: 20px;
     margin: 10px;
     flex: 1 1 calc(30% - 40px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra más fuerte */
     transition: transform 0.2s;
     text-align: center; /* Centra el contenido del producto */
 }
@@ -82,13 +86,13 @@ nav ul li a {
     display: block;
     margin-top: 10px;
     font-weight: bold;
-    color: #e67e22; /* Acento de color brillante */
+    color: #e74c3c; /* Rojo suave para los precios */
 }
 
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #444;
+    background-color: #333; /* Gris oscuro para el pie de página */
     color: #fff;
     
 }
@@ -105,7 +109,6 @@ footer {
 }
 footer a{
     color: white;
-    font-weight: bold;
 }
 footer a:hover{
     color: #e67e22; /* Acento de color brillante */

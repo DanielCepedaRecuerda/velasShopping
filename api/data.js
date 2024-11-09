@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
 
 module.exports = (req, res) => {
     
-  if (req.method === 'GET' || req.method ==='POST') {
+  if (req.method === 'GET') {
      
     // Si la solicitud es GET, obtiene los datos
     connection.query('SELECT * FROM clientes', (error, results) => {

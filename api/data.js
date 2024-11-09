@@ -1,20 +1,26 @@
-// api/data.js
-const getConnection = require('../db.js');
+// /api/data.js
+const mysql = require('mysql2');
 
-export default async function handler(req, res) {
-    if (req.method !== 'GET') {
-        return res.status(405).send('Método no permitido');
-    }
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
 
-    try {
-        const connection = await getConnection();
-        
-        const [results] = await connection.execute('SELECT * FROM clientes');
-        
-        await connection.end();
-        res.status(200).json(results);
-    } catch (error) {
-        console.error('Error en la consulta:', error);
-        res.status(500).json({ error: 'Error en la consulta' });
-    }
-}
+module.exports = (req, res) => {
+  if (req.method === 'GET') {
+    alert("hola");  
+    // Si la solicitud es GET, obtiene los datos
+    connection.query('SELECT * FROM clientes', (error, results) => {
+      if (error) {
+        console.error('Error en la consulta: ', error);
+        return res.status(500).json({ error: 'Error en la consulta' });
+      }
+      res.json(results);
+    });
+  } else {
+    // Si no es un GET, responde con un 405 (Método no permitido)
+    res.status(405).send('Método no permitido');
+  }
+};

@@ -1,7 +1,7 @@
 // db.js
 const mysql = require('mysql2');
 
-const getConnection = async () => {
+const getConnection = () => {
   return mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,

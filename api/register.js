@@ -1,6 +1,6 @@
 // /api/register.js
 const mysql = require('mysql2');
-const connection = require('./db');
+const connection = require('../db');
 // const connection = require('../db'); // Importar la conexión
 
 module.exports = (req, res) => {

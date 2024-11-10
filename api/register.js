@@ -3,10 +3,10 @@ const mysql = require('mysql2');
 
 module.exports = (req, res) => {
     // if (req.method === 'POST') {
-    //   const { nombre, apellido1, apellido2, email, contraseña, telefono } = req.body;
-    //   const query = 'INSERT INTO clientes (nombre, apellido1, apellido2, email, contraseña, telefono, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, NOW())';
+      const { nombre, apellido1, apellido2, email, contraseña, telefono } = req.body;
+      const query = 'INSERT INTO clientes (nombre, apellido1, apellido2, email, contraseña, telefono, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, NOW())';
   
-      res.status(405).send('Método no permitido');
+      res.status(405).send(query);
     //   connection.query(query, [nombre, apellido1, apellido2, email, contraseña, telefono], (error, results) => {
     //     if (error) {
     //       console.error('Error en la consulta: ', error);  // Imprime el error en el log de Vercel

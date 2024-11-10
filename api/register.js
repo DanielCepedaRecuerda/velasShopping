@@ -17,7 +17,6 @@ module.exports = (req, res) => {
             res.status(201).send('Cliente registrado con éxito');
         });
       } catch (error2) {
-        reject(new Error("Hubo un problema al realizar la tarea."));
         console.log(error2);
         res.status(401).send(error2);
       }

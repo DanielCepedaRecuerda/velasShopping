@@ -5,7 +5,8 @@ module.exports = (req, res) => {
   // if (req.method === 'POST') {
   const { nombre, apellido1, apellido2, email, contraseña, telefono } =
     req.body;
-  const query = "INSERT INTO clientes (nombre, apellido1, apellido2, email, contraseña, telefono, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, NOW())";
+  const query =
+    "INSERT INTO clientes (nombre, apellido1, apellido2, email, contraseña, telefono, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, NOW())";
 
   connection().then((conn) =>
     conn.query(
@@ -13,15 +14,12 @@ module.exports = (req, res) => {
       [nombre, apellido1, apellido2, email, contraseña, telefono],
       (error, results) => {
         if (error) {
-            res.status(200).send("Error en la consulta: " + error); // Imprime el error en el log de Vercel
-          return res.status(500).json({
-            error: "Error al registrar el cliente",
-            details: error.message,
-          });
+        return res.status(200).json({mensaje: "Error al crear"}); // Imprime el error en el log de Vercel
+          
         }
-        res.status(201).send("creado");
+        return res.status(201).json({mensaje: "Cliente creado"});
+        
       }
     )
-);
-return {};
+  );
 };

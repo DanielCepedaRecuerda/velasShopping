@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 
 // Ruta para obtener datos de la base de datos
-app.get('/api/juan', (req, res) => {
+app.get('/api/prueba', (req, res) => {
   connection.query('SELECT * FROM clientes', (error, results) => {
     if (error) {
       console.error('Error en la consulta: ', error);

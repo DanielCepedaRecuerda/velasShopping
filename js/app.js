@@ -20,6 +20,7 @@ app.get('/api/juan', (req, res) => {
   });
 });
 
+
 // app.post('/api/post', (req, res) => {
 
 //   res.json(result);

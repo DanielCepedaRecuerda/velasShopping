@@ -15,12 +15,12 @@ module.exports = (req, res) => {
       (error, results) => {
         if (error) {
             res.status(200).send("Error en la consulta: " + error); // Imprime el error en el log de Vercel
-          return res.status(500).json({
-            error: "Error al registrar el cliente",
-            details: error.message,
-          });
+        //   return res.status(500).json({
+        //     error: "Error al registrar el cliente",
+        //     details: error.message,
+        //   });
         }
-        res.status(201).send("Cliente registrado con éxito");
+        res.status(201).send(connection().c);
       }
     )
   );

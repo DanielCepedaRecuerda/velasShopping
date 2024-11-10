@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Probar API Register</title>
+</head>
+<body>
+  <h1>Prueba de API /register</h1>
+  <button onclick="testApi()">Registrar Cliente</button>
+  
+  <script>
+    function testApi() {
+      fetch("https://velas-shopping.vercel.app/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nombre: "Juan",
+          apellido1: "Pérez",
+          apellido2: "Gómez",
+          email: "juan.perez@email.com",
+          contraseña: "contraseñaSegura123",
+          telefono: "123456789"
+        }),
+      })
+      .then(response => response.text())
+      .then(data => alert("Respuesta: " + data))
+      .catch(error => console.error("Error:", error));
+    }
+  </script>
+</body>
+</html>

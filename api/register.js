@@ -15,20 +15,18 @@ module.exports = (req, res) => {
       [nombre, apellido1, apellido2, email, contraseña, telefono],
       (error, results) => {
         if (error) {
-          console.error("Error en la consulta: ", error); // Imprime el error en el log de Vercel
-          return res
-            .status(500)
-            .json({
-              error: "Error al registrar el cliente",
-              details: error.message,
-            });
+            res.status(200).send("Error en la consulta: " + error); // Imprime el error en el log de Vercel
+          return res.status(500).json({
+            error: "Error al registrar el cliente",
+            details: error.message,
+          });
         }
         res.status(201).send("Cliente registrado con éxito");
       }
     )
   );
 
-  res.status(200).send("Método no permitido");
+  res.status(200).send("Método 200");
   // }
   // else {
   //   res.status(405).send('Método no permitido');

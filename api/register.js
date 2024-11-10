@@ -2,8 +2,7 @@
 const mysql = require('mysql2');
 
 module.exports = (req, res) => {
-    debugger;
-    if (req.method == 'POST') {
+    // if (req.method === 'POST') {
       const { nombre, apellido1, apellido2, email, contraseña, telefono } = req.body;
       const query = 'INSERT INTO clientes (nombre, apellido1, apellido2, email, contraseña, telefono, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, NOW())';
   
@@ -14,7 +13,7 @@ module.exports = (req, res) => {
         }
         res.status(201).send('Cliente registrado con éxito');
       });
-    } 
+    // } 
     // else {
     //   res.status(405).send('Método no permitido');
     // }

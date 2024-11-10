@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     //   const query = 'INSERT INTO clientes (nombre, apellido1, apellido2, email, contraseña, telefono, fecha_registro) VALUES ("juan", "apellido1", "apellido2", "juan@gmail.com", "123456789", "123456789", NOW())';
 
       
-        await connection().query(query, [nombre, apellido1, apellido2, email, contraseña, telefono], (error, results) => {
+        await (await connection()).execute(query, [nombre, apellido1, apellido2, email, contraseña, telefono], (error, results) => {
             if (error) {
               console.error('Error en la consulta: ', error);  // Imprime el error en el log de Vercel
               return res.status(500).json({ error: 'Error al registrar el cliente', details: error.message });

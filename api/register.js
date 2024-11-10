@@ -3,8 +3,8 @@ const mysql = require('mysql2');
 
 module.exports = (req, res) => {
     // if (req.method === 'POST') {
-      const { nombre, apellido1, apellido2, email, contraseña, telefono } = req.body;
-      const query = 'INSERT INTO clientes (nombre, apellido1, apellido2, email, contraseña, telefono, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, NOW())';
+    //   const { nombre, apellido1, apellido2, email, contraseña, telefono } = req.body;
+    //   const query = 'INSERT INTO clientes (nombre, apellido1, apellido2, email, contraseña, telefono, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, NOW())';
   
       res.status(405).send('Método no permitido');
     //   connection.query(query, [nombre, apellido1, apellido2, email, contraseña, telefono], (error, results) => {

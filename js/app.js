@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 
 // Ruta para obtener datos de la base de datos
-app.get('/api/data', (req, res) => {
+app.get('/api/juan', (req, res) => {
   connection.query('SELECT * FROM clientes', (error, results) => {
     if (error) {
       console.error('Error en la consulta: ', error);
@@ -19,6 +19,11 @@ app.get('/api/data', (req, res) => {
     res.json(results);
   });
 });
+
+// app.post('/api/post', (req, res) => {
+
+//   res.json(result);
+// })
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);

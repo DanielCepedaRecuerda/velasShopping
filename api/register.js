@@ -6,7 +6,6 @@ module.exports = (req, res) => {
   const { nombre, apellido1, apellido2, email, contraseña, telefono } =
     req.body;
   const query = "INSERT INTO clientes (nombre, apellido1, apellido2, email, contraseña, telefono, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, NOW())";
-  //const query = 'INSERT INTO clientes (nombre, apellido1, apellido2, email, contraseña, telefono, fecha_registro) VALUES ("juan", "apellido1", "apellido2", "juan@gmail.com", "123456789", "123456789", NOW())';
 
   connection().then((conn) =>
     conn.query(

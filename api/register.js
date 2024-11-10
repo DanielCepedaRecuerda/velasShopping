@@ -19,8 +19,9 @@ module.exports = (req, res) => {
             details: error.message,
           });
         }
-        res.status(201).send(connection().c);
+        res.status(201).send("creado");
       }
     )
-  );
+);
+return {};
 };

@@ -6,7 +6,7 @@ module.exports = (req, res) => {
       const { nombre, apellido1, apellido2, email, contraseña, telefono } = req.body;
       const query = 'INSERT INTO clientes (nombre, apellido1, apellido2, email, contraseña, telefono, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, NOW())';
   
-      res.status(405).send(query);
+      res.status(405).send(req.body);
     //   connection.query(query, [nombre, apellido1, apellido2, email, contraseña, telefono], (error, results) => {
     //     if (error) {
     //       console.error('Error en la consulta: ', error);  // Imprime el error en el log de Vercel

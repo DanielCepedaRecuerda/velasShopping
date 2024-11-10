@@ -10,7 +10,7 @@
   
   <script>
     function testApi() {
-      fetch("https://velas-shopping.vercel.app/api/register", {
+      fetch("https://velas-shopping.vercel.app/api/register.js", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,20 +24,9 @@
           telefono: "123456789"
         }),
       })
-      .then((response) => {
-    if (!response.ok) { // Si el código de estado no es 200-299
-      return response.json().then((error) => {
-        throw new Error(error.error); // Lanzamos el mensaje de error para que sea capturado en el catch
-      });
-    }
-    return response.json();
-  })
-  .then((data) => {
-    console.log("Datos recibidos:", data);
-  })
-  .catch((error) => {
-    console.error("Error capturado en el front:", error.message); // Aquí capturamos el error
-  });
+      .then(response => response.text())
+      .then(data => alert("Respuesta: " + data))
+      .catch(error => console.error("Error:", error));
     }
   </script>
 </body>

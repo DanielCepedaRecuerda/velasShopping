@@ -24,11 +24,7 @@
             telefono: "123456789",
           }),
         })
-          .then((response) => response.text())
-          .then((data) => alert("Respuesta: " + data));
-        //.catch(error => console.error("Error:", error));
-
-        fetch("/mi-endpoint")
+          
           .then((response) => {
             if (!response.ok) {
               // Si el código de estado no es 200-299

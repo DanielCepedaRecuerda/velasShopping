@@ -9,7 +9,7 @@ module.exports = (req, res) => {
 
       
         //connection().then(conn=>conn.query(query, [nombre, apellido1, apellido2, email, contraseña, telefono], (error, results) => {
-        connection.query(query, [nombre, apellido1, apellido2, email, contraseña, telefono], (error, results) => {
+        connection().query(query, [nombre, apellido1, apellido2, email, contraseña, telefono], (error, results) => {
 
             //         if (error) {
     //           console.error('Error en la consulta: ', error);  // Imprime el error en el log de Vercel

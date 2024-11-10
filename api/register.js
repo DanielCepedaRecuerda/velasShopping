@@ -12,10 +12,12 @@ module.exports = (req, res) => {
           console.error('Error en la consulta: ', error);  // Imprime el error en el log de Vercel
           return res.status(500).json({ error: 'Error al registrar el cliente', details: error.message });
         }
-        res.status(201).send('Cliente registrado con éxito');
+        else{
+            res.status(201).send('Cliente registrado con éxito');
+
+        }
       });
 
-      res.status(405).send(req.body);
     // } 
     // else {
     //   res.status(405).send('Método no permitido');

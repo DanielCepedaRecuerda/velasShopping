@@ -14,7 +14,7 @@ module.exports = (req, res) => {
       [nombre, apellido1, apellido2, email, contraseña, telefono],
       (error, results) => {
         if (error) {
-        return res.status(200).json({mensaje: "Error al crear"}); // Imprime el error en el log de Vercel
+        return res.status(404).json({mensaje: "Error al crear"}); // Imprime el error en el log de Vercel
           
         }
         return res.status(201).json({mensaje: "Cliente creado"});

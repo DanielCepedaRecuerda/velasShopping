@@ -19,7 +19,7 @@ module.exports = (req, res) => {
       } catch (error2) {
         reject(new Error("Hubo un problema al realizar la tarea."));
         console.log(error2);
-        res.status(405).send(error2);
+        res.status(401).send(error2);
       }
       
      

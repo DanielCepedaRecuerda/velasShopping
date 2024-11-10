@@ -13,8 +13,9 @@ module.exports = (req, res) => {
         }
         res.status(201).send('Cliente registrado con éxito');
       });
-    } else {
-      res.status(405).send('Método no permitido');
-    }
+    } 
+    // else {
+    //   res.status(405).send('Método no permitido');
+    // }
   };
   

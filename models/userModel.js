@@ -25,7 +25,17 @@ const createUser = async (userData) => {
     telefono,
   ]);
 };
+const findUserByEmail = async (email) => {
+  const query = "SELECT * FROM clientes WHERE email = ?";
+  const conn = await connection();
+  const [rows] = await conn.execute(query, [email]);
+
+  if (rows.length === 0) {
+    return null; // Si no se encuentra el usuario
+  }
+  return rows[0]; // Devuelve el primer (y único) usuario encontrado
+};
 
 module.exports = {
-  createUser,
+  createUser, findUserByEmail,
 };

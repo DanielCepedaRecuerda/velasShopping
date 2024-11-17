@@ -1,13 +1,22 @@
 require('dotenv').config();
 const express = require("express");
+const session = require('express-session');
 const bodyParser = require("body-parser");
-const userRoutes = require("./routes/registerRoutes");
-const registerRoutes = require('./routes/registerRoutes');  // Ruta de los controladores
+const userRoutes = require("./routes/authRoutes");
+const authRoutes = require('./routes/authRoutes');  // Ruta de los controladores
 const path = require("path");
 const app = express();
 const PORT = 3000;
 
 const cors = require('cors');
+
+// Configuración del middleware express-session
+app.use(session({
+  secret: 'mi-secreto',  // Clave para firmar la cookie de sesión
+  resave: false,         // No volver a guardar la sesión si no ha cambiado
+  saveUninitialized: false,  // No guardar sesiones vacías
+  cookie: { secure: false }  // Si es HTTPS, cambiar a true
+}));
 
 // Configuración de middleware
 app.use(cors());
@@ -15,9 +24,7 @@ app.use(bodyParser.json()); // Para recibir datos JSON
 app.use(bodyParser.urlencoded({ extended: true })); // Para manejar formularios
 
 // Usar las rutas
-app.use('/', registerRoutes); // Puedes hacer que todas las rutas empiecen con /
-
-
+app.use('/', authRoutes); // Puedes hacer que todas las rutas empiecen con /
 
 // Middleware
 app.use(bodyParser.json());

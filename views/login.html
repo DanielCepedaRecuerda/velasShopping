@@ -34,19 +34,18 @@
 
     <main>
       <h2 class="form-h2">Iniciar Sesión</h2>
-      <form class="form">
+      <form id="loginForm" class="form" method="POST" action="/api/login">
         <div>
           <label for="email">Email:</label>
-          <input type="email" id="email" required />
+          <input type="email" id="email" name="email" required />
         </div>
-
         <div>
-          <label for="password">Contraseña:</label>
-          <input type="password" id="password" required />
+          <label for="contraseña">Contraseña:</label>
+          <input type="password" id="contraseña" name="contraseña" required />
         </div>
-
-        <button type="submit">Iniciar Sesión</button>
+        <button type="submit">Iniciar sesión</button>
       </form>
+      
 
       <form class="form">
         <a href="" class="aForm">¿Has olvidado la contraseña?</a>

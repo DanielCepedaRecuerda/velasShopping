@@ -15,9 +15,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/users', userRoutes);
 
 // Servir vistas (opcional)
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'views', 'register.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'views', 'index.html')));
 
 // Iniciar el servidor
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+app.listen(3000, () => {
+  console.log('Servidor corriendo en el puerto 3000');
 });

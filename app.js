@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const userRoutes = require("./routes/userRoutes");
+const userRoutes = require("./routes/registerRoutes");
 const registerRoutes = require('./routes/registerRoutes');  // Ruta de los controladores
 const path = require("path");
 const app = express();

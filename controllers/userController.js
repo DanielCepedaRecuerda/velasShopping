@@ -3,6 +3,7 @@ const userModel = require("../models/UserModel");
 
 const registerUser = async (req, res) => {
   const { nombre, apellido1, apellido2, email, contraseña, telefono } = req.body;
+  console.log(req.body);
 
   if (!nombre || !apellido1 || !email || !contraseña || !telefono) {
     return res.status(400).json({ mensaje: "Todos los campos son obligatorios" });

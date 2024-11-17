@@ -32,7 +32,7 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ mensaje: error.message });
     }
 
-    res.status(500).json({ mensaje: "Error en el servidor" });
+    res.status(500).json({ mensaje: "Error en el servidooor" });
   }
 };
 

@@ -1,10 +1,15 @@
 // /api/register.js
 const connection = require("../db"); // Importar la conexión
+const bcrypt = require('bcrypt');
+const saltRounds = 10; // Nivel de cifrado
 
 module.exports = (req, res) => {
   // if (req.method === 'POST') {
-  const { nombre, apellido1, apellido2, email, contraseña, telefono } =
-    req.body;
+  const { nombre, apellido1, apellido2, email, contraseña, telefono } = req.body;
+  try {
+    // Cifrar la contraseña
+    const hashedPassword = await bcrypt.hash(contraseña, saltRounds);
+
   const query =
     "INSERT INTO clientes (nombre, apellido1, apellido2, email, contraseña, telefono, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, NOW())";
 
@@ -21,5 +26,8 @@ module.exports = (req, res) => {
         
       }
     )
-  );
+  );} catch (err) {
+    console.error('Error al cifrar la contraseña:', err);
+    res.status(500).json({ mensaje: "Error en el servidor" });
+  }
 };

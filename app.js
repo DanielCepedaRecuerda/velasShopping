@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/registerRoutes");
@@ -14,7 +15,7 @@ app.use(bodyParser.json()); // Para recibir datos JSON
 app.use(bodyParser.urlencoded({ extended: true })); // Para manejar formularios
 
 // Usar las rutas
-app.use('/api', registerRoutes); // Puedes hacer que todas las rutas empiecen con /api
+app.use('/', registerRoutes); // Puedes hacer que todas las rutas empiecen con /
 
 
 

@@ -34,9 +34,6 @@ app.use(express.static(path.join(__dirname, "public")));
 // Configurar las rutas
 app.use("/api/users", userRoutes);
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));

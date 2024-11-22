@@ -1,3 +1,4 @@
+// /app.js
 require('dotenv').config();
 const express = require("express");
 const session = require('express-session');
@@ -64,9 +65,6 @@ app.get("/velasDecorativas", (req, res) => {
 
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "login.html"));
-});
-app.get("/register", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "register.html"));
 });
 app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "register.html"));

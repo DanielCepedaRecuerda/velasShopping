@@ -53,8 +53,6 @@ app.use("/api/users", userRoutes);
 
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {
-  console.log("isAuthenticated:", res.locals.isAuthenticated);
-  console.log("User:", res.locals.user);
   res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 

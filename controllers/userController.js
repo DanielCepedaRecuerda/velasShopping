@@ -73,17 +73,16 @@ const loginUser = async (req, res) => {
   }
 };
 
-app.get('/logout', (req, res) => {
+const logoutUser = (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      console.error(err);
-      return res.redirect('/');
+      console.error("Error al cerrar sesión:", err);
+      return res.status(500).json({ mensaje: "Error al cerrar sesión" });
     }
     res.clearCookie('connect.sid'); // Limpia la cookie de sesión
-    res.redirect('/');
+    res.redirect('/'); // Redirige al usuario a la página principal
   });
-});
-
+};
 
 module.exports = {
   registerUser,

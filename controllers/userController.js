@@ -73,7 +73,20 @@ const loginUser = async (req, res) => {
   }
 };
 
+app.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error(err);
+      return res.redirect('/');
+    }
+    res.clearCookie('connect.sid'); // Limpia la cookie de sesión
+    res.redirect('/');
+  });
+});
+
+
 module.exports = {
   registerUser,
   loginUser,
+  logoutUser,
 };

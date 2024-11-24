@@ -1,10 +1,11 @@
 // /app.js
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
-const session = require('express-session');
+const session = require("express-session");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/authRoutes");
-const authRoutes = require('./routes/authRoutes');  // Ruta de los controladores
+const authRoutes = require("./routes/authRoutes"); // Ruta de los controladores
+const { logoutUser } = require('./controllers/authController');
 const path = require("path");
 const app = express();
 const PORT = 3000;
@@ -14,24 +15,33 @@ const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME;
 const dbUser = process.env.DB_USER;
 
-console.log({ dbHost, dbPassword, dbName, dbUser });
-const cors = require('cors');
+console.log({ dbHost, dbName, dbUser });
+const cors = require("cors");
 
 // Configuración del middleware express-session
-app.use(session({
-  secret: 'mi-secreto',  // Clave para firmar la cookie de sesión
-  resave: false,         // No volver a guardar la sesión si no ha cambiado
-  saveUninitialized: false,  // No guardar sesiones vacías
-  cookie: { secure: false }  // Si es HTTPS, cambiar a true
-}));
+app.use(
+  session({
+    secret: "mi-secreto", // Clave para firmar la cookie de sesión
+    resave: false, // No volver a guardar la sesión si no ha cambiado
+    saveUninitialized: false, // No guardar sesiones vacías
+    cookie: { secure: false }, // Si es HTTPS, cambiar a true
+  })
+);
 
 // Configuración de middleware
 app.use(cors());
 app.use(bodyParser.json()); // Para recibir datos JSON
 app.use(bodyParser.urlencoded({ extended: true })); // Para manejar formularios
 
+// Middelware para pasar datos de la sesión  a las vistas
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = !!req.session.user; // true si hay un usuario en sesión
+  res.locals.user = req.session.user || null; // Datos del usuario en sesión
+  next();
+});
+
 // Usar las rutas
-app.use('/', authRoutes); // Puedes hacer que todas las rutas empiecen con /
+app.use("/", authRoutes); // Puedes hacer que todas las rutas empiecen con /
 
 // Middleware
 app.use(bodyParser.json());
@@ -75,6 +85,7 @@ app.get("/login", (req, res) => {
 app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "register.html"));
 });
+app.get('/logout', logoutUser);
 
 // Servir vistas (opcional)
 app.get("/", (req, res) =>

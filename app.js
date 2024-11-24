@@ -5,7 +5,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/authRoutes");
 const authRoutes = require("./routes/authRoutes"); // Ruta de los controladores
-const { logoutUser } = require('./controllers/UserController');
+const { logoutUser } = require("./controllers/UserController");
 const path = require("path");
 const app = express();
 const PORT = 3000;
@@ -35,8 +35,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // Para manejar formularios
 
 // Middelware para pasar datos de la sesión  a las vistas
 app.use((req, res, next) => {
-  res.locals.isAuthenticated = !!req.session.user; // true si hay un usuario en sesión
-  res.locals.user = req.session.user || null; // Datos del usuario en sesión
+  res.locals.isAuthenticated = !!req.session.user; // true si el usuario está autenticado
+  res.locals.user = req.session.user || null; // Datos del usuario
   next();
 });
 
@@ -53,6 +53,8 @@ app.use("/api/users", userRoutes);
 
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {
+  console.log("isAuthenticated:", res.locals.isAuthenticated);
+  console.log("User:", res.locals.user);
   res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
@@ -85,7 +87,7 @@ app.get("/login", (req, res) => {
 app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "register.html"));
 });
-app.get('/logout', logoutUser);
+app.get("/logout", logoutUser);
 
 // Servir vistas (opcional)
 app.get("/", (req, res) =>

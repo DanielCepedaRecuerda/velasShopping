@@ -1,4 +1,4 @@
-const Product = require('../models/Product');
+const Product = require('../models/ProductsModel');
 
 const getCart = (req, res) => {
     const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
@@ -6,39 +6,42 @@ const getCart = (req, res) => {
 };
   
 const addToCart = async (req, res) => {
-    const { productId, quantity } = req.body;
+  const { productId, quantity } = req.body;
 
-   // Validar que los datos sean correctos
-    if (!productId || !quantity || quantity <= 0) {
-      return res.status(400).json({ error: 'Datos inválidos: asegúrate de enviar productId y una cantidad mayor que 0.' });
+  // Validar que los datos sean correctos
+  if (!productId || !quantity || quantity <= 0) {
+    return res.status(400).json({ error: 'Datos inválidos: asegúrate de enviar productId y una cantidad mayor que 0.' });
+  }
+
+  // Verificar si el producto existe
+  try {
+    const product = await Product.getProductById(productId);
+
+    if (!product) {
+      return res.status(404).json({ error: 'Producto no encontrado.' });
     }
-  
-    // Verificar si el producto existe
-    try {
-      const product = await Product.findByPk(productId);
-      if (!product) {
-        return res.status(404).json({ error: 'Producto no encontrado.' });
-      }
-  
-      let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-      const itemIndex = cart.findIndex(item => item.productId === productId);
-  
-      if (itemIndex > -1) {
-        cart[itemIndex].quantity += quantity;
-      } else {
-        cart.push({ productId, quantity });
-      }
-  
+
+    let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
+    const itemIndex = cart.findIndex(item => item.productId === productId);
+
+    if (itemIndex > -1) {
+      cart[itemIndex].quantity += quantity;
+    } else {
+      cart.push({ productId, quantity });
+    }
+
     res.cookie('cart', JSON.stringify(cart), {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Solo usa secure en producción
-        sameSite: 'strict', // Restringe la cookie al mismo dominio
-    }); 
-      res.status(200).json(cart);
-    } catch (err) {
-      res.status(500).json({ error: 'Error al verificar el producto.' });
-    }
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+    });
+
+    res.status(200).json(cart);
+  } catch (err) {
+    res.status(500).json({ error: 'Error al verificar el producto.' });
+  }
 };
+
   
   
 const removeFromCart = (req, res) => {
@@ -50,6 +53,7 @@ const removeFromCart = (req, res) => {
     res.cookie('cart', JSON.stringify(cart), { httpOnly: true });
     res.status(200).json(cart);
 };
+
   
 module.exports = { getCart, addToCart, removeFromCart };
   

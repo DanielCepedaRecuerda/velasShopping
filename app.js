@@ -5,6 +5,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/authRoutes");
 const authRoutes = require("./routes/authRoutes"); // Ruta de los controladores
+const cartRoutes = require('./routes/cartRoutes');
 const { logoutUser } = require("./controllers/UserController");
 const path = require("path");
 const app = express();
@@ -15,7 +16,6 @@ const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME;
 const dbUser = process.env.DB_USER;
 
-console.log({ dbHost, dbName, dbUser });
 const cors = require("cors");
 
 // Configuración del middleware express-session
@@ -40,6 +40,11 @@ app.use((req, res, next) => {
   next();
 });
 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+
+
 // Usar las rutas
 app.use("/", authRoutes); // Puedes hacer que todas las rutas empiecen con /
 
@@ -50,6 +55,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Configurar las rutas
 app.use("/api/users", userRoutes);
+
+// Ruta carrito
+app.use('/cart', cartRoutes);
 
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {

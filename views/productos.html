@@ -26,13 +26,11 @@
         </ul>
       </nav>
       <div class="divBotonAcceso">
-        <% if (isAuthenticated) { %>
-        <li>Hola, <%= user.name %></li>
-        <li><a href="/logout">Cerrar Sesión</a></li>
-        <% } else { %>
-        <li><a href="/login">Acceso</a></li>
-        <li><a href="/register">Registro</a></li>
-        <% } %>
+        <a href="/login"
+          ><button id="botonAcesso" class="botonAcceso">
+            Acceso / Registro
+          </button></a
+        >
       </div>
       <div class="social-links">
         <a href="#" class="fa fa-instagram"></a>
@@ -48,6 +46,11 @@
           <h2>Vela Aromática</h2>
           <p>Aroma de lavanda, ideal para relajarse.</p>
           <span class="price">$10.00</span>
+          <form action="/cart" method="POST">
+            <input type="hidden" name="productId" value="10">  <!-- id del producto -->
+            <input type="number" name="quantity" value="1" min="1">
+            <button type="submit">Agregar al carrito</button>
+          </form>
         </article>
         <article class="product">
           <img src="./images/vela2.jpg" alt="Vela de Soja" />

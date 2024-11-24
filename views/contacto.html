@@ -26,13 +26,11 @@
         </ul>
       </nav>
       <div class="divBotonAcceso">
-        <% if (isAuthenticated) { %>
-        <li>Hola, <%= user.name %></li>
-        <li><a href="/logout">Cerrar Sesión</a></li>
-        <% } else { %>
-        <li><a href="/login">Acceso</a></li>
-        <li><a href="/register">Registro</a></li>
-        <% } %>
+        <a href="/login"
+          ><button id="botonAcesso" class="botonAcceso">
+            Acceso / Registro
+          </button></a
+        >
       </div>
       <div class="social-links">
         <a href="#" class="fa fa-instagram"></a>

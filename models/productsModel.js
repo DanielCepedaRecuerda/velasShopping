@@ -1,4 +1,4 @@
-const connection = require("../db/Connection");
+const connection = require("../db/connection");
 
 // Función para obtener todos los productos
 const getAllProducts = async () => {
@@ -7,7 +7,7 @@ const getAllProducts = async () => {
   return rows;
 };
 
-// Función para obtener un producto por su ID
+// Función para obtener un producto por su ID.
 const getProductById = async (productId) => {
   try {
     const conn = await connection();
@@ -19,6 +19,5 @@ const getProductById = async (productId) => {
     throw new Error('Error fetching product');
   }
 };
-
 
 module.exports = { getAllProducts, getProductById };

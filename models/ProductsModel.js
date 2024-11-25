@@ -1,4 +1,4 @@
-const connection = require("../db/Connection");
+const connection = require("../db/connection");
 
 // Función para obtener todos los productos
 const getAllProducts = async () => {

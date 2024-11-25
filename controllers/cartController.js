@@ -1,4 +1,4 @@
-const Product = require('../models/ProductsModel');
+const Product = require('../models/productsModel');
 
 const getCart = (req, res) => {
     const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];

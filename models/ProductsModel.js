@@ -7,7 +7,7 @@ const getAllProducts = async () => {
   return rows;
 };
 
-// Función para obtener un producto por su ID
+// Función para obtener un producto por su ID.
 const getProductById = async (productId) => {
   try {
     const conn = await connection();

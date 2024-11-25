@@ -1,4 +1,4 @@
-const getProducts = async (req, res) => {
+const getAllProducts = async (req, res) => {
     try {
       const products = await Product.findAll();
       res.json(products);
@@ -7,4 +7,4 @@ const getProducts = async (req, res) => {
     }
   };
 
-  module.exports = { getProducts };
+  module.exports = { getAllProducts };

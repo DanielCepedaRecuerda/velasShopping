@@ -1,4 +1,4 @@
-const Product = require('../models/productsModel');
+const Product = require('../models/ProductsModel');
 
 const getCart = (req, res) => {
     const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
@@ -6,54 +6,43 @@ const getCart = (req, res) => {
 };
   
 const addToCart = async (req, res) => {
-  const { productId, quantity } = req.body;
+  let { productId, quantity } = req.body;
 
-  // Validar los parámetros
-  if (!productId || !Number.isInteger(quantity) || quantity <= 0) {
-    return res.status(400).json({ error: 'Datos inválidos: asegúrate de enviar productId y una cantidad mayor que 0.' });
+  // Convertir a números
+  productId = parseInt(productId, 10);
+  quantity = parseInt(quantity, 10);
+
+  if (!productId || !quantity || quantity <= 0) {
+      return res.status(400).json({ error: 'Datos inválidos: asegúrate de enviar productId y una cantidad mayor que 0.' });
   }
 
   try {
-    // Verificar si el producto existe
-    const product = await Product.getProductById(productId);
+      const product = await productosModel.findById(productId);
+      if (!product) {
+          return res.status(404).json({ error: 'Producto no encontrado.' });
+      }
 
-    if (!product) {
-      return res.status(404).json({ error: 'Producto no encontrado.' });
-    }
+      let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
+      const itemIndex = cart.findIndex(item => item.productId === productId);
 
-    // Obtener el carrito de la cookie (si existe)
-    let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
+      if (itemIndex > -1) {
+          cart[itemIndex].quantity += quantity; // Sumar cantidades correctamente
+      } else {
+          cart.push({ productId, quantity });
+      }
 
-    // Verificar si el producto ya está en el carrito
-    const itemIndex = cart.findIndex(item => item.productId === productId);
-
-    if (itemIndex > -1) {
-      // Si el producto ya existe en el carrito, actualizar la cantidad
-      cart[itemIndex].quantity += quantity;
-    } else {
-      // Si no existe, agregar un nuevo producto al carrito
-      cart.push({ productId, quantity });
-    }
-
-    // Guardar el carrito actualizado en las cookies
-    res.cookie('cart', JSON.stringify(cart), {
-      httpOnly: true,
-      secure: false,
-      // secure: process.env.NODE_ENV === 'production', // Solo en producción
-      sameSite: 'strict', // Mejor control de cookies
-    });
-
-    // Responder con el carrito actualizado
-    res.status(200).json({ cart });
+      res.cookie('cart', JSON.stringify(cart), {
+          httpOnly: true,
+          secure: false,
+          // secure: process.env.NODE_ENV === 'production',
+          sameSite: 'strict',
+      });
+      res.status(200).json({ cart });
   } catch (err) {
-    // Registrar el error en el servidor para depuración
-    console.error('Error al agregar al carrito:', err);
-
-    // Responder con un mensaje genérico, pero útil para el cliente
-    res.status(500).json({ error: 'Error al verificar el producto. Intenta nuevamente más tarde.' });
+      res.status(500).json({ error: 'Error al verificar el producto.' });
   }
 };
-  
+
 const removeFromCart = (req, res) => {
     const productId = req.params.productId;
     let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];

@@ -1,4 +1,4 @@
-const connection = require("../db/Connection");
+const connection = require("../db/connection");
 
 const createUser = async (userData) => {
   const { nombre, apellido1, apellido2, email, contraseña, telefono } = userData;

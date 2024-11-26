@@ -1,58 +1,57 @@
-const Product = require('../models/ProductsModel');
+const productsModel = require("../models/productsModel");
 
 const getCart = (req, res) => {
-    const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-    res.json(cart);
+  const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
+  res.json(cart);
 };
-  
+
 const addToCart = async (req, res) => {
-  let { productId, quantity } = req.body;
-
-  // Convertir a números
-  productId = parseInt(productId, 10);
-  quantity = parseInt(quantity, 10);
-
-  if (!productId || !quantity || quantity <= 0) {
-      return res.status(400).json({ error: 'Datos inválidos: asegúrate de enviar productId y una cantidad mayor que 0.' });
-  }
-
   try {
-      const product = await productosModel.findById(productId);
-      if (!product) {
-          return res.status(404).json({ error: 'Producto no encontrado.' });
-      }
+    const { productId, quantity } = req.body;
+    const parsedQuantity = Number(quantity);
 
-      let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-      const itemIndex = cart.findIndex(item => item.productId === productId);
+    if (isNaN(parsedQuantity) || parsedQuantity <= 0) {
+      return res.status(400).json({ error: "Cantidad inválida." });
+    }
 
-      if (itemIndex > -1) {
-          cart[itemIndex].quantity += quantity; // Sumar cantidades correctamente
-      } else {
-          cart.push({ productId, quantity });
-      }
+    const product = await productsModel.getProductById(Number(productId));
+    if (!product) {
+      return res.status(404).json({ error: "Producto no encontrado." });
+    }
 
-      res.cookie('cart', JSON.stringify(cart), {
-          httpOnly: true,
-          secure: false,
-          // secure: process.env.NODE_ENV === 'production',
-          sameSite: 'strict',
-      });
-      res.status(200).json({ cart });
+    let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
+    const itemIndex = cart.findIndex(
+      (item) => Number(item.productId) === Number(productId)
+    );
+
+    if (itemIndex > -1) {
+      cart[itemIndex].quantity += parsedQuantity;
+    } else {
+      cart.push({ productId: Number(productId), quantity: parsedQuantity });
+    }
+
+    res.cookie("cart", JSON.stringify(cart), {
+      httpOnly: true,
+      secure: false,
+      sameSite: "strict",
+    });
+    console.log("Carrito actual:", cart);
+    console.log("Producto añadido:", { productId, quantity });
+    return res.status(200).json({ cart });
   } catch (err) {
-      res.status(500).json({ error: 'Error al verificar el producto.' });
+    console.error("Error en addToCart:", err);
+    res.status(500).json({ error: "Error al verificar el producto." });
   }
 };
 
 const removeFromCart = (req, res) => {
-    const productId = req.params.productId;
-    let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-  
-    cart = cart.filter(item => item.productId !== productId);
-  
-    res.cookie('cart', JSON.stringify(cart), { httpOnly: true });
-    res.status(200).json(cart);
+  const productId = req.params.productId;
+  let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
+
+  cart = cart.filter((item) => item.productId !== productId);
+
+  res.cookie("cart", JSON.stringify(cart), { httpOnly: true });
+  res.status(200).json(cart);
 };
 
-  
 module.exports = { getCart, addToCart, removeFromCart };
-  

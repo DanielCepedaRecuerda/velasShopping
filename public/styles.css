@@ -305,30 +305,27 @@ button:hover {
     position: fixed;
     bottom: 20px; /* Distancia desde el fondo */
     right: 20px; /* Distancia desde la derecha */
-    background: linear-gradient(145deg, #3498db, #2980b9);
+    background: linear-gradient(145deg, #3498db, #2980b9); /* Color degradado */
     padding: 12px;
     border-radius: 50%;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Sombra suave */
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 1000;
-    transition: transform 0.3s ease;
-    border: 3px solid #fff;
+    transition: all 0.3s ease;
+    border: 3px solid #fff; /* Borde blanco para destacar */
   }
   
-  .floating-cart:hover {
-    transform: scale(1.1); /* Efecto de agrandar el botón al pasar el mouse */
-    box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.3);
+  /* Ajustar el tamaño de la imagen */
+  .velaCarrito {
+    width: 40px;  /* Ajusta el tamaño de la imagen según el tamaño del botón */
+    height: auto;  /* Mantiene la proporción de la imagen */
+    object-fit: contain; /* Asegura que la imagen se ajuste correctamente */
   }
   
-  .cart-icon {
-    position: relative;
-    color: white;
-    font-size: 24px;
-  }
-  
+  /* Estilo para el contador de productos */
   .item-count {
     position: absolute;
     top: -5px;
@@ -336,9 +333,14 @@ button:hover {
     background-color: #e74c3c;
     color: white;
     border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 12px;
+    padding: 4px 8px;
+    font-size: 14px;
     font-weight: bold;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); /* Sombra para el contador */
     transition: transform 0.3s ease;
   }
+  
+  .item-count:hover {
+    transform: scale(1.2); /* Aumenta el tamaño del contador al pasar el mouse */
+  }
+  

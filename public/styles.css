@@ -302,7 +302,7 @@ button:hover {
 /* Estilo para el botón flotante */
 .floating-cart {
     position: fixed;
-    bottom: 20px; /* Distancia desde el fondo */
+    top: 20px; /* Distancia desde el fondo */
     right: 20px; /* Distancia desde la derecha */
     background-color: white; /* Fondo blanco para el botón flotante */
     padding: 12px;

@@ -16,8 +16,6 @@ window.onload = function() {
   // Si la cookie del carrito existe, mostrar el carrito
   if (cartCookie && carritoElement) {
     divBotonAcceso.classList.add('show');  // Mostrar el botón si está logueado
-  }else{
-    divBotonAcceso.classList.remove('show');
   }
 
 if (cartCookie) {

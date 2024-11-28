@@ -15,9 +15,9 @@ window.onload = function() {
     
   // Si la cookie del carrito existe, mostrar el carrito
   if (cartCookie && carritoElement) {
-    carritoElement.style.display = 'block';  // Muestra el carrito
-  } else if (carritoElement) {
-    carritoElement.style.display = 'none';  // Asegúrate de que esté oculto si no existe la cookie
+    divBotonAcceso.classList.add('show');  // Mostrar el botón si está logueado
+  }else{
+    divBotonAcceso.classList.remove('show');
   }
 
 if (cartCookie) {

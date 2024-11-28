@@ -314,10 +314,10 @@ button:hover {
     }
 }
 /* Estilo para el botón flotante */
-#floating-cart.hidden {
+#floating-cart {
     display: none;
   }
-.floating-cart {    
+.floating-cart.show {    
     position: fixed;
     top: 20px; /* Distancia desde el fondo */
     right: 20px; /* Distancia desde la derecha */

@@ -21,12 +21,16 @@ const cors = require("cors");
 // Configuración del middleware express-session
 app.use(
   session({
-    secret: "mi-secreto", // Clave para firmar la cookie de sesión
-    resave: false, // No volver a guardar la sesión si no ha cambiado
-    saveUninitialized: false, // No guardar sesiones vacías
-    cookie: { secure: false }, // Si es HTTPS, cambiar a true
+    secret: 'yourSecretKey',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      httpOnly: true,  // Esto protege la cookie de ser accesible desde JavaScript
+      secure: process.env.NODE_ENV === 'production', // Usar "secure" en producción (HTTPS)
+    },
   })
 );
+
 
 // Configuración de middleware
 app.use(cors());

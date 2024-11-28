@@ -18,10 +18,14 @@ window.onload = function() {
 
     // Verificar si el usuario ha iniciado sesión
     const usercookie = getCookie("user");
-
+    if (usercookie) {
+        alert("Existe cookie user");
+    }
     // Seleccionar el botón de acceso
     const divBotonAcceso = document.getElementById("divBotonAcceso");
-
+    if (divBotonAcceso) {
+        alert("Recojo div");
+    }
     // Si el usuario está logueado, añadir la clase 'hidden' al botón de acceso, de lo contrario quitarla
     if (usercookie && divBotonAcceso) {
         divBotonAcceso.classList.add("hidden");  // Añadir la clase 'hidden' si está logueado

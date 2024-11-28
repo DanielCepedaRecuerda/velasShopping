@@ -45,8 +45,10 @@ if (cartCookie) {
    if (!divBotonAcceso) return;
 
   if (usercookie) {
-    divBotonAcceso.classList.remove('show');  // Ocultar el botón si el usuario está logueado
+    divBotonAcceso.classList.add('hidden');  // Mostrar el botón si está logueado
+
   } else {
-    divBotonAcceso.classList.add('show');  // Mostrar el botón si no está logueado
+    divBotonAcceso.classList.remove('hidden');  // Ocultar el botón si no está logueado
+
   }
 };

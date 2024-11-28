@@ -69,6 +69,7 @@ const loginUser = async (req, res) => {
       id: user._id,
       email: user.email,
     };
+    res.cookie('user_authenticated', 'true', { maxAge: 900000, httpOnly: false }); // No tiene httpOnly, accesible desde JS
     res.redirect("/"); // Esto redirige al cliente al índice
   } catch (error) {
     console.error("Error al iniciar sesión:", error);

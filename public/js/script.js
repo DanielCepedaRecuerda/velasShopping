@@ -1,6 +1,5 @@
 window.onload = function() {
     // Función para obtener el valor de una cookie por su nombre
-    alert("uso");
     function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
@@ -12,30 +11,21 @@ window.onload = function() {
     const cartCookie = getCookie("cart");
 
     // Si la cookie del carrito existe, quitar la clase 'hidden' (o la clase que necesites)
-    if (cartCookie) {
-        // Seleccionamos el elemento del cual queremos quitar la clase
-        const element = document.getElementById("carrito-element"); // Cambia "carrito-element" por el ID real de tu elemento
-
-        if (element) {
-            element.classList.remove("hidden");  // Cambia "hidden" por la clase que quieres quitar
-        }
+    const carritoElement = document.getElementById("carrito-element");
+    if (cartCookie && carritoElement) {
+        carritoElement.classList.remove("hidden");  // Quitar la clase 'hidden' del carrito
     }
 
     // Verificar si el usuario ha iniciado sesión
     const usercookie = getCookie("user");
-     // Si la cookie del carrito existe, quitar la clase 'hidden' (o la clase que necesites)
-     const element = document.getElementById("divBotonAcceso"); // Cambia "carrito-element" por el ID real de tu elemento
 
-     if (usercookie) {
-        // Seleccionamos el elemento del cual queremos quitar la clase
+    // Seleccionar el botón de acceso
+    const divBotonAcceso = document.getElementById("divBotonAcceso");
 
-        if (element) {
-            element.classList.remove("hidden");  // Cambia "hidden" por la clase que quieres quitar
-        }
-    }
-    else{
-        if (element) {
-            element.classList.add("show");  // Cambia "hidden" por la clase que quieres quitar
-        }
+    // Si el usuario está logueado, añadir la clase 'hidden' al botón de acceso, de lo contrario quitarla
+    if (usercookie && divBotonAcceso) {
+        divBotonAcceso.classList.add("hidden");  // Añadir la clase 'hidden' si está logueado
+    } else if (divBotonAcceso) {
+        divBotonAcceso.classList.remove("hidden");  // Quitar la clase 'hidden' si no está logueado
     }
 };

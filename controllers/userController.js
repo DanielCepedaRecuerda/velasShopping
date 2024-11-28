@@ -64,8 +64,11 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ mensaje: "Contraseña incorrecta" });
     }
 
-    req.session.user = user; // Guardar información del usuario en la sesión
-
+     // Almacenamos la información del usuario en la sesión
+     req.session.user = {
+      id: user._id,
+      email: user.email,
+    };
     res.redirect("/"); // Esto redirige al cliente al índice
   } catch (error) {
     console.error("Error al iniciar sesión:", error);

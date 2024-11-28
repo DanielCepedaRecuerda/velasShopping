@@ -1,5 +1,6 @@
 window.onload = function() {
     // Función para obtener el valor de una cookie por su nombre
+    alert("uso");
     function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);

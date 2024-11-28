@@ -9,6 +9,8 @@ window.onload = function() {
 
     // Verificar si la cookie del carrito existe
   const cartCookie = getCookie("cart");
+  console.log(cartCookie);
+  
   const carritoElement = document.getElementById("floating-cart");
     
   // Si la cookie del carrito existe, mostrar el carrito

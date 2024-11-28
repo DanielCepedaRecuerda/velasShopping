@@ -20,13 +20,11 @@ window.onload = function() {
    const usercookie = getCookie('user_authenticated');
    const divBotonAcceso = document.getElementById('divBotonAcceso');
  
-   if (usercookie && divBotonAcceso) {
-     // Ocultar el div si la cookie indica que el usuario está logueado
-     divBotonAcceso.classList.add('hidden');
-     divBotonAcceso.classList.remove('divBotonAcceso');
-   } else if (divBotonAcceso) {
-     // Mostrar el div si no está logueado
-     divBotonAcceso.classList.remove('hidden');
-     divBotonAcceso.classList.add('divBotonAcceso');
-   }
+   if (!divBotonAcceso) return;
+
+  if (usercookie) {
+    divBotonAcceso.classList.remove('show');  // Ocultar el botón si el usuario está logueado
+  } else {
+    divBotonAcceso.classList.add('show');  // Mostrar el botón si no está logueado
+  }
 };

@@ -23,11 +23,18 @@ header {
     flex-direction: column; /* Apila los elementos verticalmente */
     align-items: center; /* Centra los elementos horizontalmente */
 }
-.divBotonAcceso {
+
+#divBotonAcceso {
+    opacity: 0;  /* Comienza oculto */
+    transition: opacity 0.3s ease;  /* Transición suave */
+  }
+  
+  #divBotonAcceso.show {
     margin: 1em;
     display: flex;
     justify-content: center; /* Centra el botón */
-}
+    opacity: 1;  /* Se hace visible cuando se le agrega la clase 'show' */
+  }
 .botonAcceso{
     position:relative;
     right: 0;

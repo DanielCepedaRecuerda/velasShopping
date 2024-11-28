@@ -19,4 +19,22 @@ window.onload = function() {
             element.classList.remove("hidden");  // Cambia "hidden" por la clase que quieres quitar
         }
     }
+
+    // Verificar si el usuario ha iniciado sesión
+    const usercookie = getCookie("user");
+     // Si la cookie del carrito existe, quitar la clase 'hidden' (o la clase que necesites)
+     const element = document.getElementById("divBotonAcceso"); // Cambia "carrito-element" por el ID real de tu elemento
+
+     if (usercookie) {
+        // Seleccionamos el elemento del cual queremos quitar la clase
+
+        if (element) {
+            element.classList.remove("hidden");  // Cambia "hidden" por la clase que quieres quitar
+        }
+    }
+    else{
+        if (element) {
+            element.classList.add("show");  // Cambia "hidden" por la clase que quieres quitar
+        }
+    }
 };

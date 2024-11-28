@@ -5,6 +5,14 @@ body {
     background-color: #fff8e1; /* Tono cálido */
     color: #333;
 }
+/********CLASES MOSTRAR/OCULTAR**************/
+.hidden{
+    display: none;
+}
+.show{
+    display: block;
+}
+/********************************************/
 
 header {
     background-color: #333;

@@ -19,8 +19,8 @@ window.onload = function() {
     // Verificar si el usuario ha iniciado sesión
     const usercookie = getCookie('user_authenticated');  // Comprobar si la cookie 'user_authenticated' está presente
     const divBotonAcceso = document.getElementById('divBotonAcceso');
-    if (usercookie) {
-        alert("existo");
+    if (usercookie && divBotonAcceso) {
+        alert("existimos");
     }
   if (usercookie && divBotonAcceso) {
     divBotonAcceso.classList.add('hidden');  // Ocultar el botón si el usuario está logueado

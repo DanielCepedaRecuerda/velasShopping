@@ -8,13 +8,15 @@ window.onload = function() {
     }
 
     // Verificar si la cookie del carrito existe
-    const cartCookie = getCookie("cart");
+  const cartCookie = getCookie("cart");
+  const carritoElement = document.getElementById("floating-cart");
 
-    // Si la cookie del carrito existe, quitar la clase 'hidden' (o la clase que necesites)
-    const carritoElement = document.getElementById("carrito-element");
-    if (cartCookie && carritoElement) {
-        carritoElement.classList.remove("hidden");  // Quitar la clase 'hidden' del carrito
-    }
+  // Si la cookie del carrito existe, mostrar el carrito
+  if (cartCookie && carritoElement) {
+    carritoElement.style.display = 'block';  // Muestra el carrito
+  } else if (carritoElement) {
+    carritoElement.style.display = 'none';  // Asegúrate de que esté oculto si no existe la cookie
+  }
 
    // Verificar si la cookie 'user_authenticated' está presente
    const usercookie = getCookie('user_authenticated');

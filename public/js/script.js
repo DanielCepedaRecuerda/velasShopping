@@ -16,15 +16,17 @@ window.onload = function() {
         carritoElement.classList.remove("hidden");  // Quitar la clase 'hidden' del carrito
     }
 
-    // Verificar si el usuario ha iniciado sesión
-    const usercookie = getCookie('user_authenticated');  // Comprobar si la cookie 'user_authenticated' está presente
-    const divBotonAcceso = document.getElementById('divBotonAcceso');
-    if (usercookie && divBotonAcceso) {
-        alert("existimos");
-    }
-  if (usercookie && divBotonAcceso) {
-    divBotonAcceso.classList.add('hidden');  // Ocultar el botón si el usuario está logueado
-  } else if (divBotonAcceso) {
-    divBotonAcceso.classList.remove('hidden');  // Mostrar el botón si no está logueado
-  }
+   // Verificar si la cookie 'user_authenticated' está presente
+   const usercookie = getCookie('user_authenticated');
+   const divBotonAcceso = document.getElementById('divBotonAcceso');
+ 
+   if (usercookie && divBotonAcceso) {
+     // Ocultar el div si la cookie indica que el usuario está logueado
+     divBotonAcceso.classList.add('hidden');
+     divBotonAcceso.classList.remove('divBotonAcceso');
+   } else if (divBotonAcceso) {
+     // Mostrar el div si no está logueado
+     divBotonAcceso.classList.remove('hidden');
+     divBotonAcceso.classList.add('divBotonAcceso');
+   }
 };

@@ -34,7 +34,7 @@ header {
     margin: 1em;
     display: flex;
     justify-content: center; /* Centra el botón */
-    transition: visibility 0s, opacity 0.3s ease;
+    transition: visibility 1s, opacity 0.3s ease;
     opacity: 1;  /* Se hace visible cuando se le agrega la clase 'show' */
   }
 .botonAcceso{

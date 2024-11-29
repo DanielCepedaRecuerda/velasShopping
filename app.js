@@ -60,7 +60,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Configurar las rutas
 app.use("/api/users", userRoutes);
-app.use('/api/contact', contactRoutes);
+// app.use('/api/contact', contactRoutes);
 
 // Ruta carrito
 app.use('/cart', cartRoutes);

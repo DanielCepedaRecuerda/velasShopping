@@ -3,7 +3,6 @@ const nodemailer = require('nodemailer');
 // Controlador para manejar el formulario de contacto
 exports.handleContactForm = async (req, res) => {
     const { name, email, message } = req.body;
-    console.log(process.env.EMAIL_USER);
     
     try {
         // Aquí va la lógica de enviar un correo electrónico

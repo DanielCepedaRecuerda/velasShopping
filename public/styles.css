@@ -25,8 +25,9 @@ header {
 }
 
 #divBotonAcceso.hidden {
-    display: none;
-  }
+    visibility: hidden;    /* Hace el elemento invisible pero mantiene el espacio que ocupa */
+    pointer-events: none;  /* Desactiva todas las interacciones (clicks, etc.) */
+}
   
   #divBotonAcceso {
     margin: 1em;

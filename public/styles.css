@@ -30,12 +30,12 @@ header {
     opacity: 0;
 }
   
-  #divBotonAcceso {
-    margin: 1em;
-    display: flex;
-    justify-content: center; /* Centra el botón */
-    transition: visibility 0s 2s, opacity 0.3s ease 2s;
-  }
+#divBotonAcceso {
+margin: 1em;
+display: flex;
+justify-content: center; /* Centra el botón */
+transition: visibility 0s, opacity 0.3s ease 2s;
+}
 .botonAcceso{
     position:relative;
     right: 0;

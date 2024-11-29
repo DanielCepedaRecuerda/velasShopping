@@ -17,10 +17,6 @@ window.onload = function() {
       }
   });
 
-
-  console.log(process.env.EMAIL_USER);
-
-
     // Función para obtener el valor de una cookie por su nombre
     function getCookie(name) {
         const value = `; ${document.cookie}`;

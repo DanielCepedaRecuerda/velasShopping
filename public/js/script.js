@@ -1,4 +1,26 @@
 window.onload = function() {
+
+  // Formulario Contáctenos
+    document.getElementById("contact-form").addEventListener("submit", async function (e) {
+      e.preventDefault(); // Evitar que el formulario se envíe de la manera tradicional
+
+      const formData = new FormData(this);
+      const response = await fetch("/api/contact", {
+          method: "POST",
+          body: formData
+      });
+
+      if (response.ok) {
+          alert("¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.");
+      } else {
+          alert("Hubo un error al enviar tu mensaje. Por favor, intenta nuevamente.");
+      }
+  });
+
+
+
+
+
     // Función para obtener el valor de una cookie por su nombre
     function getCookie(name) {
         const value = `; ${document.cookie}`;

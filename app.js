@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./routes/authRoutes");
 const authRoutes = require("./routes/authRoutes"); // Ruta de los controladores
 const cartRoutes = require('./routes/cartRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 const { logoutUser } = require("./controllers/userController");
 const path = require("path");
 const app = express();
@@ -59,6 +60,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Configurar las rutas
 app.use("/api/users", userRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Ruta carrito
 app.use('/cart', cartRoutes);

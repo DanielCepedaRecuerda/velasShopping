@@ -27,12 +27,14 @@ header {
 #divBotonAcceso.hidden {
     visibility: hidden;    /* Hace el elemento invisible pero mantiene el espacio que ocupa */
     pointer-events: none;  /* Desactiva todas las interacciones (clicks, etc.) */
+    opacity: 0;
 }
   
   #divBotonAcceso {
     margin: 1em;
     display: flex;
     justify-content: center; /* Centra el botón */
+    transition: visibility 0s, opacity 0.3s ease;
     opacity: 1;  /* Se hace visible cuando se le agrega la clase 'show' */
   }
 .botonAcceso{

@@ -34,7 +34,7 @@ header {
     margin: 1em;
     display: flex;
     justify-content: center; /* Centra el botón */
-    transition: visibility 0s 0.5s, opacity 0.3s ease 0.5s;
+    transition: visibility 0s 0.5s, opacity 0.3s ease 1s;
   }
 .botonAcceso{
     position:relative;

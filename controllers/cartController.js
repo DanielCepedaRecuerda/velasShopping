@@ -32,7 +32,7 @@ const addToCart = async (req, res) => {
 
     res.cookie("cart", JSON.stringify(cart), {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === 'production',
       sameSite: "strict",
     });
     

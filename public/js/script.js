@@ -1,6 +1,7 @@
 window.onload = function() {
 
   // Formulario Contáctenos
+  if (document.getElementById("contract-form")) {
     document.getElementById("contact-form").addEventListener("submit", async function (e) {
       e.preventDefault(); // Evitar que el formulario se envíe de la manera tradicional
 
@@ -15,8 +16,8 @@ window.onload = function() {
       } else {
           alert("Hubo un error al enviar tu mensaje. Por favor, intenta nuevamente.");
       }
-  });
-
+    });
+  }
     // Función para obtener el valor de una cookie por su nombre
     function getCookie(name) {
         const value = `; ${document.cookie}`;

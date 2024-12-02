@@ -1,4 +1,6 @@
 window.onload = function() {
+  const cart = req.cookies.cart; // Accede a los datos de la cookie "cart"
+console.log(cart);
 
   // Formulario Contáctenos
   if (document.getElementById("contract-form")) {

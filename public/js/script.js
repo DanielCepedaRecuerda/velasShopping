@@ -27,8 +27,6 @@ window.onload = function() {
 
   // Verificar si la cookie del carrito existe
   const cartCookie = getCookie("cart");
-  console.log(cartCookie);
-  
   const carritoElement = document.getElementById("floating-cart");
   const divBotonAcceso = document.getElementById('divBotonAcceso');
     
@@ -51,7 +49,8 @@ window.onload = function() {
       totalQuantity += item.quantity;  // Sumar las cantidades
     });
     document.getElementById("item-count").textContent = totalQuantity;
-    console.log("Total de productos en el carrito:", totalQuantity);  // Mostrar total
+    console.log("Total de productos en el carrito:",   
+);  // Mostrar total
   } else {
     console.log("No hay carrito guardado en las cookies.");
   }

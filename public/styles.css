@@ -316,10 +316,6 @@ button:hover {
 }
 /* Estilo para el botón flotante */
 #floating-cart {
-    visibility: hidden;
-    display: none;
-  }
-.floating-cart.show {    
     position: fixed;
     top: 20px; 
     right: 20px; 
@@ -335,6 +331,7 @@ button:hover {
     transition: all 0.3s ease;
     border: 3px solid #333; 
   }
+
   
   /* Ajustar el tamaño de la imagen */
   .velaCarrito {

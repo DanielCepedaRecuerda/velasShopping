@@ -39,7 +39,8 @@ window.onload = function() {
 
   if (cartCookie) {
     // Si la cookie existe, parseamos su contenido (que es un JSON)
-    const cartItems = JSON.parse(cartCookie);  // Convertir el string JSON en un objeto
+    const decodedCartCookie = decodeURIComponent(cartCookie);
+    const cartItems = JSON.parse(decodedCartCookie);  // Convertir el string JSON en un objeto
 
     // Ahora puedes trabajar con el objeto 'cartItems', que es un array de productos
     console.log(cartItems);  // Mostrar todo el carrito

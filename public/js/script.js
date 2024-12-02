@@ -48,9 +48,15 @@ window.onload = function() {
     cartItems.forEach(item => {
       totalQuantity += item.quantity;  // Sumar las cantidades
     });
-    document.getElementById("item-count").textContent = totalQuantity;
-    console.log("Total de productos en el carrito:",   
-);  // Mostrar total
+
+    // Mostrar la cantidad total en el elemento con id="item-count"
+    const itemCountElement = document.getElementById("item-count");
+    if (itemCountElement) {
+      itemCountElement.textContent = totalQuantity;  // Actualiza el número de productos
+    }
+
+
+    console.log("Total de productos en el carrito:", totalQuantity);  // Mostrar total
   } else {
     console.log("No hay carrito guardado en las cookies.");
   }

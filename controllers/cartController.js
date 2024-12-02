@@ -35,8 +35,8 @@ const addToCart = async (req, res) => {
       secure: false,
       sameSite: "strict",
     });
-    console.log("Carrito actual:", cart);
-    console.log("Producto añadido:", { productId, quantity });
+    
+    res.redirect("/productos");
     return res.status(200).json({ cart });
   } catch (err) {
     console.error("Error en addToCart:", err);

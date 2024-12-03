@@ -7,6 +7,8 @@ function getCookie(name) {
 }
 
 window.onload = function() {
+// Inicialmente ocultar el contenido
+document.body.style.visibility = 'hidden';
 
   // escondo primero los botones para solucionar el parpadeo
   const divBotonAcceso = document.getElementById('divBotonAcceso');
@@ -87,4 +89,7 @@ window.onload = function() {
     divBotonLogout.classList.remove("hidden");
 
   }
+  
+  // Después de ejecutar el script, hacer visible el body
+  document.body.style.visibility = 'visible';
 };

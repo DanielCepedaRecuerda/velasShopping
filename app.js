@@ -11,6 +11,21 @@ const path = require("path");
 const app = express();
 const PORT = 3000;
 
+// Middleware para establecer el encabezado Content Security Policy (CSP)
+app.use((req, res, next) => {
+  res.setHeader("Content-Security-Policy", 
+    "default-src 'self';" + // Permitir solo contenido desde el mismo dominio
+    "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;" + // Permitir scripts desde el mismo dominio y desde cdnjs
+    "style-src 'self' https://fonts.googleapis.com;" + // Permitir estilos desde Google Fonts
+    "font-src 'self' https://fonts.gstatic.com;" + // Permitir fuentes desde Google Fonts
+    "img-src 'self' data: https://www.google.com;" + // Permitir imágenes desde el dominio local, data y google
+    "connect-src 'self';" + // Permitir conexiones AJAX solo desde el mismo dominio
+    "object-src 'none';" + // Bloquear objetos como Flash o Java
+    "upgradeInsecureRequests;" // Fuerza el uso de HTTPS
+  );
+  
+  next();
+});
 // Configurar EJS como motor de plantillas
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));

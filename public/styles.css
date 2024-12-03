@@ -15,7 +15,7 @@ header {
     flex-direction: column;
     align-items: center;
 }
-
+/************ ESTILOS SHOW Y HIDDEN **************/
 .show{
     display: flex; 
     margin: 1em;
@@ -45,7 +45,7 @@ header {
 .botonAcceso:hover {
     background-color: #d35400;}
 
-.divBotonLogout{
+#divBotonLogout{
     display: none;  
     visibility: hidden; 
     pointer-events: none; 

@@ -67,10 +67,12 @@ window.onload = function() {
   console.log(divBotonAcceso);
   
   // Si la cookie NO existe (usuario no autenticado), mostramos el botón de acceso
-  if (!usercookie) {
+   if (!usercookie) {
     divBotonAcceso.classList.add('show');
+    divBotonAcceso.classList.remove('hidden');
   } else {
     // Si la cookie existe (usuario autenticado), ocultamos el botón
+    divBotonAcceso.classList.add('hidden');
     divBotonAcceso.classList.remove('show');
   }
 };

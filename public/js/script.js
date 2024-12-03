@@ -68,7 +68,7 @@ document.body.style.visibility = 'hidden';
   const divBotonAcceso = document.getElementById('divBotonAcceso');
   const divBotonLogout = document.getElementById('divBotonLogout');
 
-  if ((!usercookie && divBotonAcceso && divBotonLogout)) {
+  if ((divBotonAcceso && divBotonLogout)) {
     // Si la cookie NO existe (usuario no autenticado), mostramos el botón de acceso
     if (!usercookie) {
       divBotonAcceso.classList.add('show');

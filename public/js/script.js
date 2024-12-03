@@ -66,9 +66,7 @@ window.onload = function() {
  
   if (!divBotonAcceso) return;
 
-  if (usercookie) {
-    divBotonAcceso.classList.add('hidden');  // Ocultar el botón si el usuario está logueado
-  } else {
-    divBotonAcceso.classList.remove('hidden');  // Mostrar el botón si el usuario no está logueado
+  if (!usercookie) {
+    divBotonAcceso.classList.add('show');  // Ocultar el botón si el usuario está logueado
   }
 };

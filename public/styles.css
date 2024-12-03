@@ -24,17 +24,16 @@ header {
     align-items: center;
 }
 
-#divBotonAcceso.hidden {
+#divBotonAcceso{
     visibility: hidden;      
     pointer-events: none;  
     opacity: 0;
 }
   
-#divBotonAcceso {
+#divBotonAcceso.show {
 margin: 1em;
 display: flex;
 justify-content: center;
-transition: visibility 0s, opacity 0.3s ease 10s;
 }
 .botonAcceso{
     position:relative;
@@ -315,7 +314,7 @@ button:hover {
     }
 }
 /* Estilo para el botón flotante */
-#floating-cart {
+.floating-cart {
     position: fixed;
     top: 20px; 
     right: 20px; 

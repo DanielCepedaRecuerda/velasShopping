@@ -17,7 +17,7 @@ header {
 }
 /************ ESTILOS SHOW Y HIDDEN **************/
 .show{
-    display: flex; 
+    display: block; 
     margin: 1em;
     justify-content: center;
     opacity: 1; 

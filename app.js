@@ -96,8 +96,8 @@ app.get("/velasDecorativas", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "velasDecorativas.html"));
 });
 
-app.get("/showCart", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "showCart.html"));
+app.get("/car", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "cart.html"));
 })
 
 app.get("/login", (req, res) => {

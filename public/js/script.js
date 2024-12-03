@@ -68,21 +68,24 @@ document.body.style.visibility = 'hidden';
   const divBotonAcceso = document.getElementById('divBotonAcceso');
   const divBotonLogout = document.getElementById('divBotonLogout');
 
-  // Si la cookie NO existe (usuario no autenticado), mostramos el botón de acceso
-   if (!usercookie && divBotonAcceso && divBotonLogout) {
-    divBotonAcceso.classList.add('show');
-    divBotonAcceso.classList.remove('hidden');
-    divBotonLogout.classList.remove("show");
-    divBotonLogout.classList.add("hidden");
+  if ((!usercookie && divBotonAcceso && divBotonLogout)) {
+    // Si la cookie NO existe (usuario no autenticado), mostramos el botón de acceso
+    if (!usercookie) {
+      divBotonAcceso.classList.add('show');
+      divBotonAcceso.classList.remove('hidden');
+      divBotonLogout.classList.remove("show");
+      divBotonLogout.classList.add("hidden");
 
-  } else {
-    // Si la cookie existe (usuario autenticado), ocultamos el botón y mostramos botonLogout
-    divBotonAcceso.classList.add('hidden');
-    divBotonAcceso.classList.remove('show');
-    divBotonLogout.classList.add("show");
-    divBotonLogout.classList.remove("hidden");
+    } else {
+      // Si la cookie existe (usuario autenticado), ocultamos el botón y mostramos botonLogout
+      divBotonAcceso.classList.add('hidden');
+      divBotonAcceso.classList.remove('show');
+      divBotonLogout.classList.add("show");
+      divBotonLogout.classList.remove("hidden");
 
+    }
   }
+  
 
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = 'visible';

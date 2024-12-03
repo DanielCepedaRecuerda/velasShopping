@@ -17,6 +17,7 @@ header {
 }
 
 #divBotonAcceso {
+    display: none;  /* El botón estará oculto por defecto */
     visibility: hidden; /* Aseguramos que no sea visible */
     pointer-events: none; /* No podrá ser clickeado */
     opacity: 0;  /* Se asegura de que no sea visible ni interactivo */

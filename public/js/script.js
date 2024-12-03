@@ -1,3 +1,11 @@
+// Función para obtener el valor de una cookie por su nombre
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
+
 window.onload = function() {
   // Formulario de Contáctenos
   if (document.getElementById("contact-form")) {
@@ -17,18 +25,10 @@ window.onload = function() {
       }
     });
   }
-  // Función para obtener el valor de una cookie por su nombre
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-    return null;
-  }
-
+  
   // Verificar si la cookie del carrito existe
   const cartCookie = getCookie("cart");
   const carritoElement = document.getElementById("floating-cart");
-  const divBotonAcceso = document.getElementById('divBotonAcceso');
     
   // Si la cookie del carrito existe, mostrar el carrito
   if (cartCookie && carritoElement) {
@@ -55,7 +55,6 @@ window.onload = function() {
       itemCountElement.textContent = totalQuantity;  // Actualiza el número de productos
     }
 
-
     console.log("Total de productos en el carrito:", totalQuantity);  // Mostrar total
   } else {
     console.log("No hay carrito guardado en las cookies.");
@@ -64,9 +63,15 @@ window.onload = function() {
   // Verificar si la cookie 'user_authenticated' está presente
   const usercookie = getCookie('user_authenticated');
  
-  if (!divBotonAcceso) return;
-
-  if (!usercookie) {
-    divBotonAcceso.classList.add('show');  // Ocultar el botón si el usuario está logueado
+  const divBotonAcceso = document.getElementById('divBotonAcceso');
+  console.log(divBotonAcceso);
+  
+  // Cambié la lógica para mostrar el botón cuando el usuario está autenticado
+  if (usercookie) {
+    // Si la cookie existe (usuario autenticado), mostrar el botón
+    divBotonAcceso.classList.add('show');
+  } else {
+    // Si no existe la cookie, el botón sigue oculto
+    divBotonAcceso.classList.remove('show');
   }
 };

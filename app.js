@@ -17,9 +17,13 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use((req, res, next) => {
   res.setHeader("Content-Security-Policy", 
-    "default-src 'self'; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; style-src-elem 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com;");
+    "default-src 'self'; " +
+    "font-src 'self' https://fonts.gstatic.com; " +
+    "style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; " +
+    "style-src-elem 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com;");
   next();
 });
+
 
 const dbHost = process.env.DB_HOST;
 const dbPassword = process.env.DB_PASSWORD;

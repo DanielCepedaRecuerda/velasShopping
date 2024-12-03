@@ -15,16 +15,6 @@ const PORT = 3000;
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.use((req, res, next) => {
-  res.setHeader("Content-Security-Policy", 
-    "default-src 'self'; " +
-    "font-src 'self' https://fonts.gstatic.com; " +
-    "style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; " +
-    "style-src-elem 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com;");
-  next();
-});
-
-
 const dbHost = process.env.DB_HOST;
 const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME;

@@ -7,6 +7,14 @@ function getCookie(name) {
 }
 
 window.onload = function() {
+
+  // escondo primero los botones para solucionar el parpadeo
+  const divBotonAcceso = document.getElementById('divBotonAcceso');
+  const divBotonLogout = document.getElementById('divBotonLogout');
+  
+  divBotonAcceso.classList.add('hidden');
+  divBotonLogout.classList.add('hidden');
+
   // Formulario de Contáctenos
   if (document.getElementById("contact-form")) {
     document.getElementById("contact-form").addEventListener("submit", async function (e) {
@@ -63,9 +71,6 @@ window.onload = function() {
   // Verificar si la cookie 'user_authenticated' está presente
   const usercookie = getCookie('user_authenticated');
   console.log("Estado de la cookie:", usercookie);
- 
-  const divBotonAcceso = document.getElementById('divBotonAcceso');
-  const divBotonLogout = document.getElementById('divBotonLogout');
   
   // Si la cookie NO existe (usuario no autenticado), mostramos el botón de acceso
    if (!usercookie && divBotonAcceso && divBotonLogout) {

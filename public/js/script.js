@@ -74,11 +74,14 @@ window.onload = function() {
     divBotonAcceso.classList.add('show');
     divBotonAcceso.classList.remove('hidden');
     divBotonLogout.classList.remove("show");
+    divBotonLogout.classList.add("hidden");
+
   } else {
     // Si la cookie existe (usuario autenticado), ocultamos el botón y mostramos botonLogout
     divBotonAcceso.classList.add('hidden');
     divBotonAcceso.classList.remove('show');
     divBotonLogout.classList.add("show");
+    divBotonLogout.classList.remove("hidden");
 
   }
 };

@@ -62,6 +62,7 @@ window.onload = function() {
 
   // Verificar si la cookie 'user_authenticated' está presente
   const usercookie = getCookie('user_authenticated');
+  console.log("Estado de la cookie:", usercookie);
  
   const divBotonAcceso = document.getElementById('divBotonAcceso');
   const divBotonLogout = document.getElementById('divBotonLogout');

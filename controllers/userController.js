@@ -84,6 +84,7 @@ const logoutUser = (req, res) => {
       return res.status(500).json({ mensaje: "Error al cerrar sesión" });
     }
     res.clearCookie('connect.sid'); // Limpia la cookie de sesión
+    res.clearCookie('user_authenticated'); // Limpia la cookie de sesión
     res.redirect('/'); // Redirige al usuario a la página principal
   });
 };

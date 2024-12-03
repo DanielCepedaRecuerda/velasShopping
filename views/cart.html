@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito de Compras</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Enlace a tu archivo CSS -->
+</head>
+<body>
+    <header>
+        <h1>Tu Carrito de Compras</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/productos">Productos</a></li>
+                <li><a href="/contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="cart">
+            <h2>Productos en tu Carrito</h2>
+            <div class="cart-items">
+                <!-- Aquí cada producto se mostrará con un formulario para eliminarlo -->
+                <article class="cart-item">
+                    <img src="/images/vela1.jpg" alt="Vela Aromática" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <h3>Vela Aromática</h3>
+                        <p>Aroma de lavanda, ideal para relajarse.</p>
+                        <span class="cart-item-price">$10.00</span>
+                        <form action="/remove-from-cart" method="POST">
+                            <input type="hidden" name="productId" value="10">
+                            <button type="submit" class="remove-item">Eliminar</button>
+                        </form>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <label for="quantity">Cantidad:</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1">
+                    </div>
+                </article>
+
+                <!-- Repite el bloque anterior para cada producto en el carrito -->
+                <article class="cart-item">
+                    <img src="/images/vela2.jpg" alt="Vela de Soja" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <h3>Vela de Soja</h3>
+                        <p>Hecha con cera natural, sin tóxicos.</p>
+                        <span class="cart-item-price">$12.00</span>
+                        <form action="/remove-from-cart" method="POST">
+                            <input type="hidden" name="productId" value="11">
+                            <button type="submit" class="remove-item">Eliminar</button>
+                        </form>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <label for="quantity">Cantidad:</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1">
+                    </div>
+                </article>
+            </div>
+
+            <div class="cart-summary">
+                <p>Total: <span id="total-price">$22.00</span></p>
+                <a href="/checkout" class="checkout-btn">Proceder a la compra</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Tienda de Velas. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="/js/script.js" defer></script>
+</body>
+</html>

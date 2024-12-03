@@ -97,7 +97,7 @@ app.get("/velasDecorativas", (req, res) => {
 });
 
 app.get("/car", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "cart.html"));
+  res.sendFile(path.join(__dirname, "views", "cart.ejs"));
 })
 
 app.get("/login", (req, res) => {

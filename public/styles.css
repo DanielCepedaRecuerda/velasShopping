@@ -16,19 +16,25 @@ header {
     align-items: center;
 }
 
-#divBotonAcceso {
-    display: none;  /* El botón estará oculto por defecto */
-    visibility: hidden; /* Aseguramos que no sea visible */
-    pointer-events: none; /* No podrá ser clickeado */
-    opacity: 0;  /* Se asegura de que no sea visible ni interactivo */
-}
-
-#divBotonAcceso .show {
-    display: flex; /* Se muestra cuando se agrega la clase 'show' */
+.show{
+    display: flex; 
     margin: 1em;
     justify-content: center;
-    opacity: 1; /* Asegura que la opacidad sea 100% cuando se muestre */
-    pointer-events: auto; /* Permite la interacción con el botón */
+    opacity: 1; 
+    pointer-events: auto;
+}
+.hidden{
+    display: none;  
+    visibility: hidden; 
+    pointer-events: none; 
+    opacity: 0;  
+}
+
+#divBotonAcceso {
+    display: none;  
+    visibility: hidden; 
+    pointer-events: none; 
+    opacity: 0;  
 }
 
 .botonAcceso{
@@ -38,18 +44,12 @@ header {
 }
 .botonAcceso:hover {
     background-color: #d35400;}
+
 .divBotonLogout{
-    display: none;  /* El botón estará oculto por defecto */
-    visibility: hidden; /* Aseguramos que no sea visible */
-    pointer-events: none; /* No podrá ser clickeado */
-    opacity: 0;  /* Se asegura de que no sea visible ni interactivo */
-}
-.divBotonLogout .show {
-    display: flex; /* Se muestra cuando se agrega la clase 'show' */
-    margin: 1em;
-    justify-content: center;
-    opacity: 1; /* Asegura que la opacidad sea 100% cuando se muestre */
-    pointer-events: auto; /* Permite la interacción con el botón */
+    display: none;  
+    visibility: hidden; 
+    pointer-events: none; 
+    opacity: 0;  
 }
 
 nav ul {

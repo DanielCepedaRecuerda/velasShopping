@@ -10,13 +10,6 @@ window.onload = function() {
 // Inicialmente ocultar el contenido
 document.body.style.visibility = 'hidden';
 
-  // escondo primero los botones para solucionar el parpadeo
-  const divBotonAcceso = document.getElementById('divBotonAcceso');
-  const divBotonLogout = document.getElementById('divBotonLogout');
-  
-  divBotonAcceso.classList.add('hidden');
-  divBotonLogout.classList.add('hidden');
-
   // Formulario de Contáctenos
   if (document.getElementById("contact-form")) {
     document.getElementById("contact-form").addEventListener("submit", async function (e) {
@@ -72,8 +65,9 @@ document.body.style.visibility = 'hidden';
 
   // Verificar si la cookie 'user_authenticated' está presente
   const usercookie = getCookie('user_authenticated');
-  console.log("Estado de la cookie:", usercookie);
-  
+  const divBotonAcceso = document.getElementById('divBotonAcceso');
+  const divBotonLogout = document.getElementById('divBotonLogout');
+
   // Si la cookie NO existe (usuario no autenticado), mostramos el botón de acceso
    if (!usercookie && divBotonAcceso && divBotonLogout) {
     divBotonAcceso.classList.add('show');
@@ -89,7 +83,7 @@ document.body.style.visibility = 'hidden';
     divBotonLogout.classList.remove("hidden");
 
   }
-  
+
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = 'visible';
 };

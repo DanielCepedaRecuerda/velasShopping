@@ -64,15 +64,20 @@ window.onload = function() {
   const usercookie = getCookie('user_authenticated');
  
   const divBotonAcceso = document.getElementById('divBotonAcceso');
+  const divBotonLogout = document.getElementById('divBotonLogout');
+
   console.log(divBotonAcceso);
   
   // Si la cookie NO existe (usuario no autenticado), mostramos el botón de acceso
    if (!usercookie) {
     divBotonAcceso.classList.add('show');
     divBotonAcceso.classList.remove('hidden');
+    divBotonLogout.classList.remove("show");
   } else {
-    // Si la cookie existe (usuario autenticado), ocultamos el botón
+    // Si la cookie existe (usuario autenticado), ocultamos el botón y mostramos botonLogout
     divBotonAcceso.classList.add('hidden');
     divBotonAcceso.classList.remove('show');
+    divBotonLogout.classList.add("show");
+
   }
 };

@@ -11,6 +11,10 @@ const path = require("path");
 const app = express();
 const PORT = 3000;
 
+// Configurar EJS como motor de plantillas
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
 const dbHost = process.env.DB_HOST;
 const dbPassword = process.env.DB_PASSWORD;
 const dbName = process.env.DB_NAME;

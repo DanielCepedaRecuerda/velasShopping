@@ -30,7 +30,7 @@ header {
     opacity: 0;  
 }
 
-#divBotonAcceso {
+#divBotonAcceso.hidden {
     display: none;  
     visibility: hidden; 
     pointer-events: none; 
@@ -45,7 +45,7 @@ header {
 .botonAcceso:hover {
     background-color: #d35400;}
 
-#divBotonLogout{
+#divBotonLogout.hidden{
     display: none;  
     visibility: hidden; 
     pointer-events: none; 

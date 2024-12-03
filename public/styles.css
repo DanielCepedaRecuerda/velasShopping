@@ -23,7 +23,7 @@ header {
     opacity: 0;  /* Se asegura de que no sea visible ni interactivo */
 }
 
-#divBotonAcceso.show {
+#divBotonAcceso .show {
     display: flex; /* Se muestra cuando se agrega la clase 'show' */
     margin: 1em;
     justify-content: center;
@@ -44,7 +44,7 @@ header {
     pointer-events: none; /* No podrá ser clickeado */
     opacity: 0;  /* Se asegura de que no sea visible ni interactivo */
 }
-.divBotonLogout.show {
+.divBotonLogout .show {
     display: flex; /* Se muestra cuando se agrega la clase 'show' */
     margin: 1em;
     justify-content: center;

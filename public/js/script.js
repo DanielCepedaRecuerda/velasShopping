@@ -66,12 +66,11 @@ window.onload = function() {
   const divBotonAcceso = document.getElementById('divBotonAcceso');
   console.log(divBotonAcceso);
   
-  // Cambié la lógica para mostrar el botón cuando el usuario está autenticado
-  if (usercookie) {
-    // Si la cookie existe (usuario autenticado), mostrar el botón
+  // Si la cookie NO existe (usuario no autenticado), mostramos el botón de acceso
+  if (!usercookie) {
     divBotonAcceso.classList.add('show');
   } else {
-    // Si no existe la cookie, el botón sigue oculto
+    // Si la cookie existe (usuario autenticado), ocultamos el botón
     divBotonAcceso.classList.remove('show');
   }
 };

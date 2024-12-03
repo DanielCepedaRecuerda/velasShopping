@@ -3,7 +3,7 @@ const productsModel = require("../models/productsModel");
 const getCart = (req, res) => {
   const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
   res.json(cart);
-  res.redirect("/cart");
+  res.render('cart', { cart });
 };
 
 const addToCart = async (req, res) => {

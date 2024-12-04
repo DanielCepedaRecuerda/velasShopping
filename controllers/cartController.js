@@ -37,7 +37,7 @@ const addToCart = async (req, res) => {
         productId: Number(productId),
         quantity: parsedQuantity,
         name: product.nombre,
-        price: product.precio
+        price: parseFloat(product.precio) 
       });
     }
 

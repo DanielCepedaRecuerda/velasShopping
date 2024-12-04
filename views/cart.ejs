@@ -24,7 +24,7 @@
             <tr>
               <td><%= item.name %></td>
               <td><%= item.quantity %></td>
-              <td>$<%= item.price.toFixed(2) %></td>
+              <td>$<%= typeof item.price === 'number' ? item.price.toFixed(2) : '0.00' %></td>
               <td>$<%= (item.quantity * item.price).toFixed(2) %></td>
               <td><a href="/cart/remove/<%= item.productId %>">Eliminar</a></td>
             </tr>

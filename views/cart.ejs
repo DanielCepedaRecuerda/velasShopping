@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-        <h1>Velas Shopping</h1>
+        <h1 class="tituloTabCart">Velas Shopping</h1>
         <nav>
           <ul>
             <li><a href="/">Inicio</a></li>
@@ -66,8 +66,10 @@
       
       <h3>Total: $<%= cart.reduce((acc, item) => acc + (item.quantity * item.price), 0).toFixed(2) %></h3>
 
-      <a href="/productos">Seguir comprando</a>
-      <a href="/checkout">Ir a pagar</a>
+      <div class="divButtons-Cart">
+        <a href="/productos">Seguir comprando</a>
+        <a href="/checkout">Ir a pagar</a>
+    </div>
     <% } else { %>
       <p>Tu carrito está vacío.</p>
       <a href="/productos">Volver a la tienda</a>

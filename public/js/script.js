@@ -93,32 +93,43 @@ document.body.style.visibility = 'hidden';
   }
   
 // Función para eliminar un producto del carrito
-function removeProductFromCart(productId) {
-  fetch(`/cart/${productId}`, {
-      method: 'DELETE',  // Método DELETE para eliminar el producto
-      headers: {
-          'Content-Type': 'application/json'
-      }
-  })
-  .then(response => response.json())  // Respuesta JSON del servidor
-  .then(updatedCart => {
-      // Aquí puedes actualizar el carrito en la interfaz de usuario (UI)
-      console.log('Carrito actualizado:', updatedCart);
-      // Tal vez quieras recargar la vista del carrito o eliminar el producto visualmente
-  })
-  .catch(error => {
-      console.error('Error al eliminar producto del carrito:', error);
-  });
-}
+  console.log('Script cargado');
 
-// Llamar a esta función cuando se haga clic en el botón de eliminar producto
-// Puedes tener un botón con un atributo data-product-id para pasar el productId
-document.querySelectorAll('.delete-btn').forEach(button => {
-  button.addEventListener('click', (event) => {
-      const productId = event.target.dataset.productId;
-      removeProductFromCart(productId);
+  const removeButtons = document.querySelectorAll('.remove-btn');
+
+  console.log('Botones de eliminar encontrados:', removeButtons);
+
+  removeButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      // Prevenimos el comportamiento predeterminado del botón
+      event.preventDefault();
+
+      // Verifica si el evento se dispara correctamente
+      console.log('Botón de eliminar clickeado para el producto con ID:', button.getAttribute('data-product-id'));
+
+      // Obtener el ID del producto del atributo data-product-id
+      const productId = button.getAttribute('data-product-id');
+      
+      // Realizamos la solicitud DELETE al servidor
+      fetch(`/cart/${productId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json()) // Convertimos la respuesta en JSON
+      .then(updatedCart => {
+        console.log('Carrito actualizado:', updatedCart);
+
+        // Recargar la página para reflejar los cambios en el carrito
+        location.reload(); // Recargar la página
+      })
+      .catch(error => {
+        console.error('Error al eliminar producto:', error);
+      });
+    });
   });
-});
+
 
 
   // Después de ejecutar el script, hacer visible el body

@@ -61,27 +61,29 @@ const removeFromCart = (req, res) => {
   const productId = req.params.productId;
   let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
 
-  if (cart.length === 0) {
+  // Verifica que el carrito no esté vacío
+  if (!cart || cart.length === 0) {
     return res.status(400).json({ error: "El carrito está vacío." });
   }
 
-  // Filtrar el carrito para eliminar el producto
+  // Filtrar el carrito para eliminar el producto con el ID especificado
   const updatedCart = cart.filter((item) => item.productId !== Number(productId));
 
-  // Si no se ha eliminado ningún producto, devolver un mensaje de error
+  // Si el carrito no cambió, significa que el producto no estaba en el carrito
   if (updatedCart.length === cart.length) {
     return res.status(404).json({ error: "Producto no encontrado en el carrito." });
   }
 
-  // Guardar el carrito actualizado en la cookie
+  // Actualizar la cookie con el carrito filtrado
   res.cookie("cart", JSON.stringify(updatedCart), {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', // Asegurarse de que sea seguro en producción
-    sameSite: "strict"
+    httpOnly: true,  // Dependiendo de si la cookie necesita acceso desde JS en el frontend
+    secure: process.env.NODE_ENV === 'production',  // Asegúrate de que esto esté configurado correctamente
+    sameSite: "strict",  // Seguridad extra para evitar ataques CSRF
   });
 
   // Responder con el carrito actualizado
   res.status(200).json(updatedCart);
 };
+
 
 module.exports = { getCart, addToCart, removeFromCart };

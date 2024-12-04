@@ -5,8 +5,52 @@ function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(';').shift();
   return null;
 }
+// Actualiza el icono del carrito flotante
+function updateCartIcon() {
+  const cartCookie = getCookie("cart");
+  const carritoElement = document.getElementById("floating-cart");
+  const itemCountElement = document.getElementById("item-count");
+
+  // Si la cookie del carrito existe
+  if (cartCookie) {
+    try {
+      // Parseamos la cookie para obtener los productos
+      const decodedCartCookie = decodeURIComponent(cartCookie);
+      const cartItems = JSON.parse(decodedCartCookie);  // Convertimos el string JSON en un objeto
+
+      // Calculamos la cantidad total de productos en el carrito
+      let totalQuantity = 0;
+      cartItems.forEach(item => {
+        totalQuantity += item.quantity;  // Sumar las cantidades de cada producto
+      });
+
+      // Actualizamos la cantidad en el icono del carrito
+      itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-";  // Si no hay productos, mostramos '-'
+
+      // Si hay productos en el carrito, mostramos el icono
+      if (totalQuantity > 0) {
+        carritoElement.classList.add('show');
+        carritoElement.classList.remove("hidden");
+      } else {
+        carritoElement.classList.remove('show');
+        carritoElement.classList.add("hidden");
+      }
+
+    } catch (error) {
+      console.error('Error al parsear la cookie del carrito:', error);
+    }
+  } else {
+    // Si no hay carrito en la cookie, ocultamos el icono
+    if (carritoElement) {
+      carritoElement.classList.remove('show');
+      carritoElement.classList.add("hidden");
+    }
+  }
+}
 
 window.onload = function() {
+  // Verificar y actualizar el icono del carrito
+  updateCartIcon();
 // Inicialmente ocultar el contenido
 document.body.style.visibility = 'hidden';
 

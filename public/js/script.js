@@ -92,6 +92,34 @@ document.body.style.visibility = 'hidden';
     }
   }
   
+// Función para eliminar un producto del carrito
+function removeProductFromCart(productId) {
+  fetch(`/cart/${productId}`, {
+      method: 'DELETE',  // Método DELETE para eliminar el producto
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  })
+  .then(response => response.json())  // Respuesta JSON del servidor
+  .then(updatedCart => {
+      // Aquí puedes actualizar el carrito en la interfaz de usuario (UI)
+      console.log('Carrito actualizado:', updatedCart);
+      // Tal vez quieras recargar la vista del carrito o eliminar el producto visualmente
+  })
+  .catch(error => {
+      console.error('Error al eliminar producto del carrito:', error);
+  });
+}
+
+// Llamar a esta función cuando se haga clic en el botón de eliminar producto
+// Puedes tener un botón con un atributo data-product-id para pasar el productId
+document.querySelectorAll('.delete-btn').forEach(button => {
+  button.addEventListener('click', (event) => {
+      const productId = event.target.dataset.productId;
+      removeProductFromCart(productId);
+  });
+});
+
 
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = 'visible';

@@ -38,7 +38,7 @@
         </div>
       </header>
 
-    <h1>Carrito de Compras</h1>
+    <h1 class="tituloTabCart">Carrito de Compras</h1>
 
     <% if (cart && cart.length > 0) { %>
       <table>
@@ -56,15 +56,15 @@
             <tr>
               <td><%= item.name %></td>
               <td><%= item.quantity %></td>
-              <td>$<%= typeof item.price === 'number' ? item.price.toFixed(2) : '0.00' %></td>
-              <td>$<%= (item.quantity * item.price).toFixed(2) %></td>
+              <td>€<%= typeof item.price === 'number' ? item.price.toFixed(2) : '0.00' %></td>
+              <td>€<%= (item.quantity * item.price).toFixed(2) %></td>
               <td><a href="/cart/remove/<%= item.productId %>">Eliminar</a></td>
             </tr>
           <% }); %>
         </tbody>
       </table>
       
-      <h3>Total: $<%= cart.reduce((acc, item) => acc + (item.quantity * item.price), 0).toFixed(2) %></h3>
+      <h3>Total: €<%= cart.reduce((acc, item) => acc + (item.quantity * item.price), 0).toFixed(2) %></h3>
 
       <div class="divButtons-Cart">
         <a href="/productos">Seguir comprando</a>

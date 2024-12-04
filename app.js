@@ -41,7 +41,10 @@ app.use(cors());
 app.use(bodyParser.json()); // Para recibir datos JSON
 app.use(bodyParser.urlencoded({ extended: true })); // Para manejar formularios
 
-// Middelware para pasar datos de la sesión  a las vistas
+// Configuración de las rutas estáticas (Imágenes, CSS, JS)
+app.use(express.static(path.join(__dirname, "public")));
+
+// Middelware para pasar datos de la sesión a las vistas
 app.use((req, res, next) => {
   res.locals.isAuthenticated = !!req.session.user; // true si el usuario está autenticado
   res.locals.user = req.session.user || null; // Datos del usuario
@@ -56,10 +59,6 @@ app.use(cookieParser());
 // Usar las rutas
 app.use("/", authRoutes); // Puedes hacer que todas las rutas empiecen con /
 
-// Middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
 
 // Configurar las rutas
 app.use("/api/users", userRoutes);
@@ -96,9 +95,10 @@ app.get("/velasDecorativas", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "velasDecorativas.html"));
 });
 
+// Ruta para el carrito (usando EJS para la vista dinámica)
 app.get("/car", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "cart.ejs"));
-})
+  res.render("cart"); // Suponiendo que cart.ejs está en la carpeta "views"
+});
 
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "login.html"));
@@ -107,11 +107,6 @@ app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "register.html"));
 });
 app.get("/logout", logoutUser);
-
-// Servir vistas (opcional)
-app.get("/", (req, res) =>
-  res.sendFile(path.join(__dirname, "views", "index.html"))
-);
 
 // Iniciar servidor
 app.listen(3000, () => {

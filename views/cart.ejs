@@ -1,58 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Carrito de Compras</title>
-    <link rel="stylesheet" href="/styles.css"> <!-- Enlace a tu archivo CSS -->
-</head>
-<body>
-    <header>
-        <h1>Tu Carrito de Compras</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/productos">Productos</a></li>
-                <li><a href="/contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrito de Compras</title>
+  </head>
+  <body>
+    <h1>Carrito de Compras</h1>
 
-    <main>
-        <section class="cart">
-            <h2>Productos en tu Carrito</h2>
-            <div class="cart-items">
-                <% cart.forEach(function(item) { %>
-                    <article class="cart-item">
-                        <img src="<%= item.image %>" alt="<%= item.name %>" class="cart-item-img">
-                        <div class="cart-item-details">
-                            <h3><%= item.name %></h3>
-                            <p><%= item.description %></p>
-                            <span class="cart-item-price">$<%= item.price %></span>
-                            <form action="/cart" method="POST">
-                                <input type="hidden" name="productId" value="<%= item.productId %>">
-                                <button type="submit" class="remove-item">Eliminar</button>
-                            </form>
-                        </div>
-                        <div class="cart-item-quantity">
-                            <label for="quantity">Cantidad:</label>
-                            <input type="number" name="quantity" value="<%= item.quantity %>" min="1">
-                        </div>
-                    </article>
-                <% }); %>
-            </div>
+    <% if (cart && cart.length > 0) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% cart.forEach(item => { %>
+            <tr>
+              <td><%= item.name %></td>
+              <td><%= item.quantity %></td>
+              <td>$<%= item.price.toFixed(2) %></td>
+              <td>$<%= (item.quantity * item.price).toFixed(2) %></td>
+              <td><a href="/cart/remove/<%= item.productId %>">Eliminar</a></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      
+      <h3>Total: $<%= cart.reduce((acc, item) => acc + (item.quantity * item.price), 0).toFixed(2) %></h3>
 
-            <div class="cart-summary">
-                <p>Total: <span id="total-price">$<%= total %></span></p>
-                <a href="/checkout" class="checkout-btn">Proceder a la compra</a>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Tienda de Velas. Todos los derechos reservados.</p>
-    </footer>
-
-    <script src="/js/script.js" defer></script>
-</body>
+      <a href="/productos">Seguir comprando</a>
+      <a href="/checkout">Ir a pagar</a>
+    <% } else { %>
+      <p>Tu carrito está vacío.</p>
+      <a href="/productos">Volver a la tienda</a>
+    <% } %>
+  </body>
 </html>

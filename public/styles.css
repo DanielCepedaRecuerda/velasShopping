@@ -1,6 +1,4 @@
-/* Carrito de Compras */
 
-/* Estilos generales */
 body {
     visibility: hidden;
     font-family: 'Arial', sans-serif;
@@ -10,7 +8,6 @@ body {
     color: #333;
 }
 
-/* Cabecera */
 header {
     background-color: #333;
     color: #fff;
@@ -20,17 +17,15 @@ header {
     flex-direction: column;
     align-items: center;
 }
-
 /************ ESTILOS SHOW Y HIDDEN **************/
-.show {
+.show{
     display: block; 
     margin: 1em;
     justify-content: center;
     opacity: 1; 
     pointer-events: auto;
 }
-
-.hidden {
+.hidden{
     display: none;  
     visibility: hidden; 
     pointer-events: none; 
@@ -44,17 +39,15 @@ header {
     opacity: 0;  
 }
 
-.botonAcceso {
-    position: relative;
+.botonAcceso{
+    position:relative;
     right: 0;
     background-color: #e67e22;
 }
-
 .botonAcceso:hover {
-    background-color: #d35400;
-}
+    background-color: #d35400;}
 
-#divBotonLogout.hidden {
+#divBotonLogout.hidden{
     display: none;  
     visibility: hidden; 
     pointer-events: none; 
@@ -74,6 +67,50 @@ nav ul li {
 nav ul li a {
     color: #e67e22;
     text-decoration: none;
+}
+
+.product-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.product {
+    background-color: #fff;
+    border: 1px solid #e67e22;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    flex: 1 1 calc(30% - 40px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    text-align: center;
+}
+
+.product:hover {
+    transform: scale(1.05);
+}
+
+.product img {
+    max-width: 100%;
+    height: 200px;
+    max-height: 200px;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover; 
+}
+.product a{
+    text-decoration: none;
+    color: inherit
+}
+
+.price {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #e74c3c;
 }
 
 /* Estilos para la tabla del carrito */
@@ -125,14 +162,13 @@ h3 a:hover {
     text-decoration: underline;
 }
 
-/* Estilo del pie de página */
 footer {
     text-align: center;
     padding: 20px;
     background-color: #333; 
     color: #fff;
+    
 }
-
 .footer-content {
     display: flex;
     flex-direction: column; 
@@ -144,15 +180,12 @@ footer {
     word-wrap: break-word; 
     margin: 5px 0; 
 }
-
-footer a {
+footer a{
     color: white;
 }
-
-footer a:hover {
+footer a:hover{
     color: #e67e22; 
 }
-
 .footer-content nav ul {
     display: flex;
     flex-wrap: wrap;
@@ -163,7 +196,6 @@ footer a:hover {
     margin: 5px; 
 }
 
-/* Estilos de redes sociales */
 .social-links a {
     display: inline-block; 
     width: 40px;
@@ -195,7 +227,8 @@ footer a:hover {
     opacity: 0.8; 
 }
 
-/* Estilos para formularios */
+
+
 .form {
     display: flex;
     flex-direction: column;
@@ -212,14 +245,14 @@ footer a:hover {
     width: 100%; 
     margin-bottom: 15px; 
 }
-
-.form-h2 {
+.form-h2{
     text-align: center;
 }
 
 label {
     margin-bottom: 5px; 
     font-weight: bold; 
+    
 }
 
 input[type="text"],
@@ -264,10 +297,12 @@ button:hover {
     background-color: #d35400;
 }
 
-.aForm {
+.aForm{
     margin-top: 1em;
     color: #e67e22;
 }
+
+
 
 /* Media Queries para hacer el diseño responsive */
 @media (max-width: 768px) {
@@ -286,11 +321,9 @@ button:hover {
     nav li {
         margin: 5px 0;
     }
-
     .product {
         flex: 1 1 calc(45% - 20px); 
     }
-
     .form {
         max-width: 90%; 
         padding: 15px; 
@@ -321,8 +354,9 @@ button:hover {
     nav ul li {
         display: block;
         margin: 5px 0; 
-    }
 
+        margin: 10px 0;
+    }
     .form {
         padding: 10px; 
     }
@@ -338,7 +372,6 @@ button:hover {
         font-size: 14px; 
     }
 }
-
 /* Estilo para el botón flotante */
 .floating-cart {
     position: fixed;
@@ -354,16 +387,17 @@ button:hover {
     cursor: pointer;
     z-index: 1000;
     border: 3px solid #333; 
-}
-
-.velaCarrito {
+  }
+  
+  /* Ajustar el tamaño de la imagen */
+  .velaCarrito {
     width: 40px;  
     height: auto;  
     object-fit: contain; 
-}
-
-/* Estilo para el contador de productos */
-.item-count {
+  }
+  
+  /* Estilo para el contador de productos */
+  .item-count {
     position: absolute;
     top: -5px;
     right: -5px;
@@ -375,8 +409,9 @@ button:hover {
     font-weight: bold;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); 
     transition: transform 0.3s ease;
-}
-
-.item-count:hover {
+  }
+  
+  .item-count:hover {
     transform: scale(1.2);
-}
+  }
+  

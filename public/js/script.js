@@ -93,19 +93,11 @@ document.body.style.visibility = 'hidden';
   }
   
 // Función para eliminar un producto del carrito
-  console.log('Script cargado');
-
   const removeButtons = document.querySelectorAll('.remove-btn');
-
-  console.log('Botones de eliminar encontrados:', removeButtons);
 
   removeButtons.forEach(button => {
     button.addEventListener('click', function(event) {
-      // Prevenimos el comportamiento predeterminado del botón
       event.preventDefault();
-
-      // Verifica si el evento se dispara correctamente
-      console.log('Botón de eliminar clickeado para el producto con ID:', button.getAttribute('data-product-id'));
 
       // Obtener el ID del producto del atributo data-product-id
       const productId = button.getAttribute('data-product-id');
@@ -121,7 +113,6 @@ document.body.style.visibility = 'hidden';
       .then(updatedCart => {
         console.log('Carrito actualizado:', updatedCart);
 
-        // Recargar la página para reflejar los cambios en el carrito
         location.reload(); // Recargar la página
       })
       .catch(error => {
@@ -129,7 +120,6 @@ document.body.style.visibility = 'hidden';
       });
     });
   });
-
 
 
   // Después de ejecutar el script, hacer visible el body

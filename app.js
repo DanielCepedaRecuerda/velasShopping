@@ -65,6 +65,7 @@ app.use("/api/users", userRoutes);
 app.use('/api/contact', contactRoutes);
 
 // Ruta carrito
+app.use('/cart', require('./routes/cartRoutes'));
 app.use('/cart', cartRoutes);
 
 // Rutas para los archivos HTML
@@ -96,8 +97,8 @@ app.get("/velasDecorativas", (req, res) => {
 });
 
 // Ruta para el carrito (usando EJS para la vista dinámica)
-app.get("/car", (req, res) => {
-  res.render("cart"); // Suponiendo que cart.ejs está en la carpeta "views"
+app.get("/cart", (req, res) => {
+  res.render("cart");
 });
 
 app.get("/login", (req, res) => {

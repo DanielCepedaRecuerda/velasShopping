@@ -59,7 +59,7 @@ document.body.style.visibility = 'hidden';
     // Mostrar la cantidad total en el elemento con id="item-count"
     const itemCountElement = document.getElementById("item-count");
     if (itemCountElement) {
-      itemCountElement.textContent = totalQuantity;  // Actualiza el número de productos
+      itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-";
     }
 
     console.log("Total de productos en el carrito:", totalQuantity);  // Mostrar total

@@ -50,16 +50,15 @@ document.body.style.visibility = 'hidden';
     const decodedCartCookie = decodeURIComponent(cartCookie);
     const cartItems = JSON.parse(decodedCartCookie);  // Convertir el string JSON en un objeto
 
-    // Ahora puedes trabajar con el objeto 'cartItems', que es un array de productos
-    console.log(cartItems);  // Mostrar todo el carrito
+    console.log(cartItems);  // Mostrar todo el carrito (Array)
 
-    // Por ejemplo, para mostrar la cantidad total de productos:
+    // Mostrar la cantidad total de productos:
     let totalQuantity = 0;
     cartItems.forEach(item => {
       totalQuantity += item.quantity;  // Sumar las cantidades
     });
 
-    // Mostrar la cantidad total en el elemento con id="item-count"
+    // Mostrar la cantidad total 
     const itemCountElement = document.getElementById("item-count");
     if (itemCountElement) {
       itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-";

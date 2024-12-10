@@ -10,16 +10,13 @@ const contactRoutes = require('./routes/contactRoutes');
 const { logoutUser } = require("./controllers/userController");
 const path = require("path");
 const app = express();
-const PORT = 3000;
 
 // Configurar EJS como motor de plantillas
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-const dbHost = process.env.DB_HOST;
-const dbPassword = process.env.DB_PASSWORD;
-const dbName = process.env.DB_NAME;
-const dbUser = process.env.DB_USER;
+// Usa las rutas definidas
+app.use(velasRoutes);
 
 const cors = require("cors");
 
@@ -54,8 +51,6 @@ app.use((req, res, next) => {
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
-
-
 
 // Usar las rutas
 app.use("/", authRoutes); // Puedes hacer que todas las rutas empiecen con /

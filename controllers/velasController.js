@@ -1,14 +1,17 @@
 const velasModel = require('../models/velasModel');
 
 const getVelasByCategoria = async (req, res) => {
-  // Obtenemos la categoría en función del parámetro de la URL
-  const categoria = req.params.categoria; // Dependiendo de la ruta, obtendremos 'velasAromaticas', 'velasTematicas' o 'velasDecorativas'
+  const categoria = req.params.categoria; // 'velasAromaticas', 'velasTematicas' o 'velasDecorativas'
 
   try {
-    // Llamamos al modelo para obtener las velas según la categoría
+    // Obtener las velas de la base de datos según la categoría
     const velas = await velasModel.findVelasByCategoria(categoria);
 
-    // Renderizamos la vista y pasamos las velas
+    if (!velas) {
+      return res.status(404).send('No se encontraron velas en esta categoría');
+    }
+
+    // Renderiza la vista pasándole las velas y la categoría
     res.render('velas', { velas, categoria });
   } catch (error) {
     console.error(error);
@@ -17,5 +20,5 @@ const getVelasByCategoria = async (req, res) => {
 };
 
 module.exports = {
-  getVelasByCategoria
+  getVelasByCategoria,
 };

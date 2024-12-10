@@ -3,12 +3,12 @@ const router = express.Router();
 const velasController = require('../controllers/velasController');
 
 // Ruta para las velas aromáticas
-router.get('/velasAromaticas', velasController.getVelasByCategoria);
+router.get('/velas_aromaticas', velasController.getVelasByCategoria);
 
 // Ruta para las velas temáticas
-router.get('/velasTematicas', velasController.getVelasByCategoria);
+router.get('/velas_tematicas', velasController.getVelasByCategoria);
 
 // Ruta para las velas decorativas
-router.get('/velasDecorativas', velasController.getVelasByCategoria);
+router.get('/velas_decorativas', velasController.getVelasByCategoria);
 
 module.exports = router;

@@ -77,7 +77,7 @@ const removeFromCart = (req, res) => {
   // Actualizar la cookie con el carrito filtrado
   res.cookie("cart", JSON.stringify(updatedCart), {
     httpOnly: true,  // Dependiendo de si la cookie necesita acceso desde JS en el frontend
-    secure: process.env.NODE_ENV === 'production',  // Asegúrate de que esto esté configurado correctamente
+    secure: process.env.NODE_ENV === 'production',  
     sameSite: "strict",  // Seguridad extra para evitar ataques CSRF
   });
 

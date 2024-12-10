@@ -105,6 +105,9 @@ nav ul li a {
     text-decoration: none;
     color: inherit
 }
+.product form input{
+    margin: 5px;
+}
 
 .price {
     display: block;
@@ -259,7 +262,7 @@ footer a:hover{
 }
 
 
-
+/**********************************FORMULARIO CONTACTO******************************************/
 .form {
     display: flex;
     flex-direction: column;

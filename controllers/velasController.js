@@ -12,11 +12,11 @@ const getVelasByCategoria = async (req, res) => {
 
     // Decidir qué vista renderizar según la categoría
     let vista = '';
-    if (categoria === 'velas_aromáticas') {
+    if (categoria === 'velasAromaticas') {
         vista = 'velasAromaticas'; // Nombre de la vista debe coincidir con el archivo .ejs
-    } else if (categoria === 'velas_temáticas') {
+    } else if (categoria === 'velasTematicas') {
         vista = 'velasTematicas';  // Nombre de la vista debe coincidir con el archivo .ejs
-    } else if (categoria === 'velas_decorativas') {
+    } else if (categoria === 'velasDecorativas') {
         vista = 'velasDecorativas'; // Nombre de la vista debe coincidir con el archivo .ejs
     } else {
         return res.status(400).send('Categoría no válida');

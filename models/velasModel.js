@@ -44,19 +44,20 @@ const findVelaById = async (id) => {
   }
 };
 
-// Buscar velas por categoría
 const findVelasByCategoria = async (categoria) => {
-  const conn = await connection();
-  const query = 'SELECT * FROM productos WHERE id_categoria = (SELECT id FROM categorias WHERE nombre = ?)';
+    const conn = await connection();
   
-  try {
-    const [rows] = await conn.execute(query, [categoria]);
-    return rows;
-  } catch (error) {
-    console.error("Error en la consulta SQL: ", error);  // Imprime el error SQL
-    throw new Error("Error al obtener las velas.");
-  }
-};
+    // Consulta que obtiene las velas según la categoría
+    const query = 'SELECT * FROM productos WHERE id_categoria = (SELECT id FROM categorias WHERE nombre = ?)';
+  
+    try {
+      const [rows] = await conn.execute(query, [categoria]);  // Ejecución de la consulta
+      return rows;  // Devuelve las velas encontradas
+    } catch (error) {
+      console.error("Error en la consulta SQL: ", error);  // Muestra el error de la consulta
+      throw new Error("Error al obtener las velas.");
+    }
+  };
 
 // Actualizar la información de una vela
 const updateVela = async (id, velaData) => {

@@ -1,20 +1,30 @@
 const velasModel = require('../models/velasModel');
 
 const getVelasByCategoria = async (req, res) => {
-    const categoria = req.params.categoria; // 'velasAromaticas', 'velasTematicas' o 'velasDecorativas'
+    const categoria = req.params.categoria;  // Esto obtiene el parámetro de la URL
   
     try {
-      // Obtener las velas de la base de datos según la categoría
-      const velas = await velasModel.findVelasByCategoria(categoria);
+      const velas = await velasModel.findVelasByCategoria(categoria);  // Llama al modelo que obtiene las velas
   
       if (!velas || velas.length === 0) {
         return res.status(404).send('No se encontraron velas en esta categoría');
       }
-  
-      // Renderiza la vista pasándole las velas y la categoría
+
+    // Decidir qué vista renderizar según la categoría
+    let vista = '';
+    if (categoria === 'velas_aromáticas') {
+        vista = 'velasAromaticas'; // Nombre de la vista debe coincidir con el archivo .ejs
+    } else if (categoria === 'velas_temáticas') {
+        vista = 'velasTematicas';  // Nombre de la vista debe coincidir con el archivo .ejs
+    } else if (categoria === 'velas_decorativas') {
+        vista = 'velasDecorativas'; // Nombre de la vista debe coincidir con el archivo .ejs
+    } else {
+        return res.status(400).send('Categoría no válida');
+    }
+      // Si todo está bien, renderiza la vista
       res.render('velas', { velas, categoria });
     } catch (error) {
-      console.error("Error al obtener las velas: ", error);  // Mostrar el error completo
+      console.error("Error al obtener las velas: ", error);  // Imprime el error en la consola
       res.status(500).send('Hubo un error al obtener las velas.');
     }
   };

@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./routes/authRoutes");
 const authRoutes = require("./routes/authRoutes"); // Ruta de los controladores
 const cartRoutes = require('./routes/cartRoutes');
+const velasRoutes = require('./routes/velasRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const { logoutUser } = require("./controllers/userController");
 const path = require("path");
@@ -63,6 +64,7 @@ app.use("/", authRoutes); // Puedes hacer que todas las rutas empiecen con /
 // Configurar las rutas
 app.use("/api/users", userRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/velas', velasRoutes);
 
 // Ruta carrito
 app.use('/cart', require('./routes/cartRoutes'));

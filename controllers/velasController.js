@@ -19,7 +19,7 @@ const getVelasByCategoria = async (req, res) => {
     // Si la categoría es válida, renderizamos la vista correspondiente
     res.render(categoria, { velas, categoria });
   } catch (error) {
-    console.error("Error al obtener las velas (Controller): ", error);
+    console.error("Error al obtener las velas: ", error);
     res.status(500).send('Hubo un error al obtener las velas.');
   }
 };

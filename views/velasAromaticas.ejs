@@ -56,13 +56,17 @@
               <h2><%= vela.nombre %></h2>
               <p><%= vela.precio %> EUR</p>
               <p><%= vela.stock %> disponibles</p>
-              <img src="/images/<%= vela.imagen %>" alt="<%= vela.nombre %>" class="product-image">
+              <% if (vela.imagen) { %>
+                <img src="<%= vela.imagen %>" alt="<%= vela.nombre %>" />
+              <% } %>
             </div>
           <% }) %>
         </div>
       <% } else { %>
         <p>No hay velas disponibles en esta categoría.</p>
       <% } %>
+
+      <pre><%= JSON.stringify(velas, null, 2) %></pre>
 
       <section class="product-grid"></section>
       <!-- Botón flotante de carrito -->

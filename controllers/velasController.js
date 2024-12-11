@@ -14,7 +14,7 @@ const getVelasByCategoria = async (req, res) => {
     let vista = categoria; // Usamos el nombre de la categoría como el nombre de la vista
     res.render(vista, { velas, categoria }); // Aquí se pasa velas y categoria a la vista
   } catch (error) {
-    console.error("Error al obtener las velas (Controller): ", error);
+    console.error("Error al obtener las velas: ", error);
     res.status(500).send('Hubo un error al obtener las velas.');
   }
 };

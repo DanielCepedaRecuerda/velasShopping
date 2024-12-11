@@ -2,31 +2,28 @@ const velasModel = require('../models/velasModel');
 
 const getVelasByCategoria = async (req, res) => {
     const categoria = req.params.categoria;  // Esto obtiene el parámetro de la URL
-  
-    try {
-      const velas = await velasModel.findVelasByCategoria(categoria);  // Llama al modelo que obtiene las velas
-    console.log(velas);
-    (velas);
-      if (!velas || velas.length === 0) {
-        return res.status(404).send('No se encontraron velas en esta categoría');
-      }
 
-    // Decidir qué vista renderizar según la categoría
-    let vista = '';
-    if (categoria === 'velasAromaticas') {
-        vista = 'velasAromaticas'; // Nombre de la vista debe coincidir con el archivo .ejs
-    } else if (categoria === 'velasTematicas') {
-        vista = 'velasTematicas';  // Nombre de la vista debe coincidir con el archivo .ejs
-    } else if (categoria === 'velasDecorativas') {
-        vista = 'velasDecorativas'; // Nombre de la vista debe coincidir con el archivo .ejs
-    } else {
-        return res.status(400).send('Categoría no válida');
-    }
-      // Si todo está bien, renderiza la vista
-      res.render('velas', { velas, categoria });
+   // Validación de la categoría antes de realizar la consulta
+   const categoriasValidas = ['velasAromaticas', 'velasTematicas', 'velasDecorativas'];
+   if (!categoria || !categoriasValidas.includes(categoria)) {
+       return res.status(400).send('Categoría no válida');
+   }
+
+    try {
+        // Llamar al modelo que obtiene las velas
+        const velas = await velasModel.findVelasByCategoria(categoria);
+        console.log(velas);
+
+        if (!velas || velas.length === 0) {
+            return res.status(404).send(`No se encontraron velas en la categoría "${categoria}"`);
+        }
+
+        // Renderizar la vista correspondiente según la categoría
+        res.render(categoria, { velas, categoria });
+
     } catch (error) {
-      console.error("Error al obtener las velas (Controller): ", error);  // Imprime el error en la consola
-      res.status(500).send('Hubo un error al obtener las velas.');
+        console.error("Error al obtener las velas (Controller): ", error);  // Imprime el error
+        res.status(500).send('Hubo un error al obtener las velas.');
     }
   };
 

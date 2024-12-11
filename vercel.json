@@ -11,13 +11,5 @@
       "src": "/(.*)",
       "dest": "/app.js"
     }
-  ],
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "destination": "/",
-      "statusCode": 308,
-      "check": false
-    }
   ]
 }

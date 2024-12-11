@@ -98,6 +98,13 @@
         </p>
       </div>
     </footer>
+      <% if (velas && velas.length > 0) { %>
+        // Convertir el objeto 'velas' a un formato legible (JSON)
+        var velasData = <%= JSON.stringify(velas) %>;
+        console.log(velasData); // Ver el contenido de velas en la consola del navegador
+      <% } else { %>
+        console.log("No hay velas disponibles");
+      <% } %>
     <script src="/js/script.js"></script>
   </body>
 </html>

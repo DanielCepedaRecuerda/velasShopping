@@ -6,7 +6,7 @@ const getVelasByCategoria = async (req, res) => {
   try {
     // Consultar las velas de acuerdo a la categoría obtenida
     const velas = await velasModel.findVelasByCategoria(categoria);
-
+    console.log(velas);
     if (!velas || velas.length === 0) {
       return res.status(404).send('No se encontraron velas en esta categoría');
     }

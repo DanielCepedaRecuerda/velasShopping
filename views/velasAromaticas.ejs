@@ -50,6 +50,7 @@
       <h2 class="form-h2">Velas Aromáticas</h2>
 
       <% if (velas && velas.length > 0) { %>
+        <% console.log(velas)%>
         <div class="product-list">
           <% velas.forEach((vela) => { %>
             <div class="product">
@@ -66,8 +67,6 @@
         <p>No hay velas disponibles en esta categoría.</p>
       <% } %>
 
-      <pre><%= JSON.stringify(velas, null, 2) %></pre>
-
       <section class="product-grid"></section>
       <!-- Botón flotante de carrito -->
       <a href="/cart" class="floating-cart" id="floating-cart">
@@ -77,7 +76,6 @@
         </div>
       </a>
 
-      <pre><%= JSON.stringify(velas, null, 2) %></pre>
     </main>
 
     <footer>

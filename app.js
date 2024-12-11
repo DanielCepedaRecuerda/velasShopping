@@ -41,7 +41,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // Para manejar formularios
 
 // Configuración de las rutas estáticas (Imágenes, CSS, JS)
 app.use(express.static(path.join(__dirname, "public")));
-
 // Middelware para pasar datos de la sesión a las vistas
 app.use((req, res, next) => {
   res.locals.isAuthenticated = !!req.session.user; // true si el usuario está autenticado

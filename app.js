@@ -9,14 +9,14 @@ const velasRoutes = require('./routes/velasRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const { logoutUser } = require("./controllers/userController");
 const path = require("path");
+const cookieParser = require('cookie-parser');
+
 const app = express();
+app.use(cookieParser());
 
 // Configurar EJS como motor de plantillas
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-
-// Usa las rutas definidas
-app.use(velasRoutes);
 
 const cors = require("cors");
 
@@ -48,8 +48,6 @@ app.use((req, res, next) => {
   next();
 });
 
-const cookieParser = require('cookie-parser');
-app.use(cookieParser());
 
 // Usar las rutas
 app.use("/", authRoutes); // Puedes hacer que todas las rutas empiecen con /

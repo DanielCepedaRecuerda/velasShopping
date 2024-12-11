@@ -25,7 +25,7 @@ const getVelasByCategoria = async (req, res) => {
       res.render('velas', { velas, categoria });
     } catch (error) {
       console.error("Error al obtener las velas (Controller): ", error);  // Imprime el error en la consola
-      res.status(500).send('Hubo un error al obtener las velas.');
+      res.status(500).send('Hubo un error al obtener las velas (Controller).');
     }
   };
 

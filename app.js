@@ -54,12 +54,6 @@ app.use(cookieParser());
 // Usar las rutas
 app.use("/", authRoutes); // Puedes hacer que todas las rutas empiecen con /
 
-
-// Configurar las rutas
-app.use("/api/users", userRoutes);
-app.use('/api/contact', contactRoutes);
-app.use('/velas', velasRoutes);
-
 // Ruta carrito
 app.use('/cart', require('./routes/cartRoutes'));
 app.use('/cart', cartRoutes);
@@ -92,6 +86,11 @@ app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "register.html"));
 });
 app.get("/logout", logoutUser);
+
+// Configurar las rutas
+app.use("/api/users", userRoutes);
+app.use('/api/contact', contactRoutes);
+app.use('/velas', velasRoutes);
 
 // Iniciar servidor
 app.listen(3000, () => {

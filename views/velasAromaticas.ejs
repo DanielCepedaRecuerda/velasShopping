@@ -47,7 +47,6 @@
     </header>
 
     <main>
-
       <h2 class="form-h2">Velas Aromáticas</h2>
 
       <% if (velas && velas.length > 0) { %>
@@ -57,10 +56,7 @@
               <h2><%= vela.nombre %></h2>
               <p><%= vela.precio %> EUR</p>
               <p><%= vela.stock %> disponibles</p>
-
-              <!-- Mostrar la imagen de la vela -->
               <img src="/images/<%= vela.imagen %>" alt="<%= vela.nombre %>" class="product-image">
-
             </div>
           <% }) %>
         </div>
@@ -98,13 +94,6 @@
         </p>
       </div>
     </footer>
-      <% if (velas && velas.length > 0) { %>
-        // Convertir el objeto 'velas' a un formato legible (JSON)
-        var velasData = <%= JSON.stringify(velas) %>;
-        console.log(velasData); // Ver el contenido de velas en la consola del navegador
-      <% } else { %>
-        console.log("No hay velas disponibles");
-      <% } %>
     <script src="/js/script.js"></script>
   </body>
 </html>

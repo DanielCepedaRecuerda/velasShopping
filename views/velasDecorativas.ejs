@@ -47,22 +47,22 @@
 
     <main>
       <h2 class="form-h2">Velas Decorativas</h2>
-
+      
       <% if (velas && velas.length > 0) { %>
-        <div class="product-list">
+        <section class="product-grid">
           <% velas.forEach((vela) => { %>
-            <div class="product">
+            <article class="product">
               <h2><%= vela.nombre %></h2>
               <p><%= vela.precio %> EUR</p>
               <p><%= vela.stock %> disponibles</p>
               <img src="/images/<%= vela.imagen %>" alt="<%= vela.nombre %>" class="product-image">
-            </div>
+            </article>
           <% }) %>
-        </div>
+        </section>
       <% } else { %>
         <p>No hay velas disponibles en esta categoría.</p>
       <% } %>
-      
+
       <section class="product-grid"></section>
       <!-- Botón flotante de carrito -->
       <a href="/cart" class="floating-cart" id="floating-cart">

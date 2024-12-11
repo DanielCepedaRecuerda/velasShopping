@@ -55,7 +55,7 @@ const findVelasByCategoria = async (categoria) => {
       return rows;  // Devuelve las velas encontradas
     } catch (error) {
       console.error("Error en la consulta SQL: ", error);  // Muestra el error de la consulta
-      throw new Error("Error al obtener las velas.");
+      throw new Error("Error al obtener las velas (Model).");
     }
   };
 

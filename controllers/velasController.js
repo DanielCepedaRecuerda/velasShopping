@@ -5,7 +5,7 @@ const getVelasByCategoria = async (req, res) => {
   
     try {
       const velas = await velasModel.findVelasByCategoria(categoria);  // Llama al modelo que obtiene las velas
-  
+    alert(velas);
       if (!velas || velas.length === 0) {
         return res.status(404).send('No se encontraron velas en esta categoría');
       }
@@ -25,7 +25,7 @@ const getVelasByCategoria = async (req, res) => {
       res.render('velas', { velas, categoria });
     } catch (error) {
       console.error("Error al obtener las velas (Controller): ", error);  // Imprime el error en la consola
-      res.status(500).send('Hubo un error al obtener las velas (Controller).');
+      res.status(500).send('Hubo un error al obtener las velas.');
     }
   };
 

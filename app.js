@@ -72,6 +72,11 @@ app.get("/contacto", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "contacto.html"));
 });
 
+// Página 404 personalizada
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+});
+
 // Ruta para el carrito (usando EJS para la vista dinámica)
 app.get("/cart", (req, res) => {
   res.render("cart");

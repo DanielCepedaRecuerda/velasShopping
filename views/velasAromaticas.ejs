@@ -50,19 +50,23 @@
 
       <h2 class="form-h2">Velas Aromáticas</h2>
 
-    <% if (velas && velas.length > 0) { %>
-      <div class="product-list">
-        <% velas.forEach((vela) => { %>
-          <div class="product">
-            <h2><%= vela.nombre %></h2>
-            <p><%= vela.precio %> EUR</p>
-            <p><%= vela.stock %> disponibles</p>
-          </div>
-        <% }) %>
-      </div>
-    <% } else { %>
-      <p>No hay velas disponibles en esta categoría.</p>
-    <% } %>
+      <% if (velas && velas.length > 0) { %>
+        <div class="product-list">
+          <% velas.forEach((vela) => { %>
+            <div class="product">
+              <h2><%= vela.nombre %></h2>
+              <p><%= vela.precio %> EUR</p>
+              <p><%= vela.stock %> disponibles</p>
+
+              <!-- Mostrar la imagen de la vela -->
+              <img src="/images/<%= vela.imagen %>" alt="<%= vela.nombre %>" class="product-image">
+
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p>No hay velas disponibles en esta categoría.</p>
+      <% } %>
 
       <section class="product-grid"></section>
       <!-- Botón flotante de carrito -->

@@ -14,10 +14,10 @@
   ],
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "destination": "/",
-      "statusCode": 308
+      "statusCode": 308,
+      "check": false
     }
   ]
-  
 }

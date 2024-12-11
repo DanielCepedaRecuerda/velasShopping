@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
-const userRoutes = require("./routes/authRoutes");
 const authRoutes = require("./routes/authRoutes"); // Ruta de los controladores
 const cartRoutes = require('./routes/cartRoutes');
 const velasRoutes = require('./routes/velasRoutes');
@@ -50,11 +49,7 @@ app.use((req, res, next) => {
 
 
 // Usar las rutas
-app.use("/", authRoutes); // Puedes hacer que todas las rutas empiecen con /
-
-// Ruta carrito
-app.use('/cart', require('./routes/cartRoutes'));
-app.use('/cart', cartRoutes);
+app.use("/", authRoutes); // Hacer que todas las rutas empiecen con /
 
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {
@@ -65,9 +60,6 @@ app.get("/productos", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "productos.html"));
 });
 
-app.get("/index", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "index.html"));
-});
 app.get("/contacto", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "contacto.html"));
 });
@@ -86,9 +78,9 @@ app.get("/register", (req, res) => {
 app.get("/logout", logoutUser);
 
 // Configurar las rutas
-app.use("/api/users", userRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/velas', velasRoutes);
+app.use('/cart', cartRoutes);
 
 // Iniciar servidor
 app.listen(3000, () => {

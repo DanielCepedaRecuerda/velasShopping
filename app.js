@@ -81,18 +81,6 @@ app.get("/contacto", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "contacto.html"));
 });
 
-app.get("/velasAromaticas", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "velasAromaticas.html"));
-});
-
-app.get("/velasTematicas", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "velasTematicas.html"));
-});
-
-app.get("/velasDecorativas", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "velasDecorativas.html"));
-});
-
 // Ruta para el carrito (usando EJS para la vista dinámica)
 app.get("/cart", (req, res) => {
   res.render("cart");

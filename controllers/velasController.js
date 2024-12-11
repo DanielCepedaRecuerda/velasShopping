@@ -6,7 +6,7 @@ const getVelasByCategoria = async (req, res) => {
    // Validación de la categoría antes de realizar la consulta
    const categoriasValidas = ['velasAromaticas', 'velasTematicas', 'velasDecorativas'];
    if (!categoria || !categoriasValidas.includes(categoria)) {
-       return res.status(400).send('Categoría no válida');
+      return res.status(400).send('Categoría no válida');
    }
 
     try {

@@ -16,7 +16,7 @@
     {
       "source": "/:path*",
       "destination": "/",
-      "statusCode": 308
+      "statusCode": 301
     }
   ]
   

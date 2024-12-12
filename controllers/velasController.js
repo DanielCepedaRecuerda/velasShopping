@@ -12,10 +12,11 @@ const getVelasByCategoria = async (req, res) => {
     }
 
     // Añadir la ruta de la imagen a cada vela
-    velas.forEach(vela => {
-      vela.imagen = `/images/${vela.nombre}.jpg`;  // Asume que las imágenes se llaman con el mismo nombre que la vela
-      console.log(vela.imagen); // Verifica la ruta de la imagen en la consola
-    });
+    console.log('Cargando imágenes...');
+velas.forEach(vela => {
+  vela.imagen = `/images/${vela.nombre}.jpg`;
+  console.log(vela.imagen);
+});
 
     // Si la categoría es válida, renderizamos la vista correspondiente
     res.render(categoria, { velas, categoria });

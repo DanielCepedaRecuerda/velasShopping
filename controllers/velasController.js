@@ -1,9 +1,9 @@
 const velasModel = require('../models/velasModel');
 
 const getVelasByCategoria = async (req, res) => {
-    const categoria = req.params.categoria;  // Esto obtiene el parámetro de la URL
+  const categoria = req.params.categoria;  // Esto obtiene el parámetro de la URL
 
-   try {
+  try {
     // Consultar las velas de acuerdo a la categoría obtenida
     const velas = await velasModel.findVelasByCategoria(categoria);
 
@@ -14,6 +14,7 @@ const getVelasByCategoria = async (req, res) => {
     // Añadir la ruta de la imagen a cada vela
     velas.forEach(vela => {
       vela.imagen = `/images/${vela.nombre}.jpg`;  // Asume que las imágenes se llaman con el mismo nombre que la vela
+      console.log(vela.imagen); // Verifica la ruta de la imagen en la consola
     });
 
     // Si la categoría es válida, renderizamos la vista correspondiente

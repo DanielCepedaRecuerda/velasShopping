@@ -9,7 +9,7 @@ router.get('/velasAromaticas', (req, res) => {
 });
   
   router.get('/velasTematicas', (req, res) => {
-    req.params.categoria = 'velaTematicas';
+    req.params.categoria = 'velasTematicas';
     velasController.getVelasByCategoria(req, res);
   });
   

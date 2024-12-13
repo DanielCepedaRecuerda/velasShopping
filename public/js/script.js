@@ -35,13 +35,14 @@ document.body.style.visibility = 'hidden';
     
   // Si la cookie del carrito existe, mostrar el carrito
   if (cartCookie && carritoElement) {
-    carritoElement.classList.add('show');   // Mostrar el carrito si la cookie está presente
-    carritoElement.classList.remove("hidden");
-  }else{
+    if (carritoElement) {
+      carritoElement.classList.add('show');   // Mostrar el carrito si la cookie está presente
+      carritoElement.classList.remove("hidden");
+    }else{
       carritoElement.classList.remove("show");
       carritoElement.classList.add("hidden");
     }
-  
+  }
   
   if (cartCookie) {
     // Si la cookie existe, parseamos su contenido (que es un JSON)

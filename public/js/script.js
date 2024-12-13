@@ -7,9 +7,17 @@ function getCookie(name) {
 }
 
 window.onload = function() {
-
   // Inicialmente ocultar el contenido
 document.body.style.visibility = 'hidden';
+
+//Pruebas
+if (document.getElementById("product-list")) {
+  console.log("existe");
+  
+}
+else{
+  console.log("no existe"); 
+}
 
   // Formulario de Contáctenos
   if (document.getElementById("contact-form")) {
@@ -125,15 +133,3 @@ document.body.style.visibility = 'hidden';
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = 'visible';
 };
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-  //Pruebas
-  if (document.getElementById("product-list")) {
-    console.log("existe");
-    
-  }
-  else{
-    console.log("no existe"); 
-  }
-});

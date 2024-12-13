@@ -62,6 +62,11 @@ document.body.style.visibility = 'hidden';
     if (itemCountElement) {
       itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-";
     }
+    // Mostrar el carrito si hay productos
+    if (totalQuantity > 0) {
+      carritoElement.classList.remove('hidden'); // Mostrar el carrito si hay productos
+      carritoElement.classList.add('show');
+    }
 
     console.log("Total de productos en el carrito:", totalQuantity);  // Mostrar total
   } else {
@@ -92,62 +97,33 @@ document.body.style.visibility = 'hidden';
   }
   
 // Función para eliminar un producto del carrito
-const removeButtons = document.querySelectorAll('.remove-btn');
+  const removeButtons = document.querySelectorAll('.remove-btn');
 
-removeButtons.forEach(button => {
-  button.addEventListener('click', function(event) {
-    event.preventDefault();
+  removeButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      event.preventDefault();
 
-    // Obtener el ID del producto del atributo data-product-id
-    const productId = button.getAttribute('data-product-id');
-    
-    // Realizamos la solicitud DELETE al servidor
-    fetch(`/cart/${productId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Error al eliminar el producto del carrito');
-      }
-      return response.json(); // Convertimos la respuesta en JSON
-    })
-    .then(updatedCart => {
-      console.log('Carrito actualizado:', updatedCart);
+      // Obtener el ID del producto del atributo data-product-id
+      const productId = button.getAttribute('data-product-id');
+      
+      // Realizamos la solicitud DELETE al servidor
+      fetch(`/cart/${productId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json()) // Convertimos la respuesta en JSON
+      .then(updatedCart => {
+        console.log('Carrito actualizado:', updatedCart);
 
-      // Eliminar la fila del producto del DOM
-      const productRow = document.querySelector(`.product-row[data-product-id="${productId}"]`);
-      if (productRow) {
-        productRow.remove(); // Eliminar la fila del producto del DOM
-      }
-
-      // Actualizar la cantidad total de productos
-      let totalQuantity = 0;
-      updatedCart.forEach(item => {
-        totalQuantity += item.quantity; // Sumar las cantidades
+        location.reload(); // Recargar la página
+      })
+      .catch(error => {
+        console.error('Error al eliminar producto:', error);
       });
-
-      // Actualizar el contador de productos en la interfaz
-      const itemCountElement = document.getElementById("item-count");
-      if (itemCountElement) {
-        itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-";
-      }
-    })
-    .catch(error => {
-      console.error('Error al eliminar producto:', error);
     });
   });
-});
-
-  //Pruebas
-  if (document.getElementById("product-list")) {
-    console.log("existe");
-  }
-  else{
-    console.log("no existe"); 
-  }
 
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = 'visible';

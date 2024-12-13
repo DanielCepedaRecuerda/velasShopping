@@ -3,7 +3,6 @@ package-lock.json
 node_modules/.package-lock.json
 package.json
 .env
-mysql -h velasshopping.c94kw4uiss1b.eu-west-2.rds.amazonaws.com -P 3306 -u velasShoping -p
-velasShoping2024
- 
+
+.accessoBBDD
 .env*.local

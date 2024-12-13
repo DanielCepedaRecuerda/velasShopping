@@ -46,7 +46,6 @@ const findVelaById = async (id) => {
 
 const findVelasByCategoria = async (categoria) => {
     const conn = await connection();
-    console.log(`Buscando velas en la categoría: ${categoria}`);
     // Consulta que obtiene las velas según la categoría
     const query = `
     SELECT p.*, m.\`Imagen/Video\`

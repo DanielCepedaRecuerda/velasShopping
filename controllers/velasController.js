@@ -2,7 +2,6 @@ const velasModel = require('../models/velasModel');
 
 const getVelasByCategoria = async (req, res) => {
   const categoria = req.params.categoria;  // Esto obtiene el parámetro de la URL
-  console.log('Entrando en la función getVelasByCategoria');
   try {
     // Consultar las velas de acuerdo a la categoría obtenida
     const velas = await velasModel.findVelasByCategoria(categoria);

@@ -62,11 +62,6 @@ document.body.style.visibility = 'hidden';
     if (itemCountElement) {
       itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-";
     }
-    // Mostrar el carrito si hay productos
-    if (totalQuantity > 0) {
-      carritoElement.classList.remove('hidden'); // Mostrar el carrito si hay productos
-      carritoElement.classList.add('show');
-    }
 
     console.log("Total de productos en el carrito:", totalQuantity);  // Mostrar total
   } else {
@@ -124,6 +119,14 @@ document.body.style.visibility = 'hidden';
       });
     });
   });
+
+  //Pruebas
+    if (document.getElementById("product-list")) {
+      console.log("existe");
+    }
+    else{
+      console.log("no existe"); 
+    }
 
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = 'visible';

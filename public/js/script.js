@@ -34,8 +34,8 @@ document.body.style.visibility = 'hidden';
   const carritoElement = document.getElementById("floating-cart");
     
   // Si la cookie del carrito existe, mostrar el carrito
-  if (carritoElement) {
-    if (cartCookie && carritoElement) {
+  if (cartCookie) {
+    if (carritoElement) {
       carritoElement.classList.add('show');   // Mostrar el carrito si la cookie está presente
       carritoElement.classList.remove("hidden");
     }else{
@@ -119,14 +119,6 @@ document.body.style.visibility = 'hidden';
       });
     });
   });
-
-  //Pruebas
-    if (document.getElementById("product-list")) {
-      console.log("existe");
-    }
-    else{
-      console.log("no existe"); 
-    }
 
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = 'visible';

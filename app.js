@@ -85,4 +85,5 @@ app.use('/cart', cartRoutes);
 // Iniciar servidor
 app.listen(3000, () => {
   console.log("Servidor corriendo en http://localhost:3000");
+  console.log("Prueba de log: El servidor está funcionando."); // Este log debería aparecer
 });

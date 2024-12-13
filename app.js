@@ -64,11 +64,6 @@ app.get("/contacto", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "contacto.html"));
 });
 
-// Ruta para el carrito (usando EJS para la vista dinámica)
-app.get("/cart", (req, res) => {
-  res.render("cart");
-});
-
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "login.html"));
 });

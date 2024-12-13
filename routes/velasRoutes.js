@@ -4,7 +4,6 @@ const velasController = require('../controllers/velasController');
 
 // Rutas para cada categoría
 router.get('/velasAromaticas', (req, res) => {
-    console.log('Ruta /velasAromaticas llamada');
     req.params.categoria = 'Aromaticas';
     velasController.getVelasByCategoria(req, res);
 });

@@ -291,7 +291,7 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="password"],
+input[type="current-password"],
 textarea {
     width: 100%; 
     padding: 10px; 

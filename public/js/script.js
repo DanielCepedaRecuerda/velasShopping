@@ -66,13 +66,6 @@ document.body.style.visibility = 'hidden';
     console.log("Total de productos en el carrito:", totalQuantity);  // Mostrar total
   } else {
     console.log("No hay carrito guardado en las cookies.");
-    //Pruebas
-    if (document.getElementById("product-list")) {
-      console.log("existe");
-    }
-    else{
-      console.log("no existe"); 
-    }
   }
 
   // Verificar si la cookie 'user_authenticated' está presente
@@ -127,6 +120,13 @@ document.body.style.visibility = 'hidden';
     });
   });
 
+  //Pruebas
+  if (document.getElementById("product-list")) {
+    console.log("existe");
+  }
+  else{
+    console.log("no existe"); 
+  }
 
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = 'visible';

@@ -49,6 +49,7 @@ const addToCart = async (req, res) => {
     });
 
     // Redirigir a la página de productos
+    res.redirect("/cart");
   } catch (err) {
     console.error("Error en addToCart:", err);
     res.status(500).json({ error: "Error al verificar el producto." });

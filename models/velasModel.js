@@ -48,7 +48,7 @@ const findVelasByCategoria = async (categoria) => {
     const conn = await connection();
     // Consulta que obtiene las velas según la categoría
     const query = `
-    SELECT p.*, m.\`Imagen/Video\`
+    SELECT p.*, m.Imagen/Video
     FROM productos p
     INNER JOIN multimedia m ON p.id = m.id_producto
     WHERE p.id_categoria = (SELECT id FROM categorias WHERE nombre = ?)

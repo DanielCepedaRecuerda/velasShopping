@@ -123,8 +123,11 @@ document.body.style.visibility = 'hidden';
 
   //Pruebas
 if (document.getElementById("product-list")) {
-  console.log("hola");
+  console.log("existe");
   
+}
+else{
+  console.log("no existe"); 
 }
 
   // Después de ejecutar el script, hacer visible el body

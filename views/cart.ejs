@@ -53,7 +53,7 @@
         </thead>
         <tbody>
           <% cart.forEach(item => { %>
-            <tr>
+            <tr class="product-row" data-product-id="<%= item.productId %>"> <!-- Agregar la clase y el atributo -->
               <td><%= item.name %></td>
               <td><%= item.quantity %></td>
               <td><%= typeof item.price === 'number' ? item.price.toFixed(2) : '0.00' %>€</td>

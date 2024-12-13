@@ -50,7 +50,7 @@
       <% console.log('Estoy en la plantilla'); %>
       <% console.log(velas); %>
       <% if (velas && velas.length > 0) { %>
-        <div class="product-list">
+        <div class="product-list" id="product-list">
           <% velas.forEach((vela) => { %>
             <div class="product">
               <h2><%= vela.nombre %></h2>

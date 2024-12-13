@@ -121,6 +121,11 @@ document.body.style.visibility = 'hidden';
     });
   });
 
+  //Pruebas
+if (document.getElementById("product-list")) {
+  console.log("hola");
+  
+}
 
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = 'visible';

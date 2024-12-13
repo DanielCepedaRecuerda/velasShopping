@@ -50,16 +50,21 @@
       <% console.log('Estoy en la plantilla'); %>
       <% console.log(velas); %>
       <% if (velas && velas.length > 0) { %>
-        <div class="product-list" id="product-list">
+        <section class="product-grid">
           <% velas.forEach((vela) => { %>
-            <div class="product">
+            <article class="product">
+              <img src="/images/<%= vela['Imagen/Video'] %>" alt="<%= vela.nombre %>" />
               <h2><%= vela.nombre %></h2>
-              <p><%= vela.precio %> EUR</p>
-              <p><%= vela.stock %> disponibles</p>
-              <img src="/images/<%= vela['Imagen/Video'] %>" alt="<%= vela.nombre %>" class="product-image">
-            </div>
+              <p><%= vela.descripcion || 'Descripción no disponible.' %></p>
+              <span class="price"><%= vela.precio %> EUR</span>
+              <form action="/cart" method="POST">
+                <input type="hidden" name="productId" value="<%= vela.id %>"> <!-- id del producto -->
+                <input type="number" name="quantity" value="1" min="1">
+                <button type="submit">Agregar al carrito</button>
+              </form>
+            </article>
           <% }) %>
-        </div>
+        </section>
       <% } else { %>
         <p>No hay velas disponibles en esta categoría.</p>
       <% } %>
@@ -68,7 +73,7 @@
       <a href="/cart" class="floating-cart" id="floating-cart">
         <div class="cart-icon">
           <img src="/images/iconoPágina.jpg" alt="Vela del carrito" class="velaCarrito">
-          <span class="item-count" id="item-count">-</span> <!-- Muestra el número de productos en el carrito -->
+          <span class="item-count" id="item-count">-</span> 
         </div>
       </a>
     </main>
@@ -91,6 +96,6 @@
         </p>
       </div>
     </footer>
-    <script src="/js/script.js"></script>
+    <script src="/js/script.js" defer></script>
   </body>
 </html>

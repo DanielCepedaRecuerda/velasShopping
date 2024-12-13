@@ -10,15 +10,6 @@ window.onload = function() {
   // Inicialmente ocultar el contenido
 document.body.style.visibility = 'hidden';
 
-//Pruebas
-if (document.getElementById("product-list")) {
-  console.log("existe");
-  
-}
-else{
-  console.log("no existe"); 
-}
-
   // Formulario de Contáctenos
   if (document.getElementById("contact-form")) {
     document.getElementById("contact-form").addEventListener("submit", async function (e) {
@@ -75,6 +66,13 @@ else{
     console.log("Total de productos en el carrito:", totalQuantity);  // Mostrar total
   } else {
     console.log("No hay carrito guardado en las cookies.");
+    //Pruebas
+    if (document.getElementById("product-list")) {
+      console.log("existe");
+    }
+    else{
+      console.log("no existe"); 
+    }
   }
 
   // Verificar si la cookie 'user_authenticated' está presente

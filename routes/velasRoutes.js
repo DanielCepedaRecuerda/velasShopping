@@ -4,17 +4,17 @@ const velasController = require('../controllers/velasController');
 
 // Rutas para cada categoría
 router.get('/velasAromaticas', (req, res) => {
-  req.params.categoria = 'Aromaticas';
+  req.params.categoria = 'velasAromaticas';
   velasController.getVelasByCategoria(req, res);
 });
   
   router.get('/velasTematicas', (req, res) => {
-    req.params.categoria = 'Tematicas';
+    req.params.categoria = 'velaTematicas';
     velasController.getVelasByCategoria(req, res);
   });
   
   router.get('/velasDecorativas', (req, res) => {
-    req.params.categoria = 'Decorativas';
+    req.params.categoria = 'velasDecorativas';
     velasController.getVelasByCategoria(req, res);
   });
 module.exports = router;

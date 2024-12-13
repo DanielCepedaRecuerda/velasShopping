@@ -56,7 +56,7 @@
               <img src="/images/<%= vela['Imagen/Video'] %>" alt="<%= vela.nombre %>" />
               <h2><%= vela.nombre %></h2>
               <p><%= vela.descripcion || 'Descripción no disponible.' %></p>
-              <span class="price"><%= vela.precio %> EUR</span>
+              <span class="price"><%= vela.precio %> €</span>
               <form action="/cart" method="POST">
                 <input type="hidden" name="productId" value="<%= vela.id %>"> <!-- id del producto -->
                 <input type="number" name="quantity" value="1" min="1">

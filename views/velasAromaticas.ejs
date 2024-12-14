@@ -59,7 +59,7 @@
               <span class="price"><%= vela.precio %> €</span>
               <form action="/cart" method="POST">
                 <input type="hidden" name="productId" value="<%= vela.id %>"> <!-- id del producto -->
-                <input type="hidden" name="redirectUrl" value="<%= request.originalUrl %>">
+                <input type="hidden" name="redirectUrl" value="<%= redirectUrl %>">
                 <input type="number" name="quantity" value="1" min="1">
                 <button type="submit">Agregar al carrito</button>
               </form>

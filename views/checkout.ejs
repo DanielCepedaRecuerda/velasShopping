@@ -37,7 +37,7 @@
     <h1 class="tituloTabCart">Checkout</h1>
 
     <% if (cart && cart.length > 0) { %>
-        <h2>Resumen de tu pedido</h2>
+        <h2 class="form-h2 ">Resumen de tu pedido</h2>
         <table>
             <thead>
                 <tr>
@@ -61,7 +61,7 @@
 
         <h3>Total: <%= cart.reduce((acc, item) => acc + (item.quantity * item.price), 0).toFixed(2) %>€</h3>
 
-        <h2>Información de envío</h2>
+        <h2 class="form-h2 ">Información de envío</h2>
         <form action="/process-checkout" method="POST" class="form">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required />

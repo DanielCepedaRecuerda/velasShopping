@@ -1,4 +1,4 @@
-const Cart = require('../models/cart'); // Asegúrate de tener un modelo de carrito
+const Cart = require('../models/cartModel'); // Asegúrate de tener un modelo de carrito
 
 // Mostrar la vista de checkout
 exports.showCheckout = (req, res) => {

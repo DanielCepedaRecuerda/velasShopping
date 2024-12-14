@@ -63,21 +63,24 @@
 
         <h2 class="form-h2 ">Información de envío</h2>
         <form action="/process-checkout" method="POST" class="form">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required />
-
-            <label for="direccion">Dirección:</label>
-            <input type="text" id="direccion" name="direccion" required />
-
-            <label for="ciudad">Ciudad:</label>
-            <input type="text" id="ciudad" name="ciudad" required />
-
-            <label for="codigoPostal">Código Postal:</label>
-            <input type="text" id="codigoPostal" name="codigoPostal" required />
-
-            <label for="telefono">Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono" required />
-
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required />
+    
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" required />
+    
+                <label for="ciudad">Ciudad:</label>
+                <input type="text" id="ciudad" name="ciudad" required />
+    
+                <label for="codigoPostal">Código Postal:</label>
+                <input type="text" id="codigoPostal" name="codigoPostal" required />
+    
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" required />
+    
+            </div>
+            
             <button type="submit">Confirmar Pedido</button>
         </form>
     <% } else { %>

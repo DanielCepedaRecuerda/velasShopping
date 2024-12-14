@@ -17,7 +17,7 @@ exports.showCheckout = (req, res) => {
 // Procesar el formulario de checkout
 exports.processCheckout = (req, res) => {
     const { nombre, direccion, ciudad, codigoPostal, telefono } = req.body;
-    const cart = req.session.cart || []; // Obtener el carrito de la sesión
+    const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
 
     // Aquí puedes agregar la lógica para procesar el pedido, como guardarlo en la base de datos
     // Por ejemplo, podrías crear un pedido en la base de datos

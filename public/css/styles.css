@@ -16,7 +16,6 @@ header {
   flex-direction: column;
   align-items: center;
 }
-
 /************ ESTILOS SHOW Y HIDDEN **************/
 .show {
   display: block;
@@ -126,210 +125,80 @@ table {
   margin-top: 20px;
   border-collapse: collapse;
   background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para la tabla */
 }
 
 table th,
 table td {
-  padding: 15px; /* Espaciado interno */
+  padding: 10px;
   text-align: center;
-  border-bottom: 1px solid #e67e22; /* Línea inferior */
+  border-bottom: 1px solid #e67e22;
   font-size: 1rem;
 }
 
 table th {
-  background-color: #e67e22; /* Color de fondo de los encabezados */
-  color: white; /* Color del texto de los encabezados */
+  background-color: #e67e22;
+  color: white;
   font-size: 1.1rem;
 }
 
 table td {
-  color: #333; /* Color del texto de las celdas */
+  color: #333;
 }
 
-/* Estilos para el formulario de envío */
-form {
-  margin-top: 30px; /* Espacio superior */
-  padding: 20px; /* Espaciado interno */
-  background-color: #fff; /* Fondo blanco */
-  border-radius: 5px; /* Bordes redondeados */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para el formulario */
+table td a {
+  color: #e67e22;
+  text-decoration: none;
 }
 
-form label {
-  display: block; /* Hacer que las etiquetas ocupen toda la línea */
-  margin-bottom: 5px; /* Espacio inferior */
-  font-weight: bold; /* Negrita */
+table td a:hover {
+  text-decoration: underline;
 }
 
-form input[type="text"],
-form input[type="tel"] {
-  width: 100%; /* Ancho completo */
-  padding: 10px; /* Espaciado interno */
-  border: 1px solid #ccc; /* Borde gris claro */
-  border-radius: 4px; /* Bordes redondeados */
-  font-size: 16px; /* Tamaño de fuente */
-  margin-bottom: 15px; /* Espacio inferior */
-  transition: border-color 0.3s; /* Transición para el borde */
+h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 20px;
 }
 
-form input[type="text"]:focus,
-form input[type="tel"]:focus {
-  border-color: #e67e22; /* Color del borde al enfocar */
-  outline: none; /* Sin contorno */
+h3 a {
+  text-decoration: none;
+  color: #e67e22;
 }
 
-/* Estilos para el botón de confirmar pedido */
-button[type="submit"] {
-  padding: 10px 20px; /* Espaciado interno */
-  border: none; /* Sin borde */
-  border-radius: 4px; /* Bordes redondeados */
-  background-color: #e67e22; /* Color de fondo */
-  color: white; /* Color del texto */
-  font-size: 16px; /* Tamaño de fuente */
-  cursor: pointer; /* Cursor de puntero */
-  transition: background-color 0.3s; /* Transición para el fondo */
+h3 a:hover {
+  text-decoration: underline;
 }
 
-button[type="submit"]:hover {
-  background-color: #d35400; /* Color de fondo al pasar el mouse */
-}
-
-/* Estilos para mensajes de error o información */
-p {
-  text-align: center; /* Centrar texto */
-  font-size: 1.2rem; /* Tamaño de fuente */
-  margin-top: 20px; /* Espacio superior */
-}
-
-/* Estilos para el enlace de volver a la tienda */
-a {
-  display: inline-block; /* Hacer que el enlace sea un bloque en línea */
-  margin-top: 20px; /* Espacio superior */
-  color: #e67e22; /* Color del enlace */
-  text-decoration: none; /* Sin subrayado */
-  font-weight: bold; /* Negrita */
-}
-
-a:hover {
-  text-decoration: underline; /* Subrayar al pasar el mouse */
-}
-
-/* Media Queries para hacer el diseño responsive */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-  }
-
-  .divBotonAcceso {
-    margin-top: 10px;
-  }
-
-  nav ul {
-    flex-direction: column;
-  }
-
-  nav li {
-    margin: 5px 0;
-  }
-  .product {
-    flex: 1 1 calc(45% - 20px);
-  }
-  .form {
-    max-width: 90%;
-    padding: 15px;
-  }
-
-  button {
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  header {
-    flex-direction: column;
-  }
-
-  .divBotonAcceso {
-    margin-top: 10px;
-  }
-
-  nav ul {
-    flex-direction: column;
-  }
-
-  .product {
-    flex: 1 1 100%;
-  }
-
-  nav ul li {
-    display: block;
-    margin: 10px 0;
-  }
-  .form {
-    padding: 10px;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  textarea {
-    font-size: 14px;
-  }
-
-  button {
-    font-size: 14px;
-  }
-}
-
-/* Estilo para el botón flotante */
-.floating-cart {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: white;
-  padding: 12px;
-  border-radius: 50%;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+.divButtons-Cart {
   display: flex;
-  align-items: center;
   justify-content: center;
-  cursor: pointer;
-  z-index: 1000;
-  border: 3px solid #333;
+  gap: 20px; /* Espacio entre los botones */
+  margin-top: 20px; /* Espacio en la parte superior */
 }
-
-/* Ajustar el tamaño de la imagen */
-.velaCarrito {
-  width: 40px;
-  height: auto;
-  object-fit: contain;
-}
-
-/* Estilo para el contador de productos */
-.item-count {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: #e74c3c;
-  color: white;
-  border-radius: 50%;
-  padding: 4px 8px;
-  font-size: 14px;
+.divButtons-Cart a {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 0;
+  background-color: #e67e22; /* Color de fondo naranja */
+  color: black; /* Color de texto negro */
+  text-decoration: none;
+  font-size: 16px;
   font-weight: bold;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease;
+  text-align: center;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
-.item-count:hover {
-  transform: scale(1.2);
+.divButtons-Cart a:hover {
+  background-color: #d35400; /* Cambiar a un naranja más oscuro al pasar el mouse */
+  transform: scale(1.05); /* Efecto de agrandamiento al pasar el mouse */
 }
 
 footer {
   text-align: center;
   padding: 20px;
   background-color: #333;
- color: #fff;
+  color: #fff;
 }
 .footer-content {
   display: flex;
@@ -460,4 +329,115 @@ button:hover {
 .aForm {
   margin-top: 1em;
   color: #e67e22;
+}
+
+/* Media Queries para hacer el diseño responsive */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+  }
+
+  .divBotonAcceso {
+    margin-top: 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav li {
+    margin: 5px 0;
+  }
+  .product {
+    flex: 1 1 calc(45% - 20px);
+  }
+  .form {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+  }
+
+  .divBotonAcceso {
+    margin-top: 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  .product {
+    flex: 1 1 100%;
+  }
+
+  nav ul li {
+    display: block;
+    margin: 5px 0;
+
+    margin: 10px 0;
+  }
+  .form {
+    padding: 10px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+}
+/* Estilo para el botón flotante */
+.floating-cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: white;
+  padding: 12px;
+  border-radius: 50%;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  border: 3px solid #333;
+}
+
+/* Ajustar el tamaño de la imagen */
+.velaCarrito {
+  width: 40px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Estilo para el contador de productos */
+.item-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.item-count:hover {
+  transform: scale(1.2);
 }

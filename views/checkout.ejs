@@ -1,93 +1,107 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Checkout - Velas Shopping</title>
     <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="shortcut icon" href="/images/iconoPágina.jpg" type="image/x-icon"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-</head>
-<body>
+    <link
+      rel="shortcut icon"
+      href="/images/iconoPágina.jpg"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
     <header>
-        <h1 class="tituloTabCart">Velas Shopping</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/productos">Productos</a></li>
-                <li><a href="/contacto">Contacto</a></li>
-            </ul>
-        </nav>
-        <div class="divBotonAcceso" id="divBotonAcceso">
-            <a href="/login">
-                <button id="botonAcceso" class="botonAcceso">Acceso / Registro</button>
-            </a>
-        </div>
-        <div class="divBotonLogout" id="divBotonLogout">
-            <a href="/logout">
-                <button id="botonLogout" class="botonAcceso">Cerrar Sesión</button>
-            </a>
-        </div>
-        <div class="social-links">
-            <a href="#" class="fa fa-instagram"></a>
-            <a href="#" class="fa fa-twitter"></a>
-        </div>
+      <h1 class="tituloTabCart">Velas Shopping</h1>
+      <nav>
+        <ul>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/productos">Productos</a></li>
+          <li><a href="/contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="divBotonAcceso" id="divBotonAcceso">
+        <a href="/login">
+          <button id="botonAcceso" class="botonAcceso">
+            Acceso / Registro
+          </button>
+        </a>
+      </div>
+      <div class="divBotonLogout" id="divBotonLogout">
+        <a href="/logout">
+          <button id="botonLogout" class="botonAcceso">Cerrar Sesión</button>
+        </a>
+      </div>
+      <div class="social-links">
+        <a href="#" class="fa fa-instagram"></a>
+        <a href="#" class="fa fa-twitter"></a>
+      </div>
     </header>
 
     <h1 class="tituloTabCart">Checkout</h1>
 
     <% if (cart && cart.length > 0) { %>
-        <h2 class="form-h2 ">Resumen de tu pedido</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% cart.forEach(item => { %>
-                    <tr>
-                        <td><%= item.name %></td>
-                        <td><%= item.quantity %></td>
-                        <td><%= typeof item.price === 'number' ? item.price.toFixed(2) : '0.00' %>€</td>
-                        <td><%= (item.quantity * item.price).toFixed(2) %>€</td>
-                    </tr>
-                <% }); %>
-            </tbody>
-        </table>
+    <h2 class="form-h2">Resumen de tu pedido</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% cart.forEach(item => { %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.quantity %></td>
+          <td>
+            <%= typeof item.price === 'number' ? item.price.toFixed(2) : '0.00'
+            %>€
+          </td>
+          <td><%= (item.quantity * item.price).toFixed(2) %>€</td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
 
-        <h3>Total: <%= cart.reduce((acc, item) => acc + (item.quantity * item.price), 0).toFixed(2) %>€</h3>
+    <h3>
+      Total: <%= cart.reduce((acc, item) => acc + (item.quantity * item.price),
+      0).toFixed(2) %>€
+    </h3>
 
-        <h2 class="form-h2 ">Información de envío</h2>
-        <form action="/process-checkout" method="POST" class="form">
-            <div>
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required />
-    
-                <label for="direccion">Dirección:</label>
-                <input type="text" id="direccion" name="direccion" required />
-    
-                <label for="ciudad">Ciudad:</label>
-                <input type="text" id="ciudad" name="ciudad" required />
-    
-                <label for="codigoPostal">Código Postal:</label>
-                <input type="text" id="codigoPostal" name="codigoPostal" required />
-    
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" required />
-    
-            </div>
-            
-            <button type="submit">Confirmar Pedido</button>
-        </form>
+    <h2 class="form-h2">Información de envío</h2>
+    <form action="/process-checkout" method="POST" class="form">
+      <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required />
+
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" required />
+
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" id="ciudad" name="ciudad" required />
+
+        <label for="codigoPostal">Código Postal:</label>
+        <input type="text" id="codigoPostal" name="codigoPostal" required />
+
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" required />
+      </div>
+
+      <button type="submit">Confirmar Pedido</button>
+    </form>
     <% } else { %>
-        <p>Tu carrito está vacío. No puedes proceder al checkout.</p>
-        <a href="/productos">Volver a la tienda</a>
+    <p>Tu carrito está vacío. No puedes proceder al checkout.</p>
+    <a href="/productos">Volver a la tienda</a>
     <% } %>
 
     <script src="/js/script.js" defer></script>
-</body>
+  </body>
 </html>

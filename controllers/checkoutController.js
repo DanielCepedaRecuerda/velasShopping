@@ -4,10 +4,9 @@ const Cart = require('../models/cartModel'); // Asegúrate de tener un modelo de
 exports.showCheckout = (req, res) => {
     // Obtener el carrito de la sesión
     const cart = req.session.cart || []; // Asegúrate de que el carrito esté en la sesión
-
+    console.log('Carrito:', cart);
     // Verificar si el carrito tiene elementos
     if (cart.length === 0) {
-        console.log("entro por if cart.length = 0");
         return res.redirect('/productos'); // Redirigir si el carrito está vacío
     }
 

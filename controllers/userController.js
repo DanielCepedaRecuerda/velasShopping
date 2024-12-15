@@ -42,6 +42,8 @@ const registerUser = async (req, res) => {
 
   // Si hay errores, redirigir a la página de registro con los errores
   if (errors.length > 0) {
+    console.log(errors);
+
     return res.redirect(`/register?errors=${encodeURIComponent(JSON.stringify(errors))}`);
   }
 
@@ -97,7 +99,6 @@ const loginUser = async (req, res) => {
 
   // Si hay errores, redirigir a la página de inicio de sesión con los errores
   if (errors.length > 0) {
-    console.log(errors);
     
     return res.redirect(
       `/login?errors=${encodeURIComponent(JSON.stringify(errors))}`

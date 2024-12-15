@@ -126,12 +126,11 @@ const loginUser = async (req, res) => {
 
   // Si hay errores, redirigir a la página de inicio de sesión con los errores
   if (errors.length > 0) {
-    req.session.formData = {
+    const formData = {
       email
     };
-    req.session.errors = errors;
     return res.redirect(
-      `/login?errors=${encodeURIComponent(JSON.stringify(errors))}&data=${encodeURIComponent(JSON.stringify({ email }))}`
+      `/login?errors=${encodeURIComponent(JSON.stringify(errors))}&data=${encodeURIComponent(JSON.stringify(formData))}`
     );
   }
 

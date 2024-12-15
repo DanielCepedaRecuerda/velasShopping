@@ -40,34 +40,39 @@ window.onload = function () {
       });
   }
   // Verificar si hay un mensaje de error en la URL
-const errorMessage = getQueryParam('error');
-if (errorMessage) {
-  const mensajeFlotante = document.getElementById('mensajeFlotante');
-  mensajeFlotante.textContent = decodeURIComponent(errorMessage);
-  mensajeFlotante.classList.add('show'); // Agregar clase para mostrar el mensaje
+  const errorMessage = getQueryParam("error");
+  if (errorMessage) {
+    const mensajeFlotante = document.getElementById("mensajeFlotante");
+    mensajeFlotante.textContent = decodeURIComponent(errorMessage);
+    mensajeFlotante.classList.add("show"); // Agregar clase para mostrar el mensaje
 
-  setTimeout(() => {
-      mensajeFlotante.classList.remove('show'); 
-  }, 3000); 
-}
+    setTimeout(() => {
+      mensajeFlotante.classList.remove("show");
+    }, 3000);
+  }
   // Errores formulario login
   if (document.getElementById("login-form")) {
     // Verificar si hay errores en la URL
-  const errors = getQueryParam("errors");
-  if (errors) {
-    const errorMessages = JSON.parse(decodeURIComponent(errors));
-    errorMessages.forEach((error) => {
-      // Aquí puedes decidir cómo mostrar los errores
-      if (error.includes("email")) {
-        document.getElementById("email-error").textContent = error;
-      } else if (error.includes("contraseña")) {
-        document.getElementById("password-error").textContent = error;
-      } else {
-        // Si es un error genérico, puedes mostrarlo en ambos campos o en un lugar específico
-        document.getElementById("password-error").textContent = error;
-      }
-    });
-  }
+    const errors = getQueryParam("errors");
+    if (errors) {
+      const errorMessages = JSON.parse(decodeURIComponent(errors));
+      errorMessages.forEach((error) => {
+        // Aquí puedes decidir cómo mostrar los errores
+        if (error.includes("email")) {
+          document.getElementById("email-error").textContent = error;
+        } else if (error.includes("contraseña")) {
+          document.getElementById("password-error").textContent = error;
+        } else {
+          // Si es un error genérico, puedes mostrarlo en ambos campos o en un lugar específico
+          document.getElementById("password-error").textContent = error;
+        }
+      });
+    }
+    // Si hay datos, rellenar el formulario
+    if (data) {
+      const formData = JSON.parse(decodeURIComponent(data));
+      document.getElementById("email").value = formData.email || "";
+    }
   }
   // Errores formulario register
   if (document.getElementById("register-form")) {
@@ -104,14 +109,14 @@ if (errorMessage) {
     // Si hay datos, rellenar el formulario
     if (data) {
       const formData = JSON.parse(decodeURIComponent(data));
-      document.getElementById("nombre").value = formData.nombre || '';
-      document.getElementById("apellido1").value = formData.apellido1 || '';
-      document.getElementById("apellidos2").value = formData.apellido2 || '';
-      document.getElementById("email").value = formData.email || '';
-      document.getElementById("telefono").value = formData.telefono || '';
+      document.getElementById("nombre").value = formData.nombre || "";
+      document.getElementById("apellido1").value = formData.apellido1 || "";
+      document.getElementById("apellidos2").value = formData.apellido2 || "";
+      document.getElementById("email").value = formData.email || "";
+      document.getElementById("telefono").value = formData.telefono || "";
     }
   }
-  
+
   // Verificar si la cookie del carrito existe
   const cartCookie = getCookie("cart");
   const carritoElement = document.getElementById("floating-cart");
@@ -143,7 +148,7 @@ if (errorMessage) {
     if (itemCountElement) {
       itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-";
     }
-  } 
+  }
   // Verificar si la cookie 'user_authenticated' está presente
   const usercookie = getCookie("user_authenticated");
   const divBotonAcceso = document.getElementById("divBotonAcceso");
@@ -184,7 +189,6 @@ if (errorMessage) {
       })
         .then((response) => response.json()) // Convertimos la respuesta en JSON
         .then((updatedCart) => {
-
           location.reload(); // Recargar la página
         })
         .catch((error) => {

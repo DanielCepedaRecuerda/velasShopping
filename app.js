@@ -26,7 +26,7 @@ const cors = require("cors");
 // Configuración del middleware express-session
 app.use(
   session({
-    secret: "yourSecretKey",
+    secret: "Velashopping2024",
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -62,9 +62,6 @@ app.get("/contacto", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "contacto.html"));
 });
 
-app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "login.html"));
-});
 app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "register.html"));
 });

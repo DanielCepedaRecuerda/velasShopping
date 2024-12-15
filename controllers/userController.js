@@ -126,6 +126,9 @@ const loginUser = async (req, res) => {
 
   // Si hay errores, redirigir a la página de inicio de sesión con los errores
   if (errors.length > 0) {
+    const formData = {
+      email
+    };
     return res.redirect(
       `/login?errors=${encodeURIComponent(JSON.stringify(errors))}&data=${encodeURIComponent(JSON.stringify(formData))}`
     );
@@ -143,9 +146,6 @@ const loginUser = async (req, res) => {
     }
 
     if (errors.length > 0) {
-      const formData = {
-        email
-      };
       return res.redirect(
         `/login?errors=${encodeURIComponent(JSON.stringify(errors))}`
       );

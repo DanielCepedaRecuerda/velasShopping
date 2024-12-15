@@ -73,7 +73,6 @@ if (errorMessage) {
   if (document.getElementById("register-form")) {
     // Verificar si hay errores en la URL
   const errors = getQueryParam("errors");
-  console.log(errors);
   
   if (errors) {
     const errorMessages = JSON.parse(decodeURIComponent(errors));

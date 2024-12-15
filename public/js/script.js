@@ -68,6 +68,8 @@ window.onload = function () {
         }
       });
     }
+    // Obtener el parámetro 'data' de la URL
+    const data = getQueryParam("data");
     // Si hay datos, rellenar el formulario
     if (data) {
       const formData = JSON.parse(decodeURIComponent(data));

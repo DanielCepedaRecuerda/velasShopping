@@ -4,7 +4,7 @@ const productsModel = require('../models/productsModel'); // Asegúrate de impor
 const getAllProducts = async (req, res) => {
   try {
     const products = await productsModel.getAllProducts(); // Obtener todos los productos
-    const redirectUrl = req.query.redirectUrl || '/'; // Establecer una URL predeterminada si no se proporciona
+    const redirectUrl = req.query.redirectUrl;
 
     // Renderizar la vista y pasar los productos y la URL de redirección
     res.render('productos', { products, redirectUrl });

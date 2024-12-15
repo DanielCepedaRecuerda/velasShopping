@@ -74,7 +74,7 @@ const loginUser = async (req, res) => {
     const isPasswordValid =
       user && (await bcrypt.compare(contraseña, user.contraseña));
     if (!isPasswordValid) {
-      errors.push("Credenciales incorrectas."); // Mensaje genérico
+      errors.push("Email o contraseña incorrectos"); // Mensaje genérico
     }
 
     if (errors.length > 0) {

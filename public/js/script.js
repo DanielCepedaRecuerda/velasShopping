@@ -52,7 +52,6 @@ window.onload = function () {
         document.getElementById("password-error").textContent = error;
       } else {
         // Si es un error genérico, puedes mostrarlo en ambos campos o en un lugar específico
-        document.getElementById("email-error").textContent = error;
         document.getElementById("password-error").textContent = error;
       }
     });

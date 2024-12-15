@@ -56,10 +56,6 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
-app.get("/productos", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "productos.ejs"));
-});
-
 app.get("/contacto", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "contacto.html"));
 });

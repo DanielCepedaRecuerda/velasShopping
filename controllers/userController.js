@@ -61,8 +61,8 @@ const loginUser = async (req, res) => {
     const isPasswordValid = await bcrypt.compare(contraseña, user.contraseña);
 
     if (!isPasswordValid) {
-      return res.status(400).json({ mensaje: "Contraseña incorrecta" });
-    }
+      return res.redirect('/login?error=contraseña-incorrecta');
+  }
 
      // Almacenamos la información del usuario en la sesión
      req.session.user = {

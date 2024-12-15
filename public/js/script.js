@@ -5,6 +5,11 @@ function getCookie(name) {
   if (parts.length === 2) return parts.pop().split(';').shift();
   return null;
 }
+// Función para obtener parámetros de la URL
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
 
 window.onload = function() {
   // Inicialmente ocultar el contenido
@@ -28,6 +33,19 @@ document.body.style.visibility = 'hidden';
       }
     });
   }
+
+  // Verificar si hay un error en la URL
+const error = getQueryParam('error');
+if (error === 'contraseña-incorrecta') {
+    const mensajeFlotante = document.getElementById('mensajeFlotante');
+    mensajeFlotante.textContent = "Contraseña incorrecta";
+    mensajeFlotante.style.display = 'block';
+
+    // Ocultar el mensaje después de 3 segundos
+    setTimeout(() => {
+        mensajeFlotante.style.display = 'none';
+    }, 3000);
+}
   
   // Verificar si la cookie del carrito existe
   const cartCookie = getCookie("cart");

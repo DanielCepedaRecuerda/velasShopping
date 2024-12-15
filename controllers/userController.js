@@ -1,6 +1,11 @@
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModel");
 
+const getRegisterPage = (req, res) => {
+  // Obtener errores de la consulta
+  const errors = req.query.errors ? JSON.parse(decodeURIComponent(req.query.errors)) : [];
+  res.render('register', { errors }); // Asegúrate de que 'register' sea el nombre correcto de tu vista
+};
 const registerUser  = async (req, res) => {
   const { nombre, apellido1, apellido2, email, contraseña, telefono } = req.body;
   console.log(req.body);
@@ -72,9 +77,9 @@ const loginUser = async (req, res) => {
   if (!contraseña) {
     errors.push("La contraseña es obligatoria.");
   }
-  //  else if (contraseña.length < 6) {
-  //   errors.push("La contraseña debe tener al menos 6 caracteres.");
-  // }
+   else if (contraseña.length < 6) {
+    errors.push("La contraseña debe tener al menos 6 caracteres.");
+  }
 
   // Si hay errores, redirigir a la página de inicio de sesión con los errores
   if (errors.length > 0) {
@@ -126,7 +131,8 @@ const logoutUser = (req, res) => {
 };
 
 module.exports = {
-  registerUser,
-  loginUser,
-  logoutUser,
+  registerUser ,
+  loginUser ,
+  logoutUser ,
+  getRegisterPage,
 };

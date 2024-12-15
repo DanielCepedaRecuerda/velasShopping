@@ -16,18 +16,11 @@ header {
   flex-direction: column;
   align-items: center;
 }
-/*************MENSAJES FLOTENTES*******************/
-.mensaje-flotante {
-  display: none;
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  width: 50%;
-  transform: translateX(-50%);
-  background-color: #f44336;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
+/*************MENSAJES*******************/
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
 }
 /************ ESTILOS SHOW Y HIDDEN **************/
 .show {

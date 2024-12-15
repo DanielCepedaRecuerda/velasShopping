@@ -42,35 +42,54 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const { email, contraseña } = req.body;
-  console.log(req.body);
-  if (!email || !contraseña) {
-    return res
-      .status(400)
-      .json({ mensaje: "Email y contraseña son obligatorios" });
+  const errors = [];
+  // Validar el formato del correo electrónico
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email) {
+    errors.push("El email es obligatorio.");
+  } else if (!emailRegex.test(email)) {
+    errors.push("El email es inválido.");
+  }
+
+  // Validar la contraseña
+  if (!contraseña) {
+    errors.push("La contraseña es obligatoria.");
+  }
+  //  else if (contraseña.length < 6) {
+  //   errors.push("La contraseña debe tener al menos 6 caracteres.");
+  // }
+
+  // Si hay errores, redirigir a la página de inicio de sesión con los errores
+  if (errors.length > 0) {
+    return res.redirect(
+      `/login?errors=${encodeURIComponent(JSON.stringify(errors))}`
+    );
   }
 
   try {
     // Buscar usuario por email
     const user = await userModel.findUserByEmail(email);
 
-    if (!user) {
-      return res.status(400).json({ mensaje: "Usuario no encontrado" });
+    // Verificar contraseña
+    const isPasswordValid =
+      user && (await bcrypt.compare(contraseña, user.contraseña));
+    if (!isPasswordValid) {
+      errors.push("Credenciales incorrectas."); // Mensaje genérico
     }
 
-    // Verificar contraseña
-    const isPasswordValid = await bcrypt.compare(contraseña, user.contraseña);
+    if (errors.length > 0) {
+      return res.redirect(
+        `/login?errors=${encodeURIComponent(JSON.stringify(errors))}`
+      );
+    }
 
-    if (!isPasswordValid) {
-      return res.redirect('/login?error=contraseña-incorrecta');
-  }
-
-     // Almacenamos la información del usuario en la sesión
-     req.session.user = {
-      id: user._id,
-      email: user.email,
-    };
-    res.cookie('user_authenticated', 'true', { maxAge: 900000, httpOnly: false }); // No tiene httpOnly, accesible desde JS
-    res.redirect("/"); // Esto redirige al cliente al índice
+    // Si todo es correcto, iniciar sesión
+    req.session.user = { id: user._id, email: user.email };
+    res.cookie("user_authenticated", "true", {
+      maxAge: 900000,
+      httpOnly: false,
+    });
+    res.redirect("/"); // Redirigir al índice
   } catch (error) {
     console.error("Error al iniciar sesión:", error);
     res.status(500).json({ mensaje: "Error en el servidor" });
@@ -83,9 +102,9 @@ const logoutUser = (req, res) => {
       console.error("Error al cerrar sesión:", err);
       return res.status(500).json({ mensaje: "Error al cerrar sesión" });
     }
-    res.clearCookie('connect.sid'); // Limpia la cookie de sesión
-    res.clearCookie('user_authenticated'); // Limpia la cookie de sesión
-    res.redirect('/'); // Redirige al usuario a la página principal
+    res.clearCookie("connect.sid"); // Limpia la cookie de sesión
+    res.clearCookie("user_authenticated"); // Limpia la cookie de sesión
+    res.redirect("/"); // Redirige al usuario a la página principal
   });
 };
 

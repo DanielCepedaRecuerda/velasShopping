@@ -75,7 +75,6 @@ if (errorMessage) {
     const urlParams = new URLSearchParams(window.location.search);
     const errors = urlParams.get("errors");
     const data = urlParams.get("data");
-    console.log(errors); // Para depuración
 
     // Si hay errores, procesarlos
     if (errors) {
@@ -185,7 +184,6 @@ if (errorMessage) {
       })
         .then((response) => response.json()) // Convertimos la respuesta en JSON
         .then((updatedCart) => {
-          console.log("Carrito actualizado:", updatedCart);
 
           location.reload(); // Recargar la página
         })

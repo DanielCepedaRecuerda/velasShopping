@@ -63,9 +63,6 @@ const registerUser = async (req, res) => {
 
   // Si hay errores, redirigir a la página de registro con los errores
   if (errors.length > 0) {
-    console.log(errors);
-    console.log("entro por el if de registerUser ");
-
     // Crear un objeto con los datos del formulario
     const formData = {
       nombre,

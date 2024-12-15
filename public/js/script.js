@@ -71,22 +71,37 @@ if (errorMessage) {
   }
   // Errores formulario register
   if (document.getElementById("register-form")) {
-    // Verificar si hay errores en la URL
-  const errors = getQueryParam("errors");
-  console.log(errors);
-  
-  if (errors) {
-    const errorMessages = JSON.parse(decodeURIComponent(errors));
-    errorMessages.forEach((error) => {
-      // Aquí puedes decidir cómo mostrar los errores
-      if (error.includes("email")) {
-        document.getElementById("email-error").textContent = error;
-      }
-      if (error.includes("contraseña")) {
-        document.getElementById("password-error").textContent = error;
-      } 
-    });
-  }
+    // Obtener los parámetros de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const errors = urlParams.get("errors");
+
+    console.log(errors); // Para depuración
+
+    // Si hay errores, procesarlos
+    if (errors) {
+      const errorMessages = JSON.parse(decodeURIComponent(errors));
+      errorMessages.forEach((error) => {
+        // Mostrar errores en los campos correspondientes
+        if (error.includes("nombre")) {
+          document.getElementById("error-nombre").textContent = error;
+        }
+        if (error.includes("apellido")) {
+          document.getElementById("error-apellido1").textContent = error;
+        }
+        if (error.includes("2º Apellido")) {
+          document.getElementById("error-apellido2").textContent = error;
+        }
+        if (error.includes("email")) {
+          document.getElementById("error-email").textContent = error;
+        }
+        if (error.includes("contraseña")) {
+          document.getElementById("error-password").textContent = error;
+        }
+        if (error.includes("teléfono")) {
+          document.getElementById("error-telefono").textContent = error;
+        }
+      });
+    }
   }
   
 

@@ -12,6 +12,8 @@ const addToCart = async (req, res) => {
     const { productId, quantity, redirectUrl } = req.body;
     const parsedQuantity = Number(quantity);
     if (isNaN(parsedQuantity) || parsedQuantity <= 0) {
+      console.log(redirectUrl);
+      
       return res.redirect(`${redirectUrl}?error=${encodeURIComponent("Cantidad inválida.")}`);
     }
 

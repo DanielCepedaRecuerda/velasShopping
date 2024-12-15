@@ -113,7 +113,6 @@ if (errorMessage) {
     }
   }
   
-
   // Verificar si la cookie del carrito existe
   const cartCookie = getCookie("cart");
   const carritoElement = document.getElementById("floating-cart");

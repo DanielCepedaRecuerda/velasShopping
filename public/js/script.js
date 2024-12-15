@@ -50,8 +50,9 @@ if (errorMessage) {
       mensajeFlotante.classList.remove('show'); 
   }, 3000); 
 }
-
-  // Verificar si hay errores en la URL
+  // Errores formulario login
+  if (document.getElementById("login-form")) {
+    // Verificar si hay errores en la URL
   const errors = getQueryParam("errors");
   if (errors) {
     const errorMessages = JSON.parse(decodeURIComponent(errors));
@@ -67,6 +68,25 @@ if (errorMessage) {
       }
     });
   }
+  }
+  // Errores formulario register
+  if (document.getElementById("register-form")) {
+    // Verificar si hay errores en la URL
+  const errors = getQueryParam("errors");
+  if (errors) {
+    const errorMessages = JSON.parse(decodeURIComponent(errors));
+    errorMessages.forEach((error) => {
+      // Aquí puedes decidir cómo mostrar los errores
+      if (error.includes("email")) {
+        document.getElementById("email-error").textContent = error;
+      }
+      if (error.includes("contraseña")) {
+        document.getElementById("password-error").textContent = error;
+      } 
+    });
+  }
+  }
+  
 
   // Verificar si la cookie del carrito existe
   const cartCookie = getCookie("cart");

@@ -4,7 +4,7 @@ const userModel = require("../models/userModel");
 const registerUser = async (req, res) => {
   const { nombre, apellido1, apellido2, email, contraseña, telefono } =
     req.body;
-    const errors = [];
+  const errors = [];
 
   // Validaciones
   // Validar el nombre
@@ -43,8 +43,11 @@ const registerUser = async (req, res) => {
   // Si hay errores, redirigir a la página de registro con los errores
   if (errors.length > 0) {
     console.log(errors);
+    console.log("entro por el if de registerUser");
 
-    return res.redirect(`/register?errors=${encodeURIComponent(JSON.stringify(errors))}`);
+    return res.redirect(
+      `/register?errors=${encodeURIComponent(JSON.stringify(errors))}`
+    );
   }
 
   try {
@@ -66,7 +69,11 @@ const registerUser = async (req, res) => {
   } catch (error) {
     console.error("Error al registrar el usuario:", error);
     if (error.message === "El correo electrónico ya está registrado.") {
-      return res.redirect(`/register?errors=${encodeURIComponent(JSON.stringify([error.message]))}`);
+      return res.redirect(
+        `/register?errors=${encodeURIComponent(
+          JSON.stringify([error.message])
+        )}`
+      );
     }
 
     // Si el error es que el correo ya está registrado
@@ -92,14 +99,12 @@ const loginUser = async (req, res) => {
   // Validar la contraseña
   if (!contraseña) {
     errors.push("La contraseña es obligatoria.");
-  }
-   else if (contraseña.length < 6) {
+  } else if (contraseña.length < 6) {
     errors.push("La contraseña debe tener al menos 6 caracteres.");
   }
 
   // Si hay errores, redirigir a la página de inicio de sesión con los errores
   if (errors.length > 0) {
-    
     return res.redirect(
       `/login?errors=${encodeURIComponent(JSON.stringify(errors))}`
     );

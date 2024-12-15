@@ -46,10 +46,9 @@ if (errorMessage) {
   mensajeFlotante.textContent = decodeURIComponent(errorMessage);
   mensajeFlotante.classList.add('show'); // Agregar clase para mostrar el mensaje
 
-  // Ocultar el mensaje después de 5 segundos
   setTimeout(() => {
-      mensajeFlotante.classList.remove('show'); // Remover clase para ocultar
-  }, 5000); // Tiempo en milisegundos
+      mensajeFlotante.classList.remove('show'); 
+  }, 3000); 
 }
 
   // Verificar si hay errores en la URL

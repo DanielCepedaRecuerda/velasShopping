@@ -74,7 +74,7 @@ if (errorMessage) {
     // Obtener los parámetros de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const errors = urlParams.get("errors");
-
+    const data = urlParams.get("data");
     console.log(errors); // Para depuración
 
     // Si hay errores, procesarlos
@@ -101,6 +101,15 @@ if (errorMessage) {
           document.getElementById("error-telefono").textContent = error;
         }
       });
+    }
+    // Si hay datos, rellenar el formulario
+    if (data) {
+      const formData = JSON.parse(decodeURIComponent(data));
+      document.getElementById("nombre").value = formData.nombre || '';
+      document.getElementById("apellido1").value = formData.apellido1 || '';
+      document.getElementById("apellidos2").value = formData.apellido2 || '';
+      document.getElementById("email").value = formData.email || '';
+      document.getElementById("telefono").value = formData.telefono || '';
     }
   }
   

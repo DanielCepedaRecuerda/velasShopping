@@ -1,8 +1,9 @@
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModel");
 
-const registerUser  = async (req, res) => {
-  const { nombre, apellido1, apellido2, email, contraseña, telefono } = req.body;
+const registerUser = async (req, res) => {
+  const { nombre, apellido1, apellido2, email, contraseña, telefono } =
+    req.body;
   const errors = [];
 
   // Validaciones
@@ -21,17 +22,23 @@ const registerUser  = async (req, res) => {
   }
 
   // Validar el segundo apellido (opcional)
-  if (apellido2 && !/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(apellido2)) {
+  if (!apellido2) {
+    errors.push(
+      "El segundo apellido es opcional, pero si se proporciona, debe ser válido."
+    );
+  } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellido2)) {
     errors.push("El segundo apellido solo puede contener letras y espacios.");
   }
-
   // Validar el formato del correo electrónico
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email) {
     errors.push("El email es obligatorio.");
   } else if (!emailRegex.test(email)) {
     errors.push("El email es inválido.");
-  } else if (email.toLowerCase().includes("test") || email.toLowerCase().includes("example")) {
+  } else if (
+    email.toLowerCase().includes("test") ||
+    email.toLowerCase().includes("example")
+  ) {
     errors.push("El email no puede ser un correo de prueba.");
   }
 
@@ -59,9 +66,17 @@ const registerUser  = async (req, res) => {
     console.log(errors);
     console.log("entro por el if de registerUser ");
 
+    // Crear un objeto con los datos del formulario
+    const formData = {
+      nombre,
+      apellido1,
+      apellido2,
+      email,
+      telefono,
+    };
     return res.redirect(
-      `/register?errors=${encodeURIComponent(JSON.stringify(errors))}`
-    );
+    `/register?errors=${encodeURIComponent(JSON.stringify(errors))}&data=${encodeURIComponent(JSON.stringify(formData))}`
+  );
   }
 
   try {
@@ -69,7 +84,7 @@ const registerUser  = async (req, res) => {
     const hashedPassword = await bcrypt.hash(contraseña, 10);
 
     // Crear usuario
-    await userModel.createUser ({
+    await userModel.createUser({
       nombre,
       apellido1,
       apellido2,

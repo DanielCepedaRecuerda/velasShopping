@@ -11,12 +11,10 @@ const addToCart = async (req, res) => {
   try {
     const { productId, quantity, redirectUrl } = req.body;
     const parsedQuantity = Number(quantity);
-    console.log("ruta: fuera if",redirectUrl);
     if (isNaN(parsedQuantity) || parsedQuantity <= 0) {
-      console.log("ruta: dentro if",redirectUrl);
 
       
-      return res.redirect(`${redirectUrl}?error=${encodeURIComponent("Cantidad inválida.")}`);
+      return res.redirect(`/productos?error=${encodeURIComponent("Cantidad inválida.")}`);
     }
 
     // Obtener el producto de la base de datos

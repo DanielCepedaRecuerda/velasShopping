@@ -143,8 +143,11 @@ const loginUser = async (req, res) => {
     }
 
     if (errors.length > 0) {
+      const formData = {
+        email
+      };
       return res.redirect(
-        `/login?errors=${encodeURIComponent(JSON.stringify(errors))}`
+        `/login?errors=${encodeURIComponent(JSON.stringify(errors))}&data=${encodeURIComponent(JSON.stringify(formData))}`
       );
     }
 

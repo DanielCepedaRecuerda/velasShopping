@@ -1,32 +1,43 @@
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModel");
 
-const getRegisterPage = (req, res) => {
-  // Obtener errores de la consulta
-  const errors = req.query.errors ? JSON.parse(decodeURIComponent(req.query.errors)) : [];
-  res.render('register', { errors }); // Asegúrate de que 'register' sea el nombre correcto de tu vista
-};
-const registerUser  = async (req, res) => {
-  const { nombre, apellido1, apellido2, email, contraseña, telefono } = req.body;
-  console.log(req.body);
+const registerUser = async (req, res) => {
+  const { nombre, apellido1, apellido2, email, contraseña, telefono } =
+    req.body;
+    const errors = [];
 
   // Validaciones
-  const errors = [];
-  if (!nombre) errors.push("El nombre es obligatorio.");
-  if (!apellido1) errors.push("El primer apellido es obligatorio.");
-  if (!email) errors.push("El email es obligatorio.");
-  if (!contraseña) errors.push("La contraseña es obligatoria.");
-  if (!telefono) errors.push("El teléfono es obligatorio.");
-
-  // Validar el formato del teléfono (9 dígitos)
-  const phoneRegex = /^\d{9}$/;
-  if (telefono && !phoneRegex.test(telefono)) {
-    errors.push("El teléfono debe tener 9 dígitos.");
+  // Validar el nombre
+  if (!nombre) {
+    errors.push("El nombre es obligatorio.");
   }
 
-  // Validar la longitud de la contraseña
-  if (contraseña && contraseña.length < 6) {
+  // Validar el primer apellido
+  if (!apellido1) {
+    errors.push("El primer apellido es obligatorio.");
+  }
+
+  // Validar el formato del correo electrónico
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email) {
+    errors.push("El email es obligatorio.");
+  } else if (!emailRegex.test(email)) {
+    errors.push("El email es inválido.");
+  }
+
+  // Validar la contraseña
+  if (!contraseña) {
+    errors.push("La contraseña es obligatoria.");
+  } else if (contraseña.length < 6) {
     errors.push("La contraseña debe tener al menos 6 caracteres.");
+  }
+
+  // Validar el teléfono
+  const phoneRegex = /^\d{9}$/;
+  if (!telefono) {
+    errors.push("El teléfono es obligatorio.");
+  } else if (!phoneRegex.test(telefono)) {
+    errors.push("El teléfono debe tener 9 dígitos.");
   }
 
   // Si hay errores, redirigir a la página de registro con los errores
@@ -39,7 +50,7 @@ const registerUser  = async (req, res) => {
     const hashedPassword = await bcrypt.hash(contraseña, 10);
 
     // Crear usuario
-    await userModel.createUser ({
+    await userModel.createUser({
       nombre,
       apellido1,
       apellido2,
@@ -52,10 +63,13 @@ const registerUser  = async (req, res) => {
     res.redirect("/login");
   } catch (error) {
     console.error("Error al registrar el usuario:", error);
+    if (error.message === "El correo electrónico ya está registrado.") {
+      return res.redirect(`/register?errors=${encodeURIComponent(JSON.stringify([error.message]))}`);
+    }
 
     // Si el error es que el correo ya está registrado
     if (error.message === "El correo electrónico ya está registrado.") {
-      return res.redirect(`/register?errors=${encodeURIComponent(JSON.stringify([error.message]))}`);
+      return res.status(400).json({ mensaje: error.message });
     }
 
     res.status(500).json({ mensaje: "Error en el servidor" });
@@ -131,8 +145,7 @@ const logoutUser = (req, res) => {
 };
 
 module.exports = {
-  registerUser ,
-  loginUser ,
-  logoutUser ,
-  getRegisterPage,
+  registerUser,
+  loginUser,
+  logoutUser,
 };

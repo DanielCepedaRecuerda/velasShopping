@@ -110,8 +110,6 @@ if (errorMessage) {
     const decodedCartCookie = decodeURIComponent(cartCookie);
     const cartItems = JSON.parse(decodedCartCookie); // Convertir el string JSON en un objeto
 
-    console.log(cartItems); // Mostrar todo el carrito (Array)
-
     // Mostrar la cantidad total de productos:
     let totalQuantity = 0;
     cartItems.forEach((item) => {
@@ -123,12 +121,7 @@ if (errorMessage) {
     if (itemCountElement) {
       itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-";
     }
-
-    console.log("Total de productos en el carrito:", totalQuantity); // Mostrar total
-  } else {
-    console.log("No hay carrito guardado en las cookies.");
-  }
-
+  } 
   // Verificar si la cookie 'user_authenticated' está presente
   const usercookie = getCookie("user_authenticated");
   const divBotonAcceso = document.getElementById("divBotonAcceso");

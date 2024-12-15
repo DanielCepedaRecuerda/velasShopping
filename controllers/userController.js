@@ -1,20 +1,28 @@
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModel");
 
-const registerUser = async (req, res) => {
-  const { nombre, apellido1, apellido2, email, contraseña, telefono } =
-    req.body;
+const registerUser  = async (req, res) => {
+  const { nombre, apellido1, apellido2, email, contraseña, telefono } = req.body;
   const errors = [];
 
   // Validaciones
   // Validar el nombre
   if (!nombre) {
     errors.push("El nombre es obligatorio.");
+  } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre)) {
+    errors.push("El nombre solo puede contener letras y espacios.");
   }
 
   // Validar el primer apellido
   if (!apellido1) {
     errors.push("El primer apellido es obligatorio.");
+  } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellido1)) {
+    errors.push("El primer apellido solo puede contener letras y espacios.");
+  }
+
+  // Validar el segundo apellido (opcional)
+  if (apellido2 && !/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(apellido2)) {
+    errors.push("El segundo apellido solo puede contener letras y espacios.");
   }
 
   // Validar el formato del correo electrónico
@@ -23,6 +31,8 @@ const registerUser = async (req, res) => {
     errors.push("El email es obligatorio.");
   } else if (!emailRegex.test(email)) {
     errors.push("El email es inválido.");
+  } else if (email.toLowerCase().includes("test") || email.toLowerCase().includes("example")) {
+    errors.push("El email no puede ser un correo de prueba.");
   }
 
   // Validar la contraseña
@@ -30,6 +40,10 @@ const registerUser = async (req, res) => {
     errors.push("La contraseña es obligatoria.");
   } else if (contraseña.length < 6) {
     errors.push("La contraseña debe tener al menos 6 caracteres.");
+  } else if (!/[A-Z]/.test(contraseña)) {
+    errors.push("La contraseña debe contener al menos una letra mayúscula.");
+  } else if (!/[0-9]/.test(contraseña)) {
+    errors.push("La contraseña debe contener al menos un número.");
   }
 
   // Validar el teléfono
@@ -43,7 +57,7 @@ const registerUser = async (req, res) => {
   // Si hay errores, redirigir a la página de registro con los errores
   if (errors.length > 0) {
     console.log(errors);
-    console.log("entro por el if de registerUser");
+    console.log("entro por el if de registerUser ");
 
     return res.redirect(
       `/register?errors=${encodeURIComponent(JSON.stringify(errors))}`
@@ -55,7 +69,7 @@ const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(contraseña, 10);
 
     // Crear usuario
-    await userModel.createUser({
+    await userModel.createUser ({
       nombre,
       apellido1,
       apellido2,
@@ -74,11 +88,6 @@ const registerUser = async (req, res) => {
           JSON.stringify([error.message])
         )}`
       );
-    }
-
-    // Si el error es que el correo ya está registrado
-    if (error.message === "El correo electrónico ya está registrado.") {
-      return res.status(400).json({ mensaje: error.message });
     }
 
     res.status(500).json({ mensaje: "Error en el servidor" });

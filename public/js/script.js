@@ -39,6 +39,18 @@ window.onload = function () {
         }
       });
   }
+  // Verificar si hay un mensaje de error en la URL
+const errorMessage = getQueryParam('error');
+if (errorMessage) {
+  const mensajeFlotante = document.getElementById('mensajeFlotante');
+  mensajeFlotante.textContent = decodeURIComponent(errorMessage);
+  mensajeFlotante.classList.add('show'); // Agregar clase para mostrar el mensaje
+
+  // Ocultar el mensaje después de 5 segundos
+  setTimeout(() => {
+      mensajeFlotante.classList.remove('show'); // Remover clase para ocultar
+  }, 5000); // Tiempo en milisegundos
+}
 
   // Verificar si hay errores en la URL
   const errors = getQueryParam("errors");

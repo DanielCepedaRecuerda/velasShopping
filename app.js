@@ -65,9 +65,7 @@ app.get("/contacto", (req, res) => {
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "login.html"));
 });
-app.get("/register", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "register.html"));
-});
+
 app.get("/logout", logoutUser);
 
 // Configurar las rutas
@@ -76,6 +74,7 @@ app.use("/velas", velasRoutes);
 app.use("/cart", cartRoutes);
 app.use("/checkout", checkoutRoutes);
 app.use('/productos', productsRoutes);
+app.use('/register', userRoutes);
 
 // Iniciar servidor
 app.listen(3000, () => {

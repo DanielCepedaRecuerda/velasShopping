@@ -1,15 +1,32 @@
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModel");
 
-const registerUser = async (req, res) => {
-  const { nombre, apellido1, apellido2, email, contraseña, telefono } =
-    req.body;
+const registerUser  = async (req, res) => {
+  const { nombre, apellido1, apellido2, email, contraseña, telefono } = req.body;
   console.log(req.body);
 
-  if (!nombre || !apellido1 || !email || !contraseña || !telefono) {
-    return res
-      .status(400)
-      .json({ mensaje: "Todos los campos son obligatorios" });
+  // Validaciones
+  const errors = [];
+  if (!nombre) errors.push("El nombre es obligatorio.");
+  if (!apellido1) errors.push("El primer apellido es obligatorio.");
+  if (!email) errors.push("El email es obligatorio.");
+  if (!contraseña) errors.push("La contraseña es obligatoria.");
+  if (!telefono) errors.push("El teléfono es obligatorio.");
+
+  // Validar el formato del teléfono (9 dígitos)
+  const phoneRegex = /^\d{9}$/;
+  if (telefono && !phoneRegex.test(telefono)) {
+    errors.push("El teléfono debe tener 9 dígitos.");
+  }
+
+  // Validar la longitud de la contraseña
+  if (contraseña && contraseña.length < 6) {
+    errors.push("La contraseña debe tener al menos 6 caracteres.");
+  }
+
+  // Si hay errores, redirigir a la página de registro con los errores
+  if (errors.length > 0) {
+    return res.redirect(`/register?errors=${encodeURIComponent(JSON.stringify(errors))}`);
   }
 
   try {
@@ -17,7 +34,7 @@ const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(contraseña, 10);
 
     // Crear usuario
-    await userModel.createUser({
+    await userModel.createUser ({
       nombre,
       apellido1,
       apellido2,
@@ -33,7 +50,7 @@ const registerUser = async (req, res) => {
 
     // Si el error es que el correo ya está registrado
     if (error.message === "El correo electrónico ya está registrado.") {
-      return res.status(400).json({ mensaje: error.message });
+      return res.redirect(`/register?errors=${encodeURIComponent(JSON.stringify([error.message]))}`);
     }
 
     res.status(500).json({ mensaje: "Error en el servidor" });

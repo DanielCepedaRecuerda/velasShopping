@@ -6,7 +6,6 @@ const registerUser = async (req, res) => {
     req.body;
   const errors = [];
 
-  // Validaciones
   // Validar el nombre
   if (!nombre) {
     errors.push("El nombre es obligatorio.");
@@ -109,6 +108,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const { email, contraseña } = req.body;
   const errors = [];
+  const formData = {};
   // Validar el formato del correo electrónico
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email) {
@@ -126,9 +126,7 @@ const loginUser = async (req, res) => {
 
   // Si hay errores, redirigir a la página de inicio de sesión con los errores
   if (errors.length > 0) {
-    const formData = {
-      email
-    };
+    formData.email = email;
     return res.redirect(
       `/login?errors=${encodeURIComponent(JSON.stringify(errors))}&data=${encodeURIComponent(JSON.stringify(formData))}`
     );
@@ -146,8 +144,9 @@ const loginUser = async (req, res) => {
     }
 
     if (errors.length > 0) {
+      formData.email = email;
       return res.redirect(
-        `/login?errors=${encodeURIComponent(JSON.stringify(errors))}`
+        `/login?errors=${encodeURIComponent(JSON.stringify(errors))}&data=${encodeURIComponent(JSON.stringify(formData))}`
       );
     }
 

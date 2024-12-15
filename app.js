@@ -7,7 +7,7 @@ const cartRoutes = require("./routes/cartRoutes");
 const velasRoutes = require("./routes/velasRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const checkoutRoutes = require("./routes/checkoutRoutes");
-const productRoutes = require('./routes/productRoutes'); // Asegúrate de que la ruta sea correcta
+const productsRoutes = require('./routes/productsRoutes'); // Asegúrate de que la ruta sea correcta
 
 
 const { logoutUser } = require("./controllers/userController");
@@ -75,7 +75,7 @@ app.use("/api/contact", contactRoutes);
 app.use("/velas", velasRoutes);
 app.use("/cart", cartRoutes);
 app.use("/checkout", checkoutRoutes);
-app.use('/productos', productRoutes);
+app.use('/productos', productsRoutes);
 
 // Iniciar servidor
 app.listen(3000, () => {

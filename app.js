@@ -2,21 +2,17 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
-const userRoutes = require("./routes/userRoutes"); // Ruta de los controladores
-const cartRoutes = require("./routes/cartRoutes");
-const velasRoutes = require("./routes/velasRoutes");
-const contactRoutes = require("./routes/contactRoutes");
-const checkoutRoutes = require("./routes/checkoutRoutes");
-const productsRoutes = require('./routes/productsRoutes'); // Asegúrate de que la ruta sea correcta
-
-
+const authRoutes = require("./routes/authRoutes"); // Ruta de los controladores
+const cartRoutes = require('./routes/cartRoutes');
+const velasRoutes = require('./routes/velasRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 const { logoutUser } = require("./controllers/userController");
 const path = require("path");
-const cookieParser = require("cookie-parser");
+const cookieParser = require('cookie-parser');
 
 const app = express();
 app.use(cookieParser());
-console.log("Servidor iniciado");
+console.log('Servidor iniciado');
 // Configurar EJS como motor de plantillas
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -26,15 +22,16 @@ const cors = require("cors");
 // Configuración del middleware express-session
 app.use(
   session({
-    secret: "Velashopping2024",
+    secret: 'yourSecretKey',
     resave: false,
     saveUninitialized: true,
     cookie: {
-      httpOnly: true, // Esto protege la cookie de ser accesible desde JavaScript
-      secure: process.env.NODE_ENV === "production", // Usar "secure" en producción (HTTPS)
+      httpOnly: true,  // Esto protege la cookie de ser accesible desde JavaScript
+      secure: process.env.NODE_ENV === 'production', // Usar "secure" en producción (HTTPS)
     },
   })
 );
+
 
 // Configuración de middleware
 app.use(cors());
@@ -50,12 +47,17 @@ app.use((req, res, next) => {
   next();
 });
 
+
 // Usar las rutas
-app.use("/", userRoutes); // Hacer que todas las rutas empiecen con /
+app.use("/", authRoutes); // Hacer que todas las rutas empiecen con /
 
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));
+});
+
+app.get("/productos", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "productos.html"));
 });
 
 app.get("/contacto", (req, res) => {
@@ -71,11 +73,9 @@ app.get("/register", (req, res) => {
 app.get("/logout", logoutUser);
 
 // Configurar las rutas
-app.use("/api/contact", contactRoutes);
-app.use("/velas", velasRoutes);
-app.use("/cart", cartRoutes);
-app.use("/checkout", checkoutRoutes);
-app.use('/productos', productsRoutes);
+app.use('/api/contact', contactRoutes);
+app.use('/velas', velasRoutes);
+app.use('/cart', cartRoutes);
 
 // Iniciar servidor
 app.listen(3000, () => {

@@ -6,6 +6,7 @@ const userRoutes = require("./routes/userRoutes"); // Ruta de los controladores
 const cartRoutes = require('./routes/cartRoutes');
 const velasRoutes = require('./routes/velasRoutes');
 const contactRoutes = require('./routes/contactRoutes');
+const productsRoutes = require('./routes/productsRoutes');
 const { logoutUser } = require("./controllers/userController");
 const path = require("path");
 const cookieParser = require('cookie-parser');
@@ -60,9 +61,7 @@ app.get("/productos", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "productos.html"));
 });
 
-app.get("/contacto", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "contacto.html"));
-});
+
 
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "login.html"));
@@ -76,6 +75,7 @@ app.get("/logout", logoutUser);
 app.use('/api/contact', contactRoutes);
 app.use('/velas', velasRoutes);
 app.use('/cart', cartRoutes);
+app.use('/productos', productsRoutes);
 
 // Iniciar servidor
 app.listen(3000, () => {

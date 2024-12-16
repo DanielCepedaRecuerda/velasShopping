@@ -50,6 +50,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// Usar las rutas
+app.use("/", userRoutes); // Hacer que todas las rutas empiecen con /
+
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));
@@ -68,7 +71,6 @@ app.get("/register", (req, res) => {
 app.get("/logout", logoutUser);
 
 // Configurar las rutas
-app.use("/", userRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/velas", velasRoutes);
 app.use("/cart", cartRoutes);

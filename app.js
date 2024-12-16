@@ -57,12 +57,6 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
-app.get("/productos", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "productos.html"));
-});
-
-
-
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "login.html"));
 });

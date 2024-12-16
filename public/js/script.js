@@ -46,7 +46,10 @@ window.onload = function () {
     // Mostrar el mensaje
     document.getElementById("mensaje").innerHTML = mensaje;
     mensajeFlotante.textContent = decodeURIComponent(mensaje);
-    
+    mensajeFlotante.classList.add("show");
+    setTimeout(() => {
+      mensajeFlotante.classList.remove("show");
+    }, 3000);
   }
   
   // Verificar si hay un mensaje de error en la URL

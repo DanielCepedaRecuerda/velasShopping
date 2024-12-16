@@ -88,7 +88,7 @@ const registerUser = async (req, res) => {
       contraseña: hashedPassword,
       telefono,
     });
-  // Almacenar el mensaje de éxito en la sesión
+// Almacenar el mensaje de éxito en la sesión
   req.session.successMessage = "Registro exitoso. Bienvenido!";
 
     // Redirigir al login

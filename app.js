@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
-const authRoutes = require("./routes/authRoutes"); // Ruta de los controladores
+const userRoutes = require("./routes/userRoutes"); // Ruta de los controladores
 const cartRoutes = require('./routes/cartRoutes');
 const velasRoutes = require('./routes/velasRoutes');
 const contactRoutes = require('./routes/contactRoutes');
@@ -49,7 +49,7 @@ app.use((req, res, next) => {
 
 
 // Usar las rutas
-app.use("/", authRoutes); // Hacer que todas las rutas empiecen con /
+app.use("/", userRoutes); // Hacer que todas las rutas empiecen con /
 
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {

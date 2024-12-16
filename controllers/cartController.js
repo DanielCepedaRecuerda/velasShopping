@@ -9,11 +9,10 @@ const getCart = (req, res) => {
 
 const addToCart = async (req, res) => {
   try {
-    const { productId, quantity } = req.body;
+    const { productId, quantity, redirectUrl } = req.body;
     const parsedQuantity = Number(quantity);
-
     if (isNaN(parsedQuantity) || parsedQuantity <= 0) {
-      return res.status(400).json({ error: "Cantidad inválida." });
+      return res.redirect(`/productos?error=${encodeURIComponent("Cantidad inválida.")}`);
     }
 
     // Obtener el producto de la base de datos
@@ -51,11 +50,10 @@ const addToCart = async (req, res) => {
     });
 
     // Redirigir a la página de productos
-    res.redirect("/productos");
+    res.redirect(redirectUrl);
   } catch (err) {
     console.error("Error en addToCart:", err);
     res.status(500).json({ error: "Error al verificar el producto." });
-    res.redirect("/productos");
   }
 };
 

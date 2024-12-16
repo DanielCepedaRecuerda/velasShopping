@@ -7,7 +7,7 @@ package.json
 .accessoBBDD
 .env*.local
 
-
+.vercel
 
 mysql -h velasshopping.c94kw4uiss1b.eu-west-2.rds.amazonaws.com -P 3306 -u velasShoping -p
 velasShoping2024

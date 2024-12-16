@@ -1,6 +1,6 @@
 const velasModel = require('../models/velasModel');
 
-const getVelasByCategoria = async (req, res) => {
+const getVelasByCategoria = async (req, res, redirectUrl) => { // Agregamos redirectUrl como parámetro
   const categoria = req.params.categoria;  // Esto obtiene el parámetro de la URL
   try {
     // Consultar las velas de acuerdo a la categoría obtenida
@@ -11,7 +11,7 @@ const getVelasByCategoria = async (req, res) => {
     }
 
     // Si la categoría es válida, renderizamos la vista correspondiente
-    res.render(categoria, { velas, categoria });
+    res.render(categoria, { velas, categoria, redirectUrl });
   } catch (error) {
     console.error("Error al obtener las velas: ", error);
     res.status(500).send('Hubo un error al obtener las velas.');

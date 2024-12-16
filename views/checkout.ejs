@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carrito de Compras</title>
+    <title>Checkout - Velas Shopping</title>
     <link rel="stylesheet" href="/css/styles.css" />
     <link
       rel="shortcut icon"
@@ -26,15 +26,15 @@
         </ul>
       </nav>
       <div class="divBotonAcceso" id="divBotonAcceso">
-        <a href="/login"
-          ><button id="botonAcceso" class="botonAcceso">
+        <a href="/login">
+          <button id="botonAcceso" class="botonAcceso">
             Acceso / Registro
           </button>
         </a>
       </div>
       <div class="divBotonLogout" id="divBotonLogout">
-        <a href="/logout"
-          ><button id="botonLogout" class="botonAcceso">Cerrar Sesión</button>
+        <a href="/logout">
+          <button id="botonLogout" class="botonAcceso">Cerrar Sesión</button>
         </a>
       </div>
       <div class="social-links">
@@ -43,9 +43,10 @@
       </div>
     </header>
 
-    <h1 class="tituloTabCart">Carrito de Compras</h1>
+    <h1 class="tituloTabCart">Checkout</h1>
 
     <% if (cart && cart.length > 0) { %>
+    <h2 class="form-h2">Resumen de tu pedido</h2>
     <table>
       <thead>
         <tr>
@@ -53,13 +54,11 @@
           <th>Cantidad</th>
           <th>Precio</th>
           <th>Total</th>
-          <th>Eliminar</th>
         </tr>
       </thead>
       <tbody>
         <% cart.forEach(item => { %>
-        <tr class="product-row" data-product-id="<%= item.productId %>">
-          <!-- Agregar la clase y el atributo -->
+        <tr>
           <td><%= item.name %></td>
           <td><%= item.quantity %></td>
           <td>
@@ -67,11 +66,6 @@
             %>€
           </td>
           <td><%= (item.quantity * item.price).toFixed(2) %>€</td>
-          <td>
-            <button class="remove-btn" data-product-id="<%= item.productId %>">
-              Eliminar
-            </button>
-          </td>
         </tr>
         <% }); %>
       </tbody>
@@ -82,10 +76,32 @@
       0).toFixed(2) %>€
     </h3>
 
-    <div class="divButtons-Cart">
-      <a href="/productos">Seguir comprando</a>
-      <a href="/checkout">Ir a pagar</a>
-    </div>
+    <h2 class="form-h2">Información de envío</h2>
+    <form action="/process-checkout" method="POST" class="form">
+      <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required />
+
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" required />
+
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" id="ciudad" name="ciudad" required />
+
+        <label for="codigoPostal">Código Postal:</label>
+        <input type="text" id="codigoPostal" name="codigoPostal" required />
+
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" required />
+      </div>
+
+      <button type="submit">Confirmar Pedido</button>
+    </form>
+    <% } else { %>
+    <p>Tu carrito está vacío. No puedes proceder al checkout.</p>
+    <a href="/productos">Volver a la tienda</a>
+    <% } %>
+
     <!-- Botón flotante de carrito -->
     <a href="/cart" class="floating-cart" id="floating-cart">
       <div class="cart-icon">
@@ -98,15 +114,7 @@
         <!-- Muestra el número de productos en el carrito -->
       </div>
     </a>
-    <% } else { %>
-    <form class="form">
-      <div>
-        <p class="form-h2">Tu carrito está vacío.</p>
-      </div>
-      <a href="/productos">Volver a la tienda</a>
-    </form>
 
-    <% } %>
     <script src="/js/script.js" defer></script>
   </body>
 </html>

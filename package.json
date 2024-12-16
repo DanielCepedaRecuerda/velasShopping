@@ -6,17 +6,17 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "ejs": "^3.1.6",
-    "nodemailer": "^6.7.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "ejs": "^3.1.6",
     "express": "^4.21.1",
     "express-session": "^1.18.1",
     "iconv-lite": "^0.6.3",
     "mi-aplicacion": "file:",
-    "mysql2": "^3.11.4"
+    "mysql2": "^3.11.4",
+    "nodemailer": "^6.7.0"
   }
 }

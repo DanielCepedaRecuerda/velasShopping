@@ -32,19 +32,22 @@
     </header>
 
     <main>
+      <div class="mensaje-flotante" id="mensajeFlotante"></div>
+
       <h2 class="form-h2">Iniciar Sesión</h2>
-      <form id="loginForm" class="form" method="POST" action="/api/login">
+      <form class="form" id="login-form" method="POST" action="/login">
         <div>
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" required />
+          <div class="error-message" id="email-error"></div>
         </div>
         <div>
           <label for="contraseña">Contraseña:</label>
-          <input type="current-password" id="contraseña" name="contraseña" required />
+          <input type="password" id="contraseña" name="contraseña" required />
+          <div class="error-message" id="password-error"></div>
         </div>
         <button type="submit">Iniciar sesión</button>
       </form>
-      
 
       <form class="form">
         <a href="" class="aForm">¿Has olvidado la contraseña?</a>
@@ -54,8 +57,13 @@
       <!-- Botón flotante de carrito -->
       <a href="/cart" class="floating-cart" id="floating-cart">
         <div class="cart-icon">
-          <img src="/images/iconoPágina.jpg" alt="Vela del carrito" class="velaCarrito">
-          <span class="item-count" id="item-count">-</span> <!-- Muestra el número de productos en el carrito -->
+          <img
+            src="/images/iconoPágina.jpg"
+            alt="Vela del carrito"
+            class="velaCarrito"
+          />
+          <span class="item-count" id="item-count">-</span>
+          <!-- Muestra el número de productos en el carrito -->
         </div>
       </a>
     </main>

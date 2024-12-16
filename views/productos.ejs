@@ -34,9 +34,7 @@
       </div>
       <div class="divBotonLogout" id="divBotonLogout">
         <a href="/logout"
-          ><button id="botonLogout" class="botonAcceso">
-            Cerrar Sesión
-          </button>
+          ><button id="botonLogout" class="botonAcceso">Cerrar Sesión</button>
         </a>
       </div>
       <div class="social-links">
@@ -46,6 +44,7 @@
     </header>
 
     <main>
+      <div class="mensaje-flotante" id="mensajeFlotante"></div>
       <section class="product-grid">
         <article class="product">
           <img src="./images/imagen_vela_aromatica.jpg" alt="Vela Aromática" />
@@ -53,8 +52,10 @@
           <p>Aroma de lavanda, ideal para relajarse.</p>
           <span class="price">10.00€</span>
           <form action="/cart" method="POST">
-            <input type="hidden" name="productId" value="10">  <!-- id del producto (buscar forma de recuperar primero el id de la BBBDD)-->
-            <input type="number" name="quantity" value="1" min="1">
+            <input type="hidden" name="productId" value="10" />
+            <!-- id del producto (buscar forma de recuperar primero el id de la BBBDD)-->
+            <input type="number" name="quantity" value="1" min="1" />
+          <input type="hidden" name="redirectUrl" value="/productos"/>
             <button type="submit">Agregar al carrito</button>
           </form>
         </article>
@@ -64,19 +65,26 @@
           <p>Hecha con cera natural, sin tóxicos.</p>
           <span class="price">12.00€</span>
           <form action="/cart" method="POST">
-            <input type="hidden" name="productId" value="11">  <!-- id del producto -->
-            <input type="number" name="quantity" value="1" min="1">
+            <input type="hidden" name="productId" value="11" />
+            <!-- id del producto -->
+            <input type="number" name="quantity" value="1" min="1" />
+           <input type="hidden" name="redirectUrl" value="/productos"/>
             <button type="submit">Agregar al carrito</button>
           </form>
         </article>
         <article class="product">
-          <img src="./images/imagen_vela_cera_abeja.jpg" alt="Vela de Cera de Abeja" />
+          <img
+            src="./images/imagen_vela_cera_abeja.jpg"
+            alt="Vela de Cera de Abeja"
+          />
           <h2>Vela de Cera de Abeja</h2>
           <p>Proporciona una luz cálida y natural.</p>
           <span class="price">15.00€</span>
           <form action="/cart" method="POST">
-            <input type="hidden" name="productId" value="12">  <!-- id del producto -->
-            <input type="number" name="quantity" value="1" min="1">
+            <input type="hidden" name="productId" value="12" />
+            <!-- id del producto -->
+            <input type="number" name="quantity" value="1" min="1" />
+           <input type="hidden" name="redirectUrl" value="/productos"/>
             <button type="submit">Agregar al carrito</button>
           </form>
         </article>
@@ -86,63 +94,89 @@
           <p>Perfecta para decoraciones en el agua.</p>
           <span class="price">8.00€</span>
           <form action="/cart" method="POST">
-            <input type="hidden" name="productId" value="13">  <!-- id del producto -->
-            <input type="number" name="quantity" value="1" min="1">
+            <input type="hidden" name="productId" value="13" />
+            <!-- id del producto -->
+            <input type="number" name="quantity" value="1" min="1" />
+           <input type="hidden" name="redirectUrl" value="/productos"/>
             <button type="submit">Agregar al carrito</button>
           </form>
         </article>
         <article class="product">
-          <img src="./images/imagen_vela_decorativa.jpg" alt="Vela Decorativa" />
+          <img
+            src="./images/imagen_vela_decorativa.jpg"
+            alt="Vela Decorativa"
+          />
           <h2>Vela Decorativa</h2>
           <p>Diseños únicos temáticos.</p>
           <span class="price">20.00€</span>
           <form action="/cart" method="POST">
-            <input type="hidden" name="productId" value="14">  <!-- id del producto -->
-            <input type="number" name="quantity" value="1" min="1">
+            <input type="hidden" name="productId" value="14" />
+            <!-- id del producto -->
+            <input type="number" name="quantity" value="1" min="1" />
+           <input type="hidden" name="redirectUrl" value="/productos"/>
             <button type="submit">Agregar al carrito</button>
           </form>
         </article>
         <article class="product">
-          <img src="./images/imagen_vela_aromatica_cafe.jpg" alt="Vela Aromática de Café" />
+          <img
+            src="./images/imagen_vela_aromatica_cafe.jpg"
+            alt="Vela Aromática de Café"
+          />
           <h2>Vela Aromática de Café</h2>
           <p>Un aroma delicioso que te despierta.</p>
           <span class="price">14.00€</span>
           <form action="/cart" method="POST">
-            <input type="hidden" name="productId" value="15">  <!-- id del producto -->
-            <input type="number" name="quantity" value="1" min="1">
+            <input type="hidden" name="productId" value="15" />
+            <!-- id del producto -->
+            <input type="number" name="quantity" value="1" min="1" />
+           <input type="hidden" name="redirectUrl" value="/productos"/>
             <button type="submit">Agregar al carrito</button>
           </form>
         </article>
         <article class="product">
-          <img src="./images/imagen_vela_decorativa_navidad.jpg" alt="Vela decorativa de navidades" />
+          <img
+            src="./images/imagen_vela_decorativa_navidad.jpg"
+            alt="Vela decorativa de navidades"
+          />
           <h2>Vela decorativa de navidades</h2>
           <p></p>
           <span class="price">14.00€</span>
           <form action="/cart" method="POST">
-            <input type="hidden" name="productId" value="16">  <!-- id del producto -->
-            <input type="number" name="quantity" value="1" min="1">
+            <input type="hidden" name="productId" value="16" />
+            <!-- id del producto -->
+            <input type="number" name="quantity" value="1" min="1" />
+           <input type="hidden" name="redirectUrl" value="/productos"/>
             <button type="submit">Agregar al carrito</button>
           </form>
         </article>
         <article class="product">
-          <img src="./images/imagen_vela_decorativa_san_valentin.jpg" alt="Vela decorativa de San Valentin" />
+          <img
+            src="./images/imagen_vela_decorativa_san_valentin.jpg"
+            alt="Vela decorativa de San Valentin"
+          />
           <h2>Vela decorativa de San Valentín</h2>
           <p></p>
           <span class="price">10.00€</span>
           <form action="/cart" method="POST">
-            <input type="hidden" name="productId" value="17">  <!-- id del producto -->
-            <input type="number" name="quantity" value="1" min="1">
+            <input type="hidden" name="productId" value="17" />
+            <!-- id del producto -->
+            <input type="number" name="quantity" value="1" min="1" />
+          <input type="hidden" name="redirectUrl" value="/productos"/>
             <button type="submit">Agregar al carrito</button>
           </form>
         </article>
         <article class="product">
-          <img src="./images/imagen_vela_decorativa_rosa.jpg" alt="Vela decorativa con forma de rosa" />
+          <img
+            src="./images/imagen_vela_decorativa_rosa.jpg"
+            alt="Vela decorativa con forma de rosa"
+          />
           <h2>Vela decorativa con forma de rosa</h2>
           <p></p>
           <span class="price">14.00€</span>
           <form action="/cart" method="POST">
-            <input type="hidden" name="productId" value="18">
-            <input type="number" name="quantity" value="1" min="1">
+            <input type="hidden" name="productId" value="18" />
+            <input type="number" name="quantity" value="1" min="1" />
+          <input type="hidden" name="redirectUrl" value="/productos"/>
             <button type="submit">Agregar al carrito</button>
           </form>
         </article>
@@ -150,8 +184,12 @@
       <!-- Botón flotante de carrito -->
       <a href="/cart" class="floating-cart" id="floating-cart">
         <div class="cart-icon">
-          <img src="/images/iconoPágina.jpg" alt="Vela del carrito" class="velaCarrito">
-          <span class="item-count" id="item-count">-</span> 
+          <img
+            src="/images/iconoPágina.jpg"
+            alt="Vela del carrito"
+            class="velaCarrito"
+          />
+          <span class="item-count" id="item-count">-</span>
         </div>
       </a>
     </main>

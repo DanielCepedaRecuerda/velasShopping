@@ -39,6 +39,16 @@ window.onload = function () {
         }
       });
   }
+  // Verificar si hay un mensaje en la URL
+  const mensaje = getQueryParam("mensaje");
+  if (mensaje) {
+    const mensajeFlotante = document.getElementById("mensajeFlotante");
+    // Mostrar el mensaje
+    document.getElementById("mensaje").innerHTML = mensaje;
+    mensajeFlotante.textContent = decodeURIComponent(mensaje);
+    
+  }
+  
   // Verificar si hay un mensaje de error en la URL
   const errorMessage = getQueryParam("error");
   if (errorMessage) {

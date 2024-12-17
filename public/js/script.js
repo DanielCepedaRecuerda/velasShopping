@@ -204,6 +204,7 @@ window.onload = function () {
       })
         .then((response) => response.json()) // Convertimos la respuesta en JSON
         .then((updatedCart) => {
+          console.log(updatedCart)
           location.reload(); // Recargar la página
         })
         .catch((error) => {

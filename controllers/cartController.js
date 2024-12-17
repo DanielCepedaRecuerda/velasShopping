@@ -76,7 +76,7 @@ const removeFromCart = (req, res) => {
       secure: process.env.NODE_ENV === 'production',
       sameSite: "strict",
   });
-
+console.log(cart);
   res.status(200).json(updatedCart);
 };
 

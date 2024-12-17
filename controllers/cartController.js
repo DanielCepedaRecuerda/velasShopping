@@ -3,7 +3,6 @@ const productsModel = require("../models/productsModel");
 const getCart = (req, res) => {
   const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
   console.log('Contenido de la cookie cart:', req.cookies.cart);
-  console.log('Cart:', cart);
   res.render('cart', { cart });
 };
 
@@ -76,7 +75,7 @@ const removeFromCart = (req, res) => {
       secure: process.env.NODE_ENV === 'production',
       sameSite: "strict",
   });
-console.log(cart);
+  console.log(updatedCart);
   res.status(200).json(updatedCart);
 };
 

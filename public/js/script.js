@@ -205,9 +205,14 @@ window.onload = function () {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => response.json()) // Convertimos la respuesta en JSON
-        .then((updatedCart) => {
-          console.log(updatedCart)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al eliminar el producto");
+        }
+        return response.json(); // Convertimos la respuesta en JSON
+      })
+      .then((updatedCart) => {
+        console.log("Carrito actualizado:", updatedCart);
           // Actualizar el contador de artículos
         const totalQuantity = updatedCart.reduce((total, item) => total + item.quantity, 0);
         const itemCountElement = document.getElementById("item-count");

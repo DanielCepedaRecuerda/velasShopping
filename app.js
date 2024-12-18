@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./routes/userRoutes"); // Ruta de los controladores
 const cartRoutes = require('./routes/cartRoutes');
 const velasRoutes = require('./routes/velasRoutes');
-const contactRoutes = require('./routes/contactRoutes');
 const checkoutRoutes = require('./routes/checkoutRoutes'); // Asegúrate de que la ruta sea correcta
 const productsRoutes = require('./routes/productsRoutes');
 const { logoutUser } = require("./controllers/userController");
@@ -65,7 +64,7 @@ app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "register.html"));
 });
 router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../views', 'contactForm.html')); // Asegúrate de que la ruta sea correcta
+  res.sendFile(path.join(__dirname, '../views', 'contacto.html')); // Asegúrate de que la ruta sea correcta
 });
 app.get("/logout", logoutUser);
 

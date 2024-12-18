@@ -32,7 +32,6 @@ app.use(
   })
 );
 
-
 // Configuración de middleware
 app.use(cors());
 app.use(bodyParser.json()); // Para recibir datos JSON
@@ -64,7 +63,7 @@ app.use("/", userRoutes); // Hacer que todas las rutas empiecen con /
 app.use('/velas', velasRoutes);
 app.use('/cart', cartRoutes);
 app.use('/productos', productsRoutes);
-app.use('/checkout', checkoutRoutes);
+app.use('/', checkoutRoutes);
 
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {

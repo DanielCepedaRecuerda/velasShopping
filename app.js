@@ -67,7 +67,7 @@ app.get("/register", (req, res) => {
 app.get("/logout", logoutUser);
 
 // Configurar las rutas
-app.use('/api/contact', contactRoutes);
+app.use('/contact', contactRoutes);
 app.use('/velas', velasRoutes);
 app.use('/cart', cartRoutes);
 app.use('/productos', productsRoutes);

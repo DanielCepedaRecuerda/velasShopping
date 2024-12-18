@@ -10,7 +10,6 @@ const productsRoutes = require('./routes/productsRoutes');
 const { logoutUser } = require("./controllers/userController");
 const path = require("path");
 const cookieParser = require('cookie-parser');
-const contactRoutes = require('./routes/contactRoutes'); // Asegúrate de importar las rutas de contacto
 
 const app = express();
 app.use(cookieParser());
@@ -56,20 +55,20 @@ app.use('/velas', velasRoutes);
 app.use('/cart', cartRoutes);
 app.use('/productos', productsRoutes);
 app.use('/', checkoutRoutes);
-app.use('/contacto', contactRoutes);
 
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));
 });
-
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "login.html"));
 });
 app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "register.html"));
 });
-
+app.get('/contacto', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'contacto.html')); // Asegúrate de que la ruta sea correcta
+});
 app.get("/logout", logoutUser);
 
 

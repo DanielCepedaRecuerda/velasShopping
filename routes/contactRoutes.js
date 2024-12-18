@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const contactController = require('../controllers/contactController');
+const path = require('path');
 
 // Ruta GET para mostrar el formulario de contacto
 router.get('/', (req, res) => {

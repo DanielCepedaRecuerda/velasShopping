@@ -136,8 +136,6 @@ window.onload = function () {
   const cartCookie = getCookie("cart");
   const carritoElement = document.getElementById("floating-cart");
 
-  
-
   if (cartCookie) {
     // Si la cookie existe, parseamos su contenido (que es un JSON)
     const decodedCartCookie = decodeURIComponent(cartCookie);
@@ -196,6 +194,10 @@ window.onload = function () {
         .then((response) => response.json()) // Convertimos la respuesta en JSON
         .then((updatedCart) => {
           console.log(updatedCart)
+          // Actualizar el contador de artículos
+        const totalQuantity = updatedCart.reduce((total, item) => total + item.quantity, 0);
+        const itemCountElement = document.getElementById("item-count");
+        itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-"; // Muestra "-" si no hay artículos
           location.reload(); // Recargar la página
         })
         .catch((error) => {

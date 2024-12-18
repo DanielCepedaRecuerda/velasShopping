@@ -64,7 +64,7 @@ app.use("/", userRoutes); // Hacer que todas las rutas empiecen con /
 app.use('/velas', velasRoutes);
 app.use('/cart', cartRoutes);
 app.use('/productos', productsRoutes);
-app.use('/', checkoutRoutes);
+app.use('/checkout', checkoutRoutes);
 
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {

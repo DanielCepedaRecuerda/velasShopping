@@ -134,18 +134,16 @@ window.onload = function () {
 
   // Verificar si la cookie del carrito existe
   const cartCookie = getCookie("cart");
-  const carritoElement = document.getElementById("floating-cart");
   console.log("Contenido de la cookie 'cart':", cartCookie); // Verifica el contenido de la cookie
 
-  
   if (cartCookie) {
     const decodedCartCookie = decodeURIComponent(cartCookie);
     let cartItems = [];
     try {
-        cartItems = JSON.parse(decodedCartCookie);
-        console.log("Artículos en el carrito:", cartItems)
+      cartItems = JSON.parse(decodedCartCookie);
+      console.log("Artículos en el carrito:", cartItems); // Verifica los artículos en el carrito
     } catch (e) {
-        console.error("Error al parsear la cookie del carrito:", e);
+      console.error("Error al parsear la cookie del carrito:", e);
     }
 
     // Mostrar la cantidad total de productos:
@@ -153,19 +151,21 @@ window.onload = function () {
     cartItems.forEach((item) => {
       totalQuantity += item.quantity; // Sumar las cantidades
     });
+
     console.log("Cantidad total de productos:", totalQuantity); // Verifica la cantidad total
 
     // Mostrar la cantidad total
     const itemCountElement = document.getElementById("item-count");
     if (itemCountElement) {
-      itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-";
+      itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "0"; // Mostrar la cantidad total o "0"
     }
-    } else {
-      const itemCountElement = document.getElementById("item-count");
-      if (itemCountElement) {
-        itemCountElement.textContent = "0";
-      }
+  } else {
+    // Si no hay cookie, mostrar 0
+    const itemCountElement = document.getElementById("item-count");
+    if (itemCountElement) {
+      itemCountElement.textContent = "0"; // Mostrar 0 si no hay artículos
     }
+  }
   
   // Verificar si la cookie 'user_authenticated' está presente
   const usercookie = getCookie("user_authenticated");

@@ -63,9 +63,11 @@ const removeFromCart = (req, res) => {
   if (!cart || cart.length === 0) {
       return res.status(400).json({ error: "El carrito está vacío." });
   }
-
+  console.log("cart antes de eliminar",cart);
+  
   const updatedCart = cart.filter((item) => item.productId !== Number(productId));
 
+  console.log("cart después de eliminar",cart);
   if (updatedCart.length === cart.length) {
       return res.status(404).json({ error: "Producto no encontrado en el carrito." });
   }

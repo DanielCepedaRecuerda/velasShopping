@@ -143,6 +143,7 @@ window.onload = function () {
     let cartItems = [];
     try {
         cartItems = JSON.parse(decodedCartCookie);
+        console.log("Artículos en el carrito:", cartItems)
     } catch (e) {
         console.error("Error al parsear la cookie del carrito:", e);
     }
@@ -160,10 +161,9 @@ window.onload = function () {
       itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-";
     }
     } else {
-      // Si no hay cookie, mostrar 0 o "-"
       const itemCountElement = document.getElementById("item-count");
       if (itemCountElement) {
-        itemCountElement.textContent = "-"; // O 0, según tu preferencia
+        itemCountElement.textContent = "0";
       }
     }
   

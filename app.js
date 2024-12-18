@@ -13,7 +13,6 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 app.use(cookieParser());
-console.log('Servidor iniciado');
 // Configurar EJS como motor de plantillas
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));

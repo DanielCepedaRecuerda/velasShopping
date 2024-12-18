@@ -2,7 +2,6 @@ const productsModel = require("../models/productsModel");
 
 const getCart = (req, res) => {
   const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-  console.log('Contenido de la cookie cart:', req.cookies.cart);
   res.render('cart', { cart });
 };
 

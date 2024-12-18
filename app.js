@@ -64,10 +64,12 @@ app.get("/login", (req, res) => {
 app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "register.html"));
 });
+router.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views', 'contactForm.html')); // Asegúrate de que la ruta sea correcta
+});
 app.get("/logout", logoutUser);
 
 // Configurar las rutas
-app.use('/contacto', contactRoutes);
 app.use('/velas', velasRoutes);
 app.use('/cart', cartRoutes);
 app.use('/productos', productsRoutes);

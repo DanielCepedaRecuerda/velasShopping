@@ -10,6 +10,7 @@ const productsRoutes = require('./routes/productsRoutes');
 const { logoutUser } = require("./controllers/userController");
 const path = require("path");
 const cookieParser = require('cookie-parser');
+const contactRoutes = require('./routes/contactRoutes'); // Asegúrate de importar las rutas de contacto
 
 const app = express();
 app.use(cookieParser());
@@ -51,6 +52,11 @@ app.use((req, res, next) => {
 
 // Usar las rutas
 app.use("/", userRoutes); // Hacer que todas las rutas empiecen con /
+app.use('/velas', velasRoutes);
+app.use('/cart', cartRoutes);
+app.use('/productos', productsRoutes);
+app.use('/', checkoutRoutes);
+app.use('/contacto', contactRoutes);
 
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {
@@ -63,16 +69,10 @@ app.get("/login", (req, res) => {
 app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "register.html"));
 });
-router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../views', 'contacto.html')); // Asegúrate de que la ruta sea correcta
-});
+
 app.get("/logout", logoutUser);
 
-// Configurar las rutas
-app.use('/velas', velasRoutes);
-app.use('/cart', cartRoutes);
-app.use('/productos', productsRoutes);
-app.use('/', checkoutRoutes);
+
 
 // Iniciar servidor
 app.listen(3000, () => {

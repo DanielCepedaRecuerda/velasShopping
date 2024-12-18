@@ -58,7 +58,7 @@ const addToCart = async (req, res) => {
 const removeFromCart = (req, res) => {
   const productId = req.params.productId;
   let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-
+  console.log("Contenido de la cookie 'cart' antes de eliminar:", cart);
   if (!cart || cart.length === 0) {
       return res.status(400).json({ error: "El carrito está vacío." });
   }
@@ -74,6 +74,7 @@ const removeFromCart = (req, res) => {
       secure: process.env.NODE_ENV === 'production',
       sameSite: "strict",
   });
+  console.log("Cookie 'cart' actualizada:", JSON.stringify(updatedCart));
   res.status(200).json(updatedCart);
 };
 

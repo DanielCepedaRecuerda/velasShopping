@@ -135,6 +135,7 @@ window.onload = function () {
   // Verificar si la cookie del carrito existe
   const cartCookie = getCookie("cart");
   const carritoElement = document.getElementById("floating-cart");
+  console.log("Contenido de la cookie 'cart':", cartCookie); // Verifica el contenido de la cookie
 
   
   if (cartCookie) {
@@ -151,7 +152,8 @@ window.onload = function () {
     cartItems.forEach((item) => {
       totalQuantity += item.quantity; // Sumar las cantidades
     });
-  
+    console.log("Cantidad total de productos:", totalQuantity); // Verifica la cantidad total
+
     // Mostrar la cantidad total
     const itemCountElement = document.getElementById("item-count");
     if (itemCountElement) {

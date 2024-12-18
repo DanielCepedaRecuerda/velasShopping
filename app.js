@@ -38,6 +38,17 @@ app.use(cors());
 app.use(bodyParser.json()); // Para recibir datos JSON
 app.use(bodyParser.urlencoded({ extended: true })); // Para manejar formularios
 
+// Middleware de autenticación
+const isAuthenticated = (req, res, next) => {
+  if (req.session.user) {
+    next(); // El usuario está autenticado, continuar
+  } else {
+    res.redirect('/login'); // Redirigir a la página de inicio de sesión
+  }
+};
+
+// Usar el middleware en la ruta de checkout
+router.get('/checkout', isAuthenticated, checkoutController.showCheckout);
 // Configuración de las rutas estáticas (Imágenes, CSS, JS)
 app.use(express.static(path.join(__dirname, "public")));
 // Middelware para pasar datos de la sesión a las vistas

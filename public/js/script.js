@@ -134,14 +134,12 @@ window.onload = function () {
 
   // Verificar si la cookie del carrito existe
   const cartCookie = getCookie("cart");
-  console.log("Contenido de la cookie 'cart':", cartCookie); // Verifica el contenido de la cookie
 
   if (cartCookie) {
     const decodedCartCookie = decodeURIComponent(cartCookie);
     let cartItems = [];
     try {
       cartItems = JSON.parse(decodedCartCookie);
-      console.log("Artículos en el carrito:", cartItems); // Verifica los artículos en el carrito
     } catch (e) {
       console.error("Error al parsear la cookie del carrito:", e);
     }
@@ -151,8 +149,6 @@ window.onload = function () {
     cartItems.forEach((item) => {
       totalQuantity += item.quantity; // Sumar las cantidades
     });
-
-    console.log("Cantidad total de productos:", totalQuantity); // Verifica la cantidad total
 
     // Mostrar la cantidad total
     const itemCountElement = document.getElementById("item-count");
@@ -212,7 +208,6 @@ window.onload = function () {
         return response.json(); // Convertimos la respuesta en JSON
       })
       .then((updatedCart) => {
-        console.log("Carrito actualizado:", updatedCart);
           // Actualizar el contador de artículos
         const totalQuantity = updatedCart.reduce((total, item) => total + item.quantity, 0);
         const itemCountElement = document.getElementById("item-count");
@@ -225,6 +220,16 @@ window.onload = function () {
     });
   });
 
+  // Comprobar si se ha iniciado sesión antes de ir a pagar
+  document.querySelector('.divButtons-Cart a[href="/checkout"]').addEventListener('click', function(event) {
+    const userAuthenticated = getCookie('user_authenticated'); // Obtener la cookie de autenticación
+  
+    if (!userAuthenticated) {
+      event.preventDefault(); // Evitar la redirección
+      alert('Debes iniciar sesión para proceder al pago.'); // Mensaje de alerta
+      window.location.href = '/login'; // Redirigir a la página de inicio de sesión
+    }
+  });
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = "visible";
 };

@@ -136,23 +136,35 @@ window.onload = function () {
   const cartCookie = getCookie("cart");
   const carritoElement = document.getElementById("floating-cart");
 
+  
   if (cartCookie) {
-    // Si la cookie existe, parseamos su contenido (que es un JSON)
     const decodedCartCookie = decodeURIComponent(cartCookie);
-    const cartItems = JSON.parse(decodedCartCookie); // Convertir el string JSON en un objeto
+    let cartItems = [];
+    try {
+        cartItems = JSON.parse(decodedCartCookie);
+    } catch (e) {
+        console.error("Error al parsear la cookie del carrito:", e);
+    }
 
     // Mostrar la cantidad total de productos:
     let totalQuantity = 0;
     cartItems.forEach((item) => {
       totalQuantity += item.quantity; // Sumar las cantidades
     });
-
+  
     // Mostrar la cantidad total
     const itemCountElement = document.getElementById("item-count");
     if (itemCountElement) {
       itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-";
     }
-  }
+    } else {
+      // Si no hay cookie, mostrar 0 o "-"
+      const itemCountElement = document.getElementById("item-count");
+      if (itemCountElement) {
+        itemCountElement.textContent = "-"; // O 0, según tu preferencia
+      }
+    }
+  
   // Verificar si la cookie 'user_authenticated' está presente
   const usercookie = getCookie("user_authenticated");
   const divBotonAcceso = document.getElementById("divBotonAcceso");

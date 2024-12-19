@@ -154,6 +154,8 @@ const loginUser = async (req, res) => {
 
     // Si todo es correcto, iniciar sesión
     req.session.user = { id: user._id, email: user.email };
+    console.log(req.session.user);
+    
     res.cookie("user_authenticated", "true", {
       maxAge: 900000,
       httpOnly: false,

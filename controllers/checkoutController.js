@@ -1,5 +1,14 @@
 const Cart = require('../models/cartModel'); // Asegúrate de tener un modelo de carrito
 
+// Middleware de autenticación
+exports.isAuthenticated = (req, res, next) => {
+    if (req.session.user) {
+        next(); // El usuario está autenticado, continuar
+    } else {
+        res.redirect('/login'); // Redirigir a la página de inicio de sesión
+    }
+};
+
 // Mostrar la vista de checkout
 exports.showCheckout = (req, res) => {
     // Obtener el carrito de la sesión

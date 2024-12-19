@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
-    secret: 'yourSecretKey', // Cambia esto por una clave secreta más segura
+    secret: 'Velasshoping',
     resave: false,
     saveUninitialized: true,
     cookie: {

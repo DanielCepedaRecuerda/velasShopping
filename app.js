@@ -23,7 +23,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        httpOnly: true,
+        httpOnly: false,
         secure: process.env.NODE_ENV === 'production', // Usar "secure" en producción (HTTPS)
     },
 }));

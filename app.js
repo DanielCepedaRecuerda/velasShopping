@@ -12,7 +12,7 @@ const productsRoutes = require('./routes/productsRoutes');
 const { logoutUser  } = require("./controllers/userController");
 
 const app = express();
-
+app.use(express.static(path.join(__dirname, "public")));
 // Middleware
 app.use(cors());
 app.use(cookieParser());

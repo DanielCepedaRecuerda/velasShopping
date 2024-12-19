@@ -131,28 +131,31 @@ window.onload = function () {
       document.getElementById("telefono").value = formData.telefono || "";
     }
   }
-
+  
   // Función para manejar el envío del formulario de checkout
-document.getElementById('checkoutForm').addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevenir el envío por defecto
-
-  const formData = new FormData(this);
-
-  // Enviar los datos al servidor
-  fetch('/process', {
-      method: 'POST',
-      body: formData,
-      credentials: 'include' // Incluye las cookies
-  })
-  .then(response => {
-      if (response.redirected) {
-          window.location.href = response.url; // Redirigir si hay una respuesta redirigida
-      }
-  })
-  .catch(error => {
-      console.error('Error al procesar el checkout:', error);
-  });
-});
+  if (document.getElementById('checkoutForm')) {
+    document.getElementById('checkoutForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevenir el envío por defecto
+    
+      const formData = new FormData(this);
+    
+      // Enviar los datos al servidor
+      fetch('/process', {
+          method: 'POST',
+          body: formData,
+          credentials: 'include' // Incluye las cookies
+      })
+      .then(response => {
+          if (response.redirected) {
+              window.location.href = response.url; // Redirigir si hay una respuesta redirigida
+          }
+      })
+      .catch(error => {
+          console.error('Error al procesar el checkout:', error);
+      });
+    });
+    
+  }
 
   // Verificar si la cookie del carrito existe
   const cartCookie = getCookie("cart");

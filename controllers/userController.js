@@ -126,7 +126,6 @@ const loginUser = async (req, res) => {
     errors.push("La contraseña debe tener al menos 6 caracteres.");
   }
   
-
   // Si hay errores, redirigir a la página de inicio de sesión con los errores
   if (errors.length > 0) {
     formData.email = email;
@@ -156,7 +155,7 @@ const loginUser = async (req, res) => {
     }
 
     // Si todo es correcto, iniciar sesión
-    req.session.user = { id: user._id, email: user.email };
+    req.session.user = { id: user.id, email: user.email };
     console.log(req.session.user);
     
     res.cookie("user_authenticated", "true", {

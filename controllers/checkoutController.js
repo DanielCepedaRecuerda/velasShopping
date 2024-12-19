@@ -2,21 +2,23 @@ const Cart = require('../models/cartModel'); // Asegúrate de tener un modelo de
 
 // Middleware de autenticación
 exports.isAuthenticated = (req, res, next) => {
-    const user = req.session.user;
-    if (user) {
+    if (req.session.user) {
         console.log(req.session.user);
         next(); // El usuario está autenticado, continuar
     } else {
-        console.log(req.session.user);
         res.redirect('/login'); // Redirigir a la página de inicio de sesión
     }
 };
 
 // Mostrar la vista de checkout
 exports.showCheckout = (req, res) => {
+    console.log("Usuario en checkout:", req.session.user); // Para depuración
+   
+    if (!req.session.user) {
+        return res.redirect('/login'); // Redirigir si no hay usuario en la sesión
+    }
     // Obtener el carrito de la sesión
     const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-    // Verificar si el carrito tiene elementos
     if (cart.length === 0) {
         return res.redirect('/productos'); // Redirigir si el carrito está vacío
     }

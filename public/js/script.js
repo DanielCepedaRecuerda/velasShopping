@@ -221,15 +221,18 @@ window.onload = function () {
   });
 
   // Comprobar si se ha iniciado sesión antes de ir a pagar
-  document.querySelector('.divButtons-Cart a[href="/checkout"]').addEventListener('click', function(event) {
-    const userAuthenticated = getCookie('user_authenticated'); // Obtener la cookie de autenticación
-  
-    if (!userAuthenticated) {
-      event.preventDefault(); // Evitar la redirección
-      alert('Debes iniciar sesión para proceder al pago.'); // Mensaje de alerta
-      window.location.href = '/login'; // Redirigir a la página de inicio de sesión
-    }
-  });
+  if (document.querySelector('.divButtons-Cart a[href="/checkout"]')) {
+    document.querySelector('.divButtons-Cart a[href="/checkout"]').addEventListener('click', function(event) {
+      const userAuthenticated = getCookie('user_authenticated'); // Obtener la cookie de autenticación
+    
+      if (!userAuthenticated) {
+        event.preventDefault(); // Evitar la redirección
+        alert('Debes iniciar sesión para proceder al pago.'); // Mensaje de alerta
+        window.location.href = '/login'; // Redirigir a la página de inicio de sesión
+      }
+    });
+  }
+ 
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = "visible";
 };

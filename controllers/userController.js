@@ -125,6 +125,7 @@ const loginUser = async (req, res) => {
   } else if (contraseña.length < 6) {
     errors.push("La contraseña debe tener al menos 6 caracteres.");
   }
+  
 
   // Si hay errores, redirigir a la página de inicio de sesión con los errores
   if (errors.length > 0) {
@@ -137,7 +138,9 @@ const loginUser = async (req, res) => {
   try {
     // Buscar usuario por email
     const user = await userModel.findUserByEmail(email);
-
+    if (!user) {
+      errors.push("Email o contraseña incorrectos"); // Mensaje genérico
+  }
     // Verificar contraseña
     const isPasswordValid =
       user && (await bcrypt.compare(contraseña, user.contraseña));

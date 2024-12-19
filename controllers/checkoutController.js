@@ -2,11 +2,13 @@ const Cart = require('../models/cartModel'); // Asegúrate de tener un modelo de
 
 // Middleware de autenticación
 exports.isAuthenticated = (req, res, next) => {
+    alert(req.session.user);
     if (req.session.user) {
         console.log(req.session.user);
         
         next(); // El usuario está autenticado, continuar
     } else {
+        alert(req.session.user);
         res.redirect('/login'); // Redirigir a la página de inicio de sesión
     }
 };

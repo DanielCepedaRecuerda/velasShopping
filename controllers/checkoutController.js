@@ -38,3 +38,7 @@ exports.processCheckout = (req, res) => {
     // Redirigir a una página de confirmación o mostrar un mensaje de éxito
     res.redirect('/confirmation'); // Redirigir a una página de confirmación
 };
+
+
+// redirigir al login si no está con sesion iniciada
+/// window.open().

@@ -94,9 +94,23 @@
         <label for="telefono">Teléfono:</label>
         <input type="tel" id="telefono" name="telefono" required />
       </div>
-
-      <button type="submit">Confirmar Pedido</button>
     </form>
+    <button
+      type="button"
+      onclick="abrirPasarelaPago()"
+      style="margin-top: 20px"
+    >
+      Ir a la Pasarela de Pago
+    </button>
+
+    <script>
+      function abrirPasarelaPago() {
+        // Abre la pasarela de pago en una nueva ventana
+        const url = "/pasarelaPago"; // Cambia esta URL por la de tu pasarela
+        const options = "width=800,height=600,resizable=yes,scrollbars=yes";
+        window.open(url, "_blank", options);
+      }
+    </script>
     <% } else { %>
     <p>Tu carrito está vacío. No puedes proceder al checkout.</p>
     <a href="/productos">Volver a la tienda</a>

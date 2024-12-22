@@ -60,6 +60,8 @@ app.get("/register", (req, res) => {
 app.get('/contacto', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'contacto.html'));
 });
+app.get('/pasarelaPago', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'pasarelaPago.html'));  });
 app.get("/logout", logoutUser );
 
 // Iniciar servidor

@@ -358,6 +358,46 @@ button:hover {
   color: #e67e22;
 }
 
+/***************PASARELA DE PAGO*****************/
+.payment-gateway {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  margin: 40px auto;
+}
+
+.payment-form label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.payment-form input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.payment-form button {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #e67e22;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.payment-form button:hover {
+  background-color: #d35400;
+}
+
 /* Media Queries para hacer el diseño responsive */
 @media (max-width: 768px) {
   header {

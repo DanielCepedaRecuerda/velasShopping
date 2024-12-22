@@ -10,6 +10,14 @@ function getQueryParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(param);
 }
+// Función para enviar a la pasarela de pago
+function abrirPasarelaPago() {
+  // Abre la pasarela de pago en una nueva ventana
+  const url = "/pasarelaPago"; // Cambia esta URL por la de tu pasarela
+  const options = "width=800,height=600,resizable=yes,scrollbars=yes";
+  window.open(url, "_blank", options);
+}
+
 
 window.onload = function () {
   // Inicialmente ocultar el contenido

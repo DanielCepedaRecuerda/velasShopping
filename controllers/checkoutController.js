@@ -2,6 +2,7 @@ const Cart = require('../models/cartModel'); // Asegúrate de tener un modelo de
 
 // Middleware de autenticación
 exports.isAuthenticated = (req, res, next) => {
+    console.log(req.session); 
     if (req.session.user) {
         console.log(req.session.user);
         next(); // El usuario está autenticado, continuar

@@ -2,8 +2,6 @@ const productsModel = require("../models/productsModel");
 
 const getCart = (req, res) => {
   const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-  console.log('Contenido de la cookie cart:', req.cookies.cart);
-  console.log('Cart:', cart);
   res.render('cart', { cart });
 };
 
@@ -60,11 +58,10 @@ const addToCart = async (req, res) => {
 const removeFromCart = (req, res) => {
   const productId = req.params.productId;
   let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-
   if (!cart || cart.length === 0) {
       return res.status(400).json({ error: "El carrito está vacío." });
   }
-
+  
   const updatedCart = cart.filter((item) => item.productId !== Number(productId));
 
   if (updatedCart.length === cart.length) {
@@ -72,11 +69,10 @@ const removeFromCart = (req, res) => {
   }
 
   res.cookie("cart", JSON.stringify(updatedCart), {
-      httpOnly: true,
+      httpOnly: false,
       secure: process.env.NODE_ENV === 'production',
       sameSite: "strict",
   });
-
   res.status(200).json(updatedCart);
 };
 

@@ -88,6 +88,8 @@ const registerUser = async (req, res) => {
       contraseña: hashedPassword,
       telefono,
     });
+  // Almacenar el mensaje de éxito en la sesión
+  req.session.successMessage = "Registro exitoso. Bienvenido!";
 
     // Redirigir al login
     res.redirect("/login");
@@ -123,7 +125,7 @@ const loginUser = async (req, res) => {
   } else if (contraseña.length < 6) {
     errors.push("La contraseña debe tener al menos 6 caracteres.");
   }
-
+  
   // Si hay errores, redirigir a la página de inicio de sesión con los errores
   if (errors.length > 0) {
     formData.email = email;
@@ -135,7 +137,9 @@ const loginUser = async (req, res) => {
   try {
     // Buscar usuario por email
     const user = await userModel.findUserByEmail(email);
-
+    if (!user) {
+      errors.push("Email o contraseña incorrectos"); // Mensaje genérico
+  }
     // Verificar contraseña
     const isPasswordValid =
       user && (await bcrypt.compare(contraseña, user.contraseña));
@@ -151,7 +155,9 @@ const loginUser = async (req, res) => {
     }
 
     // Si todo es correcto, iniciar sesión
-    req.session.user = { id: user._id, email: user.email };
+    req.session.user = { id: user.id, email: user.email };
+    console.log(req.session.user);
+    
     res.cookie("user_authenticated", "true", {
       maxAge: 900000,
       httpOnly: false,

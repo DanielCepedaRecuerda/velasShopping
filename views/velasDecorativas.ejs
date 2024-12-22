@@ -46,9 +46,7 @@
     </header>
 
     <main>
-      <h2 class="form-h2">Velas Aromáticas</h2>
-      <% console.log('Estoy en la plantilla'); %>
-      <% console.log(velas); %>
+      <h2 class="form-h2">Velas Decorativas</h2>
       <% if (velas && velas.length > 0) { %>
         <section class="product-grid">
           <% velas.forEach((vela) => { %>
@@ -74,7 +72,7 @@
       <a href="/cart" class="floating-cart" id="floating-cart">
         <div class="cart-icon">
           <img src="/images/iconoPágina.jpg" alt="Vela del carrito" class="velaCarrito">
-          <span class="item-count" id="item-count">-</span> 
+          <span class="item-count" id="item-count">0</span> 
         </div>
       </a>
     </main>

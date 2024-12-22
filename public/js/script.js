@@ -39,6 +39,19 @@ window.onload = function () {
         }
       });
   }
+  // Verificar si hay un mensaje en la URL
+  const mensaje = getQueryParam("mensaje");
+  if (mensaje) {
+    const mensajeFlotante = document.getElementById("mensajeFlotante");
+    // Mostrar el mensaje
+    document.getElementById("mensaje").innerHTML = mensaje;
+    mensajeFlotante.textContent = decodeURIComponent(mensaje);
+    mensajeFlotante.classList.add("show");
+    setTimeout(() => {
+      mensajeFlotante.classList.remove("show");
+    }, 3000);
+  }
+  
   // Verificar si hay un mensaje de error en la URL
   const errorMessage = getQueryParam("error");
   if (errorMessage) {
@@ -118,26 +131,43 @@ window.onload = function () {
       document.getElementById("telefono").value = formData.telefono || "";
     }
   }
+  
+  // Función para manejar el envío del formulario de checkout
+  if (document.getElementById('checkoutForm')) {
+    document.getElementById('checkoutForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevenir el envío por defecto
+    
+      const formData = new FormData(this);
+    
+      // Enviar los datos al servidor
+      fetch('/process', {
+          method: 'POST',
+          body: formData,
+          credentials: 'include' // Incluye las cookies
+      })
+      .then(response => {
+          if (response.redirected) {
+              window.location.href = response.url; // Redirigir si hay una respuesta redirigida
+          }
+      })
+      .catch(error => {
+          console.error('Error al procesar el checkout:', error);
+      });
+    });
+    
+  }
 
   // Verificar si la cookie del carrito existe
   const cartCookie = getCookie("cart");
-  const carritoElement = document.getElementById("floating-cart");
-
-  // Si la cookie del carrito existe, mostrar el carrito
-  if (cartCookie && carritoElement) {
-    if (carritoElement) {
-      carritoElement.classList.add("show"); // Mostrar el carrito si la cookie está presente
-      carritoElement.classList.remove("hidden");
-    } else {
-      carritoElement.classList.remove("show");
-      carritoElement.classList.add("hidden");
-    }
-  }
 
   if (cartCookie) {
-    // Si la cookie existe, parseamos su contenido (que es un JSON)
     const decodedCartCookie = decodeURIComponent(cartCookie);
-    const cartItems = JSON.parse(decodedCartCookie); // Convertir el string JSON en un objeto
+    let cartItems = [];
+    try {
+      cartItems = JSON.parse(decodedCartCookie);
+    } catch (e) {
+      console.error("Error al parsear la cookie del carrito:", e);
+    }
 
     // Mostrar la cantidad total de productos:
     let totalQuantity = 0;
@@ -148,9 +178,16 @@ window.onload = function () {
     // Mostrar la cantidad total
     const itemCountElement = document.getElementById("item-count");
     if (itemCountElement) {
-      itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-";
+      itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "0"; // Mostrar la cantidad total o "0"
+    }
+  } else {
+    // Si no hay cookie, mostrar 0
+    const itemCountElement = document.getElementById("item-count");
+    if (itemCountElement) {
+      itemCountElement.textContent = "0"; // Mostrar 0 si no hay artículos
     }
   }
+  
   // Verificar si la cookie 'user_authenticated' está presente
   const usercookie = getCookie("user_authenticated");
   const divBotonAcceso = document.getElementById("divBotonAcceso");
@@ -189,8 +226,17 @@ window.onload = function () {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => response.json()) // Convertimos la respuesta en JSON
-        .then((updatedCart) => {
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al eliminar el producto");
+        }
+        return response.json(); // Convertimos la respuesta en JSON
+      })
+      .then((updatedCart) => {
+          // Actualizar el contador de artículos
+        const totalQuantity = updatedCart.reduce((total, item) => total + item.quantity, 0);
+        const itemCountElement = document.getElementById("item-count");
+        itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-"; // Muestra "-" si no hay artículos
           location.reload(); // Recargar la página
         })
         .catch((error) => {
@@ -199,6 +245,19 @@ window.onload = function () {
     });
   });
 
+  // Comprobar si se ha iniciado sesión antes de ir a pagar
+  if (document.querySelector('.divButtons-Cart a[href="/checkout"]')) {
+    document.querySelector('.divButtons-Cart a[href="/checkout"]').addEventListener('click', function(event) {
+      const userAuthenticated = getCookie('user_authenticated'); // Obtener la cookie de autenticación
+    
+      if (!userAuthenticated) {
+        event.preventDefault(); // Evitar la redirección
+        alert('Debes iniciar sesión para proceder al pago.'); // Mensaje de alerta
+        window.location.href = '/login'; // Redirigir a la página de inicio de sesión
+      }
+    });
+  }
+ 
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = "visible";
 };

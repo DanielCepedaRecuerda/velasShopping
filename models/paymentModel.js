@@ -1,5 +1,4 @@
-const connection = require("../config/database"); // Configuración de la base de datos
-
+const connection = require("../db/connection");
 // Crear un nuevo pedido
 const createPedido = async (fechaHora, total, idCliente) => {
   const [result] = await connection().execute(

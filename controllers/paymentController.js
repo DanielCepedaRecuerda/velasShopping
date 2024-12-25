@@ -17,8 +17,11 @@ exports.processPayment = async (req, res) => {
         cvv,
       });
   
-      // Redirigir a la página de confirmación
-      res.redirect('/confirmation');
+      // Almacenar mensaje en la sesión o pasar directamente
+      const successMessage = "Pago procesado exitosamente.";
+  
+      // Redirigir a la nueva vista de confirmación
+      res.render('confirmation', { message: successMessage });
     } catch (error) {
       console.error("Error al procesar el pago:", error);
       res.status(500).json({ error: "Hubo un error al procesar el pago." });

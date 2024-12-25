@@ -1,0 +1,31 @@
+<!-- confirmation.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmación de Pago</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Asegúrate de incluir tu CSS -->
+</head>
+<body>
+    <header>
+        <h1>Velas Shopping</h1>
+        <!-- Aquí puedes incluir tu navegación si es necesario -->
+    </header>
+
+    <main>
+        <h2 class="form-h2">Pago Procesado</h2>
+        <p class="tituloTabCart">¡Gracias por su compra!</p>
+
+        <% if (message) { %>
+            <div class="alert alert-success"><%= message %></div>
+        <% } %>
+
+        <p>Su pago ha sido procesado exitosamente. Recibirá un correo de confirmación en breve.</p>
+        <p>Puede volver a la <a href="/">página principal</a></p>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Velas Shopping. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

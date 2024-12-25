@@ -47,7 +47,7 @@ app.use('/velas', velasRoutes);
 app.use('/cart', cartRoutes);
 app.use('/productos', productsRoutes);
 app.use('/', checkoutRoutes);
-app.use('procesar-pago', pasarelaRoutes);
+app.use('/', pasarelaRoutes);
 
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {

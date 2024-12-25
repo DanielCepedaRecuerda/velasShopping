@@ -1,4 +1,5 @@
 const paymentModel = require('../models/paymentModel'); // Asegúrate de tener un modelo para manejar la base de datos
+const nodemailer = require('nodemailer');
 
 exports.processPayment = async (req, res) => {
     const { numeroTarjeta, nombreTitular, fechaExpiracion, cvv } = req.body;
@@ -16,6 +17,25 @@ exports.processPayment = async (req, res) => {
         fechaExpiracion,
         cvv,
       });
+      // Configurar el transportador de Nodemailer
+    const transporter = nodemailer.createTransport({
+      service: 'gmail', // Puedes usar otro servicio de correo
+      auth: {
+        user: process.env.EMAIL_USER, // Tu correo electrónico
+        pass: process.env.EMAIL_PASS, // Tu contraseña de correo
+      },
+    });
+     // Configurar el contenido del correo
+     const mailOptions = {
+      from: process.env.EMAIL_USER, // Remitente
+      to: email, // Destinatario
+      subject: 'Confirmación de Pago',
+      text: 'Su pago ha sido procesado exitosamente. Gracias por su compra.',
+    };
+
+    // Enviar el correo
+    await transporter.sendMail(mailOptions);
+
   
       // Almacenar mensaje en la sesión o pasar directamente
       const successMessage = "Pago procesado exitosamente.";

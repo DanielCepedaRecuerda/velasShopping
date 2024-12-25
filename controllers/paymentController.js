@@ -26,15 +26,22 @@ exports.processPayment = async (req, res) => {
       },
     });
      // Configurar el contenido del correo
-     const mailOptions = {
-      from: process.env.EMAIL_USER, // Remitente
-      to: email, // Destinatario
-      subject: 'Confirmación de Pago',
-      text: 'Su pago ha sido procesado exitosamente. Gracias por su compra.',
-    };
+    //  const mailOptions = {
+    //   from: process.env.EMAIL_USER,
+    //   to: 'danielc211998@gmail.com', // Cambia esto por un correo de prueba
+    //   subject: 'Prueba de Envío de Correo',
+    //   text: 'Este es un mensaje de prueba.',
+    // };
 
-    // Enviar el correo
-    await transporter.sendMail(mailOptions);
+    // transporter.sendMail(mailOptions, (error, info) => {
+    //   if (error) {
+    //     return console.log('Error al enviar el correo:', error);
+    //   }
+    //   console.log('Correo enviado:', info.response);
+    // });
+
+    // // Enviar el correo
+    // await transporter.sendMail(mailOptions);
 
   
       // Almacenar mensaje en la sesión o pasar directamente

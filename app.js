@@ -9,6 +9,7 @@ const cartRoutes = require('./routes/cartRoutes');
 const velasRoutes = require('./routes/velasRoutes');
 const checkoutRoutes = require('./routes/checkoutRoutes');
 const productsRoutes = require('./routes/productsRoutes');
+const pasarelaRoutes = require('./routes/pasarelaRoutes');
 const { logoutUser  } = require("./controllers/userController");
 
 const app = express();
@@ -46,6 +47,7 @@ app.use('/velas', velasRoutes);
 app.use('/cart', cartRoutes);
 app.use('/productos', productsRoutes);
 app.use('/', checkoutRoutes);
+app.use('/pasarela', pasarelaRoutes);
 
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {

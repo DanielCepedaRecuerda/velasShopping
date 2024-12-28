@@ -30,7 +30,7 @@ const addToCart = async (req, res) => {
 
     // Si el producto ya está en el carrito, se actualiza la cantidad
     if (itemIndex > -1) {
-      cart[itemIndex].quantity += parsedQuantity;
+      cart[itemIndex].quantity += parsedChange;
       // Si la cantidad es menor o igual a 0, eliminar el producto del carrito
       if (cart[itemIndex].quantity <= 0) {
         cart.splice(itemIndex, 1); // Eliminar el producto
@@ -39,7 +39,7 @@ const addToCart = async (req, res) => {
       // Si el producto no está en el carrito, se agrega con los detalles
       cart.push({
         productId: Number(productId),
-        quantity: parsedQuantity,
+        quantity: parsedChange > 0 ? parsedChange : 1,
         name: product.nombre,
         price: parseFloat(product.precio) 
       });

@@ -3,12 +3,17 @@ class Cart {
         this.items = []; // Almacena los productos en el carrito
     }
 
-    addItem(productId, quantity, price, name) {
+    addItem(productId, change, price, name) {
         const existingItem = this.items.find(item => item.productId === productId);
         if (existingItem) {
-            existingItem.quantity += quantity; // Aumentar la cantidad si el producto ya está en el carrito
+            existingItem.quantity += change; // Aumentar o disminuir la cantidad según el cambio
+            // Si la cantidad es menor o igual a 0, eliminar el producto del carrito
+            if (existingItem.quantity <= 0) {
+                this.removeItem(productId); // Llamar a removeItem para eliminar el producto
+            }
         } else {
-            this.items.push({ productId, quantity, price, name }); // Agregar nuevo producto al carrito
+            // Agregar nuevo producto al carrito, asegurando que el cambio sea al menos 1
+            this.items.push({ productId, quantity: change > 0 ? change : 1, price, name });
         }
     }
 

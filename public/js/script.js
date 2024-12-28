@@ -16,25 +16,6 @@ function abrirPasarelaPago() {
   const url = "/pasarelaPago"; // Cambia esta URL por la de tu pasarela
   window.open(url, "_blank"); // Abre en una nueva pestaña
 }
-// Funcion para actualizar el carrito
-function updateCart(productId, change) {
-  fetch(`/cart`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ productId, change }),
-  })
-  .then(response => response.json())
-  .then(updatedCart => {
-    // Actualizar la cantidad en la vista
-    document.getElementById(`quantity-${productId}`).textContent = updatedCart.find(item => item.productId === Number(productId)).quantity;
-    // Aquí puedes actualizar el total del carrito si es necesario
-  })
-  .catch(error => {
-    console.error('Error al actualizar el carrito:', error);
-  });
-}
 
 window.onload = function () {
   // Inicialmente ocultar el contenido
@@ -282,24 +263,6 @@ window.onload = function () {
       }
     });
   }
-
-  // Aumentar o disminuir 1 producto del carrito
-  if (document.getElementById("increase-btn") && document.getElementById("decrease-btn")) {
-    document.querySelectorAll('.increase-btn').forEach(button => {
-      button.addEventListener('click', function() {
-        const productId = this.getAttribute('data-product-id');
-        updateCart(productId, 1); // Aumentar cantidad
-      });
-    });
-    
-    document.querySelectorAll('.decrease-btn').forEach(button => {
-      button.addEventListener('click', function() {
-        const productId = this.getAttribute('data-product-id');
-        updateCart(productId, -1); // Disminuir cantidad
-      });
-    });
-  }
-
  
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = "visible";

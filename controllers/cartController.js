@@ -7,11 +7,10 @@ const getCart = (req, res) => {
 
 const addToCart = async (req, res) => {
   try {
-    const { productId, change, redirectUrl } = req.body; // Asegúrate de incluir 'change' y 'redirectUrl'
-    const parsedChange = Number(change); // Convertir el cambio a número
-
-    if (isNaN(parsedChange)) {
-      return res.redirect(`/productos?error=${encodeURIComponent("Cambio inválido.")}`);
+    const { productId, quantity, redirectUrl } = req.body;
+    const parsedQuantity = Number(quantity);
+    if (isNaN(parsedQuantity) || parsedQuantity <= 0) {
+      return res.redirect(`/productos?error=${encodeURIComponent("Cantidad inválida.")}`);
     }
 
     // Obtener el producto de la base de datos
@@ -30,16 +29,12 @@ const addToCart = async (req, res) => {
 
     // Si el producto ya está en el carrito, se actualiza la cantidad
     if (itemIndex > -1) {
-      cart[itemIndex].quantity += parsedChange;
-      // Si la cantidad es menor o igual a 0, eliminar el producto del carrito
-      if (cart[itemIndex].quantity <= 0) {
-        cart.splice(itemIndex, 1); // Eliminar el producto
-      }
+      cart[itemIndex].quantity += parsedQuantity;
     } else {
       // Si el producto no está en el carrito, se agrega con los detalles
       cart.push({
         productId: Number(productId),
-        quantity: parsedChange > 0 ? parsedChange : 1,
+        quantity: parsedQuantity,
         name: product.nombre,
         price: parseFloat(product.precio) 
       });

@@ -61,7 +61,11 @@
         <tr class="product-row" data-product-id="<%= item.productId %>">
           <!-- Agregar la clase y el atributo -->
           <td><%= item.name %></td>
-          <td><%= item.quantity %></td>
+          <td>
+            <button class="quantity-btn" data-action="decrease" data-product-id="<%= item.productId %>">-</button>
+            <span class="quantity"><%= item.quantity %></span>
+            <button class="quantity-btn" data-action="increase" data-product-id="<%= item.productId %>">+</button>
+          </td>
           <td>
             <%= typeof item.price === 'number' ? item.price.toFixed(2) : '0.00'
             %>€

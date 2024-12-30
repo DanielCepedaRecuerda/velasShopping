@@ -5,10 +5,10 @@ const path = require('path');
 
 // Ruta GET para mostrar el formulario de contacto
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views', 'contacto.html')); // Asegúrate de que la ruta sea correcta
+    res.sendFile(path.join(__dirname, '../views', 'contacto.html'));
 });
 
 // Ruta POST para manejar el envío del formulario
-router.post('/contact', contactController.handleContactForm);
+router.post('/', contactController.handleContactForm); // Esta ruta maneja el envío del formulario
 
 module.exports = router;

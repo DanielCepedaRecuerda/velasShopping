@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-
 // Controlador para manejar el formulario de contacto
 exports.handleContactForm = async (req, res) => {
     const { name, email, message } = req.body;
@@ -23,7 +22,6 @@ exports.handleContactForm = async (req, res) => {
 
         await transporter.sendMail(mailOptions);
 
-        res.status(200).json({ message: "Mensaje enviado correctamente" });
         res.redirect("/");
     } catch (error) {
         console.error("Error al procesar el formulario:", error);

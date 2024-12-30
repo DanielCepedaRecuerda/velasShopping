@@ -30,3 +30,5 @@ exports.handleContactForm = async (req, res) => {
     res.status(500).json({ error: "Hubo un error al enviar el mensaje." });
   }
 };
+
+module.exports = { handleContactForm };

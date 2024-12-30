@@ -49,6 +49,8 @@ window.onload = function () {
             alert(
               "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto."
             );
+            res.redirect("/");
+
           } else {
             const errorData = await response.json();
             console.error("Error del servidor:", errorData);

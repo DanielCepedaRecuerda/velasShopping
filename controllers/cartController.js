@@ -79,7 +79,7 @@ const removeFromCart = (req, res) => {
 };
 
 const updateCartQuantity = (req, res) => {
-  const { productId, action } = req.body; // Obtener el ID del producto y la acción
+  const { productId, action } = req.body;
   let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
 
   // Buscar el producto en el carrito

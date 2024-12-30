@@ -27,7 +27,6 @@ const handleContactForm = async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
-    res.redirect("/");
   } catch (error) {
     console.error("Error al procesar el formulario:", error);
     res.status(500).json({ error: "Hubo un error al enviar el mensaje." });

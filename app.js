@@ -49,7 +49,7 @@ app.use('/cart', cartRoutes);
 app.use('/productos', productsRoutes);
 app.use('/', checkoutRoutes);
 app.use('/pasarela', pasarelaRoutes);
-app.use('/', contactRoutes);
+app.use('/contact', contactRoutes);
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "views", "index.html"));

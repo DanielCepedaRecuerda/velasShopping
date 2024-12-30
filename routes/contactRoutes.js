@@ -9,6 +9,6 @@ router.get('/', (req, res) => {
 });
 
 // Ruta POST para manejar el envío del formulario
-router.post('/', contactController.handleContactForm);
+router.post('/contact', contactController.handleContactForm);
 
 module.exports = router;

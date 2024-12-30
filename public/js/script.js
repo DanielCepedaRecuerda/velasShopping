@@ -29,7 +29,7 @@ window.onload = function () {
         e.preventDefault(); // Evitar que el formulario se envíe de manera tradicional
 
         const formData = new FormData(this);
-        const response = await fetch("/api/contact", {
+        const response = await fetch("/contact", {
           method: "POST",
           body: formData,
         });

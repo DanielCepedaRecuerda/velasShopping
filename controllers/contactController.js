@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 // Controlador para manejar el formulario de contacto
-exports.handleContactForm = async (req, res) => {
+const handleContactForm = async (req, res) => {
   console.log("Datos recibidos en el controlador:", req.body); // Esto debería mostrar todos los datos recibidos
   const { name, email, message } = req.body;
   console.log(name, email, message);

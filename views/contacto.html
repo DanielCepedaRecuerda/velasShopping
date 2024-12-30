@@ -34,9 +34,7 @@
       </div>
       <div class="divBotonLogout" id="divBotonLogout">
         <a href="/logout"
-          ><button id="botonLogout" class="botonLogout">
-            Cerrar Sesión
-          </button>
+          ><button id="botonLogout" class="botonLogout">Cerrar Sesión</button>
         </a>
       </div>
       <div class="social-links">
@@ -49,23 +47,27 @@
       <h2 class="form-h2">Contacto</h2>
       <form class="form" id="contact-form">
         <div>
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" required />
+          <label for="name">Nombre:</label>
+          <input type="text" id="name" name="name" required />
         </div>
         <div>
           <label for="email">Email:</label>
-          <input type="email" id="email" required />
+          <input type="email" id="email" name="email" required />
         </div>
         <div>
-          <label for="mensaje">Mensaje:</label>
-          <textarea id="mensaje" required></textarea>
+          <label for="message">Mensaje:</label>
+          <textarea id="message" name="message" required></textarea>
         </div>
         <button type="submit">Enviar</button>
       </form>
-      
+
       <a href="/cart" class="floating-cart" id="floating-cart">
         <div class="cart-icon">
-          <img src="/images/iconoPágina.jpg" alt="Vela del carrito" class="velaCarrito">
+          <img
+            src="/images/iconoPágina.jpg"
+            alt="Vela del carrito"
+            class="velaCarrito"
+          />
           <span class="item-count" id="item-count">0</span>
         </div>
       </a>
@@ -86,12 +88,13 @@
         <p>
           Contacto:
           <span>
-            <a href="mailto:tusvelasshopping@gmail.com">tusvelasshopping@gmail.com</a>
+            <a href="mailto:tusvelasshopping@gmail.com"
+              >tusvelasshopping@gmail.com</a
+            >
           </span>
         </p>
       </div>
     </footer>
     <script src="/js/script.js"></script>
-
   </body>
 </html>

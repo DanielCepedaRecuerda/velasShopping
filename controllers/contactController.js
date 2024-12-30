@@ -26,6 +26,7 @@ const handleContactForm = async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
+    res.redirect("/");
 
   } catch (error) {
     console.error("Error al procesar el formulario:", error);

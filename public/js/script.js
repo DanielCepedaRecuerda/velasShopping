@@ -28,7 +28,7 @@ window.onload = function () {
       .addEventListener("submit", async function (e) {
         e.preventDefault(); // Evitar que el formulario se envíe de manera tradicional
 
-        const formData = new FormData(this);
+        const formData = new FormData(e.target);
         console.log("Datos del formulario:", Array.from(formData.entries())); // Verifica los datos del formulario
 
         const response = await fetch("/contact", {

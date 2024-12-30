@@ -28,7 +28,7 @@ window.onload = function () {
       .addEventListener("submit", async function (e) {
         e.preventDefault(); // Evitar que el formulario se envíe de manera tradicional
 
-        const formData = new FormData(e.target);
+        const formData = new FormData(this); // 'this' se refiere al formulario
         console.log("Datos del formulario:", Array.from(formData.entries())); // Verifica los datos del formulario
 
         const response = await fetch("/contact", {
@@ -37,16 +37,12 @@ window.onload = function () {
         });
 
         if (response.ok) {
-          alert(
-            "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto."
-          );
+          alert("¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.");
         } else {
-          alert(
-            "Hubo un error al enviar tu mensaje. Por favor, intenta nuevamente."
-          );
+          alert("Hubo un error al enviar tu mensaje. Por favor, intenta nuevamente.");
         }
       });
-  }
+}
   // Verificar si hay un mensaje en la URL
   const mensaje = getQueryParam("mensaje");
   if (mensaje) {

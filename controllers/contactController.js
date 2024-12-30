@@ -5,6 +5,9 @@ const handleContactForm = async (req, res) => {
   const { name, email, message } = req.body;
   console.log(name, email, message);
 
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: "Todos los campos son obligatorios." });
+}
   try {
     // Aquí va la lógica de enviar un correo electrónico
     const transporter = nodemailer.createTransport({

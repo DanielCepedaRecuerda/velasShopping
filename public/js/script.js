@@ -28,21 +28,40 @@ window.onload = function () {
       .addEventListener("submit", async function (e) {
         e.preventDefault(); // Evitar que el formulario se envíe de manera tradicional
 
-        const formData = new FormData(this); // 'this' se refiere al formulario
-        console.log("Datos del formulario:", Array.from(formData.entries())); // Verifica los datos del formulario
+        // Capturamos los datos del formulario
+        const data = {
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          message: document.getElementById("message").value,
+        };
+        console.log("Datos del formulario a enviar:", data);
 
-        const response = await fetch("/contact", {
-          method: "POST",
-          body: formData,
-        });
+        try {
+          const response = await fetch("/contact", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json", // Indicamos que enviamos JSON
+            },
+            body: JSON.stringify(data), // Convertimos el objeto a formato JSON
+          });
 
-        if (response.ok) {
-          alert("¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.");
-        } else {
-          alert("Hubo un error al enviar tu mensaje. Por favor, intenta nuevamente.");
+          if (response.ok) {
+            alert(
+              "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto."
+            );
+          } else {
+            const errorData = await response.json();
+            console.error("Error del servidor:", errorData);
+            alert(
+              "Hubo un error al enviar tu mensaje. Por favor, intenta nuevamente."
+            );
+          }
+        } catch (error) {
+          console.error("Error al enviar el formulario:", error);
+          alert("Hubo un problema al enviar el mensaje. Revisa tu conexión.");
         }
       });
-}
+  }
   // Verificar si hay un mensaje en la URL
   const mensaje = getQueryParam("mensaje");
   if (mensaje) {
@@ -55,7 +74,7 @@ window.onload = function () {
       mensajeFlotante.classList.remove("show");
     }, 3000);
   }
-  
+
   // Verificar si hay un mensaje de error en la URL
   const errorMessage = getQueryParam("error");
   if (errorMessage) {
@@ -135,30 +154,31 @@ window.onload = function () {
       document.getElementById("telefono").value = formData.telefono || "";
     }
   }
-  
+
   // Función para manejar el envío del formulario de checkout
-  if (document.getElementById('checkoutForm')) {
-    document.getElementById('checkoutForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevenir el envío por defecto
-    
-      const formData = new FormData(this);
-    
-      // Enviar los datos al servidor
-      fetch('/process', {
-          method: 'POST',
+  if (document.getElementById("checkoutForm")) {
+    document
+      .getElementById("checkoutForm")
+      .addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevenir el envío por defecto
+
+        const formData = new FormData(this);
+
+        // Enviar los datos al servidor
+        fetch("/process", {
+          method: "POST",
           body: formData,
-          credentials: 'include' // Incluye las cookies
-      })
-      .then(response => {
-          if (response.redirected) {
+          credentials: "include", // Incluye las cookies
+        })
+          .then((response) => {
+            if (response.redirected) {
               window.location.href = response.url; // Redirigir si hay una respuesta redirigida
-          }
-      })
-      .catch(error => {
-          console.error('Error al procesar el checkout:', error);
+            }
+          })
+          .catch((error) => {
+            console.error("Error al procesar el checkout:", error);
+          });
       });
-    });
-    
   }
 
   // Verificar si la cookie del carrito existe
@@ -191,7 +211,7 @@ window.onload = function () {
       itemCountElement.textContent = "0"; // Mostrar 0 si no hay artículos
     }
   }
-  
+
   // Verificar si la cookie 'user_authenticated' está presente
   const usercookie = getCookie("user_authenticated");
   const divBotonAcceso = document.getElementById("divBotonAcceso");
@@ -230,17 +250,21 @@ window.onload = function () {
           "Content-Type": "application/json",
         },
       })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error al eliminar el producto");
-        }
-        return response.json(); // Convertimos la respuesta en JSON
-      })
-      .then((updatedCart) => {
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al eliminar el producto");
+          }
+          return response.json(); // Convertimos la respuesta en JSON
+        })
+        .then((updatedCart) => {
           // Actualizar el contador de artículos
-        const totalQuantity = updatedCart.reduce((total, item) => total + item.quantity, 0);
-        const itemCountElement = document.getElementById("item-count");
-        itemCountElement.textContent = totalQuantity > 0 ? totalQuantity : "-"; // Muestra "-" si no hay artículos
+          const totalQuantity = updatedCart.reduce(
+            (total, item) => total + item.quantity,
+            0
+          );
+          const itemCountElement = document.getElementById("item-count");
+          itemCountElement.textContent =
+            totalQuantity > 0 ? totalQuantity : "-"; // Muestra "-" si no hay artículos
           location.reload(); // Recargar la página
         })
         .catch((error) => {
@@ -250,49 +274,51 @@ window.onload = function () {
   });
 
   // Añadir 1 o quitar 1 del carrito
-  document.querySelectorAll('.quantity-btn').forEach(button => {
-    button.addEventListener('click', function() {
-      const action = this.getAttribute('data-action');
-      const productId = this.getAttribute('data-product-id');
-      
+  document.querySelectorAll(".quantity-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+      const action = this.getAttribute("data-action");
+      const productId = this.getAttribute("data-product-id");
+
       // Enviar la solicitud al servidor
-      fetch('/cart/update', {
-        method: 'POST',
+      fetch("/cart/update", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ productId, action }),
-        credentials: 'include' // Incluir cookies
+        credentials: "include", // Incluir cookies
       })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error al actualizar la cantidad');
-        }
-        return response.json();
-      })
-      .then(updatedCart => {
-        // Actualizar la vista del carrito si es necesario
-        location.reload(); // Recargar la página para reflejar los cambios
-      })
-      .catch(error => {
-        console.error('Error al actualizar la cantidad:', error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error al actualizar la cantidad");
+          }
+          return response.json();
+        })
+        .then((updatedCart) => {
+          // Actualizar la vista del carrito si es necesario
+          location.reload(); // Recargar la página para reflejar los cambios
+        })
+        .catch((error) => {
+          console.error("Error al actualizar la cantidad:", error);
+        });
     });
   });
 
   // Comprobar si se ha iniciado sesión antes de ir a pagar
   if (document.querySelector('.divButtons-Cart a[href="/checkout"]')) {
-    document.querySelector('.divButtons-Cart a[href="/checkout"]').addEventListener('click', function(event) {
-      const userAuthenticated = getCookie('user_authenticated'); // Obtener la cookie de autenticación
-    
-      if (!userAuthenticated) {
-        event.preventDefault(); // Evitar la redirección
-        alert('Debes iniciar sesión para proceder al pago.'); // Mensaje de alerta
-        window.location.href = '/login'; // Redirigir a la página de inicio de sesión
-      }
-    });
+    document
+      .querySelector('.divButtons-Cart a[href="/checkout"]')
+      .addEventListener("click", function (event) {
+        const userAuthenticated = getCookie("user_authenticated"); // Obtener la cookie de autenticación
+
+        if (!userAuthenticated) {
+          event.preventDefault(); // Evitar la redirección
+          alert("Debes iniciar sesión para proceder al pago."); // Mensaje de alerta
+          window.location.href = "/login"; // Redirigir a la página de inicio de sesión
+        }
+      });
   }
- 
+
   // Después de ejecutar el script, hacer visible el body
   document.body.style.visibility = "visible";
 };

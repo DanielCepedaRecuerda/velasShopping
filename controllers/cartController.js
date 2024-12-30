@@ -78,5 +78,33 @@ const removeFromCart = (req, res) => {
   res.status(200).json(updatedCart);
 };
 
+const updateCartQuantity = (req, res) => {
+  const { productId, action } = req.body; // Obtener el ID del producto y la acción
+  let cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
 
-module.exports = { getCart, addToCart, removeFromCart };
+  // Buscar el producto en el carrito
+  const itemIndex = cart.findIndex(item => item.productId === Number(productId));
+
+  if (itemIndex > -1) {
+    if (action === 'increase') {
+      cart[itemIndex].quantity += 1; // Incrementar la cantidad
+    } else if (action === 'decrease') {
+      if (cart[itemIndex].quantity > 1) {
+        cart[itemIndex].quantity -= 1; // Decrementar la cantidad
+      } else {
+        cart.splice(itemIndex, 1); // Eliminar el producto si la cantidad es 0
+      }
+    }
+  }
+
+  // Guardar el carrito actualizado en la cookie
+  res.cookie("cart", JSON.stringify(cart), {
+    httpOnly: false,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: "strict",
+  });
+
+  res.status(200).json(cart); // Devolver el carrito actualizado
+};
+
+module.exports = { getCart, addToCart, removeFromCart, updateCartQuantity };

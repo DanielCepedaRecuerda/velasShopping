@@ -251,6 +251,37 @@ window.onload = function () {
     });
   });
 
+  // Añadir 1 o quitar 1 del carrito
+  document.querySelectorAll('.quantity-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const action = this.getAttribute('data-action');
+      const productId = this.getAttribute('data-product-id');
+      
+      // Enviar la solicitud al servidor
+      fetch('/cart/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId, action }),
+        credentials: 'include' // Incluir cookies
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al actualizar la cantidad');
+        }
+        return response.json();
+      })
+      .then(updatedCart => {
+        // Actualizar la vista del carrito si es necesario
+        location.reload(); // Recargar la página para reflejar los cambios
+      })
+      .catch(error => {
+        console.error('Error al actualizar la cantidad:', error);
+      });
+    });
+  });
+
   // Comprobar si se ha iniciado sesión antes de ir a pagar
   if (document.querySelector('.divButtons-Cart a[href="/checkout"]')) {
     document.querySelector('.divButtons-Cart a[href="/checkout"]').addEventListener('click', function(event) {

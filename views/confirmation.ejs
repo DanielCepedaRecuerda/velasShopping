@@ -13,15 +13,16 @@
     </header>
 
     <main>
-        <h2 class="form-h2">Pago Procesado</h2>
-        <p class="tituloTabCart">¡Gracias por su compra!</p>
-
-        <% if (message) { %>
-            <div class="alert alert-success"><%= message %></div>
-        <% } %>
-
-        <p>Su pago ha sido procesado exitosamente. Recibirá un correo de confirmación en breve.</p>
-        <p>Puede volver a la <a href="/">página principal</a></p>
+        <div id="contenidoConfirm" style="height: 80%;">
+            <h2 class="form-h2">Pago Procesado</h2>
+            <p class="tituloTabCart">¡Gracias por su compra!</p>
+    
+            <% if (message) { %>
+                <div class="alert alert-success"><%= message %></div>
+            <% } %>
+    
+            <p>Puede volver a la <a href="/">página principal</a></p>
+        </div>
     </main>
 
     <footer>

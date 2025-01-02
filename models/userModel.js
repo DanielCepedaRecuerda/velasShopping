@@ -5,7 +5,7 @@ const createUser = async (userData) => {
 
   const conn = await connection();
 
-  // Primero verificamos si el email ya está en la base de datos
+  // Verificamos si el email ya está en la base de datos
   const [rows] = await conn.execute("SELECT * FROM clientes WHERE email = ?", [email]);
 
   if (rows.length > 0) {

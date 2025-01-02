@@ -1,6 +1,6 @@
 const velasModel = require('../models/velasModel');
 
-const getVelasByCategoria = async (req, res, redirectUrl) => { // Agregamos redirectUrl como parámetro
+const getVelasByCategoria = async (req, res, redirectUrl) => {
   const categoria = req.params.categoria;  // Esto obtiene el parámetro de la URL
   try {
     // Consultar las velas de acuerdo a la categoría obtenida

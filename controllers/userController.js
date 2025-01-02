@@ -20,11 +20,9 @@ const registerUser = async (req, res) => {
     errors.push("El primer apellido solo puede contener letras y espacios.");
   }
 
-  // Validar el segundo apellido (opcional)
+  // Validar el segundo apellido
   if (!apellido2) {
-    errors.push(
-      "El segundo apellido es opcional, pero si se proporciona, debe ser válido."
-    );
+    errors.push("El segundo apellido es obligatorio.");
   } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(apellido2)) {
     errors.push("El segundo apellido solo puede contener letras y espacios.");
   }
@@ -138,13 +136,13 @@ const loginUser = async (req, res) => {
     // Buscar usuario por email
     const user = await userModel.findUserByEmail(email);
     if (!user) {
-      errors.push("Email o contraseña incorrectos"); // Mensaje genérico
+      errors.push("Email o contraseña incorrectos");
   }
     // Verificar contraseña
     const isPasswordValid =
       user && (await bcrypt.compare(contraseña, user.contraseña));
     if (!isPasswordValid) {
-      errors.push("Email o contraseña incorrectos"); // Mensaje genérico
+      errors.push("Email o contraseña incorrectos");
     }
 
     if (errors.length > 0) {

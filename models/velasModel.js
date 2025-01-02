@@ -1,13 +1,13 @@
 const connection = require("../db/connection");
 
-// Crear un nuevo producto (vela)
+// Crear un nuevo producto
 const createVela = async (velaData) => {
   const { nombre, precio, stock, id_categoria, id_proveedor } = velaData;
 
   const conn = await connection();
 
   try {
-    // Insertamos el nuevo producto (vela)
+    // Insertamos el nuevo producto
     const query =
       "INSERT INTO productos (nombre, precio, stock, id_categoria, id_proveedor) VALUES (?, ?, ?, ?, ?)";
 
@@ -45,22 +45,22 @@ const findVelaById = async (id) => {
 };
 
 const findVelasByCategoria = async (categoria) => {
-    const conn = await connection();
-    // Consulta que obtiene las velas según la categoría
-    const query = `
+  const conn = await connection();
+  // Obtener velas según su categoria
+  const query = `
     SELECT p.*, m.\`Imagen/Video\`
     FROM productos p
     INNER JOIN multimedia m ON p.id = m.id_producto
     WHERE p.id_categoria = (SELECT id FROM categorias WHERE nombre = ?)
 `;
-    try {
-      const [rows] = await conn.execute(query, [categoria]);  // Ejecución de la consulta
-      return rows;  // Devuelve las velas encontradas
-    } catch (error) {
-      console.error("Error en la consulta SQL: ", error);  // Muestra el error de la consulta
-      throw new Error("Error al obtener las velas.");
-    }
-  };
+  try {
+    const [rows] = await conn.execute(query, [categoria]);
+    return rows; // Devuelve las velas encontradas
+  } catch (error) {
+    console.error("Error en la consulta SQL: ", error); // Muestra el error de la consulta
+    throw new Error("Error al obtener las velas.");
+  }
+};
 
 // Actualizar la información de una vela
 const updateVela = async (id, velaData) => {
@@ -102,5 +102,5 @@ const deleteVela = async (id) => {
 };
 
 module.exports = {
-    findVelasByCategoria
+  findVelasByCategoria,
 };

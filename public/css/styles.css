@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   visibility: hidden;
   font-family: Arial, sans-serif;
@@ -5,6 +10,12 @@ body {
   padding: 0;
   background-color: #fff8e1;
   color: #333;
+  overflow-x: hidden;
+}
+.container {
+  max-width: 100%;
+  padding: 0; /* Elimina espaciado no deseado */
+  margin: 0 auto; /* Asegura que esté centrado */
 }
 
 header {
@@ -160,13 +171,7 @@ nav ul li a {
 }
 
 /******* Estilos para la tabla del carrito ********/
-.container {
-  max-width: 1200px; /* Ancho máximo */
-  width: 100%; /* Ancho completo en pantallas pequeñas */
-  margin: 0 auto; /* Centrar el contenedor */
-  padding: 0 20px; /* Espaciado lateral */
-  box-sizing: border-box;
-}
+
 .tituloTabCart {
   text-align: center;
   margin-bottom: 20px;
@@ -508,11 +513,11 @@ button:hover {
   button {
     width: 100%;
   }
-/******* Responsive para la tabla del carrito ********/
-.container {
-  padding: 0 10px; /* Menos padding en pantallas pequeñas */
-}
-table th,
+  /******* Responsive para la tabla del carrito ********/
+  .container {
+    padding: 0 10px; /* Menos padding en pantallas pequeñas */
+  }
+  table th,
   table td {
     font-size: 0.9rem;
     padding: 10px;

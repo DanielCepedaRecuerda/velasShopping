@@ -171,7 +171,6 @@ nav ul li a {
 }
 
 /******* Estilos para la tabla del carrito ********/
-
 .tituloTabCart {
   text-align: center;
   margin-bottom: 20px;
@@ -513,11 +512,11 @@ button:hover {
   button {
     width: 100%;
   }
-  /******* Responsive para la tabla del carrito ********/
-  .container {
-    padding: 0 10px; /* Menos padding en pantallas pequeñas */
-  }
-  table th,
+/******* Responsive para la tabla del carrito ********/
+.container {
+  padding: 0 10px; /* Menos padding en pantallas pequeñas */
+}
+table th,
   table td {
     font-size: 0.9rem;
     padding: 10px;

@@ -147,7 +147,7 @@ nav ul li a {
   text-align: center;
   margin-bottom: 20px;
   font-size: 1.8rem;
-  color: #333;
+  color: #fff;
 }
 table {
   width: 100%;
@@ -223,6 +223,7 @@ table td .delete-button:hover {
   margin: 20px auto;
   padding: 10px;
   max-width: 400px;
+  width: 30%;
 }
 .divButtons-Cart a {
   display: inline-block;

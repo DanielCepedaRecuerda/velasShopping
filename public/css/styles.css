@@ -143,6 +143,10 @@ nav ul li a {
 }
 
 /******* Estilos para la tabla del carrito ********/
+.table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+}
 .tituloTabCart {
   text-align: center;
 }
@@ -194,6 +198,30 @@ h3 a {
 h3 a:hover {
   text-decoration: underline;
 }
+/* Menú hamburguesa */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.hamburger span {
+  background: white;
+  height: 3px;
+  width: 25px;
+  margin: 4px;
+}
+
+.nav-menu {
+  display: flex;
+}
+
+.nav-menu.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .divButtons-Cart {
   display: flex;
@@ -214,7 +242,7 @@ h3 a:hover {
   border-radius: 5px;
   transition: background-color 0.3s, transform 0.3s;
 }
-.quantity{
+.quantity {
   margin: 1em;
 }
 
@@ -441,6 +469,41 @@ button:hover {
 
 /* Media Queries para hacer el diseño responsive */
 @media (max-width: 768px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  thead tr {
+    display: none;
+  }
+
+  tbody tr {
+    margin-bottom: 15px;
+    background: #fff;
+    border: 1px solid #e67e22;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  tbody td {
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  tbody td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: 45%;
+    font-weight: bold;
+    text-align: left;
+  }
   header {
     flex-direction: column;
   }
@@ -472,14 +535,21 @@ button:hover {
 @media (max-width: 480px) {
   header {
     flex-direction: column;
+    align-items: center;
   }
-
+  .hamburguer{
+    display: flex;
+  }
   .divBotonAcceso {
     margin-top: 10px;
   }
 
   nav ul {
+    display: none;
     flex-direction: column;
+  }
+  nav ul.active{
+    display: flex;
   }
 
   .product {
@@ -507,4 +577,3 @@ button:hover {
     font-size: 14px;
   }
 }
-

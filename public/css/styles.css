@@ -509,10 +509,6 @@ table th,
 }
 
 @media (max-width: 480px) {
-  header {
-    flex-direction: column;
-    width: 100%;
-  }
   .divBotonAcceso {
     margin-top: 10px;
   }
@@ -548,22 +544,5 @@ table th,
   button {
     font-size: 14px;
   }
-  /******* Responsive para la tabla del carrito ********/
-  .divButtons-Cart {
-    gap: 10px;
-    margin: 10px auto;
-  }
-
-  .floating-cart {
-    top: 10px;
-    right: 10px;
-    padding: 8px;
-  }
-
-  .item-count {
-    top: -3px;
-    right: -3px;
-    padding: 3px 5px;
-    font-size: 0.7rem;
-  }
+ 
 }

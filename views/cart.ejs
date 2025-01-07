@@ -42,87 +42,111 @@
         <a href="#" class="fa fa-twitter"></a>
       </div>
     </header>
+    <main>
+      <h1 class="tituloTabCart">Carrito de Compras</h1>
 
-    <h1 class="tituloTabCart">Carrito de Compras</h1>
+      <% if (cart && cart.length > 0) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% cart.forEach(item => { %>
+          <tr class="product-row" data-product-id="<%= item.productId %>">
+            <!-- Agregar la clase y el atributo -->
+            <td><%= item.name %></td>
+            <td>
+              <button
+                class="quantity-btn"
+                data-action="decrease"
+                data-product-id="<%= item.productId %>"
+              >
+                -
+              </button>
+              <span class="quantity"><%= item.quantity %></span>
+              <button
+                class="quantity-btn"
+                data-action="increase"
+                data-product-id="<%= item.productId %>"
+              >
+                +
+              </button>
+            </td>
+            <td>
+              <%= typeof item.price === 'number' ? item.price.toFixed(2) :
+              '0.00' %>€
+            </td>
+            <td><%= (item.quantity * item.price).toFixed(2) %>€</td>
+            <td>
+              <button
+                class="remove-btn"
+                data-product-id="<%= item.productId %>"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
 
-    <% if (cart && cart.length > 0) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Cantidad</th>
-          <th>Precio</th>
-          <th>Total</th>
-          <th>Eliminar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% cart.forEach(item => { %>
-        <tr class="product-row" data-product-id="<%= item.productId %>">
-          <!-- Agregar la clase y el atributo -->
-          <td><%= item.name %></td>
-          <td>
-            <button
-              class="quantity-btn"
-              data-action="decrease"
-              data-product-id="<%= item.productId %>"
-            >
-              -
-            </button>
-            <span class="quantity"><%= item.quantity %></span>
-            <button
-              class="quantity-btn"
-              data-action="increase"
-              data-product-id="<%= item.productId %>"
-            >
-              +
-            </button>
-          </td>
-          <td>
-            <%= typeof item.price === 'number' ? item.price.toFixed(2) : '0.00'
-            %>€
-          </td>
-          <td><%= (item.quantity * item.price).toFixed(2) %>€</td>
-          <td>
-            <button class="remove-btn" data-product-id="<%= item.productId %>">
-              Eliminar
-            </button>
-          </td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
+      <h3 class="total-price">
+        Total: <%= cart.reduce((acc, item) => acc + (item.quantity *
+        item.price), 0).toFixed(2) %>€
+      </h3>
 
-    <h3 class="total-price">
-      Total: <%= cart.reduce((acc, item) => acc + (item.quantity * item.price),
-      0).toFixed(2) %>€
-    </h3>
-
-    <div class="divButtons-Cart">
-      <a href="/productos">Seguir comprando</a>
-      <a href="/checkout">Ir a pagar</a>
-    </div>
-    <!-- Botón flotante de carrito -->
-    <a href="/cart" class="floating-cart" id="floating-cart">
-      <div class="cart-icon">
-        <img
-          src="/images/iconoPágina.jpg"
-          alt="Vela del carrito"
-          class="velaCarrito"
-        />
-        <span class="item-count" id="item-count">0</span>
-        <!-- Muestra el número de productos en el carrito -->
+      <div class="divButtons-Cart">
+        <a href="/productos">Seguir comprando</a>
+        <a href="/checkout">Ir a pagar</a>
       </div>
-    </a>
-    <% } else { %>
-    <form class="form">
-      <div>
-        <p class="form-h2">Tu carrito está vacío.</p>
-      </div>
-      <a href="/productos">Volver a la tienda</a>
-    </form>
+      <!-- Botón flotante de carrito -->
+      <a href="/cart" class="floating-cart" id="floating-cart">
+        <div class="cart-icon">
+          <img
+            src="/images/iconoPágina.jpg"
+            alt="Vela del carrito"
+            class="velaCarrito"
+          />
+          <span class="item-count" id="item-count">0</span>
+          <!-- Muestra el número de productos en el carrito -->
+        </div>
+      </a>
+      <% } else { %>
+      <form class="form">
+        <div>
+          <p class="form-h2">Tu carrito está vacío.</p>
+        </div>
+        <a href="/productos">Volver a la tienda</a>
+      </form>
 
-    <% } %>
+      <% } %>
+    </main>
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2024 Tienda de Velas. Todos los derechos reservados.</p>
+
+        <nav>
+          <ul>
+            <li><a href="">Términos y Condiciones</a></li>
+            <li><a href="">Política de Privacidad</a></li>
+            <li><a href="">FAQ</a></li>
+            <li><a href="">Sobre Nosotros</a></li>
+          </ul>
+        </nav>
+        <p>
+          Contacto:
+          <a href="mailto:tusvelasshopping@gmail.com"
+            >tusvelasshopping@gmail.com</a
+          >
+        </p>
+      </div>
+    </footer>
     <script src="/js/script.js" defer></script>
   </body>
 </html>

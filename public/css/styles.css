@@ -143,16 +143,15 @@ nav ul li a {
 }
 
 /******* Estilos para la tabla del carrito ********/
-.table-container {
-  overflow-x: auto;
-  margin-top: 20px;
-}
 .tituloTabCart {
   text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #333;
 }
 table {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 20px auto;
   border-collapse: collapse;
   background-color: white;
 }
@@ -173,82 +172,75 @@ table th {
 
 table td {
   color: #333;
+  vertical-align: middle;
 }
-
-table td a {
-  color: #e67e22;
-  text-decoration: none;
-}
-
-table td a:hover {
-  text-decoration: underline;
-}
-
-h3 {
-  text-align: center;
-  font-size: 1.5rem;
-  margin-top: 20px;
-}
-
-h3 a {
-  text-decoration: none;
-  color: #e67e22;
-}
-
-h3 a:hover {
-  text-decoration: underline;
-}
-/* Menú hamburguesa */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.hamburger span {
-  background: white;
-  height: 3px;
-  width: 25px;
-  margin: 4px;
-}
-
-.nav-menu {
-  display: flex;
-}
-
-.nav-menu.active {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.divButtons-Cart {
+table td .quantity-buttons {
   display: flex;
   justify-content: center;
-  gap: 20px; /* Espacio entre los botones */
-  margin-top: 20px; /* Espacio en la parte superior */
+  align-items: center;
+  gap: 10px;
+}
+table td .quantity-buttons button {
+  background-color: #e67e22;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+table td .quantity-buttons button:hover {
+  background-color: #d35400;
+}
+table td .delete-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+table td .delete-button:hover {
+  background-color: #c0392b;
+}
+
+.total-price {
+  text-align: right;
+  margin: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/******* Estilos para los botones del carrito ********/
+.divButtons-Cart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px auto;
+  padding: 10px;
+  max-width: 400px;
 }
 .divButtons-Cart a {
   display: inline-block;
   padding: 10px 20px;
-  margin: 10px 0;
-  background-color: #e67e22; /* Color de fondo naranja */
-  color: black; /* Color de texto negro */
+  margin: 0;
+  background-color: #e67e22;
+  color: white;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
   text-align: center;
   border-radius: 5px;
-  transition: background-color 0.3s, transform 0.3s;
-}
-.quantity {
-  margin: 1em;
+  transition: background-color 0.3s ease;
 }
 
 .divButtons-Cart a:hover {
   background-color: #d35400;
-  transform: scale(1.05);
 }
 
 footer {
@@ -424,21 +416,20 @@ button:hover {
   background-color: #d35400;
 }
 
-/* Estilo para el botón flotante */
+/******* Estilos del contador flotante en el carrito ********/
 .floating-cart {
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: white;
-  padding: 12px;
+  background-color: #e67e22;
+  padding: 10px;
   border-radius: 50%;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 1000;
-  border: 3px solid #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Ajustar el tamaño de la imagen */
@@ -456,11 +447,9 @@ button:hover {
   background-color: #e74c3c;
   color: white;
   border-radius: 50%;
-  padding: 4px 8px;
-  font-size: 14px;
+  padding: 5px 8px;
+  font-size: 0.8rem;
   font-weight: bold;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease;
 }
 
 .item-count:hover {
@@ -469,41 +458,6 @@ button:hover {
 
 /* Media Queries para hacer el diseño responsive */
 @media (max-width: 768px) {
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
-    display: block;
-  }
-
-  thead tr {
-    display: none;
-  }
-
-  tbody tr {
-    margin-bottom: 15px;
-    background: #fff;
-    border: 1px solid #e67e22;
-    border-radius: 5px;
-    padding: 10px;
-  }
-
-  tbody td {
-    text-align: right;
-    position: relative;
-    padding-left: 50%;
-  }
-
-  tbody td:before {
-    content: attr(data-label);
-    position: absolute;
-    left: 10px;
-    width: 45%;
-    font-weight: bold;
-    text-align: left;
-  }
   header {
     flex-direction: column;
   }
@@ -530,26 +484,42 @@ button:hover {
   button {
     width: 100%;
   }
+/******* Responsive para la tabla del carrito ********/
+table th,
+  table td {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .divButtons-Cart {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .divButtons-Cart a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .total-price {
+    text-align: center;
+    margin: 10px auto;
+  }
 }
 
 @media (max-width: 480px) {
   header {
     flex-direction: column;
-    align-items: center;
-  }
-  .hamburguer{
-    display: flex;
   }
   .divBotonAcceso {
     margin-top: 10px;
   }
-
-  nav ul {
-    display: none;
-    flex-direction: column;
+  table {
+    width: 100%;
+    font-size: 0.8rem;
   }
-  nav ul.active{
-    display: flex;
+  nav ul {
+    flex-direction: column;
   }
 
   .product {
@@ -575,5 +545,23 @@ button:hover {
 
   button {
     font-size: 14px;
+  }
+  /******* Responsive para la tabla del carrito ********/
+  .divButtons-Cart {
+    gap: 10px;
+    margin: 10px auto;
+  }
+
+  .floating-cart {
+    top: 10px;
+    right: 10px;
+    padding: 8px;
+  }
+
+  .item-count {
+    top: -3px;
+    right: -3px;
+    padding: 3px 5px;
+    font-size: 0.7rem;
   }
 }

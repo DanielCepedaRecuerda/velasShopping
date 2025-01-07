@@ -16,118 +16,113 @@
     />
   </head>
   <body>
-    <div class="container">
-      <header>
-        <h1>Velas Shopping</h1>
-        <nav>
-          <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/productos">Productos</a></li>
-            <li><a href="/contacto">Contacto</a></li>
-          </ul>
-        </nav>
-        <div class="divBotonAcceso" id="divBotonAcceso">
-          <a href="/login"
-            ><button id="botonAcceso" class="botonAcceso">
-              Acceso / Registro
-            </button>
-          </a>
-        </div>
-        <div class="divBotonLogout" id="divBotonLogout">
-          <a href="/logout"
-            ><button id="botonLogout" class="botonAcceso">Cerrar Sesión</button>
-          </a>
-        </div>
-        <div class="social-links">
-          <a href="#" class="fa fa-instagram"></a>
-          <a href="#" class="fa fa-twitter"></a>
-        </div>
-      </header>
-
-      <h1 class="tituloTabCart">Carrito de Compras</h1>
-
-      <% if (cart && cart.length > 0) { %>
-      <table>
-        <thead>
-          <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
-            <th>Total</th>
-            <th>Eliminar</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% cart.forEach(item => { %>
-          <tr class="product-row" data-product-id="<%= item.productId %>">
-            <!-- Agregar la clase y el atributo -->
-            <td><%= item.name %></td>
-            <td>
-              <button
-                class="quantity-btn"
-                data-action="decrease"
-                data-product-id="<%= item.productId %>"
-              >
-                -
-              </button>
-              <span class="quantity"><%= item.quantity %></span>
-              <button
-                class="quantity-btn"
-                data-action="increase"
-                data-product-id="<%= item.productId %>"
-              >
-                +
-              </button>
-            </td>
-            <td>
-              <%= typeof item.price === 'number' ? item.price.toFixed(2) :
-              '0.00' %>€
-            </td>
-            <td><%= (item.quantity * item.price).toFixed(2) %>€</td>
-            <td>
-              <button
-                class="remove-btn"
-                data-product-id="<%= item.productId %>"
-              >
-                Eliminar
-              </button>
-            </td>
-          </tr>
-          <% }); %>
-        </tbody>
-      </table>
-
-      <h3 class="total-price">
-        Total: <%= cart.reduce((acc, item) => acc + (item.quantity *
-        item.price), 0).toFixed(2) %>€
-      </h3>
-
-      <div class="divButtons-Cart">
-        <a href="/productos">Seguir comprando</a>
-        <a href="/checkout">Ir a pagar</a>
+    <header>
+      <h1>Velas Shopping</h1>
+      <nav>
+        <ul>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/productos">Productos</a></li>
+          <li><a href="/contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="divBotonAcceso" id="divBotonAcceso">
+        <a href="/login"
+          ><button id="botonAcceso" class="botonAcceso">
+            Acceso / Registro
+          </button>
+        </a>
       </div>
-      <!-- Botón flotante de carrito -->
-      <a href="/cart" class="floating-cart" id="floating-cart">
-        <div class="cart-icon">
-          <img
-            src="/images/iconoPágina.jpg"
-            alt="Vela del carrito"
-            class="velaCarrito"
-          />
-          <span class="item-count" id="item-count">0</span>
-          <!-- Muestra el número de productos en el carrito -->
-        </div>
-      </a>
-      <% } else { %>
-      <form class="form">
-        <div>
-          <p class="form-h2">Tu carrito está vacío.</p>
-        </div>
-        <a href="/productos">Volver a la tienda</a>
-      </form>
+      <div class="divBotonLogout" id="divBotonLogout">
+        <a href="/logout"
+          ><button id="botonLogout" class="botonAcceso">Cerrar Sesión</button>
+        </a>
+      </div>
+      <div class="social-links">
+        <a href="#" class="fa fa-instagram"></a>
+        <a href="#" class="fa fa-twitter"></a>
+      </div>
+    </header>
 
-      <% } %>
+    <h1 class="tituloTabCart">Carrito de Compras</h1>
+
+    <% if (cart && cart.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Total</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% cart.forEach(item => { %>
+        <tr class="product-row" data-product-id="<%= item.productId %>">
+          <!-- Agregar la clase y el atributo -->
+          <td><%= item.name %></td>
+          <td>
+            <button
+              class="quantity-btn"
+              data-action="decrease"
+              data-product-id="<%= item.productId %>"
+            >
+              -
+            </button>
+            <span class="quantity"><%= item.quantity %></span>
+            <button
+              class="quantity-btn"
+              data-action="increase"
+              data-product-id="<%= item.productId %>"
+            >
+              +
+            </button>
+          </td>
+          <td>
+            <%= typeof item.price === 'number' ? item.price.toFixed(2) : '0.00'
+            %>€
+          </td>
+          <td><%= (item.quantity * item.price).toFixed(2) %>€</td>
+          <td>
+            <button class="remove-btn" data-product-id="<%= item.productId %>">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+    <h3 class="total-price">
+      Total: <%= cart.reduce((acc, item) => acc + (item.quantity * item.price),
+      0).toFixed(2) %>€
+    </h3>
+
+    <div class="divButtons-Cart">
+      <a href="/productos">Seguir comprando</a>
+      <a href="/checkout">Ir a pagar</a>
     </div>
+    <!-- Botón flotante de carrito -->
+    <a href="/cart" class="floating-cart" id="floating-cart">
+      <div class="cart-icon">
+        <img
+          src="/images/iconoPágina.jpg"
+          alt="Vela del carrito"
+          class="velaCarrito"
+        />
+        <span class="item-count" id="item-count">0</span>
+        <!-- Muestra el número de productos en el carrito -->
+      </div>
+    </a>
+    <% } else { %>
+    <form class="form">
+      <div>
+        <p class="form-h2">Tu carrito está vacío.</p>
+      </div>
+      <a href="/productos">Volver a la tienda</a>
+    </form>
+
+    <% } %>
     <script src="/js/script.js" defer></script>
   </body>
 </html>

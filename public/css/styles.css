@@ -22,7 +22,7 @@ nav ul {
   margin: 0;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
+  flex-wrap: wrap;
 }
 nav ul li {
   margin: 0 10px;
@@ -160,6 +160,13 @@ nav ul li a {
 }
 
 /******* Estilos para la tabla del carrito ********/
+.container {
+  max-width: 1200px; /* Ancho máximo */
+  width: 100%; /* Ancho completo en pantallas pequeñas */
+  margin: 0 auto; /* Centrar el contenedor */
+  padding: 0 20px; /* Espaciado lateral */
+  box-sizing: border-box;
+}
 .tituloTabCart {
   text-align: center;
   margin-bottom: 20px;
@@ -502,6 +509,9 @@ button:hover {
     width: 100%;
   }
 /******* Responsive para la tabla del carrito ********/
+.container {
+  padding: 0 10px; /* Menos padding en pantallas pequeñas */
+}
 table th,
   table td {
     font-size: 0.9rem;

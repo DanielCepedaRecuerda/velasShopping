@@ -421,7 +421,7 @@ button:hover {
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: #e67e22;
+  background-color: white;
   padding: 10px;
   border-radius: 50%;
   display: flex;

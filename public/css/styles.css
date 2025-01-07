@@ -145,24 +145,20 @@ nav ul li a {
 /******* Estilos para la tabla del carrito ********/
 .tituloTabCart {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-  color: #fff;
 }
 table {
   width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
+  margin-top: 20px;
   border-collapse: collapse;
-  text-align: center;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
 
 table th,
 table td {
   padding: 10px;
-  border: 1px solid #ddd;
+  text-align: center;
+  border-bottom: 1px solid #e67e22;
+  font-size: 1rem;
 }
 
 table th {
@@ -173,73 +169,55 @@ table th {
 
 table td {
   color: #333;
-  vertical-align: middle;
-}
-table td .quantity-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-table td .quantity-buttons button {
-  background-color: #e67e22;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-table td .quantity-buttons button:hover {
-  background-color: #d35400;
-}
-table td .delete-button {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
 }
 
-table td .delete-button:hover {
-  background-color: #c0392b;
+table td a {
+  color: #e67e22;
+  text-decoration: none;
 }
 
-.total-price {
+table td a:hover {
+  text-decoration: underline;
+}
+
+h3 {
   text-align: center;
-  margin: 20px 0;
-  font-size: 1.2em;
+  font-size: 1.5rem;
+  margin-top: 20px;
 }
 
-/******* Estilos para los botones del carrito ********/
+h3 a {
+  text-decoration: none;
+  color: #e67e22;
+}
+
+h3 a:hover {
+  text-decoration: underline;
+}
+
 .divButtons-Cart {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px auto;
-  padding: 10px;
-  max-width: 400px;
+  justify-content: center;
+  gap: 20px; /* Espacio entre los botones */
+  margin-top: 20px; /* Espacio en la parte superior */
 }
 .divButtons-Cart a {
   display: inline-block;
   padding: 10px 20px;
-  margin: 0;
-  background-color: #e67e22;
-  color: white;
+  margin: 10px 0;
+  background-color: #e67e22; /* Color de fondo naranja */
+  color: black; /* Color de texto negro */
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: bold;
   text-align: center;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .divButtons-Cart a:hover {
-  background-color: #d35400;
+  background-color: #d35400; /* Cambiar a un naranja más oscuro al pasar el mouse */
+  transform: scale(1.05); /* Efecto de agrandamiento al pasar el mouse */
 }
 
 footer {
@@ -294,6 +272,11 @@ footer a:hover {
 
 .fa-twitter {
   background: #1da1f2;
+  color: white;
+}
+
+.fa-facebook {
+  background: #3b5998;
   color: white;
 }
 
@@ -415,46 +398,6 @@ button:hover {
   background-color: #d35400;
 }
 
-/******* Estilos del contador flotante en el carrito ********/
-.floating-cart {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: white;
-  padding: 10px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Ajustar el tamaño de la imagen */
-.velaCarrito {
-  width: 40px;
-  height: auto;
-  object-fit: contain;
-}
-
-/* Estilo para el contador de productos */
-.item-count {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: #e74c3c;
-  color: white;
-  border-radius: 50%;
-  padding: 5px 8px;
-  font-size: 0.8rem;
-  font-weight: bold;
-}
-
-.item-count:hover {
-  transform: scale(1.2);
-}
-
 /* Media Queries para hacer el diseño responsive */
 @media (max-width: 768px) {
   header {
@@ -467,7 +410,6 @@ button:hover {
 
   nav ul {
     flex-direction: column;
-    align-items: center;
   }
 
   nav li {
@@ -484,40 +426,17 @@ button:hover {
   button {
     width: 100%;
   }
-/******* Responsive para la tabla del carrito ********/
-table th,
-  table td {
-    font-size: 0.9rem;
-    padding: 10px;
-  }
-
-  .divButtons-Cart {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .divButtons-Cart a {
-    width: 100%;
-    text-align: center;
-  }
-
-  .total-price {
-    text-align: center;
-    margin: 10px auto;
-  }
 }
 
 @media (max-width: 480px) {
   header {
     flex-direction: column;
   }
+
   .divBotonAcceso {
     margin-top: 10px;
   }
-  table {
-    width: 100%;
-    font-size: 0.8rem;
-  }
+
   nav ul {
     flex-direction: column;
   }
@@ -546,22 +465,46 @@ table th,
   button {
     font-size: 14px;
   }
-  /******* Responsive para la tabla del carrito ********/
-  .divButtons-Cart {
-    gap: 10px;
-    margin: 10px auto;
-  }
+}
+/* Estilo para el botón flotante */
+.floating-cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: white;
+  padding: 12px;
+  border-radius: 50%;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  border: 3px solid #333;
+}
 
-  .floating-cart {
-    top: 10px;
-    right: 10px;
-    padding: 8px;
-  }
+/* Ajustar el tamaño de la imagen */
+.velaCarrito {
+  width: 40px;
+  height: auto;
+  object-fit: contain;
+}
 
-  .item-count {
-    top: -3px;
-    right: -3px;
-    padding: 3px 5px;
-    font-size: 0.7rem;
-  }
+/* Estilo para el contador de productos */
+.item-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.item-count:hover {
+  transform: scale(1.2);
 }

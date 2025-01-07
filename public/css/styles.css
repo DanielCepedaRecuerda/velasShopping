@@ -10,11 +10,28 @@ body {
 header {
   background-color: #333;
   color: #fff;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
+}
+nav ul li {
+  margin: 0 10px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
 }
 /*************MENSAJES*******************/
 .error-message {

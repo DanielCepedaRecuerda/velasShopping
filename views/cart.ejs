@@ -17,7 +17,7 @@
   </head>
   <body>
     <header>
-      <h1 class="tituloTabCart">Velas Shopping</h1>
+      <h1>Velas Shopping</h1>
       <nav>
         <ul>
           <li><a href="/">Inicio</a></li>
@@ -62,9 +62,21 @@
           <!-- Agregar la clase y el atributo -->
           <td><%= item.name %></td>
           <td>
-            <button class="quantity-btn" data-action="decrease" data-product-id="<%= item.productId %>">-</button>
+            <button
+              class="quantity-btn"
+              data-action="decrease"
+              data-product-id="<%= item.productId %>"
+            >
+              -
+            </button>
             <span class="quantity"><%= item.quantity %></span>
-            <button class="quantity-btn" data-action="increase" data-product-id="<%= item.productId %>">+</button>
+            <button
+              class="quantity-btn"
+              data-action="increase"
+              data-product-id="<%= item.productId %>"
+            >
+              +
+            </button>
           </td>
           <td>
             <%= typeof item.price === 'number' ? item.price.toFixed(2) : '0.00'

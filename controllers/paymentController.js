@@ -1,5 +1,6 @@
 // controllers/paymentController.js
 const cartModel = require("../models/cartModel");
+const { get } = require("../routes/userRoutes");
 
 const getCart = (req, res) => {
   const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
@@ -10,7 +11,7 @@ const getCart = (req, res) => {
 
 const confirmPayment = async (req, res) => {
   // Leer el cartId de la cookie o de la sesión
-
+  getCart();
   const cartId = req.cookies.cartId || req.session.cartId;
 
   if (!cartId) {

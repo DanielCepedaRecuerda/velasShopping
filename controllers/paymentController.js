@@ -1,19 +1,10 @@
 // controllers/paymentController.js
 const cartModel = require("../models/cartModel");
 
-const getCart = (req, res) => {
-  const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-  console.log(cart);
-
-  res.render("cart", { cart });
-};
-
 const confirmPayment = async (req, res) => {
   // Leer el cartId de la cookie o de la sesión
-  const carrito = getCart();
-  console.log(carrito);
-  
-  const cartId = req.cookies.cartId || req.session.cartId;
+
+  const cartId = req.cookies.cart || req.session.cartId;
 
   if (!cartId) {
     return res.status(400).send("No se encontró un carrito activo.");

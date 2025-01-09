@@ -59,7 +59,7 @@ function abrirPasarelaPago() {
   }
 
   // Validación de caracteres especiales en la dirección
-  const direccionRegex = /^[a-zA-Z0-9\s,.'-]*$/;
+  const direccionRegex = /^[a-zA-Z0-9\s,.'-º]*$/;
   if (!direccionRegex.test(direccion)) {
     document.getElementById("error-direccion").textContent = "La dirección contiene caracteres no permitidos.";
     hayErrores = true;
@@ -72,9 +72,10 @@ function abrirPasarelaPago() {
   }
 
   // Validación de caracteres especiales en la ciudad
-  const ciudadRegex = /^[a-zA-Z\s]*$/;
+  const ciudadRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]*$/;
+
   if (!ciudadRegex.test(ciudad)) {
-    document.getElementById("error-ciudad").textContent = "La ciudad solo puede contener letras y espacios.";
+    document.getElementById("error-ciudad").textContent = "La ciudad solo puede contener letras, espacios y acentos.";
     hayErrores = true;
   }
 

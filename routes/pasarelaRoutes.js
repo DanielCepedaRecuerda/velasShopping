@@ -8,6 +8,6 @@ router.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../views", "pasarelaPago.html"));
 });
 // Ruta para procesar el pago
-router.post("/procesar-pago", paymentController.processPayment);
+router.post("/procesar-pago", paymentController.confirmPayment);
 
 module.exports = router;

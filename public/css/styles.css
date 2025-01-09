@@ -301,6 +301,14 @@ footer a:hover {
   opacity: 0.8;
 }
 
+/***************************VISTA CHECKOUT******************************************************/
+.error {
+  color: red;
+}
+#pagarButton{
+  margin-top: 1em;
+}
+
 /**********************************FORMULARIO CONTACTO******************************************/
 .form {
   display: flex;
@@ -485,8 +493,8 @@ button:hover {
   button {
     width: 100%;
   }
-/******* Responsive para la tabla del carrito ********/
-table th,
+  /******* Responsive para la tabla del carrito ********/
+  table th,
   table td {
     font-size: 0.9rem;
     padding: 10px;
@@ -544,5 +552,4 @@ table th,
   button {
     font-size: 14px;
   }
- 
 }

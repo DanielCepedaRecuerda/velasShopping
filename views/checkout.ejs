@@ -71,7 +71,7 @@
       </tbody>
     </table>
 
-    <h3>
+    <h3 class="tituloTabCart">
       Total: <%= cart.reduce((acc, item) => acc + (item.quantity * item.price),
       0).toFixed(2) %>€
     </h3>
@@ -81,22 +81,22 @@
       <div>
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required />
-        <div id="error-nombre"></div>
+        <div id="error-nombre" class="error"></div>
 
         <label for="direccion">Dirección:</label>
         <input type="text" id="direccion" name="direccion" required />
-        <div id="error-direccion"></div>
+        <div id="error-direccion" class="error"></div>
 
         <label for="ciudad">Ciudad:</label>
         <input type="text" id="ciudad" name="ciudad" required />
-        <div id="error-ciudad"></div>
+        <div id="error-ciudad" class="error"></div>
 
         <label for="codigoPostal">Código Postal:</label>
         <input type="text" id="codigoPostal" name="codigoPostal" required />
-        <div id="error-codigoPostal"></div>
+        <div id="error-codigoPostal" class="error"></div>
       </div>
 
-      <button type="button" id="pagarButton" style="margin-top: 20px">
+      <button type="button" id="pagarButton">
         Ir a pagar
       </button>
     </form>

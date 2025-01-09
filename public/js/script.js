@@ -91,6 +91,15 @@ function abrirPasarelaPago() {
     return;
   }
 
+   // Guardar la información del formulario en el LocalStorage
+   const datosFormulario = {
+    nombre,
+    direccion,
+    ciudad,
+    codigoPostal,
+  };
+  localStorage.setItem("formularioDatos", JSON.stringify(datosFormulario));
+
   // Si todas las validaciones pasan, abrir la pasarela de pago
   const url = "/pasarelaPago";
   window.open(url, "_blank");

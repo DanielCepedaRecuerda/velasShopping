@@ -12,12 +12,31 @@ function getQueryParam(param) {
 }
 // Función para enviar a la pasarela de pago
 function abrirPasarelaPago() {
+  // Validar el formulario antes de abrir la pasarela de pago
+  const nombre = document.getElementById("nombre").value;
+  const direccion = document.getElementById("direccion").value;
+  const ciudad = document.getElementById("ciudad").value;
+  const codigoPostal = document.getElementById("codigoPostal").value;
+
+  if (!nombre || !direccion || !ciudad || !codigoPostal) {
+    alert("Por favor, completa todos los campos requeridos.");
+    return; // No abrir la pasarela si hay campos vacíos
+  }
+
   // Abre la pasarela de pago en una nueva pestaña
   const url = "/pasarelaPago"; // Cambia esta URL por la de tu pasarela
   window.open(url, "_blank"); // Abre en una nueva pestaña
 }
 
 window.onload = function () {
+  // Agregar evento al botón de pagar
+  if (document.getElementById("pagarButton")) {
+    const pagarButton = document.getElementById("pagarButton");
+    if (pagarButton) {
+      pagarButton.addEventListener("click", abrirPasarelaPago);
+    }
+  }
+
   // Inicialmente ocultar el contenido
   document.body.style.visibility = "hidden";
 

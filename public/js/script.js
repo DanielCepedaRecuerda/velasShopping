@@ -192,6 +192,10 @@ function validarFormulario() {
   return true;
 }
 window.onload = function () {
+  // Inicialmente ocultar el contenido
+  document.body.style.visibility = "hidden";
+
+  // Pasarela de pago
   // Agregar evento al botón de pagar
   if (document.getElementById("pagarButton")) {
     const pagarButton = document.getElementById("pagarButton");
@@ -201,8 +205,6 @@ window.onload = function () {
   }
 
   if (document.getElementById("paymentForm")) {
-    
-
     document.querySelector("form").addEventListener("submit", function (event) {
       event.preventDefault();
       if (validarFormulario()) {
@@ -210,9 +212,6 @@ window.onload = function () {
       }
     });
   }
-
-  // Inicialmente ocultar el contenido
-  document.body.style.visibility = "hidden";
 
   // Formulario de Contáctenos
   if (document.getElementById("contact-form")) {

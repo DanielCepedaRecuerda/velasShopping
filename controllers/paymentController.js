@@ -1,6 +1,5 @@
 // controllers/paymentController.js
 const cartModel = require("../models/cartModel");
-const { get } = require("../routes/userRoutes");
 
 const getCart = (req, res) => {
   const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];

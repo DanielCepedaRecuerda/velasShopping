@@ -29,45 +29,57 @@ function abrirPasarelaPago() {
 
   // Validación de campos vacíos
   if (!nombre || !direccion || !ciudad || !codigoPostal) {
-    document.getElementById("error-nombre").textContent = "Por favor, completa todos los campos requeridos.";
+    document.getElementById("error-nombre").textContent =
+      "Por favor, completa todos los campos requeridos.";
     hayErrores = true;
   }
 
   // Validación de campos vacíos con trim
-  if (!nombre.trim() || !direccion.trim() || !ciudad.trim() || !codigoPostal.trim()) {
-    document.getElementById("error-nombre").textContent = "Por favor, completa todos los campos requeridos.";
+  if (
+    !nombre.trim() ||
+    !direccion.trim() ||
+    !ciudad.trim() ||
+    !codigoPostal.trim()
+  ) {
+    document.getElementById("error-nombre").textContent =
+      "Por favor, completa todos los campos requeridos.";
     hayErrores = true;
   }
 
   // Validación de longitud del nombre
   if (nombre.length < 3 || nombre.length > 50) {
-    document.getElementById("error-nombre").textContent = "El nombre debe tener entre 3 y 50 caracteres.";
+    document.getElementById("error-nombre").textContent =
+      "El nombre debe tener entre 3 y 50 caracteres.";
     hayErrores = true;
   }
 
   // Validación de caracteres especiales en el nombre
   const nombreRegex = /^[a-zA-Z\s]*$/;
   if (!nombreRegex.test(nombre)) {
-    document.getElementById("error-nombre").textContent = "El nombre solo puede contener letras y espacios.";
+    document.getElementById("error-nombre").textContent =
+      "El nombre solo puede contener letras y espacios.";
     hayErrores = true;
   }
 
   // Validación de longitud de la dirección
   if (direccion.length < 5 || direccion.length > 100) {
-    document.getElementById("error-direccion").textContent = "La dirección debe tener entre 5 y 100 caracteres.";
+    document.getElementById("error-direccion").textContent =
+      "La dirección debe tener entre 5 y 100 caracteres.";
     hayErrores = true;
   }
 
   // Validación de caracteres especiales en la dirección
   const direccionRegex = /^[a-zA-Z0-9\s,.'-º]*$/;
   if (!direccionRegex.test(direccion)) {
-    document.getElementById("error-direccion").textContent = "La dirección contiene caracteres no permitidos.";
+    document.getElementById("error-direccion").textContent =
+      "La dirección contiene caracteres no permitidos.";
     hayErrores = true;
   }
 
   // Validación de longitud de la ciudad
   if (ciudad.length < 3 || ciudad.length > 50) {
-    document.getElementById("error-ciudad").textContent = "La ciudad debe tener entre 3 y 50 caracteres.";
+    document.getElementById("error-ciudad").textContent =
+      "La ciudad debe tener entre 3 y 50 caracteres.";
     hayErrores = true;
   }
 
@@ -75,14 +87,16 @@ function abrirPasarelaPago() {
   const ciudadRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]*$/;
 
   if (!ciudadRegex.test(ciudad)) {
-    document.getElementById("error-ciudad").textContent = "La ciudad solo puede contener letras, espacios y acentos.";
+    document.getElementById("error-ciudad").textContent =
+      "La ciudad solo puede contener letras, espacios y acentos.";
     hayErrores = true;
   }
 
   // Validación de formato del código postal
   const codigoPostalRegex = /^\d{5}$/;
   if (!codigoPostalRegex.test(codigoPostal)) {
-    document.getElementById("error-codigoPostal").textContent = "El código postal debe tener 5 dígitos.";
+    document.getElementById("error-codigoPostal").textContent =
+      "El código postal debe tener 5 dígitos.";
     hayErrores = true;
   }
 
@@ -91,8 +105,8 @@ function abrirPasarelaPago() {
     return;
   }
 
-   // Guardar la información del formulario en el LocalStorage
-   const datosFormulario = {
+  // Guardar la información del formulario en el LocalStorage
+  const datosFormulario = {
     nombre,
     direccion,
     ciudad,
@@ -105,6 +119,78 @@ function abrirPasarelaPago() {
   window.open(url, "_blank");
 }
 
+// Función verificar pasarela de pago
+function validarFormulario() {
+  // Limpiar mensajes de error anteriores
+  document.getElementById("error-numeroTarjeta").textContent = "";
+  document.getElementById("error-nombretitular").textContent = "";
+  document.getElementById("error-fechaExpiracion").textContent = "";
+  document.getElementById("error-cvv").textContent = "";
+
+  // Obtener valores de los campos
+  const numeroTarjeta = document.getElementById("numeroTarjeta").value;
+  const nombreTitular = document.getElementById("nombreTitular").value;
+  const fechaExpiracion = document.getElementById("fechaExpiracion").value;
+  const cvv = document.getElementById("cvv").value;
+
+  // Variable para rastrear si hay errores
+  let hayErrores = false;
+
+  // Validación del número de tarjeta
+  const tarjetaRegex = /^\d{4} \d{4} \d{4} \d{4}$/;
+  if (!numeroTarjeta.trim() || !tarjetaRegex.test(numeroTarjeta)) {
+    document.getElementById("error-numeroTarjeta").textContent =
+      "El número de tarjeta no es válido. Debe tener el formato 1234 5678 9101 1121.";
+    hayErrores = true;
+  }
+
+  // Validación del nombre del titular
+  const nombreRegex = /^[a-zA-ZÁÉÍÓÚÑáéíóúñ\s]+$/;
+  if (!nombreTitular.trim() || !nombreRegex.test(nombreTitular)) {
+    document.getElementById("error-nombretitular").textContent =
+      "El nombre del titular solo puede contener letras y espacios.";
+    hayErrores = true;
+  }
+
+  // Validación de la fecha de expiración
+  const fechaRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+  if (!fechaExpiracion.trim() || !fechaRegex.test(fechaExpiracion)) {
+    document.getElementById("error-fechaExpiracion").textContent =
+      "La fecha de expiración no es válida. Debe tener el formato MM/AA.";
+    hayErrores = true;
+  } else {
+    // Validar que la tarjeta no esté vencida
+    const [mes, ano] = fechaExpiracion.split("/");
+    const fechaActual = new Date();
+    const anoActual = fechaActual.getFullYear() % 100; // Últimos 2 dígitos del año actual
+    const mesActual = fechaActual.getMonth() + 1; // Mes actual (0 indexado)
+
+    if (
+      parseInt(ano) < anoActual ||
+      (parseInt(ano) === anoActual && parseInt(mes) < mesActual)
+    ) {
+      document.getElementById("error-fechaExpiracion").textContent =
+        "La tarjeta está vencida. Por favor, utiliza una tarjeta válida.";
+      hayErrores = true;
+    }
+  }
+
+  // Validación del CVV
+  const cvvRegex = /^\d{3}$/;
+  if (!cvv.trim() || !cvvRegex.test(cvv)) {
+    document.getElementById("error-cvv").textContent =
+      "El CVV no es válido. Debe contener exactamente 3 dígitos.";
+    hayErrores = true;
+  }
+
+  // Si hay errores, no continuar con el envío
+  if (hayErrores) {
+    return false;
+  }
+
+  // Si todas las validaciones pasan, retornar true
+  return true;
+}
 window.onload = function () {
   // Agregar evento al botón de pagar
   if (document.getElementById("pagarButton")) {
@@ -112,6 +198,17 @@ window.onload = function () {
     if (pagarButton) {
       pagarButton.addEventListener("click", abrirPasarelaPago);
     }
+  }
+
+  if (document.getElementById("paymentForm")) {
+    
+
+    document.querySelector("form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      if (validarFormulario()) {
+        this.submit();
+      }
+    });
   }
 
   // Inicialmente ocultar el contenido

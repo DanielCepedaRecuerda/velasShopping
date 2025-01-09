@@ -12,6 +12,7 @@ const checkoutRoutes = require("./routes/checkoutRoutes");
 const productsRoutes = require("./routes/productsRoutes");
 const pasarelaRoutes = require("./routes/pasarelaRoutes");
 const { logoutUser } = require("./controllers/userController");
+const paymentRoutes = require('./routes/paymentRoutes');
 
 const app = express();
 app.use(express.static(path.join(__dirname, "public")));
@@ -52,6 +53,7 @@ app.use("/productos", productsRoutes);
 app.use("/", checkoutRoutes);
 app.use("/pasarela", pasarelaRoutes);
 app.use("/contact", contactRoutes);
+app.use('/procesar-pago', paymentRoutes);
 // Rutas para los archivos HTML
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));

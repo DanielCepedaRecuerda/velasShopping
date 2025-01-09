@@ -12,7 +12,7 @@ const confirmPayment = async (req, res) => {
 
   try {
     // Obtener los artículos del carrito desde la base de datos
-    const cartItems = await cartModel.getCartItems(cartId);
+    const cartItems = await cartModel.getCart(cartId);
 
     // Renderizar la vista de confirmación con los artículos del carrito
     res.render("confirmation", {

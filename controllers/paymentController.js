@@ -11,6 +11,8 @@ const getCart = (req, res) => {
 const confirmPayment = async (req, res) => {
   // Leer el cartId de la cookie o de la sesión
   const carrito = getCart();
+  console.log(carrito);
+  
   const cartId = req.cookies.cartId || req.session.cartId;
 
   if (!cartId) {

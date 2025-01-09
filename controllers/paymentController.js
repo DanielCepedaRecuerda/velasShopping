@@ -4,7 +4,7 @@ const cartModel = require("../models/cartModel");
 const confirmPayment = async (req, res) => {
   // Leer el cartId de la cookie o de la sesión
 
-  const cartId = req.cookies.cart || req.session.cartId;
+  const cartId = req.cookies.cart || req.session.cart;
 
   if (!cartId) {
     return res.status(400).send("No se encontró un carrito activo.");
@@ -28,4 +28,4 @@ const confirmPayment = async (req, res) => {
   }
 };
 
-module.exports = { getCart, confirmPayment };
+module.exports = {confirmPayment };

@@ -24,61 +24,69 @@ function abrirPasarelaPago() {
   const ciudad = document.getElementById("ciudad").value;
   const codigoPostal = document.getElementById("codigoPostal").value;
 
+  // Variable para rastrear si hay errores
+  let hayErrores = false;
+
   // Validación de campos vacíos
   if (!nombre || !direccion || !ciudad || !codigoPostal) {
     document.getElementById("error-nombre").textContent = "Por favor, completa todos los campos requeridos.";
-    return;
+    hayErrores = true;
   }
 
   // Validación de campos vacíos con trim
   if (!nombre.trim() || !direccion.trim() || !ciudad.trim() || !codigoPostal.trim()) {
     document.getElementById("error-nombre").textContent = "Por favor, completa todos los campos requeridos.";
-    return;
+    hayErrores = true;
   }
 
   // Validación de longitud del nombre
   if (nombre.length < 3 || nombre.length > 50) {
     document.getElementById("error-nombre").textContent = "El nombre debe tener entre 3 y 50 caracteres.";
-    return;
+    hayErrores = true;
   }
 
   // Validación de caracteres especiales en el nombre
   const nombreRegex = /^[a-zA-Z\s]*$/;
   if (!nombreRegex.test(nombre)) {
     document.getElementById("error-nombre").textContent = "El nombre solo puede contener letras y espacios.";
-    return;
+    hayErrores = true;
   }
 
   // Validación de longitud de la dirección
   if (direccion.length < 5 || direccion.length > 100) {
     document.getElementById("error-direccion").textContent = "La dirección debe tener entre 5 y 100 caracteres.";
-    return;
+    hayErrores = true;
   }
 
   // Validación de caracteres especiales en la dirección
   const direccionRegex = /^[a-zA-Z0-9\s,.'-]*$/;
   if (!direccionRegex.test(direccion)) {
     document.getElementById("error-direccion").textContent = "La dirección contiene caracteres no permitidos.";
-    return;
+    hayErrores = true;
   }
 
   // Validación de longitud de la ciudad
   if (ciudad.length < 3 || ciudad.length > 50) {
     document.getElementById("error-ciudad").textContent = "La ciudad debe tener entre 3 y 50 caracteres.";
-    return;
+    hayErrores = true;
   }
 
   // Validación de caracteres especiales en la ciudad
   const ciudadRegex = /^[a-zA-Z\s]*$/;
   if (!ciudadRegex.test(ciudad)) {
     document.getElementById("error-ciudad").textContent = "La ciudad solo puede contener letras y espacios.";
-    return;
+    hayErrores = true;
   }
 
   // Validación de formato del código postal
   const codigoPostalRegex = /^\d{5}$/;
   if (!codigoPostalRegex.test(codigoPostal)) {
     document.getElementById("error-codigoPostal").textContent = "El código postal debe tener 5 dígitos.";
+    hayErrores = true;
+  }
+
+  // Si hay errores, no abrir la pasarela de pago
+  if (hayErrores) {
     return;
   }
 

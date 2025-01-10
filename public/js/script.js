@@ -111,7 +111,7 @@ function abrirPasarelaPago() {
     return;
   }
 
-    // Guardar los datos del formulario en una cookie
+  // Guardar los datos del formulario en una cookie
   const datosFormulario = {
     nombre,
     direccion,
@@ -231,7 +231,14 @@ window.onload = function () {
           body: JSON.stringify(formData),
           credentials: "include", // Incluir cookies
         })
-          .then((response) => response.json())
+        .then((response) => {
+          // Verifica si la respuesta es JSON antes de intentar convertirla
+          if (response.ok && response.headers.get("Content-Type").includes("application/json")) {
+            return response.json(); // Convierte la respuesta a JSON
+          } else {
+            throw new Error("Respuesta inesperada: " + response.status + " " + response.statusText);
+          }
+        })
           .then((data) => {
             if (data.success) {
               alert(data.message);

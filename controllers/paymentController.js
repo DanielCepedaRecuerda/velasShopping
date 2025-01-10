@@ -7,8 +7,7 @@ const {
 const paymentController = async (req, res) => {
   try {
     // Verificar si el usuario está autenticado
-    console.log(req.session.user);
-    if (!req.session.user || !req.session.user.id) {
+    if (req.cookies.user_authenticated) {
       return res.status(401).json({
         success: false,
         error: "No estás autenticado. Por favor, inicia sesión.",
@@ -28,12 +27,10 @@ const paymentController = async (req, res) => {
 
     // Verificar si faltan datos
     if (!cart || !formularioDatos) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          error: "Faltan datos del carrito o formulario.",
-        });
+      return res.status(400).json({
+        success: false,
+        error: "Faltan datos del carrito o formulario.",
+      });
     }
 
     // Validación de datos del formulario (aunque esto ya lo controlas previamente)
@@ -46,12 +43,10 @@ const paymentController = async (req, res) => {
       !fechaExpiracion ||
       !cvv
     ) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          error: "Faltan datos en el formulario de pago.",
-        });
+      return res.status(400).json({
+        success: false,
+        error: "Faltan datos en el formulario de pago.",
+      });
     }
 
     // 1. Insertar o actualizar la dirección

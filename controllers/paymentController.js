@@ -8,7 +8,6 @@ const paymentController = async (req, res) => {
   try {
     // Verificar si el usuario está autenticado
     if (!req.session.user || !req.session.user.id) {
-      alert("Debes iniciar sesión para proceder al pago.");
       return res.redirect("/login"); // Redirigir a login si no está autenticado
     }
     // Obtener el id_cliente desde la sesión

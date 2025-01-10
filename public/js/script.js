@@ -208,7 +208,30 @@ window.onload = function () {
     document.querySelector("form").addEventListener("submit", function (event) {
       event.preventDefault();
       if (validarFormulario()) {
-        this.submit();
+        const formData = new FormData(this);
+
+        // Enviar los datos al servidor
+        fetch("/pasarela/procesar-pago", {
+          method: "POST",
+          body: formData,
+          credentials: "include", // Incluye las cookies
+        })
+          .then((response) => {
+            if (response.redirected) {
+              window.location.href = response.url; // Redirigir si hay una respuesta redirigida
+            } else {
+              // Manejar otros tipos de respuestas
+              return response.json(); // Suponiendo que el servidor devuelve JSON
+            }
+          })
+          .then((data) => {
+            // Manejar la respuesta JSON (por ejemplo, mostrar un mensaje de éxito)
+            console.log("Respuesta del servidor:", data);
+          })
+          .catch((error) => {
+            console.error("Error al procesar el checkout:", error);
+            // Mostrar un mensaje de error al usuario
+          });
       }
     });
   }

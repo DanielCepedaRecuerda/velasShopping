@@ -207,8 +207,10 @@ window.onload = function () {
   if (document.getElementById("paymentForm")) {
     document.querySelector("form").addEventListener("submit", function (event) {
       event.preventDefault(); // Evitar el envío tradicional del formulario
-  
+      console.log("entro en el primer if");
       if (validarFormulario()) {
+        console.log("entro en el segundo if");
+
         const formData = new FormData(this);
   
         // Enviar los datos al servidor
@@ -218,9 +220,9 @@ window.onload = function () {
           credentials: "include", // Incluir cookies
         })
           .then((response) => {
+            console.log("entro en then response if");
+
             if (response.redirected) {
-              console.log("me voy al mismo sitio");
-              
               window.location.href = response.url; // Redirigir si hay una redirección
             } else if (response.headers.get("Content-Type").includes("application/json")) {
               return response.json(); // Parsear como JSON si el contenido es JSON
@@ -229,6 +231,8 @@ window.onload = function () {
             }
           })
           .then((data) => {
+            console.log("entro en el then data if");
+
             if (typeof data === "string") {
               // Manejar respuesta HTML (por ejemplo, mostrar un mensaje de éxito en el DOM)
               document.body.innerHTML += `<div>${data}</div>`;

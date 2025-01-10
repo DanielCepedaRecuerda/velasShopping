@@ -16,4 +16,4 @@ router.get("/confirmation", (req, res) => {
     cartItems: [],
   });
 });
-module.exports = router;
+module.exports = {paymentController, router};

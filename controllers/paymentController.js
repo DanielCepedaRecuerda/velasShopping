@@ -6,7 +6,7 @@ const paymentController = async (req, res) => {
     // Recuperar los datos del formulario
     const { numeroTarjeta, nombreTitular, fechaExpiracion, cvv } = req.body;
     console.log("Form: " + numeroTarjeta, nombreTitular, fechaExpiracion, cvv);
-    
+
     // Recuperar la cookie "cart" (cartId o los datos del carrito)
     const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : []; // Recuperar los datos del carrito desde la cookie
     console.log("Cookie: " + cart);
@@ -28,9 +28,25 @@ const paymentController = async (req, res) => {
     console.error("Error al procesar el pago:", error);
     res.status(500).json({
       success: false,
-      error: "Ocurrió un error al procesar el pago. Inténtalo de nuevo más tarde.",
+      error:
+        "Ocurrió un error al procesar el pago. Inténtalo de nuevo más tarde.",
     });
   }
 };
+const confirmation = (req, res) => {
+  const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
+  const formularioDatos = req.cookies.formularioDatos
+    ? JSON.parse(req.cookies.formularioDatos)
+    : null;
 
-module.exports = { paymentController };
+  res.clearCookie("cart");
+  res.clearCookie("formularioDatos");
+
+  res.render("confirmation", {
+    message: "Gracias por tu compra. Tu pago se procesó exitosamente.",
+    cartItems: cart,
+    formularioDatos: formularioDatos,
+  });
+};
+
+module.exports = { paymentController, confirmation };

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const {paymentController} = require("../controllers/paymentController");
+const { paymentController } = require("../controllers/paymentController");
+const { confirmation } = require("../controllers/paymentController");
 const path = require("path");
 
 // Ruta para mostrar la pasarela de pago
@@ -10,12 +11,5 @@ router.get("/", (req, res) => {
 // Ruta para procesar el pago
 router.post("/procesar-pago", paymentController);
 
-router.get("/confirmation", (req, res) => {
-  const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-  res.render("confirmation", {
-    message: "Gracias por tu compra. Tu pago se procesó exitosamente.",
-    cartItems: cart,
-    formularioDatos,
-  });
-});
+router.get("/confirmation", confirmation);
 module.exports = router;

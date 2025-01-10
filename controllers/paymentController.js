@@ -22,10 +22,12 @@ const confirmPayment = async (req, res) => {
 
     // Opcional: Vaciar el carrito después del pago
     await cartModel.clearCart(cartId);
+
+    res.redirect("/confirmation");
   } catch (error) {
     console.error("Error al confirmar el pago:", error);
     res.status(500).send("Ocurrió un error al procesar tu pago.");
   }
 };
 
-module.exports = {confirmPayment };
+module.exports = { confirmPayment };

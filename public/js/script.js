@@ -232,6 +232,8 @@ window.onload = function () {
           credentials: "include", // Incluir cookies
         })
         .then((response) => {
+          console.log("Tipo de contenido de la respuesta:", response.headers.get("Content-Type"));
+    
           // Verifica si la respuesta es JSON antes de intentar convertirla
           if (response.ok && response.headers.get("Content-Type").includes("application/json")) {
             return response.json(); // Convierte la respuesta a JSON

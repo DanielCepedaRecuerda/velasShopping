@@ -11,9 +11,10 @@ router.get("/", (req, res) => {
 router.post("/procesar-pago", paymentController);
 
 router.get("/confirmation", (req, res) => {
+  const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
   res.render("confirmation", {
     message: "Gracias por tu compra. Tu pago se procesó exitosamente.",
-    cartItems: [],
+    cartItems: cart,
   });
 });
 module.exports = router;

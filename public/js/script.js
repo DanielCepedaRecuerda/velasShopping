@@ -212,7 +212,7 @@ window.onload = function () {
         const formData = new FormData(this);
   
         // Enviar los datos al servidor
-        fetch("/pasarela/procesar-pago", {
+        fetch("/procesar-pago", {
           method: "POST",
           body: formData,
           credentials: "include", // Incluir cookies

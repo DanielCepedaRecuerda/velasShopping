@@ -5,9 +5,11 @@ const paymentController = async (req, res) => {
   try {
     // Recuperar los datos del formulario
     const { numeroTarjeta, nombreTitular, fechaExpiracion, cvv } = req.body;
-
+    console.log("Form: " + numeroTarjeta, nombreTitular, fechaExpiracion, cvv);
+    
     // Recuperar la cookie "cart" (cartId o los datos del carrito)
     const cart = req.cookies.cart;
+    console.log("Cookie: " + cart);
 
     // Si no se encuentra un carrito o no se envían los datos del formulario, retornar un error
     if (!cart || !numeroTarjeta || !nombreTitular || !fechaExpiracion || !cvv) {

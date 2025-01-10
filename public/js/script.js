@@ -209,7 +209,7 @@ window.onload = function () {
       event.preventDefault(); // Evitar el envío tradicional del formulario
       if (validarFormulario()) {
         const formData = new FormData(this);
-
+  
         // Enviar los datos al servidor
         fetch("/pasarela/procesar-pago", {
           method: "POST",
@@ -218,24 +218,24 @@ window.onload = function () {
         })
           .then((response) => {
             if (response.redirected) {
-              window.location.href = "/confirmation";
+              // Redirigir automáticamente si el servidor indica una redirección
+              window.location.href = response.url;
             } else if (
               response.headers.get("Content-Type").includes("application/json")
             ) {
               return response.json(); // Parsear como JSON si el contenido es JSON
             } else {
-              return response.text(); // Si no, manejar como texto (por ejemplo, HTML)
+              return response.text(); // Si no es JSON, manejar como texto
             }
           })
           .then((data) => {
             if (typeof data === "string") {
-              // Manejar respuesta HTML (por ejemplo, mostrar un mensaje de éxito en el DOM)
-              document.body.innerHTML += `<div>${data}</div>`;
+              // Redirigir manualmente si el servidor devolvió HTML
+              window.location.href = "/confirmation";
             } else if (data.success) {
               // Manejar respuesta JSON de éxito
               alert(data.message);
-              // Redirigir a otra página si es necesario
-              window.location.href = "/confirmation";
+              window.location.href = "/confirmation"; // Redirigir a la página de confirmación
             } else {
               // Manejar errores devueltos en JSON
               alert(data.error);
@@ -249,7 +249,7 @@ window.onload = function () {
           });
       }
     });
-  }
+  }  
 
   // Formulario de Contáctenos
   if (document.getElementById("contact-form")) {

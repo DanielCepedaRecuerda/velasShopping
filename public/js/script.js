@@ -208,36 +208,27 @@ window.onload = function () {
     document.querySelector("form").addEventListener("submit", function (event) {
       event.preventDefault(); // Evitar el envío tradicional del formulario
       if (validarFormulario()) {
-        const formData = new FormData(this);
-  
+        const formData = {
+          numeroTarjeta: document.getElementById("numeroTarjeta").value,
+          nombreTitular: document.getElementById("nombreTitular").value,
+          fechaExpiracion: document.getElementById("fechaExpiracion").value,
+          cvv: document.getElementById("cvv").value,
+        };
         // Enviar los datos al servidor
         fetch("/pasarela/procesar-pago", {
           method: "POST",
-          body: formData,
+          headers: {
+            "Content-Type": "application/json", // Importante para JSON
+          },
+          body: JSON.stringify(formData),
           credentials: "include", // Incluir cookies
         })
-          .then((response) => {
-            if (response.redirected) {
-              // Redirigir automáticamente si el servidor indica una redirección
-              window.location.href = response.url;
-            } else if (
-              response.headers.get("Content-Type").includes("application/json")
-            ) {
-              return response.json(); // Parsear como JSON si el contenido es JSON
-            } else {
-              return response.text(); // Si no es JSON, manejar como texto
-            }
-          })
+          .then((response) => response.json())
           .then((data) => {
-            if (typeof data === "string") {
-              // Redirigir manualmente si el servidor devolvió HTML
-              window.location.href = "/pasarela/confirmation";
-            } else if (data.success) {
-              // Manejar respuesta JSON de éxito
+            if (data.success) {
               alert(data.message);
-              window.location.href = "/pasarela/confirmation"; // Redirigir a la página de confirmación
+              window.location.href = "/pasarela/confirmation";
             } else {
-              // Manejar errores devueltos en JSON
               alert(data.error);
             }
           })
@@ -249,7 +240,7 @@ window.onload = function () {
           });
       }
     });
-  }  
+  }
 
   // Formulario de Contáctenos
   if (document.getElementById("contact-form")) {

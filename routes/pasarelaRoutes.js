@@ -10,4 +10,10 @@ router.get("/", (req, res) => {
 // Ruta para procesar el pago
 router.post("/procesar-pago", paymentController);
 
+router.get("/confirmation", (req, res) => {
+  res.render("confirmation", {
+    message: "Gracias por tu compra. Tu pago se procesó exitosamente.",
+    cartItems: [],
+  });
+});
 module.exports = router;

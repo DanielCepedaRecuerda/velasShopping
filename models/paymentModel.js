@@ -1,128 +1,114 @@
 const connection = require("../db/connection");
 
-const createPedido = async (fechaHora, total, idCliente) => {
-  const connectionInstance = await connection();
-  try {
-    // Iniciar transacción
-    await connectionInstance.beginTransaction();
-
-    // Crear pedido
-    const [result] = await connectionInstance.execute(
-      "INSERT INTO pedidos (fecha_hora, total, id_cliente) VALUES (?, ?, ?)",
-      [fechaHora, total, idCliente]
-    );
-    const idPedido = result.insertId;
-
-    // Agregar productos al pedido
-    const values = cartItems.map((item) => [
-      item.cantidad,
-      item.precio,
-      idPedido,
-      item.id_producto,
-    ]);
-    await connectionInstance.execute(
-      "INSERT INTO productos_pedidos (cantidad, precio, id_pedido, id_producto) VALUES ?",
-      [values]
-    );
-
-    // Actualizar stock de productos
-    for (let item of cartItems) {
-      await connectionInstance.execute(
-        "UPDATE productos SET stock = stock - ? WHERE id = ?",
-        [item.cantidad, item.id_producto]
-      );
+const insertarPedido = (idCliente, total) => {
+  const query = `INSERT INTO pedido (fecha_hora, total, id_cliente) VALUES (NOW(), ?, ?)`;
+  connection.execute(query, [total, idCliente], (err, result) => {
+    if (err) {
+      console.error("Error al insertar pedido:", err);
+      return;
     }
-
-    // Commit de la transacción
-    await connectionInstance.commit();
-
-    return idPedido;
-  } catch (error) {
-    // Revertir en caso de error
-    await connectionInstance.rollback();
-    throw error;
-  } finally {
-    // Cerrar Conexción
-    connectionInstance.release();
-  }
+    console.log("Pedido insertado con éxito, ID:", result.insertId);
+    return result.insertId; // Devuelve el id del nuevo pedido
+  });
 };
 
-// Agregar productos al pedido
-const addProductsToOrder = async (idPedido, cartItems) => {
-  const connectionInstance = await connection();
-  try {
-    // Verificar si los productos existen y tienen stock suficiente
-    for (let item of cartItems) {
-      const [product] = await connectionInstance.execute(
-        "SELECT stock FROM productos WHERE id = ?",
-        [item.id_producto]
-      );
-
-      if (!product || product.length === 0) {
-        throw new Error(`El producto con ID ${item.id_producto} no existe.`);
+const insertarProductosPedidos = (idPedido, productos) => {
+  productos.forEach((producto) => {
+    const query = `INSERT INTO productos_pedidos (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)`;
+    connection.execute(
+      query,
+      [idPedido, producto.id_producto, producto.cantidad, producto.precio],
+      (err, result) => {
+        if (err) {
+          console.error("Error al insertar productos en el pedido:", err);
+          return;
+        }
+        console.log("Producto insertado con éxito en el pedido.");
       }
-
-      const productStock = product[0].stock;
-      if (productStock < item.cantidad) {
-        throw new Error(
-          `No hay suficiente stock para el producto ${item.id_producto}.`
-        );
-      }
-    }
-
-    // Insertar productos en la tabla de productos_pedidos
-    const values = cartItems.map((item) => [
-      item.cantidad,
-      item.precio,
-      idPedido,
-      item.id_producto,
-    ]);
-    await connectionInstance.execute(
-      "INSERT INTO productos_pedidos (cantidad, precio, id_pedido, id_producto) VALUES ?",
-      [values]
     );
-  } catch (error) {
-    console.error("Error al agregar productos al pedido:", error);
-    throw error; // Lanzar el error para que se maneje por el controlador
-  } finally {
-    connectionInstance.release();
-  }
+  });
 };
 
-// Actualizar el stock de los productos
-const updateProductStock = async (cartItems) => {
-  const connectionInstance = await connection();
-  try {
-    // Actualizar el stock de cada producto
-    for (let item of cartItems) {
-      const [product] = await connectionInstance.execute(
-        "SELECT stock FROM productos WHERE id = ?",
-        [item.id_producto]
-      );
-
-      if (!product || product.length === 0) {
-        throw new Error(`El producto con ID ${item.id_producto} no existe.`);
+const insertarDireccion = (idCliente, direccionData) => {
+  return new Promise((resolve, reject) => {
+    // Verificar si el cliente ya tiene una dirección similar (por ejemplo, misma ciudad, código postal y dirección)
+    const queryCheck = `SELECT * FROM direcciones WHERE id_cliente = ? AND dirección = ? AND cod_postal = ? AND ciudad = ? AND provincia = ? AND país = ?`;
+    connection.execute(
+      queryCheck,
+      [
+        idCliente,
+        direccionData.dirección,
+        direccionData.cod_postal,
+        direccionData.ciudad,
+        direccionData.provincia,
+        direccionData.país
+      ],
+      (err, result) => {
+        if (err) {
+          console.error("Error al verificar dirección existente:", err);
+          reject(err);
+        } else {
+          if (result.length > 0) {
+            // Si la dirección ya existe, no hacer nada o retornar la dirección existente
+            console.log("La dirección ya está registrada.");
+            resolve(result[0]); // Devuelve la dirección existente
+          } else {
+            // Si no existe, insertamos la nueva dirección
+            const queryInsert = `INSERT INTO direcciones (dirección, numero, piso, puerta, cod_postal, ciudad, provincia, país, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+            connection.execute(
+              queryInsert,
+              [
+                direccionData.dirección,
+                direccionData.numero,
+                direccionData.piso,
+                direccionData.puerta,
+                direccionData.cod_postal,
+                direccionData.ciudad,
+                direccionData.provincia,
+                direccionData.país,
+                idCliente
+              ],
+              (err, result) => {
+                if (err) {
+                  console.error("Error al insertar dirección:", err);
+                  reject(err);
+                } else {
+                  console.log("Dirección insertada con éxito.");
+                  resolve(result);
+                }
+              }
+            );
+          }
+        }
       }
+    );
+  });
+};
 
-      const productStock = product[0].stock;
-      if (productStock < item.cantidad) {
-        throw new Error(
-          `No hay suficiente stock para el producto ${item.id_producto}.`
-        );
-      }
 
-      // Actualizar el stock en la base de datos
-      await connectionInstance.execute(
-        "UPDATE productos SET stock = stock - ? WHERE id = ?",
-        [item.cantidad, item.id_producto]
-      );
+const procesarPago = (idCliente, productos, direccionData, total) => {
+  connection.beginTransaction((err) => {
+    if (err) {
+      throw err;
     }
-  } catch (error) {
-    console.error("Error al actualizar el stock de los productos:", error);
-    throw error;
-  } finally {
-    connectionInstance.release();
-  }
+    // 1. Insertar el pedido
+    insertarPedido(idCliente, total, (idPedido) => {
+      // 2. Insertar los productos en el pedido
+      insertarProductosPedidos(idPedido, productos);
+
+      // 3. Insertar la dirección
+      insertarDireccion(idCliente, direccionData);
+      connection.commit((err) => {
+        if (err) {
+          connection.rollback(() => {
+            console.error("Error en la transacción. Se ha revertido.");
+          });
+        } else {
+          console.log("Transacción completada con éxito.");
+        }
+      });
+    });
+  });
 };
 
-module.exports = { createPedido, addProductsToOrder, updateProductStock };
+module.exports = {procesarPago};

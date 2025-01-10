@@ -1,29 +1,77 @@
-// controllers/paymentController.js
-const cartModel = require("../models/cartModel");
+const {
+  insertarPedido,
+  insertarProductosPedidos,
+  insertarDireccion,
+} = require("../models/paymentModel"); // Asegúrate de tener las funciones correctamente exportadas
 
 const paymentController = async (req, res) => {
   try {
-    // Recuperar los datos del formulario
-    const { numeroTarjeta, nombreTitular, fechaExpiracion, cvv } = req.body;
-    console.log("Form: " + numeroTarjeta, nombreTitular, fechaExpiracion, cvv);
+    // Verificar si el usuario está autenticado
+    if (!req.session.user || !req.session.user.id) {
+      alert("Debes iniciar sesión para proceder al pago.");
+      return res.redirect("/login"); // Redirigir a login si no está autenticado
+    }
+    // Obtener el id_cliente desde la sesión
+    const idCliente = req.session.user.id;
 
-    // Recuperar la cookie "cart" (cartId o los datos del carrito)
-    const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : []; // Recuperar los datos del carrito desde la cookie
-    console.log("Cookie: " + cart);
+    // Recuperar los datos del carrito desde la cookie
+    const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
+    console.log("Cart: ", cart);
 
-    // Si no se encuentra un carrito o no se envían los datos del formulario, retornar un error
-    if (!cart || !numeroTarjeta || !nombreTitular || !fechaExpiracion || !cvv) {
-      return res.status(400).json({ success: false, error: "Faltan datos." });
+    // Recuperar los datos del formulario desde la cookie
+    const formularioDatos = req.cookies.formularioDatos
+      ? JSON.parse(req.cookies.formularioDatos)
+      : null;
+
+    // Verificar si faltan datos
+    if (!cart || !formularioDatos) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          error: "Faltan datos del carrito o formulario.",
+        });
     }
 
-    // Si todo es correcto, responde con un mensaje de éxito y redirigir a confirmation
+    // Validación de datos del formulario (aunque esto ya lo controlas previamente)
+    const { direccion, numeroTarjeta, nombreTitular, fechaExpiracion, cvv } =
+      formularioDatos;
+    if (
+      !direccion ||
+      !numeroTarjeta ||
+      !nombreTitular ||
+      !fechaExpiracion ||
+      !cvv
+    ) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          error: "Faltan datos en el formulario de pago.",
+        });
+    }
+
+    // 1. Insertar o actualizar la dirección
+    await insertarDireccion(idCliente, direccion);
+
+    // 2. Calcular el total del pedido
+    const total = cart.reduce(
+      (acc, item) => acc + item.precio * item.cantidad,
+      0
+    ); // Calculamos el total del pedido
+
+    // 3. Insertar el pedido
+    const idPedido = await insertarPedido(idCliente, total);
+
+    // 4. Insertar los productos del pedido
+    await insertarProductosPedidos(idPedido, cart);
+
+    // 5. Responder con éxito
     res.status(200).json({
       success: true,
       message: "Pago procesado correctamente. Redirigiendo a la confirmación.",
       cartItems: cart,
     });
-
-    // Aquí podrías agregar la lógica de inserción a base de datos o procesamiento del pago
   } catch (error) {
     console.error("Error al procesar el pago:", error);
     res.status(500).json({
@@ -33,6 +81,7 @@ const paymentController = async (req, res) => {
     });
   }
 };
+
 const confirmation = (req, res) => {
   const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
   const formularioDatos = req.cookies.formularioDatos

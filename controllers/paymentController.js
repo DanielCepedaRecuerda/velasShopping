@@ -11,17 +11,18 @@ const confirmPayment = async (req, res) => {
   }
 
   try {
-    // Obtener los artículos del carrito desde la base de datos
-    const cartItems = await cartModel.getCart(cartId);
+    // Recuperar los datos del formulario
+    const { numeroTarjeta, nombreTitular, fechaExpiracion, cvv } = req.body;
 
-    // Vaciar el carrito después del pago
-    await cartModel.clearCart(cartId);
+    // Recuperar la cookie "cart"
+    const cart = req.cookies.cart;
 
     // Renderizar la vista de confirmación con los artículos del carrito
     res.render("confirmation", {
       message: "Tu pago se procesó exitosamente.",
-      cartItems: cartItems,
+      cartItems: cartItems || [],
     });
+
   } catch (error) {
     console.error("Error al confirmar el pago:", error);
     res.status(500).send("Ocurrió un error al procesar tu pago.");

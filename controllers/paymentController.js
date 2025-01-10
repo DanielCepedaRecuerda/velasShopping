@@ -7,6 +7,7 @@ const {
 const paymentController = async (req, res) => {
   try {
     // Verificar si el usuario está autenticado
+    console.log(req.session.user);
     if (!req.session.user || !req.session.user.id) {
       return res.status(401).json({
         success: false,

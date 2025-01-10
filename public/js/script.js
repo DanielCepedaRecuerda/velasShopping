@@ -19,30 +19,36 @@ function abrirPasarelaPago() {
   document.getElementById("error-codigoPostal").textContent = "";
 
   // Validar el formulario antes de abrir la pasarela de pago
-  const nombre = document.getElementById("nombre").value;
-  const direccion = document.getElementById("direccion").value;
-  const ciudad = document.getElementById("ciudad").value;
-  const codigoPostal = document.getElementById("codigoPostal").value;
+  const nombre = document.getElementById("nombre").value.trim();
+  const direccion = document.getElementById("direccion").value.trim();
+  const ciudad = document.getElementById("ciudad").value.trim();
+  const codigoPostal = document.getElementById("codigoPostal").value.trim();
 
   // Variable para rastrear si hay errores
   let hayErrores = false;
 
   // Validación de campos vacíos
-  if (!nombre || !direccion || !ciudad || !codigoPostal) {
+  if (!nombre) {
     document.getElementById("error-nombre").textContent =
-      "Por favor, completa todos los campos requeridos.";
+      "Por favor, ingresa tu nombre.";
     hayErrores = true;
   }
 
-  // Validación de campos vacíos con trim
-  if (
-    !nombre.trim() ||
-    !direccion.trim() ||
-    !ciudad.trim() ||
-    !codigoPostal.trim()
-  ) {
-    document.getElementById("error-nombre").textContent =
-      "Por favor, completa todos los campos requeridos.";
+  if (!direccion) {
+    document.getElementById("error-direccion").textContent =
+      "Por favor, ingresa tu dirección.";
+    hayErrores = true;
+  }
+
+  if (!ciudad) {
+    document.getElementById("error-ciudad").textContent =
+      "Por favor, ingresa tu ciudad.";
+    hayErrores = true;
+  }
+
+  if (!codigoPostal) {
+    document.getElementById("error-codigoPostal").textContent =
+      "Por favor, ingresa tu código postal.";
     hayErrores = true;
   }
 
@@ -105,15 +111,17 @@ function abrirPasarelaPago() {
     return;
   }
 
-  // Guardar la información del formulario en el LocalStorage
+    // Guardar los datos del formulario en una cookie
   const datosFormulario = {
     nombre,
     direccion,
     ciudad,
     codigoPostal,
   };
-  localStorage.setItem("formularioDatos", JSON.stringify(datosFormulario));
 
+  document.cookie = `formularioDatos=${encodeURIComponent(
+    JSON.stringify(datosFormulario)
+  )}; path=/;`;
   // Si todas las validaciones pasan, abrir la pasarela de pago
   const url = "/pasarelaPago";
   window.open(url, "_blank");

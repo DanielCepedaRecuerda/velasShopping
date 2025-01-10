@@ -15,6 +15,7 @@ router.get("/confirmation", (req, res) => {
   res.render("confirmation", {
     message: "Gracias por tu compra. Tu pago se procesó exitosamente.",
     cartItems: cart,
+    formularioDatos,
   });
 });
 module.exports = router;

@@ -30,6 +30,18 @@
         </ul>
         <% } else { %>
         <p>No se encontraron artículos en el carrito.</p>
+        <% } %> <% if (formularioDatos) { %>
+        <h3>Detalles de envío:</h3>
+        <ul>
+          <li><strong>Nombre:</strong> <%= formularioDatos.nombre %></li>
+          <li><strong>Dirección:</strong> <%= formularioDatos.direccion %></li>
+          <li><strong>Ciudad:</strong> <%= formularioDatos.ciudad %></li>
+          <li>
+            <strong>Código Postal:</strong> <%= formularioDatos.codigoPostal %>
+          </li>
+        </ul>
+        <% } else { %>
+        <p>No se encontraron detalles de envío.</p>
         <% } %>
 
         <p>Puede volver a la <a href="/">página principal</a>.</p>

@@ -207,12 +207,9 @@ window.onload = function () {
   if (document.getElementById("paymentForm")) {
     document.querySelector("form").addEventListener("submit", function (event) {
       event.preventDefault(); // Evitar el envío tradicional del formulario
-      console.log("entro en el primer if");
       if (validarFormulario()) {
-        console.log("entro en el segundo if");
-
         const formData = new FormData(this);
-  
+
         // Enviar los datos al servidor
         fetch("/pasarela/procesar-pago", {
           method: "POST",
@@ -220,19 +217,17 @@ window.onload = function () {
           credentials: "include", // Incluir cookies
         })
           .then((response) => {
-            console.log("entro en then response if");
-
             if (response.redirected) {
-              window.location.href = response.url; // Redirigir si hay una redirección
-            } else if (response.headers.get("Content-Type").includes("application/json")) {
+              window.location.href = "/confirmation";
+            } else if (
+              response.headers.get("Content-Type").includes("application/json")
+            ) {
               return response.json(); // Parsear como JSON si el contenido es JSON
             } else {
               return response.text(); // Si no, manejar como texto (por ejemplo, HTML)
             }
           })
           .then((data) => {
-            console.log("entro en el then data if");
-
             if (typeof data === "string") {
               // Manejar respuesta HTML (por ejemplo, mostrar un mensaje de éxito en el DOM)
               document.body.innerHTML += `<div>${data}</div>`;
@@ -240,7 +235,7 @@ window.onload = function () {
               // Manejar respuesta JSON de éxito
               alert(data.message);
               // Redirigir a otra página si es necesario
-              window.location.href = "/pagina-confirmacion";
+              window.location.href = "/confirmation";
             } else {
               // Manejar errores devueltos en JSON
               alert(data.error);
@@ -248,7 +243,9 @@ window.onload = function () {
           })
           .catch((error) => {
             console.error("Error al procesar el pago:", error);
-            alert("Ocurrió un error al procesar el pago. Inténtalo de nuevo más tarde.");
+            alert(
+              "Ocurrió un error al procesar el pago. Inténtalo de nuevo más tarde."
+            );
           });
       }
     });

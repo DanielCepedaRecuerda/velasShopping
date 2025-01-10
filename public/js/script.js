@@ -206,31 +206,43 @@ window.onload = function () {
 
   if (document.getElementById("paymentForm")) {
     document.querySelector("form").addEventListener("submit", function (event) {
-      event.preventDefault();
+      event.preventDefault(); // Evitar el envío tradicional del formulario
+  
       if (validarFormulario()) {
         const formData = new FormData(this);
-
+  
         // Enviar los datos al servidor
         fetch("/pasarela/procesar-pago", {
           method: "POST",
           body: formData,
-          credentials: "include", // Incluye las cookies
+          credentials: "include", // Incluir cookies
         })
           .then((response) => {
             if (response.redirected) {
-              window.location.href = response.url; // Redirigir si hay una respuesta redirigida
+              window.location.href = response.url; // Redirigir si hay una redirección
+            } else if (response.headers.get("Content-Type").includes("application/json")) {
+              return response.json(); // Parsear como JSON si el contenido es JSON
             } else {
-              // Manejar otros tipos de respuestas
-              return response.json(); // Suponiendo que el servidor devuelve JSON
+              return response.text(); // Si no, manejar como texto (por ejemplo, HTML)
             }
           })
           .then((data) => {
-            // Manejar la respuesta JSON (por ejemplo, mostrar un mensaje de éxito)
-            console.log("Respuesta del servidor:", data);
+            if (typeof data === "string") {
+              // Manejar respuesta HTML (por ejemplo, mostrar un mensaje de éxito en el DOM)
+              document.body.innerHTML += `<div>${data}</div>`;
+            } else if (data.success) {
+              // Manejar respuesta JSON de éxito
+              alert(data.message);
+              // Redirigir a otra página si es necesario
+              window.location.href = "/pagina-confirmacion";
+            } else {
+              // Manejar errores devueltos en JSON
+              alert(data.error);
+            }
           })
           .catch((error) => {
-            console.error("Error al procesar el checkout:", error);
-            // Mostrar un mensaje de error al usuario
+            console.error("Error al procesar el pago:", error);
+            alert("Ocurrió un error al procesar el pago. Inténtalo de nuevo más tarde.");
           });
       }
     });

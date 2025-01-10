@@ -219,6 +219,8 @@ window.onload = function () {
         })
           .then((response) => {
             if (response.redirected) {
+              console.log("me voy al mismo sitio");
+              
               window.location.href = response.url; // Redirigir si hay una redirección
             } else if (response.headers.get("Content-Type").includes("application/json")) {
               return response.json(); // Parsear como JSON si el contenido es JSON

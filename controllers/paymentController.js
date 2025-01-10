@@ -1,32 +1,33 @@
 // controllers/paymentController.js
 const cartModel = require("../models/cartModel");
 
-const confirmPayment = async (req, res) => {
-  // Leer el cartId de la cookie o de la sesión
-
-  const cartId = req.cookies.cart || req.session.cart;
-
-  if (!cartId) {
-    return res.status(400).send("No se encontró un carrito activo.");
-  }
-
+const paymentController = async (req, res) => {
   try {
     // Recuperar los datos del formulario
     const { numeroTarjeta, nombreTitular, fechaExpiracion, cvv } = req.body;
 
-    // Recuperar la cookie "cart"
+    // Recuperar la cookie "cart" (cartId o los datos del carrito)
     const cart = req.cookies.cart;
 
-    // Renderizar la vista de confirmación con los artículos del carrito
-    res.render("confirmation", {
-      message: "Tu pago se procesó exitosamente.",
-      cartItems: cartItems || [],
+    // Si no se encuentra un carrito o no se envían los datos del formulario, retornar un error
+    if (!cart || !numeroTarjeta || !nombreTitular || !fechaExpiracion || !cvv) {
+      return res.status(400).json({ success: false, error: "Faltan datos." });
+    }
+
+    // Si todo es correcto, responde con un mensaje de éxito y redirigir a confirmation
+    res.status(200).json({
+      success: true,
+      message: "Pago procesado correctamente. Redirigiendo a la confirmación.",
     });
 
+    // Aquí podrías agregar la lógica de inserción a base de datos o procesamiento del pago
   } catch (error) {
-    console.error("Error al confirmar el pago:", error);
-    res.status(500).send("Ocurrió un error al procesar tu pago.");
+    console.error("Error al procesar el pago:", error);
+    res.status(500).json({
+      success: false,
+      error: "Ocurrió un error al procesar el pago. Inténtalo de nuevo más tarde.",
+    });
   }
 };
 
-module.exports = { confirmPayment };
+module.exports = { paymentController };

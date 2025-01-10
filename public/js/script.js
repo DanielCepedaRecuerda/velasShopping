@@ -231,11 +231,11 @@ window.onload = function () {
           .then((data) => {
             if (typeof data === "string") {
               // Redirigir manualmente si el servidor devolvió HTML
-              window.location.href = "/pasareña/confirmation";
+              window.location.href = "/pasarela/confirmation";
             } else if (data.success) {
               // Manejar respuesta JSON de éxito
               alert(data.message);
-              window.location.href = "/pasareña/confirmation"; // Redirigir a la página de confirmación
+              window.location.href = "/pasarela/confirmation"; // Redirigir a la página de confirmación
             } else {
               // Manejar errores devueltos en JSON
               alert(data.error);

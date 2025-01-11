@@ -48,6 +48,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use((req, res, next) => {
   res.locals.isAuthenticated = !!req.session.user; // true si el usuario está autenticado
   res.locals.user = req.session.user || null; // Datos del usuario
+  res.locals.userId = req.session.user ? req.session.user.id : null; // Id del usuario
   next();
 });
 

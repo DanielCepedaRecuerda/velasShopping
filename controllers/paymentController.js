@@ -6,17 +6,14 @@ const {
 
 const paymentController = async (req, res) => {
   try {
-    // Recuperar la cookie user_authenticated
-    const isAuthenticated = req.cookies.user_authenticated;
+    console.log("Datos de la sesión:", req.session); // Esto te ayudará a ver qué llega en la sesión
 
-    // Verificar si la cookie existe
-    if (!isAuthenticated || isAuthenticated !== "true") {
+    if (!req.session.user || !req.session.user.id) {
       return res.status(401).json({
         success: false,
         error: "No estás autenticado. Por favor, inicia sesión.",
       });
     }
-    console.log("Cookie user_authenticated:", isAuthenticated);
 
     // Obtener el id_cliente desde la sesión
     const idCliente = req.session.user.id;

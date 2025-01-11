@@ -24,7 +24,7 @@ app.use(
   session({
     secret: "Velasshoping",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Usar "secure" en producción (HTTPS)

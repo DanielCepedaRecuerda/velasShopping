@@ -63,13 +63,13 @@ const insertarDireccion = async (idCliente, direccionData) => {
       "INSERT INTO direcciones (dirección, numero, piso, puerta, cod_postal, ciudad, provincia, país, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         direccionCompleta,
-        direccionData.numero,
-        direccionData.piso,
-        direccionData.puerta,
-        direccionData.codigoPostal,
-        direccionData.ciudad,
-        direccionData.provincia,
-        direccionData.pais,
+        direccionData.numero || 0,
+        direccionData.piso || 0,
+        direccionData.puerta || '',
+        direccionData.codigoPostal || 0,
+        direccionData.ciudad || '',
+        direccionData.provincia || '',
+        direccionData.pais || '',
         idCliente,
       ]
     );

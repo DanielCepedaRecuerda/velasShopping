@@ -48,9 +48,10 @@ const insertarProductosPedidos = (idPedido, productos) => {
   });
 };
 
-const insertarDireccion = (idCliente, direccionData) => {
-  return new Promise((resolve, reject) => {
-    connection.query(
+const insertarDireccion = async (idCliente, direccionData) => {
+  try {
+    const conn = await connection();
+    const [result] = await conn.query(
       "SELECT * FROM direcciones WHERE id_cliente = ? AND dirección = ? AND cod_postal = ? AND ciudad = ? AND provincia = ? AND país = ?",
       [
         idCliente,
@@ -59,46 +60,39 @@ const insertarDireccion = (idCliente, direccionData) => {
         direccionData.ciudad,
         direccionData.provincia,
         direccionData.pais,
-      ],
-      (err, result) => {
-        if (err) {
-          console.error("Error al verificar dirección existente:", err);
-          reject(err);
-        } else {
-          if (result.length > 0) {
-            // Si la dirección ya existe, no hacer nada o retornar la dirección existente
-            console.log("La dirección ya está registrada.");
-            resolve(result[0]); // Devuelve la dirección existente
-          } else {
-            // Si no existe, insertamos la nueva dirección
-            connection.query(
-              "INSERT INTO direcciones (dirección, numero, piso, puerta, cod_postal, ciudad, provincia, país, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-              [
-                direccionData.direccion,
-                direccionData.numero,
-                direccionData.piso,
-                direccionData.puerta,
-                direccionData.cod_postal,
-                direccionData.ciudad,
-                direccionData.provincia,
-                direccionData.pais,
-                idCliente,
-              ],
-              (err, result) => {
-                if (err) {
-                  console.error("Error al insertar dirección:", err);
-                  reject(err);
-                } else {
-                  console.log("Dirección insertada con éxito.");
-                  resolve(result);
-                }
-              }
-            );
-          }
-        }
-      }
+      ]
     );
-  });
+    await conn.end();
+
+    if (result.length > 0) {
+      // Si la dirección ya existe, no hacer nada o retornar la dirección existente
+      console.log("La dirección ya está registrada.");
+      return result[0]; // Devuelve la dirección existente
+    } else {
+      // Si no existe, insertamos la nueva dirección
+      const conn = await connection();
+      const [result] = await conn.query(
+        "INSERT INTO direcciones (dirección, numero, piso, puerta, cod_postal, ciudad, provincia, país, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [
+          direccionData.direccion,
+          direccionData.numero,
+          direccionData.piso,
+          direccionData.puerta,
+          direccionData.cod_postal,
+          direccionData.ciudad,
+          direccionData.provincia,
+          direccionData.pais,
+          idCliente,
+        ]
+      );
+      await conn.end();
+      console.log("Dirección insertada con éxito.");
+      return result;
+    }
+  } catch (err) {
+    console.error("Error al insertar dirección:", err);
+    throw err;
+  }
 };
 
 

@@ -233,12 +233,18 @@ window.onload = function () {
         })
         .then((response) => {
           console.log("Tipo de contenido de la respuesta:", response.headers.get("Content-Type"));
-    
+          
           // Verifica si la respuesta es JSON antes de intentar convertirla
           if (response.ok && response.headers.get("Content-Type").includes("application/json")) {
             return response.json(); // Convierte la respuesta a JSON
           } else {
-            throw new Error("Respuesta inesperada: " + response.status + " " + response.statusText);
+            console.log("Respuesta no JSON:", response.status, response.statusText);
+            
+            // Aquí puedes leer el texto de la respuesta y ver qué se está devolviendo
+            return response.text().then((text) => {
+              console.log("Respuesta (no JSON):", text); // Muestra lo que está llegando
+              throw new Error("Respuesta inesperada: " + response.status + " " + response.statusText);
+            });
           }
         })
           .then((data) => {

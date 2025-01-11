@@ -29,8 +29,8 @@ const paymentController = async (req, res) => {
     // Validación de datos del formulario (aunque esto ya lo controlas previamente)
     const { direccion, numeroTarjeta, nombreTitular, fechaExpiracion, cvv } =
       formularioDatos;
-    console.log("idCliente: ", idCliente, "direccion: " ,direccion);
-
+    console.log(formularioDatos);
+    
     if (
       !direccion ||
       !numeroTarjeta ||

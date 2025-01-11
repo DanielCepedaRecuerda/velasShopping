@@ -1,5 +1,4 @@
 const connection = require("../db/connection");
-console.log(connection);
 const insertarPedido = async (idCliente, total) => {
   const conn = await connection();
   const query =
@@ -10,25 +9,26 @@ const insertarPedido = async (idCliente, total) => {
 };
 
 const insertarProductosPedidos = async (idPedido, productos, conn) => {
-  console.log("entro en insertarProductosPedidos ", idPedido, productos);
-
-  const queries = productos.map(async (producto) => {
+  console.log("Insertando productos:", productos);
+  for (const producto of productos) {
     try {
       await conn.execute(
         "INSERT INTO productos_pedidos (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)",
         [idPedido, producto.id_producto, producto.cantidad, producto.precio]
       );
     } catch (error) {
-      console.error("Error al insertar producto:", producto, error);
+      console.error("Error al insertar producto:", error.message);
       throw error; // Lanza el error para detener toda la transacción
     }
-  });
+  }
+};
 
+  // Espera a que todas las promesas se resuelvan
   await Promise.all(queries);
 };
 
 const insertarDireccion = async (idCliente, direccionData) => {
-  console.log("entro en insertarDireccion ".idCliente, direccionData);
+  console.log("entro en insertarDireccion ",idCliente, direccionData);
 
   const conn = await connection();
   const query =
@@ -51,17 +51,13 @@ const procesarPago = async (idCliente, productos, direccionData, total) => {
   await conn.beginTransaction();
 
   try {
-    // 1. Insertar el pedido
-    const [result] = await conn.execute(
-      "INSERT INTO pedido (fecha_hora, total, id_cliente) VALUES (NOW(), ?, ?)",
-      [total, idCliente]
-    );
-    const idPedido = result.insertId;
+    // Insertar el pedido
+    const idPedido = await insertarPedido(idCliente, total, conn);
 
-    // 2. Insertar los productos en el pedido
+    // Insertar los productos
     await insertarProductosPedidos(idPedido, productos, conn);
 
-    // 3. Insertar la dirección
+    // Insertar la dirección
     await insertarDireccion(idCliente, direccionData, conn);
 
     await conn.commit();

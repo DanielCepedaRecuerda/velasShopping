@@ -13,7 +13,6 @@ const paymentController = async (req, res) => {
 
     // Recuperar los datos del carrito desde la cookie
     const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];
-    console.log("Cart: ", cart);
 
     // Recuperar los datos del formulario desde la cookie
     const formularioDatos = req.cookies.formularioDatos
@@ -40,10 +39,7 @@ const paymentController = async (req, res) => {
       });
     }
 
-    // Validación de datos del formulario (aunque esto ya lo controlas previamente)
-
-    console.log(formularioDatos);
-
+    // Validación de datos del formulario
     if (
       !direccion ||
       !numeroTarjeta ||
@@ -56,10 +52,6 @@ const paymentController = async (req, res) => {
         error: "Faltan datos en el formulario de pago.",
       });
     }
-
-    // 1. Insertar o actualizar la dirección
-    const direccionCompleta = `${direccion}, ${numero}, ${piso}, ${puerta}, ${ciudad}, ${codigoPostal}, ${provincia}, ${pais}`;
-    console.log(direccionCompleta);
 
     // Pasar los valores separados
     const direccionData = {
@@ -74,20 +66,20 @@ const paymentController = async (req, res) => {
     };
 
     await insertarDireccion(idCliente, direccionData);
-    // 2. Calcular el total del pedido
+    // Calcular el total del pedido
     const total = cart.reduce(
       (acc, item) => acc + item.precio * item.cantidad,
       0
     ); // Calculamos el total del pedido
     console.log("total: ", total);
 
-    // 3. Insertar el pedido
+    // Insertar el pedido
     const idPedido = await insertarPedido(idCliente, total);
 
-    // 4. Insertar los productos del pedido
+    // Insertar los productos del pedido
     await insertarProductosPedidos(idPedido, cart);
 
-    // 5. Responder con éxito
+    // Responder con éxito
     res.status(200).json({
       success: true,
       message: "Pago procesado correctamente. Redirigiendo a la confirmación.",

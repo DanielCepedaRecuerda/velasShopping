@@ -1,6 +1,9 @@
 const connection = require("../db/connection");
 
 const insertarPedido = async (idCliente, total, conn) => {
+  if (!conn) {
+    throw new Error("Conexión no inicializada.");
+  }
   const query =
     "INSERT INTO pedido (fecha_hora, total, id_cliente) VALUES (NOW(), ?, ?)";
   const [result] = await conn.execute(query, [total, idCliente]);
@@ -17,6 +20,9 @@ const insertarProductosPedidos = async (idPedido, productos, conn) => {
 };
 
 const insertarDireccion = async (idCliente, direccionData, conn) => {
+  if (!conn) {
+    throw new Error("Conexión no inicializada.");
+  }
   const query =
     "INSERT INTO direcciones (dirección, numero, piso, puerta, cod_postal, ciudad, provincia, país, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
   await conn.execute(query, [

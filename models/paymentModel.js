@@ -11,21 +11,10 @@ const insertarPedido = async (idCliente, total) => {
 
 const insertarProductosPedidos = async (idPedido, productos, conn) => {
   const queries = productos.map((producto) => {
-    return new Promise((resolve, reject) => {
-      conn.execute(
-        "INSERT INTO productos_pedidos (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)",
-        [idPedido, producto.id_producto, producto.cantidad, producto.precio],
-        (err, result) => {
-          if (err) {
-            console.error("Error al insertar producto en el pedido:", err);
-            reject(err);
-          } else {
-            console.log("Producto insertado con éxito en el pedido.");
-            resolve(result);
-          }
-        }
-      );
-    });
+    return conn.execute(
+      "INSERT INTO productos_pedidos (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)",
+      [idPedido, producto.id_producto, producto.cantidad, producto.precio]
+    );
   });
 
   await Promise.all(queries);

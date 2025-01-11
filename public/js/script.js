@@ -15,15 +15,24 @@ function abrirPasarelaPago() {
   // Limpiar mensajes de error anteriores
   document.getElementById("error-nombre").textContent = "";
   document.getElementById("error-direccion").textContent = "";
+  document.getElementById("error-numero").textContent = "";
+  document.getElementById("error-piso").textContent = "";
+  document.getElementById("error-puerta").textContent = "";
   document.getElementById("error-ciudad").textContent = "";
   document.getElementById("error-codigoPostal").textContent = "";
+  document.getElementById("error-provincia").textContent = "";
+  document.getElementById("error-pais").textContent = "";
 
   // Validar el formulario antes de abrir la pasarela de pago
   const nombre = document.getElementById("nombre").value.trim();
   const direccion = document.getElementById("direccion").value.trim();
+  const numero = document.getElementById("numero").value.trim();
+  const piso = document.getElementById("piso").value.trim();
+  const puerta = document.getElementById("puerta").value.trim();
   const ciudad = document.getElementById("ciudad").value.trim();
   const codigoPostal = document.getElementById("codigoPostal").value.trim();
-
+  const provincia = document.getElementById("provincia").value.trim();
+  const pais = document.getElementById("pais").value.trim();
   // Variable para rastrear si hay errores
   let hayErrores = false;
 
@@ -40,6 +49,24 @@ function abrirPasarelaPago() {
     hayErrores = true;
   }
 
+  if (!numero) {
+    document.getElementById("error-numero").textContent =
+      "Por favor, ingresa el número de la casa.";
+    hayErrores = true;
+  }
+
+  if (!piso) {
+    document.getElementById("error-piso").textContent =
+      "Por favor, ingresa el piso del edificio.";
+    hayErrores = true;
+  }
+
+  if (!puerta) {
+    document.getElementById("error-puerta").textContent =
+      "Por favor, ingresa la puerta del edificio.";
+    hayErrores = true;
+  }
+
   if (!ciudad) {
     document.getElementById("error-ciudad").textContent =
       "Por favor, ingresa tu ciudad.";
@@ -49,6 +76,18 @@ function abrirPasarelaPago() {
   if (!codigoPostal) {
     document.getElementById("error-codigoPostal").textContent =
       "Por favor, ingresa tu código postal.";
+    hayErrores = true;
+  }
+
+  if (!provincia) {
+    document.getElementById("error-provincia").textContent =
+      "Por favor, ingresa tu provincia.";
+    hayErrores = true;
+  }
+
+  if (!pais) {
+    document.getElementById("error-pais").textContent =
+      "Por favor, ingresa tu país.";
     hayErrores = true;
   }
 
@@ -105,6 +144,35 @@ function abrirPasarelaPago() {
       "El código postal debe tener 5 dígitos.";
     hayErrores = true;
   }
+  // Validación de longitud de la provincia
+  if (provincia.length < 3 || provincia.length > 50) {
+    document.getElementById("error-provincia").textContent =
+      "La provincia debe tener entre 3 y 50 caracteres.";
+    hayErrores = true;
+  }
+
+  // Validación de caracteres especiales en la provincia
+  const provinciaRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]*$/;
+  if (!provinciaRegex.test(provincia)) {
+    document.getElementById("error-provincia").textContent =
+      "La provincia solo puede contener letras, espacios y acentos.";
+    hayErrores = true;
+  }
+
+  // Validación de longitud del país
+  if (pais.length < 3 || pais.length > 50) {
+    document.getElementById("error-pais").textContent =
+      "El país debe tener entre 3 y 50 caracteres.";
+    hayErrores = true;
+  }
+
+  // Validación de caracteres especiales en el país
+  const paisRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]*$/;
+  if (!paisRegex.test(pais)) {
+    document.getElementById("error-pais").textContent =
+      "El país solo puede contener letras, espacios y acentos.";
+    hayErrores = true;
+  }
 
   // Si hay errores, no abrir la pasarela de pago
   if (hayErrores) {
@@ -115,8 +183,13 @@ function abrirPasarelaPago() {
   const datosFormulario = {
     nombre,
     direccion,
+    numero,
+    piso,
+    puerta,
     ciudad,
     codigoPostal,
+    provincia,
+    pais,
   };
 
   document.cookie = `formularioDatos=${encodeURIComponent(
@@ -231,22 +304,37 @@ window.onload = function () {
           body: JSON.stringify(formData),
           credentials: "include", // Incluir cookies
         })
-        .then((response) => {
-          console.log("Tipo de contenido de la respuesta:", response.headers.get("Content-Type"));
-          
-          // Verifica si la respuesta es JSON antes de intentar convertirla
-          if (response.ok && response.headers.get("Content-Type").includes("application/json")) {
-            return response.json(); // Convierte la respuesta a JSON
-          } else {
-            console.log("Respuesta no JSON:", response.status, response.statusText);
-            
-            // Aquí puedes leer el texto de la respuesta y ver qué se está devolviendo
-            return response.text().then((text) => {
-              console.log("Respuesta (no JSON):", text); // Muestra lo que está llegando
-              throw new Error("Respuesta inesperada: " + response.status + " " + response.statusText);
-            });
-          }
-        })
+          .then((response) => {
+            console.log(
+              "Tipo de contenido de la respuesta:",
+              response.headers.get("Content-Type")
+            );
+
+            // Verifica si la respuesta es JSON antes de intentar convertirla
+            if (
+              response.ok &&
+              response.headers.get("Content-Type").includes("application/json")
+            ) {
+              return response.json(); // Convierte la respuesta a JSON
+            } else {
+              console.log(
+                "Respuesta no JSON:",
+                response.status,
+                response.statusText
+              );
+
+              // Aquí puedes leer el texto de la respuesta y ver qué se está devolviendo
+              return response.text().then((text) => {
+                console.log("Respuesta (no JSON):", text); // Muestra lo que está llegando
+                throw new Error(
+                  "Respuesta inesperada: " +
+                    response.status +
+                    " " +
+                    response.statusText
+                );
+              });
+            }
+          })
           .then((data) => {
             if (data.success) {
               alert(data.message);

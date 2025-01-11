@@ -84,8 +84,41 @@
         <div id="error-nombre" class="error"></div>
 
         <label for="direccion">Dirección:</label>
-        <input type="text" id="direccion" name="direccion" required />
+        <input
+          type="text"
+          id="direccion"
+          name="direccion"
+          placeholder="Calle y número"
+          required
+        />
         <div id="error-direccion" class="error"></div>
+        <label for="numero">Número:</label>
+        <input
+          type="text"
+          id="numero"
+          name="numero"
+          placeholder="Número de la casa"
+          required
+        />
+        <div id="error-numero" class="error"></div>
+        <label for="piso">Piso:</label>
+        <input
+          type="text"
+          id="piso"
+          name="piso"
+          placeholder="Piso del edificio"
+          required
+        />
+        <div id="error-piso" class="error"></div>
+        <label for="puerta">Puerta:</label>
+        <input
+          type="text"
+          id="puerta"
+          name="puerta"
+          placeholder="Puerta del edificio"
+          required
+        />
+        <div id="error-puerta" class="error"></div>
 
         <label for="ciudad">Ciudad:</label>
         <input type="text" id="ciudad" name="ciudad" required />
@@ -95,10 +128,19 @@
         <input type="text" id="codigoPostal" name="codigoPostal" required />
         <div id="error-codigoPostal" class="error"></div>
       </div>
-
-      <button type="button" id="pagarButton">
-        Ir a pagar
-      </button>
+      <label for="provincia">Provincia:</label>
+      <input
+        type="text"
+        id="provincia"
+        name="provincia"
+        placeholder="Provincia"
+        required
+      />
+      <div id="error-provincia" class="error"></div>
+      <label for="pais">País:</label>
+      <input type="text" id="pais" name="pais" placeholder="País" required />
+      <div id="error-pais" class="error"></div>
+      <button type="button" id="pagarButton">Ir a pagar</button>
     </form>
     <% } else { %>
     <p>Tu carrito está vacío. No puedes proceder al checkout.</p>

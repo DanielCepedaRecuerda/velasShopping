@@ -72,7 +72,7 @@ const insertarDireccion = async (idCliente, direccionData) => {
       // Si no existe, insertamos la nueva dirección
       const conn = await connection();
       const [result] = await conn.query(
-        "INSERT INTO direcciones (dirección, numero, piso, puerta, cod_postal, ciudad, provincia, país, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO direcciones (direccion, numero, piso, puerta, cod_postal, ciudad, provincia, pais, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [
           direccionData.direccion,
           direccionData.numero,

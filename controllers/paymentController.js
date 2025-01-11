@@ -20,7 +20,17 @@ const paymentController = async (req, res) => {
       ? JSON.parse(req.cookies.formularioDatos)
       : null;
     // Recuperar la informacion de envío
-    const { nombre, direccion, ciudad, codigoPostal } = formularioDatos;
+    const {
+      nombre,
+      direccion,
+      numero,
+      piso,
+      puerta,
+      ciudad,
+      codigoPostal,
+      provincia,
+      pais,
+    } = formularioDatos;
 
     // Verificar si faltan datos
     if (!cart || !formularioDatos) {
@@ -48,7 +58,8 @@ const paymentController = async (req, res) => {
     }
 
     // 1. Insertar o actualizar la dirección
-    await insertarDireccion(idCliente, direccion);
+    const direccionCompleta = `${direccion}, ${numero}, ${piso}, ${puerta}, ${ciudad}, ${codigoPostal}, ${provincia}, ${pais}`;
+    await insertarDireccion(idCliente, direccionCompleta);
 
     // 2. Calcular el total del pedido
     const total = cart.reduce(

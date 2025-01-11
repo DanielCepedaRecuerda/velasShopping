@@ -52,7 +52,12 @@ const insertarProductosPedidos = (idPedido, productos) => {
 
 const insertarDireccion = async (idCliente, direccionData) => {
   try {
-    const conn = await connection();
+    if (!direccionData) {
+      console.error("No se recibió información de dirección");
+      console.log(direccionData);
+      throw new Error("No se recibió información de dirección");
+    }
+    const conn = await connection();    
     const direccionCompleta = `${direccionData.direccion}, ${direccionData.numero}, ${direccionData.piso}, ${direccionData.puerta}`;
     const [result] = await conn.query(
       "INSERT INTO direcciones (dirección, numero, piso, puerta, cod_postal, ciudad, provincia, país, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",

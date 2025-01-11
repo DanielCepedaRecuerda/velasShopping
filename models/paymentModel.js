@@ -15,10 +15,15 @@ const insertarProductosPedidos = async (idPedido, productos) => {
   console.log("Insertando productos:", productos);
 
   for (const producto of productos) {
+    // Verificamos que no haya valores undefined
+    const idProducto = producto.id_producto ?? null;  // Si es undefined, asignamos null
+    const cantidad = producto.cantidad ?? 0;          // Si es undefined, asignamos 0
+    const precio = producto.precio ?? 0;              // Si es undefined, asignamos 0
+
     try {
       await conn.execute(
         "INSERT INTO productos_pedidos (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)",
-        [idPedido, producto.id_producto, producto.cantidad, producto.precio]
+        [idPedido, idProducto, cantidad, precio]
       );
     } catch (error) {
       console.error("Error al insertar producto:", error.message);

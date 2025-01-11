@@ -10,6 +10,7 @@ const insertarPedido = async (idCliente, total) => {
 };
 
 const insertarProductosPedidos = async (idPedido, productos, conn) => {
+  const conn = await connection();
   console.log("id del pedido: ", idPedido);
   console.log("Insertando productos:", productos);
   console.log("conn", conn);
@@ -25,6 +26,7 @@ const insertarProductosPedidos = async (idPedido, productos, conn) => {
       throw error; // Lanza el error para detener toda la transacción
     }
   }
+  await conn.end();
 };
 
 const insertarDireccion = async (idCliente, direccionData) => {
@@ -44,6 +46,7 @@ const insertarDireccion = async (idCliente, direccionData) => {
     direccionData.pais || "",
     idCliente,
   ]);
+  await conn.end();
 };
 
 const procesarPago = async (idCliente, productos, direccionData, total) => {

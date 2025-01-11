@@ -9,11 +9,10 @@ const insertarPedido = async (idCliente, total) => {
   return result.insertId;
 };
 
-const insertarProductosPedidos = async (idPedido, productos, conn) => {
+const insertarProductosPedidos = async (idPedido, productos) => {
   const conn = await connection();
   console.log("id del pedido: ", idPedido);
   console.log("Insertando productos:", productos);
-  console.log("conn", conn);
 
   for (const producto of productos) {
     try {

@@ -6,6 +6,9 @@ const {
 
 const paymentController = async (req, res) => {
   try {
+    // Recuperar datos del formulario
+    const { numeroTarjeta, nombreTitular, fechaExpiracion, cvv } = req.body;
+    const {nombre, direccion, ciudad, codigoPostal} = formularioDatos;
     // Obtener el id_cliente desde la sesión
     const idCliente = req.cookies.userId;
 
@@ -27,8 +30,7 @@ const paymentController = async (req, res) => {
     }
 
     // Validación de datos del formulario (aunque esto ya lo controlas previamente)
-    const { direccion, numeroTarjeta, nombreTitular, fechaExpiracion, cvv } =
-      formularioDatos;
+    
     console.log(formularioDatos);
     
     if (

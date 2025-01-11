@@ -1,5 +1,5 @@
 const connection = require("../db/connection");
-
+console.log(connection);
 const insertarPedido = (idCliente, total) => {
   return new Promise((resolve, reject) => {
     connection.query(

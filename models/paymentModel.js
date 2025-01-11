@@ -111,4 +111,4 @@ const procesarPago = (idCliente, productos, direccionData, total) => {
   });
 };
 
-module.exports = {procesarPago};
+module.exports = {procesarPago, insertarPedido ,insertarDireccion, insertarProductosPedidos};

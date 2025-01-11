@@ -59,8 +59,21 @@ const paymentController = async (req, res) => {
 
     // 1. Insertar o actualizar la dirección
     const direccionCompleta = `${direccion}, ${numero}, ${piso}, ${puerta}, ${ciudad}, ${codigoPostal}, ${provincia}, ${pais}`;
-    await insertarDireccion(idCliente, direccionCompleta);
+    console.log(direccionCompleta);
 
+    // Pasar los valores separados
+    const direccionData = {
+      direccion: direccion,
+      numero: numero,
+      piso: piso,
+      puerta: puerta,
+      ciudad: ciudad,
+      codigoPostal: codigoPostal,
+      provincia: provincia,
+      pais: pais,
+    };
+
+    await insertarDireccion(idCliente, direccionData);
     // 2. Calcular el total del pedido
     const total = cart.reduce(
       (acc, item) => acc + item.precio * item.cantidad,

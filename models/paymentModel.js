@@ -23,10 +23,6 @@ const insertarProductosPedidos = async (idPedido, productos, conn) => {
   }
 };
 
-  // Espera a que todas las promesas se resuelvan
-  await Promise.all(queries);
-};
-
 const insertarDireccion = async (idCliente, direccionData) => {
   console.log("entro en insertarDireccion ",idCliente, direccionData);
 

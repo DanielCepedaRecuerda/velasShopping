@@ -32,6 +32,13 @@ app.use(
     },
   })
 );
+// Configuración global de CORS
+app.use(
+  cors({
+    origin: "https://velas-shopping.vercel.app/",
+    credentials: true, // Permite el envío de cookies y encabezados de autenticación
+  })
+);
 
 // Configurar EJS como motor de plantillas
 app.set("view engine", "ejs");

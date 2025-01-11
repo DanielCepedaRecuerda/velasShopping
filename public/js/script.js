@@ -223,7 +223,7 @@ window.onload = function () {
           cvv: document.getElementById("cvv").value,
         };
         // Enviar los datos al servidor
-        fetch("/pasarela/procesar-pago", {
+        fetch("https://velas-shopping.vercel.app/pasarela/procesar-pago", {
           method: "POST",
           headers: {
             "Content-Type": "application/json", // Importante para JSON

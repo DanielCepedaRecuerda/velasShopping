@@ -10,17 +10,26 @@ const insertarPedido = async (idCliente, total) => {
 };
 
 const insertarProductosPedidos = async (idPedido, productos, conn) => {
-  const queries = productos.map((producto) => {
-    return conn.execute(
-      "INSERT INTO productos_pedidos (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)",
-      [idPedido, producto.id_producto, producto.cantidad, producto.precio]
-    );
+  console.log("entro en insertarProductosPedidos ", idPedido, productos);
+
+  const queries = productos.map(async (producto) => {
+    try {
+      await conn.execute(
+        "INSERT INTO productos_pedidos (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)",
+        [idPedido, producto.id_producto, producto.cantidad, producto.precio]
+      );
+    } catch (error) {
+      console.error("Error al insertar producto:", producto, error);
+      throw error; // Lanza el error para detener toda la transacción
+    }
   });
 
   await Promise.all(queries);
 };
 
 const insertarDireccion = async (idCliente, direccionData) => {
+  console.log("entro en insertarDireccion ".idCliente, direccionData);
+
   const conn = await connection();
   const query =
     "INSERT INTO direcciones (dirección, numero, piso, puerta, cod_postal, ciudad, provincia, país, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -28,11 +37,11 @@ const insertarDireccion = async (idCliente, direccionData) => {
     direccionData.direccion,
     direccionData.numero || 0,
     direccionData.piso || 0,
-    direccionData.puerta || '',
+    direccionData.puerta || "",
     direccionData.codigoPostal || 0,
-    direccionData.ciudad || '',
-    direccionData.provincia || '',
-    direccionData.pais || '',
+    direccionData.ciudad || "",
+    direccionData.provincia || "",
+    direccionData.pais || "",
     idCliente,
   ]);
 };

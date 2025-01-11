@@ -7,7 +7,7 @@ const {
 const paymentController = async (req, res) => {
   try {
     // Obtener el id_cliente desde la sesión
-    const idCliente = res.locals.userId;
+    const idCliente = res.cookies.userId;
 
     // Recuperar los datos del carrito desde la cookie
     const cart = req.cookies.cart ? JSON.parse(req.cookies.cart) : [];

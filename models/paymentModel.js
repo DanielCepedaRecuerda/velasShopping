@@ -1,9 +1,9 @@
 const connection = require("../db/connection");
 
-const insertarPedido = async (idCliente, total, conn) => {
-  if (!conn) {
-    throw new Error("Conexión no inicializada.");
-  }
+const insertarPedido = async (idCliente, total) => {
+  console.log("Intentando conectarse al pool...");
+  const conn = await connection();
+  console.log("Conexión establecida con éxito.");
   const query =
     "INSERT INTO pedido (fecha_hora, total, id_cliente) VALUES (NOW(), ?, ?)";
   const [result] = await conn.execute(query, [total, idCliente]);
@@ -29,11 +29,11 @@ const insertarDireccion = async (idCliente, direccionData, conn) => {
     direccionData.direccion,
     direccionData.numero || 0,
     direccionData.piso || 0,
-    direccionData.puerta || '',
+    direccionData.puerta || "",
     direccionData.codigoPostal || 0,
-    direccionData.ciudad || '',
-    direccionData.provincia || '',
-    direccionData.pais || '',
+    direccionData.ciudad || "",
+    direccionData.provincia || "",
+    direccionData.pais || "",
     idCliente,
   ]);
 };

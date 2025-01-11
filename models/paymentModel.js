@@ -1,47 +1,64 @@
 const connection = require("../db/connection");
 
 const insertarPedido = (idCliente, total) => {
-  const query = `INSERT INTO pedido (fecha_hora, total, id_cliente) VALUES (NOW(), ?, ?)`;
-  connection.execute(query, [total, idCliente], (err, result) => {
-    if (err) {
-      console.error("Error al insertar pedido:", err);
-      return;
-    }
-    console.log("Pedido insertado con éxito, ID:", result.insertId);
-    return result.insertId; // Devuelve el id del nuevo pedido
-  });
-};
-
-const insertarProductosPedidos = (idPedido, productos) => {
-  productos.forEach((producto) => {
-    const query = `INSERT INTO productos_pedidos (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)`;
-    connection.execute(
-      query,
-      [idPedido, producto.id_producto, producto.cantidad, producto.precio],
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "INSERT INTO pedido (fecha_hora, total, id_cliente) VALUES (NOW(), ?, ?)",
+      [total, idCliente],
       (err, result) => {
         if (err) {
-          console.error("Error al insertar productos en el pedido:", err);
-          return;
+          console.error("Error al insertar pedido:", err);
+          reject(err);
+        } else {
+          console.log("Pedido insertado con éxito, ID:", result.insertId);
+          resolve(result.insertId); // Devuelve el id del nuevo pedido
         }
-        console.log("Producto insertado con éxito en el pedido.");
       }
     );
   });
 };
 
+const insertarProductosPedidos = (idPedido, productos) => {
+  return new Promise((resolve, reject) => {
+    const queries = productos.map((producto) => {
+      return new Promise((resolve, reject) => {
+        connection.query(
+          "INSERT INTO productos_pedidos (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)",
+          [idPedido, producto.id_producto, producto.cantidad, producto.precio],
+          (err, result) => {
+            if (err) {
+              console.error("Error al insertar producto en el pedido:", err);
+              reject(err);
+            } else {
+              console.log("Producto insertado con éxito en el pedido.");
+              resolve(result);
+            }
+          }
+        );
+      });
+    });
+
+    Promise.all(queries).then((results) => {
+      console.log("Todos los productos insertados con éxito en el pedido.");
+      resolve(results);
+    }).catch((err) => {
+      console.error("Error al insertar productos en el pedido:", err);
+      reject(err);
+    });
+  });
+};
+
 const insertarDireccion = (idCliente, direccionData) => {
   return new Promise((resolve, reject) => {
-    // Verificar si el cliente ya tiene una dirección similar (por ejemplo, misma ciudad, código postal y dirección)
-    const queryCheck = `SELECT * FROM direcciones WHERE id_cliente = ? AND dirección = ? AND cod_postal = ? AND ciudad = ? AND provincia = ? AND país = ?`;
-    connection.execute(
-      queryCheck,
+    connection.query(
+      "SELECT * FROM direcciones WHERE id_cliente = ? AND dirección = ? AND cod_postal = ? AND ciudad = ? AND provincia = ? AND país = ?",
       [
         idCliente,
-        direccionData.dirección,
+        direccionData.direccion,
         direccionData.cod_postal,
         direccionData.ciudad,
         direccionData.provincia,
-        direccionData.país
+        direccionData.pais,
       ],
       (err, result) => {
         if (err) {
@@ -54,19 +71,18 @@ const insertarDireccion = (idCliente, direccionData) => {
             resolve(result[0]); // Devuelve la dirección existente
           } else {
             // Si no existe, insertamos la nueva dirección
-            const queryInsert = `INSERT INTO direcciones (dirección, numero, piso, puerta, cod_postal, ciudad, provincia, país, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-            connection.execute(
-              queryInsert,
+            connection.query(
+              "INSERT INTO direcciones (dirección, numero, piso, puerta, cod_postal, ciudad, provincia, país, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
               [
-                direccionData.dirección,
+                direccionData.direccion,
                 direccionData.numero,
                 direccionData.piso,
                 direccionData.puerta,
                 direccionData.cod_postal,
                 direccionData.ciudad,
                 direccionData.provincia,
-                direccionData.país,
-                idCliente
+                direccionData.pais,
+                idCliente,
               ],
               (err, result) => {
                 if (err) {

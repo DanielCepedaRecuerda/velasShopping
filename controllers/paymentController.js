@@ -29,6 +29,8 @@ const paymentController = async (req, res) => {
     // Validación de datos del formulario (aunque esto ya lo controlas previamente)
     const { direccion, numeroTarjeta, nombreTitular, fechaExpiracion, cvv } =
       formularioDatos;
+    console.log("idCliente: ", idCliente, "direccion: " ,direccion);
+
     if (
       !direccion ||
       !numeroTarjeta ||
@@ -41,7 +43,6 @@ const paymentController = async (req, res) => {
         error: "Faltan datos en el formulario de pago.",
       });
     }
-    console.log("idCliente: ", idCliente, "direccion: " ,direccion);
     
     // 1. Insertar o actualizar la dirección
     await insertarDireccion(idCliente, direccion);

@@ -17,6 +17,13 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 // Middleware
 app.use(cors());
+// Configuración global de CORS
+app.use(
+  cors({
+    origin: "https://velas-shopping.vercel.app/",
+    credentials: true, // Permite el envío de cookies y encabezados de autenticación
+  })
+);
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -30,13 +37,6 @@ app.use(
       secure: process.env.NODE_ENV === "production", // Usar "secure" en producción (HTTPS)
       sameSite: "strict",
     },
-  })
-);
-// Configuración global de CORS
-app.use(
-  cors({
-    origin: "https://velas-shopping.vercel.app/",
-    credentials: true, // Permite el envío de cookies y encabezados de autenticación
   })
 );
 

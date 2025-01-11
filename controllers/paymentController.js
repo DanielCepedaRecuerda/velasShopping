@@ -6,16 +6,6 @@ const {
 
 const paymentController = async (req, res) => {
   try {
-    console.log("Cookies recibidas:", req.cookies); // Verifica si llega la cookie de sesión
-    console.log("Sesión en el servidor:", req.session); // Verifica qué datos tiene la sesión
-
-    if (!res.locals.isAuthenticated) {
-      return res.status(401).json({
-        success: false,
-        error: "No estás autenticado. Por favor, inicia sesión.",
-      });
-    }
-
     // Obtener el id_cliente desde la sesión
     const idCliente = res.locals.userId;
 

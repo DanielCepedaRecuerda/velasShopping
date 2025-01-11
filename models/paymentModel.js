@@ -1,27 +1,22 @@
 const connection = require("../db/connection");
-console.log(connection);
-const insertarPedido = async (idCliente, total) => {
-  const conn = await connection();
+
+const insertarPedido = async (idCliente, total, conn) => {
   const query =
     "INSERT INTO pedido (fecha_hora, total, id_cliente) VALUES (NOW(), ?, ?)";
   const [result] = await conn.execute(query, [total, idCliente]);
-  await conn.end();
   return result.insertId;
 };
 
 const insertarProductosPedidos = async (idPedido, productos, conn) => {
-  const queries = productos.map((producto) => {
-    return conn.execute(
+  for (const producto of productos) {
+    await conn.execute(
       "INSERT INTO productos_pedidos (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)",
       [idPedido, producto.id_producto, producto.cantidad, producto.precio]
     );
-  });
-
-  await Promise.all(queries);
+  }
 };
 
-const insertarDireccion = async (idCliente, direccionData) => {
-  const conn = await connection();
+const insertarDireccion = async (idCliente, direccionData, conn) => {
   const query =
     "INSERT INTO direcciones (dirección, numero, piso, puerta, cod_postal, ciudad, provincia, país, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
   await conn.execute(query, [
@@ -43,11 +38,7 @@ const procesarPago = async (idCliente, productos, direccionData, total) => {
 
   try {
     // 1. Insertar el pedido
-    const [result] = await conn.execute(
-      "INSERT INTO pedido (fecha_hora, total, id_cliente) VALUES (NOW(), ?, ?)",
-      [total, idCliente]
-    );
-    const idPedido = result.insertId;
+    const idPedido = await insertarPedido(idCliente, total, conn);
 
     // 2. Insertar los productos en el pedido
     await insertarProductosPedidos(idPedido, productos, conn);
@@ -55,11 +46,12 @@ const procesarPago = async (idCliente, productos, direccionData, total) => {
     // 3. Insertar la dirección
     await insertarDireccion(idCliente, direccionData, conn);
 
+    // Confirmar la transacción
     await conn.commit();
     console.log("Transacción completada con éxito.");
   } catch (err) {
     await conn.rollback();
-    console.error("Error en la transacción. Se ha revertido.");
+    console.error("Error en la transacción. Se ha revertido:", err);
     throw err;
   } finally {
     await conn.end();

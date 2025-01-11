@@ -69,8 +69,10 @@ const registerUser = async (req, res) => {
       telefono,
     };
     return res.redirect(
-    `/register?errors=${encodeURIComponent(JSON.stringify(errors))}&data=${encodeURIComponent(JSON.stringify(formData))}`
-  );
+      `/register?errors=${encodeURIComponent(
+        JSON.stringify(errors)
+      )}&data=${encodeURIComponent(JSON.stringify(formData))}`
+    );
   }
 
   try {
@@ -86,8 +88,8 @@ const registerUser = async (req, res) => {
       contraseña: hashedPassword,
       telefono,
     });
-  // Almacenar el mensaje de éxito en la sesión
-  req.session.successMessage = "Registro exitoso. Bienvenido!";
+    // Almacenar el mensaje de éxito en la sesión
+    req.session.successMessage = "Registro exitoso. Bienvenido!";
 
     // Redirigir al login
     res.redirect("/login");
@@ -123,12 +125,14 @@ const loginUser = async (req, res) => {
   } else if (contraseña.length < 6) {
     errors.push("La contraseña debe tener al menos 6 caracteres.");
   }
-  
+
   // Si hay errores, redirigir a la página de inicio de sesión con los errores
   if (errors.length > 0) {
     formData.email = email;
     return res.redirect(
-      `/login?errors=${encodeURIComponent(JSON.stringify(errors))}&data=${encodeURIComponent(JSON.stringify(formData))}`
+      `/login?errors=${encodeURIComponent(
+        JSON.stringify(errors)
+      )}&data=${encodeURIComponent(JSON.stringify(formData))}`
     );
   }
 
@@ -137,7 +141,7 @@ const loginUser = async (req, res) => {
     const user = await userModel.findUserByEmail(email);
     if (!user) {
       errors.push("Email o contraseña incorrectos");
-  }
+    }
     // Verificar contraseña
     const isPasswordValid =
       user && (await bcrypt.compare(contraseña, user.contraseña));
@@ -148,15 +152,22 @@ const loginUser = async (req, res) => {
     if (errors.length > 0) {
       formData.email = email;
       return res.redirect(
-        `/login?errors=${encodeURIComponent(JSON.stringify(errors))}&data=${encodeURIComponent(JSON.stringify(formData))}`
+        `/login?errors=${encodeURIComponent(
+          JSON.stringify(errors)
+        )}&data=${encodeURIComponent(JSON.stringify(formData))}`
       );
     }
 
     // Si todo es correcto, iniciar sesión
     req.session.user = { id: user.id, email: user.email };
     console.log(req.session.user);
-    
+
     res.cookie("user_authenticated", "true", {
+      maxAge: 900000,
+      httpOnly: false,
+    });
+    // Enviar id del usuario en la cookie de sesión
+    res.cookie("userId", user.id, {
       maxAge: 900000,
       httpOnly: false,
     });

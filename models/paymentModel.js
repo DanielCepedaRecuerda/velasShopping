@@ -9,7 +9,10 @@ const insertarPedido = async (idCliente, total) => {
 };
 
 const insertarProductosPedidos = async (idPedido, productos, conn) => {
+  console.log("id del pedido: ", idPedido);
   console.log("Insertando productos:", productos);
+  console.log("conn", conn);
+
   for (const producto of productos) {
     try {
       await conn.execute(
@@ -24,7 +27,7 @@ const insertarProductosPedidos = async (idPedido, productos, conn) => {
 };
 
 const insertarDireccion = async (idCliente, direccionData) => {
-  console.log("entro en insertarDireccion ",idCliente, direccionData);
+  console.log("entro en insertarDireccion ", idCliente, direccionData);
 
   const conn = await connection();
   const query =

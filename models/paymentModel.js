@@ -50,15 +50,14 @@ const insertarProductosPedidos = (idPedido, productos) => {
   });
 };
 
-const insertarDireccion = async (idCliente, direccionData) => {
-  try {
+const insertarDireccion = (idCliente, direccionData) => {
+  return new Promise((resolve, reject) => {
     if (!direccionData) {
       console.error("No se recibió información de dirección");
       console.log(direccionData);
-      throw new Error("No se recibió información de dirección");
+      reject(new Error("No se recibió información de dirección"));
     }
-    const conn = await connection();    
-    const [result] = await conn.query(
+    connection.query(
       "INSERT INTO direcciones (dirección, numero, piso, puerta, cod_postal, ciudad, provincia, país, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         direccionData.direccion,
@@ -70,14 +69,18 @@ const insertarDireccion = async (idCliente, direccionData) => {
         direccionData.provincia || '',
         direccionData.pais || '',
         idCliente,
-      ]
+      ],
+      (err, result) => {
+        if (err) {
+          console.error("Error al insertar dirección:", err);
+          reject(err);
+        } else {
+          console.log("Dirección insertada con éxito.");
+          resolve(result);
+        }
+      }
     );
-    await conn.end();
-    return result;
-  } catch (error) {
-    console.error("Error al insertar dirección:", error);
-    throw error;
-  }
+  });
 };
 
 const procesarPago = (idCliente, productos, direccionData, total) => {

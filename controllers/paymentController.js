@@ -41,7 +41,8 @@ const paymentController = async (req, res) => {
         error: "Faltan datos en el formulario de pago.",
       });
     }
-
+    console.log("idCliente: ", idCliente, "direccion: " ,direccion);
+    
     // 1. Insertar o actualizar la dirección
     await insertarDireccion(idCliente, direccion);
 
@@ -50,7 +51,8 @@ const paymentController = async (req, res) => {
       (acc, item) => acc + item.precio * item.cantidad,
       0
     ); // Calculamos el total del pedido
-
+    console.log("total: ", total);
+    
     // 3. Insertar el pedido
     const idPedido = await insertarPedido(idCliente, total);
 

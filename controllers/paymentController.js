@@ -8,7 +8,6 @@ const paymentController = async (req, res) => {
   try {
     // Recuperar datos del formulario
     const { numeroTarjeta, nombreTitular, fechaExpiracion, cvv } = req.body;
-    const {nombre, direccion, ciudad, codigoPostal} = formularioDatos;
     // Obtener el id_cliente desde la sesión
     const idCliente = req.cookies.userId;
 
@@ -20,6 +19,8 @@ const paymentController = async (req, res) => {
     const formularioDatos = req.cookies.formularioDatos
       ? JSON.parse(req.cookies.formularioDatos)
       : null;
+    // Recuperar la informacion de envío
+    const { nombre, direccion, ciudad, codigoPostal } = formularioDatos;
 
     // Verificar si faltan datos
     if (!cart || !formularioDatos) {
@@ -30,9 +31,9 @@ const paymentController = async (req, res) => {
     }
 
     // Validación de datos del formulario (aunque esto ya lo controlas previamente)
-    
+
     console.log(formularioDatos);
-    
+
     if (
       !direccion ||
       !numeroTarjeta ||
@@ -45,7 +46,7 @@ const paymentController = async (req, res) => {
         error: "Faltan datos en el formulario de pago.",
       });
     }
-    
+
     // 1. Insertar o actualizar la dirección
     await insertarDireccion(idCliente, direccion);
 
@@ -55,7 +56,7 @@ const paymentController = async (req, res) => {
       0
     ); // Calculamos el total del pedido
     console.log("total: ", total);
-    
+
     // 3. Insertar el pedido
     const idPedido = await insertarPedido(idCliente, total);
 

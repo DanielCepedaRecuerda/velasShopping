@@ -1,5 +1,6 @@
 const connection = require("../db/connection");
 const insertarPedido = async (idCliente, total) => {
+  console.log("entro en insertarPedido ", idCliente, total);
   const conn = await connection();
   const query =
     "INSERT INTO pedido (fecha_hora, total, id_cliente) VALUES (NOW(), ?, ?)";

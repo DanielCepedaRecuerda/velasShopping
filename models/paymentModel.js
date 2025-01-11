@@ -38,13 +38,15 @@ const insertarProductosPedidos = (idPedido, productos) => {
       });
     });
 
-    Promise.all(queries).then((results) => {
-      console.log("Todos los productos insertados con éxito en el pedido.");
-      resolve(results);
-    }).catch((err) => {
-      console.error("Error al insertar productos en el pedido:", err);
-      reject(err);
-    });
+    Promise.all(queries)
+      .then((results) => {
+        console.log("Todos los productos insertados con éxito en el pedido.");
+        resolve(results);
+      })
+      .catch((err) => {
+        console.error("Error al insertar productos en el pedido:", err);
+        reject(err);
+      });
   });
 };
 
@@ -52,49 +54,26 @@ const insertarDireccion = async (idCliente, direccionData) => {
   try {
     const conn = await connection();
     const [result] = await conn.query(
-      "SELECT * FROM direcciones WHERE id_cliente = ? AND dirección = ? AND cod_postal = ? AND ciudad = ? AND provincia = ? AND país = ?",
+      "INSERT INTO direcciones (dirección, numero, piso, puerta, cod_postal, ciudad, provincia, país, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
-        idCliente,
         direccionData.direccion,
-        direccionData.cod_postal,
+        direccionData.numero,
+        direccionData.piso,
+        direccionData.puerta,
+        direccionData.codigoPostal,
         direccionData.ciudad,
         direccionData.provincia,
         direccionData.pais,
+        idCliente,
       ]
     );
     await conn.end();
-
-    if (result.length > 0) {
-      // Si la dirección ya existe, no hacer nada o retornar la dirección existente
-      console.log("La dirección ya está registrada.");
-      return result[0]; // Devuelve la dirección existente
-    } else {
-      // Si no existe, insertamos la nueva dirección
-      const conn = await connection();
-      const [result] = await conn.query(
-        "INSERT INTO direcciones (direccion, numero, piso, puerta, cod_postal, ciudad, provincia, pais, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [
-          direccionData.direccion,
-          direccionData.numero,
-          direccionData.piso,
-          direccionData.puerta,
-          direccionData.cod_postal,
-          direccionData.ciudad,
-          direccionData.provincia,
-          direccionData.pais,
-          idCliente,
-        ]
-      );
-      await conn.end();
-      console.log("Dirección insertada con éxito.");
-      return result;
-    }
-  } catch (err) {
-    console.error("Error al insertar dirección:", err);
-    throw err;
+    return result;
+  } catch (error) {
+    console.error("Error al insertar dirección:", error);
+    throw error;
   }
 };
-
 
 const procesarPago = (idCliente, productos, direccionData, total) => {
   connection.beginTransaction((err) => {
@@ -121,4 +100,9 @@ const procesarPago = (idCliente, productos, direccionData, total) => {
   });
 };
 
-module.exports = {procesarPago, insertarPedido ,insertarDireccion, insertarProductosPedidos};
+module.exports = {
+  procesarPago,
+  insertarPedido,
+  insertarDireccion,
+  insertarProductosPedidos,
+};

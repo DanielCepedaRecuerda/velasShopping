@@ -127,19 +127,20 @@
         <label for="codigoPostal">Código Postal:</label>
         <input type="text" id="codigoPostal" name="codigoPostal" required />
         <div id="error-codigoPostal" class="error"></div>
+        <label for="provincia">Provincia:</label>
+        <input
+          type="text"
+          id="provincia"
+          name="provincia"
+          placeholder="Provincia"
+          required
+        />
+        <div id="error-provincia" class="error"></div>
+        <label for="pais">País:</label>
+        <input type="text" id="pais" name="pais" placeholder="País" required />
+        <div id="error-pais" class="error"></div>
       </div>
-      <label for="provincia">Provincia:</label>
-      <input
-        type="text"
-        id="provincia"
-        name="provincia"
-        placeholder="Provincia"
-        required
-      />
-      <div id="error-provincia" class="error"></div>
-      <label for="pais">País:</label>
-      <input type="text" id="pais" name="pais" placeholder="País" required />
-      <div id="error-pais" class="error"></div>
+
       <button type="button" id="pagarButton">Ir a pagar</button>
     </form>
     <% } else { %>

@@ -6,7 +6,8 @@ const {
 
 const paymentController = async (req, res) => {
   try {
-    console.log("Datos de la sesión:", req.session); // Esto te ayudará a ver qué llega en la sesión
+    console.log("Cookies recibidas:", req.cookies); // Verifica si llega la cookie de sesión
+    console.log("Sesión en el servidor:", req.session); // Verifica qué datos tiene la sesión
 
     if (!req.session.user || !req.session.user.id) {
       return res.status(401).json({

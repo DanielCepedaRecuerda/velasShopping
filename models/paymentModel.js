@@ -16,9 +16,9 @@ const insertarProductosPedidos = async (idPedido, productos) => {
 
   for (const producto of productos) {
     // Verificamos que no haya valores undefined
-    const idProducto = producto.id_producto ?? null;  // Si es undefined, asignamos null
-    const cantidad = producto.cantidad ?? 0;          // Si es undefined, asignamos 0
-    const precio = producto.precio ?? 0;              // Si es undefined, asignamos 0
+    const idProducto = producto.productId ?? null;  // Si es undefined, asignamos null
+    const cantidad = producto.quantity ?? 0;          // Si es undefined, asignamos 0
+    const precio = producto.price ?? 0;              // Si es undefined, asignamos 0
 
     try {
       await conn.execute(

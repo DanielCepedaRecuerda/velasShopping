@@ -17,7 +17,23 @@ header {
   flex-direction: column;
   align-items: center;
 }
+main {
+  padding: 20px;
+  min-height: 100vh; /* Garantiza que el contenido ocupe toda la pantalla */
+  box-sizing: border-box; /* Incluye el relleno dentro de la altura */
+}
 
+footer {
+  position: fixed; /* Fija el footer en la parte inferior */
+  bottom: 0;
+  left: 0;
+  width: 100%; /* Ocupa todo el ancho */
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra opcional */
+}
 /*************MENSAJES*******************/
 .error-message {
   color: red;
@@ -307,7 +323,7 @@ footer a:hover {
 .error {
   color: red;
 }
-#pagarButton{
+#pagarButton {
   margin-top: 1em;
 }
 
@@ -426,13 +442,13 @@ button:hover {
   background-color: #d35400;
 }
 /****************VISTA CONFIRMATION*/
-#contenidoConfirm{
+#contenidoConfirm {
   text-align: center;
 }
-#contenidoConfirm ul{
+#contenidoConfirm ul {
   list-style: none;
 }
-#volver{
+#volver {
   text-align: center;
 }
 

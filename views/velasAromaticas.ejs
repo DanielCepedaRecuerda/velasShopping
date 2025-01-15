@@ -34,9 +34,7 @@
       </div>
       <div class="divBotonLogout" id="divBotonLogout">
         <a href="/logout">
-          <button id="botonLogout" class="botonAcceso">
-            Cerrar Sesión
-          </button>
+          <button id="botonLogout" class="botonAcceso">Cerrar Sesión</button>
         </a>
       </div>
       <div class="social-links">
@@ -47,34 +45,45 @@
 
     <main>
       <h2 class="form-h2">Velas Aromáticas</h2>
-      <% if (velas && velas.length > 0) { %>
-        <% console.log(velas)%>
-        <section class="product-grid">
-          <% velas.forEach((vela) => { %>
-            
-            <article class="product">
-              <img src="/images/<%= vela['Imagen/Video'] %>" alt="<%= vela.nombre %>" />
-              <h2><%= vela.nombre %></h2>
-              <p><%= vela.descripcion || 'Descripción no disponible.' %></p>
-              <span class="price"><%= vela.precio %> €</span>
-              <form action="/cart" method="POST">
-                <input type="hidden" name="productId" value="<%= vela.id %>"> <!-- id del producto -->
-                <input type="hidden" name="redirectUrl" value="<%= redirectUrl %>">
-                <input type="number" name="quantity" value="1" min="1">
-                <button type="submit">Agregar al carrito</button>
-              </form>
-            </article>
-          <% }) %>
-        </section>
+      <% if (velas && velas.length > 0) { %> <% console.log(velas)%>
+      <section class="product-grid">
+        <% velas.forEach((vela) => { %>
+
+        <article class="product">
+          <img
+            src="/images/<%= vela['Imagen/Video'] %>"
+            alt="<%= vela.nombre %>"
+          />
+          <h2><%= vela.nombre %></h2>
+          <p><%= vela.descripcion || 'Descripción no disponible.' %></p>
+          <span class="price"><%= vela.precio %> €</span>
+          <form action="/cart" method="POST">
+            <input type="hidden" name="productId" value="<%= vela.id %>" />
+            <!-- id del producto -->
+            <input
+              type="hidden"
+              name="redirectUrl"
+              value="<%= redirectUrl %>"
+            />
+            <input type="number" name="quantity" value="1" min="1" />
+            <button type="submit">Agregar al carrito</button>
+          </form>
+        </article>
+        <% }) %>
+      </section>
       <% } else { %>
-        <p>No hay velas disponibles en esta categoría.</p>
+      <p>No hay velas disponibles en esta categoría.</p>
       <% } %>
 
       <!-- Botón flotante de carrito -->
       <a href="/cart" class="floating-cart" id="floating-cart">
         <div class="cart-icon">
-          <img src="/images/iconoPágina.jpg" alt="Vela del carrito" class="velaCarrito">
-          <span class="item-count" id="item-count">0</span> 
+          <img
+            src="/images/iconoPágina.jpg"
+            alt="Vela del carrito"
+            class="velaCarrito"
+          />
+          <span class="item-count" id="item-count">0</span>
         </div>
       </a>
     </main>
@@ -83,17 +92,11 @@
       <div class="footer-content">
         <p>&copy; 2024 Tienda de Velas. Todos los derechos reservados.</p>
 
-        <nav>
-          <ul>
-            <li><a href="">Términos y Condiciones</a></li>
-            <li><a href="">Política de Privacidad</a></li>
-            <li><a href="">FAQ</a></li>
-            <li><a href="">Sobre Nosotros</a></li>
-          </ul>
-        </nav>
         <p>
           Contacto:
-          <a href="mailto:tusvelasshopping@gmail.com">tusvelasshopping@gmail.com</a>
+          <a href="mailto:tusvelasshopping@gmail.com"
+            >tusvelasshopping@gmail.com</a
+          >
         </p>
       </div>
     </footer>

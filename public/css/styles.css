@@ -426,10 +426,13 @@ button:hover {
 }
 /****************VISTA CONFIRMATION*/
 #contenidoConfirm{
-  align-items: center;
+  text-align: center;
 }
 #contenidoConfirm ul{
   list-style: none;
+}
+#volver{
+  text-align: center;
 }
 
 /******* Estilos del contador flotante en el carrito ********/

@@ -306,7 +306,7 @@ footer a:hover {
 .error {
   color: red;
 }
-#pagarButton {
+#pagarButton{
   margin-top: 1em;
 }
 
@@ -424,28 +424,12 @@ button:hover {
 .payment-form button:hover {
   background-color: #d35400;
 }
-/****************VISTA CONFIRMATION****************/
-#contenidoConfirm {
+/****************VISTA CONFIRMATION*/
+#contenidoConfirm{
   align-items: center;
 }
-#contenidoConfirm ul {
+#contenidoConfirm ul{
   list-style: none;
-}
-#contenidoConfirm ul li {
-  margin-bottom: 5px;
-  padding: 5px 0;
-  border-bottom: 1px solid #ddd;
-}
-
-#contenidoConfirm ul li:last-child {
-  border-bottom: none;
-}
-#contenidoConfirm a {
-  text-decoration: none;
-}
-
-#contenidoConfirm a:hover {
-  text-decoration: underline;
 }
 
 /******* Estilos del contador flotante en el carrito ********/

@@ -105,7 +105,7 @@ const confirmation = (req, res) => {
   res.clearCookie("formularioDatos");
 
   res.render("confirmation", {
-    message: "Gracias por tu compra. Tu pago se procesó exitosamente.",
+    message: "Tu pago se procesó exitosamente.",
     cartItems: cart,
     formularioDatos: formularioDatos,
   });

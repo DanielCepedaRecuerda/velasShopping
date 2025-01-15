@@ -122,19 +122,8 @@ function App() {
       </main>
 
       <footer>
-        <div className="footer-content">
-          <p>&copy; 2024 Tienda de Velas. Todos los derechos reservados.</p>
-          <nav>
-            <ul>
-              <li><a href="">Términos y Condiciones</a></li>
-              <li><a href="">Política de Privacidad</a></li>
-              <li><a href="">FAQ</a></li>
-              <li><a href="">Sobre Nosotros</a></li>
-            </ul>
-          </nav>
-          <p>Contacto: <span><a href="mailto:tusvelasshopping@gmail.com">tusvelasshopping@gmail.com</a></span></p>
-        </div>
-      </footer>
+      <p>&copy; 2024 Velas Shopping. Todos los derechos reservados.</p>
+    </footer>
     </div>
   );
 }
